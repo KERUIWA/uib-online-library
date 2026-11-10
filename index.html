@@ -91,11 +91,45 @@ function filter(){
  $("count").textContent=shown+" of "+(library?.folders||[]).length+" subjects";
 }
 $("search").addEventListener("input",filter);
+const CACHE_KEY="uib-online-library-cache-v1";
 function load(){
+ let hasCache=false;
+ try{
+   const saved=localStorage.getItem(CACHE_KEY);
+   if(saved){
+     const cached=JSON.parse(saved);
+     if(cached&&Array.isArray(cached.folders)){
+       render(cached);
+       hasCache=true;
+       $("count").textContent=$("count").textContent+" · updating";
+     }
+   }
+ }catch(e){console.warn("Could not read library cache:",e);}
  const callback="uibLibraryCallback";
- window[callback]=data=>{try{render(data);}catch(e){$("status").textContent="The library data loaded, but the page could not display it: "+e.message;}};
- const s=document.createElement("script");s.src=API+"?callback="+callback+"&_="+Date.now();
- s.onerror=()=>{$("status").textContent="Could not connect to Google Drive. Check the Apps Script deployment and sharing permissions, then refresh."};
+ let finished=false;
+ const s=document.createElement("script");
+ const timeout=setTimeout(()=>{
+   if(!finished&&!hasCache){
+     $("status").textContent="The library is taking longer than usual to respond. Please wait or refresh.";
+   }
+ },12000);
+ window[callback]=data=>{
+   finished=true;
+   clearTimeout(timeout);
+   try{
+     render(data);
+     try{localStorage.setItem(CACHE_KEY,JSON.stringify(data));}catch(e){console.warn("Could not save library cache:",e);}
+   }catch(e){
+     if(!hasCache)$("status").textContent="The library data loaded, but the page could not display it: "+e.message;
+   }
+ };
+ s.src=API+"?callback="+callback+"&_="+Date.now();
+ s.onerror=()=>{
+   finished=true;
+   clearTimeout(timeout);
+   if(!hasCache)$("status").textContent="Could not connect to Google Drive. Check the Apps Script deployment and sharing permissions, then refresh.";
+   else $("count").textContent=$("count").textContent.replace(" · updating"," · offline copy");
+ };
  document.head.appendChild(s);
 }
 load();
