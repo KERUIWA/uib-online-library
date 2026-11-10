@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>Subject Materials · UIB Online Library</title>
+<title>Subject Materials · UIB E-Library | Class of 2026</title>
 <script>
 try{const t=localStorage.getItem("uib-library-theme");if(t==="dark")document.documentElement.dataset.theme="dark";}catch(e){}
 </script>
@@ -24,8 +24,8 @@ main{max-width:1000px;margin:26px auto;padding:0 20px 60px}.back{display:inline-
 </head>
 <body>
 <header><div class="wrap">
-<div class="topline"><div class="eyebrow">Universitas Internasional Batam</div><button class="theme-toggle" id="themeToggle" type="button">☾ Dark mode</button></div>
-<h1 id="subjectTitle">Loading subject…</h1><div class="sub">Weekly course materials</div>
+<div class="topline"><div class="eyebrow">Universitas Internasional Batam · Class of 2026</div><button class="theme-toggle" id="themeToggle" type="button">☾ Dark mode</button></div>
+<h1 id="subjectTitle">Loading subject…</h1><div class="sub">Class of 2026 · Weekly course materials</div>
 </div></header>
 <main>
 <a class="back" href="index.html">← All subjects</a>
@@ -34,7 +34,7 @@ main{max-width:1000px;margin:26px auto;padding:0 20px 60px}.back{display:inline-
 <div id="weeks" class="week-grid"></div>
 <section id="other" class="other" hidden><h2>Other subject files</h2><ul id="otherFiles"></ul></section>
 </main>
-<footer>UIB Online Library · Materials hosted on Google Drive</footer>
+<footer>UIB E-Library · Class of 2026 · Materials hosted on Google Drive</footer>
 <script>
 const API="https://script.google.com/macros/s/AKfycbyxIJTsHxJABFZo6RTtU4RagmcMtrG5ch0tUUJkgByERxFLPuBYhMXcjf7x7FUNzkQf_A/exec";
 const $=id=>document.getElementById(id);const folderId=new URLSearchParams(location.search).get("folder");
@@ -47,7 +47,7 @@ $("themeToggle").addEventListener("click",()=>setTheme(document.documentElement.
 function render(data){
  const course=(data.folders||[]).find(x=>x.id===folderId);
  if(!course){$("subjectTitle").textContent="Subject not found";$("status").hidden=false;$("status").textContent="This subject could not be found. Return to the library and choose a subject again.";$("weekCount").textContent="";return;}
- document.title=course.name+" · UIB Online Library";$("subjectTitle").textContent=course.name;
+ document.title=course.name+" · UIB E-Library | Class of 2026";$("subjectTitle").textContent=course.name;
  const weeks=(course.folders||[]).filter(x=>/^week\s*\d+/i.test(x.name));const present=new Set(weeks.map(w=>weekNumber(w.name)));
  if(!present.has(8))weeks.push({name:"Week 8",files:[],synthetic:true});
  if(!present.has(16))weeks.push({name:"Week 16",files:[],synthetic:true});
