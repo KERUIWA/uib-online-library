@@ -64,6 +64,16 @@ button,.theme-toggle{font:inherit;cursor:pointer}.theme-toggle{border:1px solid 
 header{animation:pageRise .75s both}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 
+
+/* Staggered card entrances so each page feels alive without becoming noisy */
+.grid>*,.cards>*,.metrics>*,.quick-grid>*,.week-grid>*,.leadership-grid>*,.history-grid>*,.news-list>*{animation:pageRise .62s cubic-bezier(.2,.75,.25,1) both}
+.grid>*:nth-child(2),.cards>*:nth-child(2),.metrics>*:nth-child(2),.quick-grid>*:nth-child(2),.week-grid>*:nth-child(2),.leadership-grid>*:nth-child(2),.history-grid>*:nth-child(2),.news-list>*:nth-child(2){animation-delay:.07s}
+.grid>*:nth-child(3),.cards>*:nth-child(3),.metrics>*:nth-child(3),.quick-grid>*:nth-child(3),.week-grid>*:nth-child(3),.leadership-grid>*:nth-child(3),.history-grid>*:nth-child(3),.news-list>*:nth-child(3){animation-delay:.14s}
+.grid>*:nth-child(4),.cards>*:nth-child(4),.metrics>*:nth-child(4),.quick-grid>*:nth-child(4),.week-grid>*:nth-child(4),.history-grid>*:nth-child(4),.news-list>*:nth-child(4){animation-delay:.21s}
+.grid>*:nth-child(5),.cards>*:nth-child(5),.week-grid>*:nth-child(5),.news-list>*:nth-child(5){animation-delay:.28s}
+input,select,textarea{transition:border-color .2s,box-shadow .2s,background .2s}
+input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,var(--blue) 13%,transparent)}
+
 </style>
 </head>
 <body>
