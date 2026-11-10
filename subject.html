@@ -12,7 +12,7 @@ try{const t=localStorage.getItem("uib-library-theme");if(t==="dark")document.doc
 :root{color-scheme:light;--bg:#f4f6fb;--surface:#fff;--surface2:#f8f9fd;--ink:#172033;--muted:#687386;--line:#e5e9f1;--blue:#3157d5;--shadow:0 8px 28px #1720330b;--uts:#fff7e7;--uts-line:#f0d49d;--uas:#fff0f0;--uas-line:#efc3c3}
 :root[data-theme="dark"]{color-scheme:dark;--bg:#101522;--surface:#192131;--surface2:#202b3e;--ink:#edf2fc;--muted:#a2aec2;--line:#303c50;--blue:#9aafff;--shadow:0 8px 28px #0003;--uts:#382d1c;--uts-line:#71552b;--uas:#3b242b;--uas-line:#75404a}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,Segoe UI,Arial,sans-serif;transition:background .2s,color .2s}
-header{background:var(--surface);border-bottom:1px solid var(--line);padding:28px 22px}.wrap{max-width:1000px;margin:auto}.topline{display:flex;justify-content:space-between;align-items:center;gap:14px}.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);font-weight:800}h1{font-size:clamp(28px,5vw,42px);line-height:1.15;letter-spacing:-.04em;margin:12px 0 5px}.sub{color:var(--muted)}
+header{background:var(--surface);border-bottom:1px solid var(--line);padding:28px 22px}.teacher-line{display:inline-block;margin-top:10px;padding:5px 11px;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-size:12px;font-weight:750}.wrap{max-width:1000px;margin:auto}.topline{display:flex;justify-content:space-between;align-items:center;gap:14px}.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);font-weight:800}h1{font-size:clamp(28px,5vw,42px);line-height:1.15;letter-spacing:-.04em;margin:12px 0 5px}.sub{color:var(--muted)}
 main{max-width:1000px;margin:26px auto;padding:0 20px 60px}.back{display:inline-flex;gap:8px;color:var(--blue);font-weight:750;text-decoration:none;margin:0 0 18px}.theme-toggle{border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:999px;padding:9px 13px;font:700 13px inherit;cursor:pointer;white-space:nowrap}
 .summary{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 18px;color:var(--muted);font-size:13px}.week-grid{display:grid;grid-template-columns:1fr;gap:0;position:relative;padding:4px 0 4px 8px}.week-grid:before{content:"";position:absolute;left:28px;top:18px;bottom:18px;width:2px;background:var(--line)}
 .week{min-width:0;position:relative;margin:0 0 11px 42px;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:visible;animation:weekEnter .42s both;animation-delay:calc(var(--i,0)*22ms);transition:border-color .22s,box-shadow .22s,transform .22s}.week:before{content:"";position:absolute;left:-49px;top:23px;width:12px;height:12px;border-radius:50%;background:var(--blue);border:4px solid var(--bg);box-shadow:0 0 0 1px var(--line)}.week:has(.week-toggle[aria-expanded="true"]){border-color:var(--blue);box-shadow:0 7px 22px #17203312;transform:translateX(3px)}.week.uts{background:var(--uts);border-color:var(--uts-line)}.week.uas{background:var(--uas);border-color:var(--uas-line)}.week.uts:before{background:#d69b35}.week.uas:before{background:#d45b68}
@@ -25,7 +25,7 @@ main{max-width:1000px;margin:26px auto;padding:0 20px 60px}.back{display:inline-
 <body>
 <header><div class="wrap">
 <div class="topline"><div class="eyebrow">Universitas Internasional Batam · Class of 2026</div><button class="theme-toggle" id="themeToggle" type="button">☾ Dark mode</button></div>
-<h1 id="subjectTitle">Loading subject…</h1><div class="sub">Class of 2026 · Weekly course materials</div>
+<h1 id="subjectTitle">Loading subject…</h1><div class="sub">Class of 2026 · Weekly course materials</div><div class="teacher-line" id="teacherLine" hidden></div>
 </div></header>
 <main>
 <a class="back" href="index.html">← All subjects</a>
@@ -40,6 +40,7 @@ const API="https://script.google.com/macros/s/AKfycbyxIJTsHxJABFZo6RTtU4RagmcMtr
 const $=id=>document.getElementById(id);const folderId=new URLSearchParams(location.search).get("folder");
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function weekNumber(name){const m=String(name).match(/week\s*(\d+)/i);return m?Number(m[1]):999;}
+function lecturer(name){const n=String(name).toLowerCase().replace(/[^a-z0-9]/g,"");const entries=[["agama","Bu Kelen"],["bahasaindonesia","Bu Wike Oriza"],["bahasainggris","Mrs. Risqa Meilani"],["labpengantarakuntansi","Ko Anthehock Zhang"],["laboratoriumpengantarakuntansi","Ko Anthehock Zhang"],["matematikabisnis","Bu Serly"],["pengantarakuntansi","Pak Supriyanto"],["pengantarmanajemendanbisnis","Bu Reza Pramata"]];const found=entries.find(([key])=>n===key||n.includes(key));return found?found[1]:"";}
 function fileLink(f){const url=f.previewUrl||("https://drive.google.com/file/d/"+f.id+"/preview");const ext=(String(f.name).split(".").pop()||"").toLowerCase();const known=["pdf","xlsx","xls","csv","pptx","ppt","docx","doc","zip","rar"];const type=known.includes(ext)?ext:"file";return '<li><a class="file-name" href="'+esc(url)+'" target="_blank" rel="noopener">'+esc(f.name)+'</a><span class="file-type '+type+'">'+esc(ext.toUpperCase()||"FILE")+'</span></li>';}
 function setTheme(theme){document.documentElement.dataset.theme=theme;try{localStorage.setItem("uib-library-theme",theme);}catch(e){}$("themeToggle").textContent=theme==="dark"?"☀ Light mode":"☾ Dark mode";}
 function initTheme(){setTheme(document.documentElement.dataset.theme==="dark"?"dark":"light");}
@@ -47,7 +48,7 @@ $("themeToggle").addEventListener("click",()=>setTheme(document.documentElement.
 function render(data){
  const course=(data.folders||[]).find(x=>x.id===folderId);
  if(!course){$("subjectTitle").textContent="Subject not found";$("status").hidden=false;$("status").textContent="This subject could not be found. Return to the library and choose a subject again.";$("weekCount").textContent="";return;}
- document.title=course.name+" · UIB E-Library | Class of 2026";$("subjectTitle").textContent=course.name;
+ document.title=course.name+" · UIB E-Library | Class of 2026";$("subjectTitle").textContent=course.name;const teacher=lecturer(course.name);if(teacher){$("teacherLine").textContent="Lecturer · "+teacher;$("teacherLine").hidden=false;}
  const folders=(course.folders||[]).filter(x=>/^week\s*\d+/i.test(x.name));
  const weekMap=new Map();folders.forEach(w=>{const n=weekNumber(w.name);if(n>=1&&n<=16){if(!weekMap.has(n))weekMap.set(n,[]);weekMap.get(n).push(...(w.files||[]));}});
  const total=[...weekMap.values()].reduce((n,files)=>n+files.length,0);
