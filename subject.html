@@ -30,7 +30,17 @@ main{max-width:1000px;margin:26px auto;padding:0 20px 60px}.back{display:inline-
 <main>
 <a class="back" href="index.html">← All subjects</a>
 <div class="summary"><span id="weekCount">Loading weekly materials…</span><span>Choose a week to view its files</span></div>
-<div id="status" class="status">Confunction fileLink(f){const url=f.previewUrl||("https://drive.google.com/file/d/"+f.id+"/preview");const ext=(String(f.name).split(".").pop()||"").toLowerCase();const type=ext==="pptx"?"pptx":ext==="docx"?"docx":ext;return '<li><a class="file-name" href="'+esc(url)+'" target="_blank" rel="noopener">'+esc(f.name)+'</a><span class="file-type '+(type==="pptx"?"pptx":type==="docx"?"docx":"")+'">'+esc(type.toUpperCase()||"FILE")+'</span></li>';}
+<div id="status" class="status">Connecting to the library…</div>
+<div id="weeks" class="week-grid"></div>
+<section id="other" class="other" hidden><h2>Other subject files</h2><ul id="otherFiles"></ul></section>
+</main>
+<footer>UIB E-Library · Class of 2026 · Materials hosted on Google Drive</footer>
+<script>
+const API="https://script.google.com/macros/s/AKfycbyxIJTsHxJABFZo6RTtU4RagmcMtrG5ch0tUUJkgByERxFLPuBYhMXcjf7x7FUNzkQf_A/exec";
+const $=id=>document.getElementById(id);const folderId=new URLSearchParams(location.search).get("folder");
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function weekNumber(name){const m=String(name).match(/week\s*(\d+)/i);return m?Number(m[1]):999;}
+function fileLink(f){const url=f.previewUrl||("https://drive.google.com/file/d/"+f.id+"/preview");const ext=(String(f.name).split(".").pop()||"").toLowerCase();const type=ext==="pptx"?"pptx":ext==="docx"?"docx":ext;return '<li><a class="file-name" href="'+esc(url)+'" target="_blank" rel="noopener">'+esc(f.name)+'</a><span class="file-type '+(type==="pptx"?"pptx":type==="docx"?"docx":"")+'">'+esc(type.toUpperCase()||"FILE")+'</span></li>';}
 function setTheme(theme){document.documentElement.dataset.theme=theme;try{localStorage.setItem("uib-library-theme",theme);}catch(e){}$("themeToggle").textContent=theme==="dark"?"☀ Light mode":"☾ Dark mode";}
 function initTheme(){setTheme(document.documentElement.dataset.theme==="dark"?"dark":"light");}
 $("themeToggle").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));initTheme();
