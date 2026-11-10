@@ -21,23 +21,23 @@ button,.theme-toggle{font:inherit;cursor:pointer}.theme-toggle{border:1px solid 
 .count{color:var(--muted);font-size:13px}
 .semester-nav{display:flex;gap:9px;overflow-x:auto;padding:4px 1px 13px;margin:0 0 16px;scrollbar-width:thin}
 .semester-button{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);padding:10px 16px;font-size:13px;font-weight:750;white-space:nowrap;transition:background .18s,border-color .18s,color .18s}
-.semester-button:hover{border-color:var(--blue);color:var(--blue)}
-.semester-button.active{background:var(--blue);border-color:var(--blue);color:#fff}
-.semester-message{margin:8px 0 24px;padding:42px 22px;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+.semester-button:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
+.semester-button.active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 5px 14px color-mix(in srgb,var(--blue) 25%,transparent)}
+.semester-message{margin:8px 0 24px;padding:42px 22px;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);animation:messageIn .38s ease both}
 .semester-message h2{margin:12px 0 5px;font-size:23px}
 .semester-message p{margin:0 auto 18px;max-width:440px;color:var(--muted)}
-.progress-icon{font-size:38px;color:var(--blue)}
+.progress-icon{font-size:38px;color:var(--blue);animation:clockPulse 2.4s ease-in-out infinite}
 .progress-label{display:inline-block;padding:6px 12px;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-size:10px;font-weight:850;letter-spacing:.12em}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-.card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-height:168px;transition:transform .18s,border-color .18s}
-.card:hover{transform:translateY(-2px);border-color:var(--blue)}.card h2{font-size:18px;line-height:1.35;margin:0 0 7px}.meta{color:var(--muted);font-size:13px}.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:20px}.open-link{color:var(--blue);font-weight:750;text-decoration:none}.open-link:hover{text-decoration:underline}.arrow{font-size:19px}
+.card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-height:168px;transition:transform .22s,border-color .22s,box-shadow .22s;animation:cardIn .4s both}
+.card:hover{transform:translateY(-4px);border-color:var(--blue);box-shadow:0 13px 30px #17203314}.card h2{font-size:18px;line-height:1.35;margin:0 0 7px}.meta{color:var(--muted);font-size:13px}.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:20px}.open-link{color:var(--blue);font-weight:750;text-decoration:none}.open-link:hover{text-decoration:underline}.arrow{font-size:19px}
 .general,.status{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:19px}.general h2{font-size:18px;margin:0 0 10px}.general ul{margin:0;padding-left:20px;display:grid;gap:7px}.general a,.files a{color:var(--blue);text-decoration:none;overflow-wrap:anywhere}.general a:hover,.files a:hover{text-decoration:underline}
 .status{color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
 .back{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:750;text-decoration:none;margin:0 0 16px}.subject-title{margin-top:0}
 .week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:13px}.week{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:15px}.week.uts{background:var(--uts);border-color:var(--uts-line)}.week.uas{background:var(--uas);border-color:var(--uas-line)}
 .week-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;border:0;background:transparent;color:var(--ink);text-align:left;padding:0;font-weight:750}.week-label{display:block;color:var(--muted);font-size:12px;font-weight:500;margin-top:3px}.tag{font-size:10px;letter-spacing:.06em;border-radius:20px;padding:4px 8px;background:var(--surface2);color:var(--muted);white-space:nowrap}.uts .tag{background:#f4dfb9;color:#80520d}.uas .tag{background:#f2d0d0;color:#8e3030}:root[data-theme="dark"] .uts .tag{background:#604a28;color:#ffe0a8}:root[data-theme="dark"] .uas .tag{background:#61343d;color:#ffc5cb}
 .files{margin:14px 0 0;padding:12px 0 0 18px;border-top:1px solid var(--line);display:grid;gap:8px}.files li{font-size:13px}.empty{font-size:12px;color:var(--muted);font-style:italic;margin-top:12px}
-[hidden]{display:none!important}
+@keyframes chipIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}@keyframes messageIn{from{opacity:0;transform:translateY(12px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes clockPulse{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}\n[hidden]{display:none!important}
 @media(max-width:560px){header{padding:24px 17px}main{padding:0 14px 42px}.card{padding:17px}.topline{align-items:flex-start}}
 </style>
 </head>
@@ -53,8 +53,8 @@ button,.theme-toggle{font:inherit;cursor:pointer}.theme-toggle{border:1px solid 
  <button class="semester-button" type="button" data-semester="2" aria-pressed="false">2nd Semester</button>
  <button class="semester-button" type="button" data-semester="3" aria-pressed="false">3rd Semester</button>
  <button class="semester-button" type="button" data-semester="4" aria-pressed="false">4th Semester</button>
- <button class="semester-button" type="button" data-semester="5" aria-pressed="false">undefined Semester</button>
- <button class="semester-button" type="button" data-semester="6" aria-pressed="false">undefined Semester</button>
+ <button class="semester-button" type="button" data-semester="5" aria-pressed="false">5th Semester</button>
+ <button class="semester-button" type="button" data-semester="6" aria-pressed="false">6th Semester</button>
 </nav>
 <section id="semesterMessage" class="semester-message" hidden aria-live="polite">
  <div class="progress-icon">◷</div>
