@@ -80,7 +80,7 @@ function setTheme(theme){document.documentElement.dataset.theme=theme;try{localS
 $("themeToggle").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
 setTheme(document.documentElement.dataset.theme==="dark"?"dark":"light");
 function render(data){
- library=data;const courses=(data.folders||[]).filter(x=>x.folders&&x.name);$("status").hidden=true;
+ library=data;const courses=(data.folders||[]).filter(x=>x.folders&&x.name&&!/^zzz\.other$/i.test(x.name.trim()));$("status").hidden=true;
  $("subjects").innerHTML=courses.map(course=>{
   const weeks=(course.folders||[]).filter(x=>/^week\s*\d+/i.test(x.name));const total=weeks.reduce((n,w)=>n+(w.files||[]).length,0);
   const allNames=[course.name,...weeks.flatMap(w=>(w.files||[]).map(f=>f.name)),...(course.files||[]).map(f=>f.name)].join(" ").toLowerCase();
@@ -90,7 +90,7 @@ function render(data){
  if(general.length){$("general").hidden=false;$("generalFiles").innerHTML=general.map(fileLink).join("");}
  filter();
 }
-function filter(){const q=$("search").value.trim().toLowerCase();let shown=0;document.querySelectorAll(".card").forEach(card=>{const yes=!q||card.dataset.search.includes(q);card.hidden=!yes;if(yes)shown++;});$("count").textContent=shown+" of "+(library?.folders||[]).filter(x=>x.folders&&x.name).length+" subjects";}
+function filter(){const q=$("search").value.trim().toLowerCase();let shown=0;document.querySelectorAll(".card").forEach(card=>{const yes=!q||card.dataset.search.includes(q);card.hidden=!yes;if(yes)shown++;});$("count").textContent=shown+" of "+(library?.folders||[]).filter(x=>x.folders&&x.name&&!/^zzz\.other$/i.test(x.name.trim())).length+" subjects";}
 $("search").addEventListener("input",filter);
 function selectSemester(n){
  document.querySelectorAll(".semester-button").forEach(button=>{
