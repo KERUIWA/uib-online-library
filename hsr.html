@@ -120,7 +120,7 @@ const NEWS_API="https://api.ennead.cc/mihoyo/starrail/news/";
 const $=id=>document.getElementById(id),REMINDER_KEY="uib-hsr-reminder-state-v1",SEEN_KEY="uib-hsr-seen-news-v1";
 let events=[],news=[],versionData=null,initialNewsLoaded=false;
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function parseDate(v){if(!v)return null;let d;if(typeof v==="number")d=new Date(v*1000);else{const s=String(v),tail=s.slice(10),hasZone=tail.includes("+")||tail.includes("-")||s.endsWith("Z");d=new Date(hasZone?s:s+"+08:00")}return Number.isNaN(d.getTime())?null:d}
+function parseDate(v){if(!v)return null;let d;if(v instanceof Date)d=v;else if(typeof v==="number")d=new Date(v*1000);else{const s=String(v),tail=s.slice(10),hasZone=tail.includes("+")||tail.includes("-")||s.endsWith("Z");d=new Date(hasZone?s:s+"+08:00")}return Number.isNaN(d.getTime())?null:d}
 function fmt(v){const d=parseDate(v);return d?d.toLocaleString(undefined,{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}):"Not announced"}
 function remaining(v){const d=parseDate(v);if(!d)return"Not announced";const ms=d-Date.now();if(ms<=0)return"Ended";const days=Math.floor(ms/86400000),hours=Math.floor(ms%86400000/3600000);return days?days+"d "+hours+"h":hours+"h "+Math.max(0,Math.floor(ms%3600000/60000))+"m"}
 function loadReminderState(){try{return JSON.parse(localStorage.getItem(REMINDER_KEY)||"{}")}catch(e){return{}}}
