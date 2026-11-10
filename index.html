@@ -3,43 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>UIB Online Library</title>
+<script>
+try{const t=localStorage.getItem("uib-library-theme");if(t==="dark")document.documentElement.dataset.theme="dark";}catch(e){}
+</script>
 <style>
-:root{--ink:#172033;--muted:#687386;--line:#e7eaf0;--paper:#f6f7fb;--blue:#3157d5;--blue2:#edf1ff}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 Inter,Segoe UI,Arial,sans-serif}
-header{background:#fff;border-bottom:1px solid var(--line);padding:34px 22px 26px}
-.wrap{max-width:1100px;margin:auto}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:800}
-h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:8px 0}.sub{color:var(--muted);max-width:650px}
-main{max-width:1100px;margin:26px auto;padding:0 20px 60px}
-.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0 22px}
-input{flex:1;min-width:230px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff}
-.count{color:var(--muted);font-size:13px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px}
-.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 3px 12px #1a2b4a08}
-.card h2{font-size:18px;margin:0 0 5px}.meta{color:var(--muted);font-size:13px}
-.card details{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
-summary{cursor:pointer;color:var(--blue);font-weight:700;list-style:none}
-summary::-webkit-details-marker{display:none}.weeks{display:grid;gap:8px;margin-top:12px}
-.week{border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:#fff}
-.week.uts{background:#fff8e9;border-color:#f1d49b}.week.uas{background:#fff0f0;border-color:#efc0c0}
-.week-head{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:700}
-.tag{font-size:10px;letter-spacing:.08em;border-radius:20px;padding:3px 8px;background:#f0f2f7;color:#566176;white-space:nowrap}
-.uts .tag{background:#ffe6b6;color:#875200}.uas .tag{background:#ffdada;color:#9b2525}
-.files{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:6px}
-.files a,.general a{color:#3157d5;text-decoration:none;overflow-wrap:anywhere}.files a:hover,.general a:hover{text-decoration:underline}
-.files li{font-size:13px;padding-left:2px}.empty{font-size:12px;color:#8a93a3;font-style:italic;margin-top:6px}
-.general{margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
-.general h2{font-size:18px;margin:0 0 10px}.general ul{margin:0;padding-left:20px;display:grid;gap:6px}
-.status{padding:16px;background:#fff;border:1px solid var(--line);border-radius:14px;color:var(--muted)}
-footer{text-align:center;color:#8a93a3;font-size:12px;padding:25px}
-@media(max-width:560px){header{padding:26px 18px}main{padding:0 14px 40px}.card{padding:15px}}
+:root{color-scheme:light;--bg:#f4f6fb;--surface:#fff;--surface2:#f8f9fd;--ink:#172033;--muted:#687386;--line:#e5e9f1;--blue:#3157d5;--blue-soft:#edf1ff;--shadow:0 8px 28px #1720330b;--uts:#fff7e7;--uts-line:#f0d49d;--uas:#fff0f0;--uas-line:#efc3c3}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#101522;--surface:#192131;--surface2:#202b3e;--ink:#edf2fc;--muted:#a2aec2;--line:#303c50;--blue:#9aafff;--blue-soft:#263454;--shadow:0 8px 28px #0003;--uts:#382d1c;--uts-line:#71552b;--uas:#3b242b;--uas-line:#75404a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,Segoe UI,Arial,sans-serif;transition:background .2s,color .2s}
+header{background:var(--surface);border-bottom:1px solid var(--line);padding:30px 22px 28px}
+.wrap{max-width:1100px;margin:auto}.topline{display:flex;justify-content:space-between;align-items:center;gap:14px}.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);font-weight:800}
+h1{font-size:clamp(30px,5vw,44px);line-height:1.1;letter-spacing:-.04em;margin:10px 0}.sub{color:var(--muted);max-width:650px}
+main{max-width:1100px;margin:28px auto;padding:0 20px 60px}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0 22px}
+input{flex:1;min-width:230px;padding:13px 15px;border:1px solid var(--line);border-radius:13px;font:inherit;background:var(--surface);color:var(--ink);outline:none}input:focus{border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 16%,transparent)}
+button,.theme-toggle{font:inherit;cursor:pointer}.theme-toggle{border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:999px;padding:9px 13px;font-size:13px;font-weight:700;white-space:nowrap}
+.count{color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-height:168px;transition:transform .18s,border-color .18s}
+.card:hover{transform:translateY(-2px);border-color:var(--blue)}.card h2{font-size:18px;line-height:1.35;margin:0 0 7px}.meta{color:var(--muted);font-size:13px}.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:20px}.open-link{color:var(--blue);font-weight:750;text-decoration:none}.open-link:hover{text-decoration:underline}.arrow{font-size:19px}
+.general,.status{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:19px}.general h2{font-size:18px;margin:0 0 10px}.general ul{margin:0;padding-left:20px;display:grid;gap:7px}.general a,.files a{color:var(--blue);text-decoration:none;overflow-wrap:anywhere}.general a:hover,.files a:hover{text-decoration:underline}
+.status{color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
+.back{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:750;text-decoration:none;margin:0 0 16px}.subject-title{margin-top:0}
+.week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:13px}.week{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:15px}.week.uts{background:var(--uts);border-color:var(--uts-line)}.week.uas{background:var(--uas);border-color:var(--uas-line)}
+.week-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;border:0;background:transparent;color:var(--ink);text-align:left;padding:0;font-weight:750}.week-label{display:block;color:var(--muted);font-size:12px;font-weight:500;margin-top:3px}.tag{font-size:10px;letter-spacing:.06em;border-radius:20px;padding:4px 8px;background:var(--surface2);color:var(--muted);white-space:nowrap}.uts .tag{background:#f4dfb9;color:#80520d}.uas .tag{background:#f2d0d0;color:#8e3030}:root[data-theme="dark"] .uts .tag{background:#604a28;color:#ffe0a8}:root[data-theme="dark"] .uas .tag{background:#61343d;color:#ffc5cb}
+.files{margin:14px 0 0;padding:12px 0 0 18px;border-top:1px solid var(--line);display:grid;gap:8px}.files li{font-size:13px}.empty{font-size:12px;color:var(--muted);font-style:italic;margin-top:12px}
+[hidden]{display:none!important}
+@media(max-width:560px){header{padding:24px 17px}main{padding:0 14px 42px}.card{padding:17px}.topline{align-items:flex-start}}
 </style>
 </head>
 <body>
 <header><div class="wrap">
-<div class="eyebrow">Universitas Internasional Batam</div>
-<h1>UIB Online Library</h1>
-<div class="sub">Your course materials, organized by subject and week. Open a file to preview it in Google Drive.</div>
+<div class="topline"><div class="eyebrow">Universitas Internasional Batam</div><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">☾ Dark mode</button></div>
+<h1>UIB Online Library</h1><div class="sub">Your course materials, organized by subject and week. Open a file to preview it in Google Drive.</div>
 </div></header>
 <main>
 <div class="toolbar"><input id="search" type="search" placeholder="Search subjects or files..." aria-label="Search subjects or files"><span class="count" id="count">Loading library…</span></div>
@@ -50,89 +45,31 @@ footer{text-align:center;color:#8a93a3;font-size:12px;padding:25px}
 <footer>UIB Online Library · Materials hosted on Google Drive</footer>
 <script>
 const API="https://script.google.com/macros/s/AKfycbyxIJTsHxJABFZo6RTtU4RagmcMtrG5ch0tUUJkgByERxFLPuBYhMXcjf7x7FUNzkQf_A/exec";
-const $=id=>document.getElementById(id);
-let library=null;
+const $=id=>document.getElementById(id);let library=null;
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function weekNumber(name){const m=String(name).match(/week\s*(\d+)/i);return m?Number(m[1]):999;}
 function fileLink(f){const url=f.previewUrl||("https://drive.google.com/file/d/"+f.id+"/preview");return '<li><a href="'+esc(url)+'" target="_blank" rel="noopener">'+esc(f.name)+'</a></li>';}
+function setTheme(theme){document.documentElement.dataset.theme=theme;try{localStorage.setItem("uib-library-theme",theme);}catch(e){}$("themeToggle").textContent=theme==="dark"?"☀ Light mode":"☾ Dark mode";}
+$("themeToggle").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
+setTheme(document.documentElement.dataset.theme==="dark"?"dark":"light");
 function render(data){
- library=data;
- const courses=(data.folders||[]).filter(x=>x.folders&&x.name);
- $("status").hidden=true;
- $("count").textContent=courses.length+" subjects";
+ library=data;const courses=(data.folders||[]).filter(x=>x.folders&&x.name);$("status").hidden=true;
  $("subjects").innerHTML=courses.map(course=>{
-   const weeks=(course.folders||[]).filter(x=>/^week\s*\d+/i.test(x.name));
-   weeks.sort((a,b)=>weekNumber(a.name)-weekNumber(b.name));
-   const present=new Set(weeks.map(w=>weekNumber(w.name)));
-   if(!present.has(8))weeks.push({name:"Week 8",files:[],folders:[],synthetic:true});
-   if(!present.has(16))weeks.push({name:"Week 16",files:[],folders:[],synthetic:true});
-   weeks.sort((a,b)=>weekNumber(a.name)-weekNumber(b.name));
-   const total=weeks.reduce((n,w)=>n+(w.files||[]).length,0);
-   const weekHtml=weeks.map(w=>{
-     const n=weekNumber(w.name),kind=n===8?"uts":n===16?"uas":"";
-     const label=n===8?"UTS · Ujian Tengah Semester":n===16?"UAS · Ujian Akhir Semester":"";
-     const files=(w.files||[]).slice().sort((a,b)=>a.name.localeCompare(b.name));
-     return '<div class="week '+kind+'"><div class="week-head"><span>'+esc(w.name)+'</span>'+(label?'<span class="tag">'+label+'</span>':'')+'</div>'+
-       (files.length?'<ul class="files">'+files.map(fileLink).join("")+'</ul>':(label?'<div class="empty">Exam week</div>':'<div class="empty">No materials uploaded yet</div>'))+'</div>';
-   }).join("");
-   const nonWeek=(course.files||[]).filter(f=>!/^00\s*-\s*index\.html$/i.test(f.name));
-   const allNames=[course.name,...weeks.flatMap(w=>(w.files||[]).map(f=>f.name)),...nonWeek.map(f=>f.name)].join(" ").toLowerCase();
-   return '<article class="card" data-search="'+esc(allNames)+'"><h2>'+esc(course.name)+'</h2><div class="meta">'+total+' weekly file'+(total===1?"":"s")+'</div><details><summary>Browse weekly materials →</summary><div class="weeks">'+weekHtml+'</div>'+
-     (nonWeek.length?'<div class="week" style="margin-top:9px"><div class="week-head">Other subject files</div><ul class="files">'+nonWeek.map(fileLink).join("")+'</ul></div>':'')+
-     '</details></article>';
+  const weeks=(course.folders||[]).filter(x=>/^week\s*\d+/i.test(x.name));const total=weeks.reduce((n,w)=>n+(w.files||[]).length,0);
+  const allNames=[course.name,...weeks.flatMap(w=>(w.files||[]).map(f=>f.name)),...(course.files||[]).map(f=>f.name)].join(" ").toLowerCase();
+  return '<article class="card" data-search="'+esc(allNames)+'"><div><h2>'+esc(course.name)+'</h2><div class="meta">'+weeks.length+' weekly sections · '+total+' files</div></div><div class="card-bottom"><a class="open-link" href="subject.html?folder='+encodeURIComponent(course.id)+'">Open subject <span class="arrow">→</span></a></div></article>';
  }).join("");
  const general=(data.files||[]).filter(f=>!/^00\s*-\s*PUSAT MATERI UIB\.html$/i.test(f.name));
  if(general.length){$("general").hidden=false;$("generalFiles").innerHTML=general.map(fileLink).join("");}
  filter();
 }
-function filter(){
- const q=$("search").value.trim().toLowerCase();let shown=0;
- document.querySelectorAll(".card").forEach(card=>{const yes=!q||card.dataset.search.includes(q);card.hidden=!yes;if(yes)shown++;});
- $("count").textContent=shown+" of "+(library?.folders||[]).length+" subjects";
-}
+function filter(){const q=$("search").value.trim().toLowerCase();let shown=0;document.querySelectorAll(".card").forEach(card=>{const yes=!q||card.dataset.search.includes(q);card.hidden=!yes;if(yes)shown++;});$("count").textContent=shown+" of "+(library?.folders||[]).filter(x=>x.folders&&x.name).length+" subjects";}
 $("search").addEventListener("input",filter);
 const CACHE_KEY="uib-online-library-cache-v1";
-function load(){
- let hasCache=false;
- try{
-   const saved=localStorage.getItem(CACHE_KEY);
-   if(saved){
-     const cached=JSON.parse(saved);
-     if(cached&&Array.isArray(cached.folders)){
-       render(cached);
-       hasCache=true;
-       $("count").textContent=$("count").textContent+" · updating";
-     }
-   }
- }catch(e){console.warn("Could not read library cache:",e);}
- const callback="uibLibraryCallback";
- let finished=false;
- const s=document.createElement("script");
- const timeout=setTimeout(()=>{
-   if(!finished&&!hasCache){
-     $("status").textContent="The library is taking longer than usual to respond. Please wait or refresh.";
-   }
- },12000);
- window[callback]=data=>{
-   finished=true;
-   clearTimeout(timeout);
-   try{
-     render(data);
-     try{localStorage.setItem(CACHE_KEY,JSON.stringify(data));}catch(e){console.warn("Could not save library cache:",e);}
-   }catch(e){
-     if(!hasCache)$("status").textContent="The library data loaded, but the page could not display it: "+e.message;
-   }
- };
- s.src=API+"?callback="+callback+"&_="+Date.now();
- s.onerror=()=>{
-   finished=true;
-   clearTimeout(timeout);
-   if(!hasCache)$("status").textContent="Could not connect to Google Drive. Check the Apps Script deployment and sharing permissions, then refresh.";
-   else $("count").textContent=$("count").textContent.replace(" · updating"," · offline copy");
- };
- document.head.appendChild(s);
-}
+function load(){let hasCache=false;try{const saved=localStorage.getItem(CACHE_KEY);if(saved){const cached=JSON.parse(saved);if(cached&&Array.isArray(cached.folders)){render(cached);hasCache=true;$("count").textContent+=" · updating";}}}catch(e){console.warn("Could not read library cache:",e);}
+ const callback="uibLibraryCallback";let finished=false;const s=document.createElement("script");const timeout=setTimeout(()=>{if(!finished&&!hasCache)$("status").textContent="The library is taking longer than usual to respond. Please wait or refresh.";},12000);
+ window[callback]=data=>{finished=true;clearTimeout(timeout);try{render(data);try{localStorage.setItem(CACHE_KEY,JSON.stringify(data));}catch(e){console.warn("Could not save library cache:",e);}}catch(e){if(!hasCache)$("status").textContent="The library loaded, but could not be displayed: "+e.message;}};
+ s.src=API+"?callback="+callback+"&_="+Date.now();s.onerror=()=>{finished=true;clearTimeout(timeout);if(!hasCache)$("status").textContent="Could not connect to Google Drive. Check the Apps Script deployment and sharing permissions, then refresh.";else $("count").textContent=$("count").textContent.replace(" · updating"," · offline copy");};document.head.appendChild(s);}
 load();
 </script>
-</body>
-</html>
+</body></html>

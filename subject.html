@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Subject Materials · UIB Online Library</title>
+<script>
+try{const t=localStorage.getItem("uib-library-theme");if(t==="dark")document.documentElement.dataset.theme="dark";}catch(e){}
+</script>
+<style>
+:root{color-scheme:light;--bg:#f4f6fb;--surface:#fff;--surface2:#f8f9fd;--ink:#172033;--muted:#687386;--line:#e5e9f1;--blue:#3157d5;--shadow:0 8px 28px #1720330b;--uts:#fff7e7;--uts-line:#f0d49d;--uas:#fff0f0;--uas-line:#efc3c3}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#101522;--surface:#192131;--surface2:#202b3e;--ink:#edf2fc;--muted:#a2aec2;--line:#303c50;--blue:#9aafff;--shadow:0 8px 28px #0003;--uts:#382d1c;--uts-line:#71552b;--uas:#3b242b;--uas-line:#75404a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,Segoe UI,Arial,sans-serif;transition:background .2s,color .2s}
+header{background:var(--surface);border-bottom:1px solid var(--line);padding:28px 22px}.wrap{max-width:1000px;margin:auto}.topline{display:flex;justify-content:space-between;align-items:center;gap:14px}.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);font-weight:800}h1{font-size:clamp(28px,5vw,42px);line-height:1.15;letter-spacing:-.04em;margin:12px 0 5px}.sub{color:var(--muted)}
+main{max-width:1000px;margin:26px auto;padding:0 20px 60px}.back{display:inline-flex;gap:8px;color:var(--blue);font-weight:750;text-decoration:none;margin:0 0 18px}.theme-toggle{border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:999px;padding:9px 13px;font:700 13px inherit;cursor:pointer;white-space:nowrap}
+.summary{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 18px;color:var(--muted);font-size:13px}.week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:14px}
+.week{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}.week.uts{background:var(--uts);border-color:var(--uts-line)}.week.uas{background:var(--uas);border-color:var(--uas-line)}
+.week-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;border:0;background:transparent;color:var(--ink);text-align:left;padding:0;font:inherit;font-weight:750;cursor:pointer}.week-label{display:block;color:var(--muted);font-size:12px;font-weight:500;margin-top:3px}.tag{font-size:10px;letter-spacing:.06em;border-radius:20px;padding:4px 8px;background:var(--surface2);color:var(--muted);white-space:nowrap}.uts .tag{background:#f4dfb9;color:#80520d}.uas .tag{background:#f2d0d0;color:#8e3030}:root[data-theme="dark"] .uts .tag{background:#604a28;color:#ffe0a8}:root[data-theme="dark"] .uas .tag{background:#61343d;color:#ffc5cb}
+.files{margin:14px 0 0;padding:12px 0 0 18px;border-top:1px solid var(--line);display:grid;gap:8px}.files li{font-size:13px}.files a,.other a{color:var(--blue);text-decoration:none;overflow-wrap:anywhere}.files a:hover,.other a:hover{text-decoration:underline}.empty{font-size:12px;color:var(--muted);font-style:italic;margin-top:12px}
+.other,.status{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}.other h2{font-size:17px;margin:0 0 8px}.other ul{margin:0;padding-left:20px;display:grid;gap:7px}.status{color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}[hidden]{display:none!important}
+@media(max-width:560px){header{padding:23px 17px}main{padding:0 14px 42px}.topline{align-items:flex-start}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="topline"><div class="eyebrow">Universitas Internasional Batam</div><button class="theme-toggle" id="themeToggle" type="button">☾ Dark mode</button></div>
+<h1 id="subjectTitle">Loading subject…</h1><div class="sub">Weekly course materials</div>
+</div></header>
+<main>
+<a class="back" href="index.html">← All subjects</a>
+<div class="summary"><span id="weekCount">Loading weekly materials…</span><span>Choose a week to view its files</span></div>
+<div id="status" class="status">Connecting to the library…</div>
+<div id="weeks" class="week-grid"></div>
+<section id="other" class="other" hidden><h2>Other subject files</h2><ul id="otherFiles"></ul></section>
+</main>
+<footer>UIB Online Library · Materials hosted on Google Drive</footer>
+<script>
+const API="https://script.google.com/macros/s/AKfycbyxIJTsHxJABFZo6RTtU4RagmcMtrG5ch0tUUJkgByERxFLPuBYhMXcjf7x7FUNzkQf_A/exec";
+const $=id=>document.getElementById(id);const folderId=new URLSearchParams(location.search).get("folder");
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function weekNumber(name){const m=String(name).match(/week\s*(\d+)/i);return m?Number(m[1]):999;}
+function fileLink(f){const url=f.previewUrl||("https://drive.google.com/file/d/"+f.id+"/preview");return '<li><a href="'+esc(url)+'" target="_blank" rel="noopener">'+esc(f.name)+'</a></li>';}
+function setTheme(theme){document.documentElement.dataset.theme=theme;try{localStorage.setItem("uib-library-theme",theme);}catch(e){}$("themeToggle").textContent=theme==="dark"?"☀ Light mode":"☾ Dark mode";}
+function initTheme(){setTheme(document.documentElement.dataset.theme==="dark"?"dark":"light");}
+$("themeToggle").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));initTheme();
+function render(data){
+ const course=(data.folders||[]).find(x=>x.id===folderId);
+ if(!course){$("subjectTitle").textContent="Subject not found";$("status").hidden=false;$("status").textContent="This subject could not be found. Return to the library and choose a subject again.";$("weekCount").textContent="";return;}
+ document.title=course.name+" · UIB Online Library";$("subjectTitle").textContent=course.name;
+ const weeks=(course.folders||[]).filter(x=>/^week\s*\d+/i.test(x.name));const present=new Set(weeks.map(w=>weekNumber(w.name)));
+ if(!present.has(8))weeks.push({name:"Week 8",files:[],synthetic:true});
+ if(!present.has(16))weeks.push({name:"Week 16",files:[],synthetic:true});
+ weeks.sort((a,b)=>weekNumber(a.name)-weekNumber(b.name));
+ const total=weeks.reduce((n,w)=>n+(w.files||[]).length,0);$("weekCount").textContent=weeks.length+" weeks · "+total+" files";$("status").hidden=true;
+ $("weeks").innerHTML=weeks.map(w=>{
+  const n=weekNumber(w.name),kind=n===8?"uts":n===16?"uas":"",label=n===8?"UTS · Ujian Tengah Semester":n===16?"UAS · Ujian Akhir Semester":"";
+  const files=(w.files||[]).slice().sort((a,b)=>a.name.localeCompare(b.name));
+  const content=files.length?'<ul class="files">'+files.map(fileLink).join("")+'</ul>':'<div class="empty">'+(label?"Exam week":"No materials uploaded yet")+'</div>';
+  return '<article class="week '+kind+'"><button class="week-toggle" type="button" aria-expanded="false"><span>'+esc(w.name)+(label?'<span class="week-label">'+label+'</span>':'')+'</span><span class="tag">'+(files.length?files.length+" files":label?"Exam":"Empty")+'</span></button><div class="week-content" hidden>'+content+'</div></article>';
+ }).join("");
+ document.querySelectorAll(".week-toggle").forEach(btn=>btn.addEventListener("click",()=>{const panel=btn.nextElementSibling;const opening=panel.hidden;panel.hidden=!opening;btn.setAttribute("aria-expanded",String(opening));}));
+ const other=(course.files||[]).filter(f=>!/^00\s*-\s*index\.html$/i.test(f.name));
+ if(other.length){$("other").hidden=false;$("otherFiles").innerHTML=other.map(fileLink).join("");}
+}
+function load(){if(!folderId){$("subjectTitle").textContent="No subject selected";$("status").textContent="Return to the library and select a subject.";return;}
+ let hasCache=false;try{const saved=localStorage.getItem("uib-online-library-cache-v1");if(saved){const cached=JSON.parse(saved);if(cached&&Array.isArray(cached.folders)){render(cached);hasCache=true;}}}catch(e){}
+ const callback="uibSubjectCallback";let finished=false;const s=document.createElement("script");const timeout=setTimeout(()=>{if(!finished&&!hasCache)$("status").textContent="The library is taking longer than usual to respond. Please wait or refresh.";},12000);
+ window[callback]=data=>{finished=true;clearTimeout(timeout);try{render(data);try{localStorage.setItem("uib-online-library-cache-v1",JSON.stringify(data));}catch(e){}}catch(e){if(!hasCache)$("status").textContent="Could not display subject materials: "+e.message;}};
+ s.src=API+"?callback="+callback+"&_="+Date.now();s.onerror=()=>{finished=true;clearTimeout(timeout);if(!hasCache)$("status").textContent="Could not connect to Google Drive. Check the deployment and sharing permissions.";};document.head.appendChild(s);
+}
+load();
+</script>
+</body></html>
