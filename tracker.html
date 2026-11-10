@@ -4,6 +4,21 @@
 body{transition:background .22s,color .22s}.metric,.panel,.history-card{animation:trackerEnter .4s ease both;transition:transform .2s,box-shadow .2s,border-color .2s}.metric:nth-child(2){animation-delay:.06s}.metric:nth-child(3){animation-delay:.12s}.metric:hover,.history-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
 button,a,td input,td select{transition:background .2s,color .2s,border-color .2s,box-shadow .2s,transform .2s,opacity .2s}.semester{transition:background .2s,border-color .2s,color .2s,transform .2s}.semester:hover,.btn:hover,.theme:hover{transform:translateY(-1px)}.semester.active{box-shadow:0 5px 14px color-mix(in srgb,var(--blue) 25%,transparent)}td input:focus,td select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 15%,transparent)}tbody tr{animation:trackerEnter .25s ease both}tbody tr:hover{background:var(--surface2)}.remove:hover{transform:scale(1.15)}.bar i{transition:width .45s ease}.metric strong{transition:color .2s,transform .2s}@keyframes trackerEnter{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Motion system: subtle entrances, hover lift and soft ambient light */
+@keyframes pageRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes softFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes glowPulse{0%,100%{opacity:.4}50%{opacity:.85}}
+@keyframes sheen{0%{background-position:180% 0}100%{background-position:-180% 0}}
+@keyframes starBlink{0%,100%{opacity:.2}50%{opacity:.9}}
+@keyframes heroDrift{0%,100%{background-position:center 38%}50%{background-position:center 48%}}
+.card,.metric,.panel,.quick,.leader,.week,.semester-button,.history-card,.news-item,.info-box,.version,.reminder-panel,.task,.search-result,.deadline-home-item{transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
+.card:hover,.metric:hover,.quick:hover,.leader:hover,.week:hover,.semester-button:hover,.history-card:hover,.news-item:hover,.info-box:hover,.task:hover,.search-result:hover{transform:translateY(-4px);box-shadow:0 16px 34px #17203318}
+.btn,.theme,.theme-toggle,.nav a,.nav button,.back,.open-link{transition:transform .2s ease,filter .2s ease,background .2s ease}
+.btn:hover,.theme:hover,.theme-toggle:hover,.nav a:hover,.nav button:hover,.back:hover,.open-link:hover{transform:translateY(-2px);filter:brightness(1.08)}
+header{animation:pageRise .75s both}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
 </style></head><body>
 <header><div class="wrap"><div class="top"><div class="eyebrow">Universitas Internasional Batam · Class of 2026</div><div style="display:flex;gap:8px"><a class="back" href="index.html">← Library</a><button class="theme" id="themeToggle" type="button">☾ Dark mode</button></div></div><h1>IPS & IPK Tracker</h1><div class="sub">Track your semester grades and cumulative academic progress.</div></div></header>
 <main><section class="summary"><div class="metric"><span>Selected semester IPS</span><strong id="currentIps">0.00</strong><small id="currentSks">0 SKS recorded</small></div><div class="metric"><span>Cumulative IPK</span><strong id="overallIpk">0.00</strong><small id="overallSks">0 total SKS</small></div><div class="metric"><span>Semesters with grades</span><strong id="semesterCount">0 / 6</strong><small>Based on entered courses</small></div></section>
