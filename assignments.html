@@ -33,7 +33,7 @@
 <footer>UIB E-Library · Assignment data stays in this browser</footer></main>
 <script>
 const $=id=>document.getElementById(id),KEY="uib-assignment-tracker-v1",names=["Agama","Bahasa Indonesia","Bahasa Inggris","Lab. Pengantar Akuntansi","Matematika Bisnis","Pengantar Akuntansi","Pengantar Manajemen dan Bisnis"];
-let items=[],editing=null,sharedReady=false,sharedSyncing=false;const SHARED_API="https://script.google.com/macros/s/AKfycbyxIJTsHxJABFZo6RTtU4RagmcMtr5Gch0tUUJkgByERxFLPuBYhMXcjf7x7FUNzkQf_A/exec";
+let items=[],editing=null,sharedReady=false,sharedSyncing=false;const SHARED_API="https://script.google.com/macros/s/AKfycbxTnLjon94xy4pum1O410O5pHHgjOk8FglMDtDFnteo6oJCttYX_Q3aV0_6xO15ocaEkA/exec";
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 let toastTimer;function showToast(message){const t=$("toast");t.textContent=message;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2600);}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(items));$("saveStatus").textContent=sharedReady?"✓ Saved locally · syncing for everyone…":"✓ Saved on this device · shared sync is connecting…";showToast("✓ Assignment saved. Syncing shared class list…");if(sharedReady)syncSharedAssignments();else loadSharedAssignments((err,remote)=>{if(err){$("saveStatus").textContent="⚠ Saved only on this device. Shared API is not connected yet.";}else syncSharedAssignments();});return true;}catch(e){$("saveStatus").textContent="⚠ Could not save. Browser storage may be blocked or full." ;showToast("⚠ Could not save. Check browser storage.");return false;}}
