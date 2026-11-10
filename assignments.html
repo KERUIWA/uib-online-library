@@ -83,7 +83,71 @@ function loadSharedAssignments(done){
   }
   attempt();
 }
-function syncSharedAssignments(){if(sharedSyncing)return;sharedSyncing=true;const snapshot=JSON.stringify(items);fetch(SHARED_API,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:snapshot}).then(()=>new Promise(resolve=>setTimeout(resolve,1200))).then(()=>loadSharedAssignments((err,remote)=>{sharedSyncing=false;if(err){$("saveStatus").textContent="⚠ Saved on this device, but shared sync could not be verified.";return;}const same=JSON.stringify(remote)===snapshot;if(same){$("saveStatus").textContent="✓ Shared with everyone · synced successfully";showToast("🌍 Assignment shared with everyone!");}else{$("saveStatus").textContent="⚠ Shared list did not match. Refresh and try again.";}})).catch(()=>{sharedSyncing=false;$("saveStatus").textContent="⚠ Shared sync failed. Your local copy is safe.";});}
+function normalizeAssignment(x){
+  return {
+    id:String(x&&x.id||""),
+    title:String(x&&x.title||"").trim().slice(0,120),
+    course:String(x&&x.course||"").trim().slice(0,100),
+    due:String(x&&x.due||""),
+    time:String(x&&x.time||"23:59"),
+    priority:["Normal","High","Urgent"].includes(x&&x.priority)?x.priority:"Normal",
+    description:String(x&&x.description||"").slice(0,1000),
+    done:!!(x&&x.done===true)
+  };
+}
+function assignmentSignature(list){
+  return JSON.stringify((Array.isArray(list)?list:[])
+    .map(normalizeAssignment)
+    .sort((a,b)=>a.id.localeCompare(b.id)));
+}
+function mergeAssignments(local,remote){
+  const merged=new Map();
+  const diagnosticIds=new Set(["diagnostic-test-001","post-test-001","browser-post-test"]);
+  (Array.isArray(remote)?remote:[]).forEach(x=>{
+    if(x&&x.id&&!diagnosticIds.has(String(x.id)))merged.set(String(x.id),normalizeAssignment(x));
+  });
+  (Array.isArray(local)?local:[]).forEach(x=>{
+    if(x&&typeof x==="object"&&x.id&&!diagnosticIds.has(String(x.id)))merged.set(String(x.id),normalizeAssignment(x));
+  });
+  return Array.from(merged.values());
+}
+function syncSharedAssignments(){
+  if(sharedSyncing)return;
+  sharedSyncing=true;
+  const snapshot=JSON.stringify(items.map(normalizeAssignment));
+  fetch(SHARED_API,{
+    method:"POST",
+    mode:"no-cors",
+    headers:{"Content-Type":"text/plain;charset=utf-8"},
+    body:snapshot
+  }).then(()=>new Promise(resolve=>setTimeout(resolve,1200)))
+    .then(()=>verifySharedUpload(snapshot,0))
+    .catch(()=>{
+      sharedSyncing=false;
+      $("saveStatus").textContent="⚠ Saved on this device, but shared sync failed. Your local copy is safe.";
+    });
+}
+function verifySharedUpload(snapshot,attempt){
+  loadSharedAssignments((err,remote)=>{
+    if(err){
+      sharedSyncing=false;
+      $("saveStatus").textContent="⚠ Saved on this device, but shared sync could not be verified.";
+      return;
+    }
+    if(assignmentSignature(remote)===assignmentSignature(JSON.parse(snapshot))){
+      sharedSyncing=false;
+      $("saveStatus").textContent="✓ Shared with everyone · synced successfully";
+      showToast("🌍 Assignment shared with everyone!");
+      return;
+    }
+    if(attempt<3){
+      setTimeout(()=>verifySharedUpload(snapshot,attempt+1),900);
+      return;
+    }
+    sharedSyncing=false;
+    $("saveStatus").textContent="⚠ Upload reached the server, but the shared list differs. Your local copy is safe.";
+  });
+}
 function celebrate(){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;const colors=["#f94144","#f9c74f","#43aa8b","#577590","#b565d9","#f9844a"];for(let i=0;i<110;i++){const p=document.createElement("i");p.className="confetti-piece";p.style.left=(Math.random()*100)+"vw";p.style.background=colors[i%colors.length];p.style.borderRadius=Math.random()>.5?"50%":"2px";p.style.setProperty("--drift",((Math.random()-.5)*340)+"px");p.style.setProperty("--spin",(Math.random()*1500+720)+"deg");p.style.animationDelay=(Math.random()*2.2)+"s";p.style.width=(7+Math.random()*9)+"px";p.style.height=(11+Math.random()*16)+"px";document.body.appendChild(p);setTimeout(()=>p.remove(),9000);} }
 function dueDate(x){return new Date(x.due+"T"+x.time+":00");}
 function localDateKey(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
@@ -106,5 +170,5 @@ function checkNotifications(){if(!("Notification"in window)||Notification.permis
 $("notifyBtn").addEventListener("click",async()=>{const status=$("notifyStatus");if(!window.isSecureContext){status.textContent="Notifications require a secure HTTPS page. Open the GitHub Pages address, not a local file.";return;}if(!("Notification"in window)){status.textContent="This browser does not support desktop notifications. On-page alerts still work.";return;}try{if(Notification.permission==="granted"){status.textContent="✓ Browser notifications are already enabled. Keep this tracker open for reminders.";checkNotifications();return;}if(Notification.permission==="denied"){status.textContent="Notifications are blocked in browser site settings. Allow them for this website, then try again.";return;}status.textContent="Waiting for browser permission…";const p=await Notification.requestPermission();if(p==="granted"){status.textContent="✓ Browser notifications enabled. Keep this tracker open for reminders.";new Notification("UIB Assignment Tracker",{body:"Notifications are working. We will alert you about deadlines within 24 hours."});checkNotifications();}else if(p==="denied"){status.textContent="Permission was blocked. Allow notifications for this site in your browser settings.";}else{status.textContent="Permission was dismissed. Click the button again and choose Allow.";}}catch(err){status.textContent="Could not request notification permission: "+(err?.message||"browser error");}});
 if("Notification"in window&&Notification.permission==="granted")$("notifyStatus").textContent="Browser notifications are enabled. Keep this tracker open for reminders.";
 $("themeToggle").addEventListener("click",()=>{const d=document.documentElement.dataset.theme!=="dark";document.documentElement.dataset.theme=d?"dark":"light";try{localStorage.setItem("uib-library-theme",d?"dark":"light")}catch(e){}$("themeToggle").textContent=d?"☀ Light mode":"☾ Dark mode";});$("themeToggle").textContent=document.documentElement.dataset.theme==="dark"?"☀ Light mode":"☾ Dark mode";
-try{const raw=JSON.parse(localStorage.getItem(KEY)||"[]");items=Array.isArray(raw)?raw:[];}catch(e){items=[];}render();checkNotifications();loadSharedAssignments((err,remote)=>{if(err){$("saveStatus").textContent="Local-only mode: shared assignment service needs deployment." ;return;}if(remote.length){items=remote;try{localStorage.setItem(KEY,JSON.stringify(items));}catch(e){}render();$("saveStatus").textContent="✓ Loaded the globally shared class assignment list";}else if(items.length){syncSharedAssignments();}else{$("saveStatus").textContent="✓ Connected to the shared class assignment list";}});setInterval(()=>{render();checkNotifications();},60000);
+try{const raw=JSON.parse(localStorage.getItem(KEY)||"[]");items=Array.isArray(raw)?raw:[];}catch(e){items=[];}render();checkNotifications();loadSharedAssignments((err,remote)=>{if(err){$("saveStatus").textContent="Local-only mode: shared assignment service needs deployment.";return;}const merged=mergeAssignments(items,remote);const needsUpload=assignmentSignature(merged)!==assignmentSignature(remote);items=merged;try{localStorage.setItem(KEY,JSON.stringify(items));}catch(e){}render();if(needsUpload){syncSharedAssignments();}else{$("saveStatus").textContent="✓ Connected · shared class assignments loaded";}});setInterval(()=>{render();checkNotifications();},60000);
 </script></body></html>
