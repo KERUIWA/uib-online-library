@@ -32,7 +32,7 @@ button,.theme-toggle{font:inherit;cursor:pointer}.theme-toggle{border:1px solid 
 .card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-height:168px;transition:transform .22s,border-color .22s,box-shadow .22s;animation:cardIn .4s both}
 .card:hover{transform:translateY(-4px);border-color:var(--blue);box-shadow:0 13px 30px #17203314}.card h2{font-size:18px;line-height:1.35;margin:0 0 7px}.meta{color:var(--muted);font-size:13px}.teacher{margin-top:5px;color:var(--blue);font-size:12px;font-weight:650}.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:20px}.open-link{color:var(--blue);font-weight:750;text-decoration:none}.open-link:hover{text-decoration:underline}.arrow{font-size:19px}
 .general,.status,.leadership{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:19px}.general h2,.leadership h2{font-size:18px;margin:0 0 10px}.leadership-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.leader{padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--surface2)}.leader strong{display:block;font-size:14px}.leader span{display:block;color:var(--muted);font-size:12px;margin-top:4px}.general ul{margin:0;padding-left:20px;display:grid;gap:7px}.general a,.files a{color:var(--blue);text-decoration:none;overflow-wrap:anywhere}.general a:hover,.files a:hover{text-decoration:underline}
-.status{color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
+.status{color:var(--muted)}.search-results{margin:0 0 22px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:17px}.search-results h2{font-size:16px;margin:0 0 10px}.search-result-list{display:grid;gap:8px}.search-result{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--surface2);text-decoration:none;color:var(--ink)}.search-result:hover{border-color:var(--blue)}.search-result strong{display:block;font-size:13px;overflow-wrap:anywhere}.search-result small{display:block;color:var(--muted);font-size:11px}.search-result .result-kind{flex:0 0 auto;color:var(--blue);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}.no-results{color:var(--muted);font-size:13px;padding:8px 2px}footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
 .back{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:750;text-decoration:none;margin:0 0 16px}.subject-title{margin-top:0}
 .week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:13px}.week{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:15px}.week.uts{background:var(--uts);border-color:var(--uts-line)}.week.uas{background:var(--uas);border-color:var(--uas-line)}
 .week-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;border:0;background:transparent;color:var(--ink);text-align:left;padding:0;font-weight:750}.week-label{display:block;color:var(--muted);font-size:12px;font-weight:500;margin-top:3px}.tag{font-size:10px;letter-spacing:.06em;border-radius:20px;padding:4px 8px;background:var(--surface2);color:var(--muted);white-space:nowrap}.uts .tag{background:#f4dfb9;color:#80520d}.uas .tag{background:#f2d0d0;color:#8e3030}:root[data-theme="dark"] .uts .tag{background:#604a28;color:#ffe0a8}:root[data-theme="dark"] .uas .tag{background:#61343d;color:#ffc5cb}
@@ -65,6 +65,7 @@ button,.theme-toggle{font:inherit;cursor:pointer}.theme-toggle{border:1px solid 
  <span class="progress-label">IN PROGRESS</span>
 </section>
 <div id="status" class="status">Connecting to the library…</div>
+<section id="searchResults" class="search-results" hidden aria-live="polite"><h2 id="searchResultsTitle">Matching files</h2><div id="searchResultList" class="search-result-list"></div></section>
 <div id="semesterOneContent">
 <div id="subjects" class="grid"></div>
 <section id="general" class="general" hidden><h2>General library documents</h2><ul id="generalFiles"></ul></section>
@@ -93,7 +94,28 @@ function render(data){
  if(general.length){$("general").hidden=false;$("generalFiles").innerHTML=general.map(fileLink).join("");}
  filter();
 }
-function filter(){const q=$("search").value.trim().toLowerCase();let shown=0;document.querySelectorAll(".card").forEach(card=>{const yes=!q||card.dataset.search.includes(q);card.hidden=!yes;if(yes)shown++;});$("count").textContent=shown+" of "+(library?.folders||[]).filter(x=>x.folders&&x.name&&!/^zzz\.other$/i.test(x.name.trim())).length+" subjects";}
+function filter(){
+ const q=$("search").value.trim().toLocaleLowerCase();
+ const cards=[...document.querySelectorAll(".card")];let shown=0;
+ cards.forEach(card=>{const yes=!q||String(card.dataset.search||"").toLocaleLowerCase().includes(q);card.hidden=!yes;if(yes)shown++;});
+ const results=[];
+ if(q&&library){
+  const addFile=(file,course,section)=>{if(String(file.name||"").toLocaleLowerCase().includes(q)){const url=file.previewUrl||("https://drive.google.com/file/d/"+file.id+"/preview");results.push({name:file.name,url,context:[course,section].filter(Boolean).join(" · ")});}};
+  const walk=(folder,course,section)=>{(folder.files||[]).forEach(file=>addFile(file,course,section));(folder.folders||[]).forEach(child=>walk(child,course,child.name||section));};
+  (library.folders||[]).filter(x=>x.folders&&x.name&&!/^zzz\.other$/i.test(x.name.trim())).forEach(course=>walk(course,course.name,""));
+  (library.files||[]).forEach(file=>addFile(file,"General library",""));
+ }
+ const box=$("searchResults"),list=$("searchResultList");
+ if(q){
+  box.hidden=false;
+  $("searchResultsTitle").textContent=results.length?"Matching files ("+results.length+")":"No matching files";
+  list.innerHTML=results.length?results.map(r=>'<a class="search-result" href="'+esc(r.url)+'" target="_blank" rel="noopener"><span><strong>'+esc(r.name)+'</strong><small>'+esc(r.context)+'</small></span><span class="result-kind">File ↗</span></a>').join(""):'<div class="no-results">No file names match that search. Try another keyword.</div>';
+  $("count").textContent=shown+" matching subjects · "+results.length+" matching files";
+ }else{
+  box.hidden=true;
+  $("count").textContent=shown+" of "+(library?.folders||[]).filter(x=>x.folders&&x.name&&!/^zzz\.other$/i.test(x.name.trim())).length+" subjects";
+ }
+}
 $("search").addEventListener("input",filter);
 function selectSemester(n){
  document.querySelectorAll(".semester-button").forEach(button=>{
