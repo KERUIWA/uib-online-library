@@ -35,7 +35,7 @@ function getSharedAssignmentsResponse_(e) {
   }
   const callback = e && e.parameter ? String(e.parameter.callback || "") : "";
   const json = JSON.stringify(payload);
-  if (callback && /^[A-Za-z_$][0-9A-Za-z_$]*(?:\\.[A-Za-z_$][0-9A-Za-z_$]*)*$/.test(callback)) {
+  if (callback && /^[A-Za-z_$][0-9A-Za-z_$]*(?:\.[A-Za-z_$][0-9A-Za-z_$]*)*$/.test(callback)) {
     return ContentService.createTextOutput(callback + "(" + json + ");")
       .setMimeType(ContentService.MimeType.JAVASCRIPT);
   }
@@ -54,7 +54,7 @@ function doPost(e) {
       const course = String(x.course || "").trim().slice(0, 100);
       const due = String(x.due || "");
       const time = String(x.time || "23:59");
-      if (!title || !course || !/^\\d{4}-\\d{2}-\\d{2}$/.test(due) || !/^\\d{2}:\\d{2}$/.test(time)) {
+      if (!title || !course || !/^\d{4}-\d{2}-\d{2}$/.test(due) || !/^\d{2}:\d{2}$/.test(time)) {
         throw new Error("An assignment has missing or invalid required fields.");
       }
       return {
