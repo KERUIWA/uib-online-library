@@ -63,8 +63,10 @@ button,.theme-toggle{font:inherit;cursor:pointer}.theme-toggle{border:1px solid 
  <span class="progress-label">IN PROGRESS</span>
 </section>
 <div id="status" class="status">Connecting to the library…</div>
+<div id="semesterOneContent">
 <div id="subjects" class="grid"></div>
 <section id="general" class="general" hidden><h2>General library documents</h2><ul id="generalFiles"></ul></section>
+</div>
 </main>
 <footer>UIB E-Library · Class of 2026 · Materials hosted on Google Drive</footer>
 <script>
@@ -96,8 +98,9 @@ function selectSemester(n){
   button.setAttribute("aria-pressed",String(active));
  });
  const first=n===1;
- $("subjects").hidden=!first;
- $("general").hidden=first?!(library&&(library.files||[]).length):true;
+ $("semesterOneContent").hidden=!first;
+ $("subjects").hidden=false;
+ $("general").hidden=!(library&&(library.files||[]).length);
  $("status").hidden=true;
  $("semesterMessage").hidden=first;
  if(first){filter();return;}
