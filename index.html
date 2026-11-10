@@ -12,7 +12,7 @@ try{const t=localStorage.getItem("uib-library-theme");if(t==="dark")document.doc
 :root{color-scheme:light;--bg:#f4f6fb;--surface:#fff;--surface2:#f8f9fd;--ink:#172033;--muted:#687386;--line:#e5e9f1;--blue:#3157d5;--blue-soft:#edf1ff;--shadow:0 8px 28px #1720330b;--uts:#fff7e7;--uts-line:#f0d49d;--uas:#fff0f0;--uas-line:#efc3c3}
 :root[data-theme="dark"]{color-scheme:dark;--bg:#101522;--surface:#192131;--surface2:#202b3e;--ink:#edf2fc;--muted:#a2aec2;--line:#303c50;--blue:#9aafff;--blue-soft:#263454;--shadow:0 8px 28px #0003;--uts:#382d1c;--uts-line:#71552b;--uas:#3b242b;--uas-line:#75404a}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,Segoe UI,Arial,sans-serif;transition:background .2s,color .2s}
-header{background:var(--surface);border-bottom:1px solid var(--line);padding:30px 22px 28px}
+header{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(90deg,rgba(10,18,38,.82),rgba(10,18,38,.42)),url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=2000&q=85") center 48%/cover no-repeat;border-bottom:1px solid var(--line);padding:46px 22px 52px;color:#fff;min-height:250px}header .eyebrow{color:#e0e8ff}header h1{color:#fff;text-shadow:0 2px 18px #0005}header .sub{color:rgba(255,255,255,.86)}header .theme-toggle{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35);color:#fff;backdrop-filter:blur(10px)}header .theme-toggle:hover{background:rgba(255,255,255,.24)}
 .wrap{max-width:1100px;margin:auto}.topline{display:flex;justify-content:space-between;align-items:center;gap:14px}.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);font-weight:800}
 h1{font-size:clamp(30px,5vw,44px);line-height:1.1;letter-spacing:-.04em;margin:10px 0}.sub{color:var(--muted);max-width:650px}
 main{max-width:1100px;margin:28px auto;padding:0 20px 60px}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0 22px}
@@ -39,6 +39,7 @@ button,.theme-toggle{font:inherit;cursor:pointer}.theme-toggle{border:1px solid 
 .files{margin:14px 0 0;padding:12px 0 0 18px;border-top:1px solid var(--line);display:grid;gap:8px}.files li{font-size:13px}.empty{font-size:12px;color:var(--muted);font-style:italic;margin-top:12px}
 @keyframes chipIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}@keyframes messageIn{from{opacity:0;transform:translateY(12px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes clockPulse{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}\n[hidden]{display:none!important}
 @media(max-width:560px){header{padding:24px 17px}main{padding:0 14px 42px}.card{padding:17px}.topline{align-items:flex-start}}
+@media(max-width:600px){header{padding:34px 18px 38px;min-height:220px;background-position:54% center}header .topline{align-items:flex-start}header h1{font-size:34px}}
 </style>
 </head>
 <body>
