@@ -18,7 +18,17 @@ h1{font-size:clamp(30px,5vw,44px);line-height:1.1;letter-spacing:-.04em;margin:1
 main{max-width:1100px;margin:28px auto;padding:0 20px 60px}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0 22px}
 input{flex:1;min-width:230px;padding:13px 15px;border:1px solid var(--line);border-radius:13px;font:inherit;background:var(--surface);color:var(--ink);outline:none}input:focus{border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 16%,transparent)}
 button,.theme-toggle{font:inherit;cursor:pointer}.theme-toggle{border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:999px;padding:9px 13px;font-size:13px;font-weight:700;white-space:nowrap}
-.count{color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.count{color:var(--muted);font-size:13px}
+.semester-nav{display:flex;gap:9px;overflow-x:auto;padding:4px 1px 13px;margin:0 0 16px;scrollbar-width:thin}
+.semester-button{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);padding:10px 16px;font-size:13px;font-weight:750;white-space:nowrap;transition:background .18s,border-color .18s,color .18s}
+.semester-button:hover{border-color:var(--blue);color:var(--blue)}
+.semester-button.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.semester-message{margin:8px 0 24px;padding:42px 22px;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+.semester-message h2{margin:12px 0 5px;font-size:23px}
+.semester-message p{margin:0 auto 18px;max-width:440px;color:var(--muted)}
+.progress-icon{font-size:38px;color:var(--blue)}
+.progress-label{display:inline-block;padding:6px 12px;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-size:10px;font-weight:850;letter-spacing:.12em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
 .card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);min-height:168px;transition:transform .18s,border-color .18s}
 .card:hover{transform:translateY(-2px);border-color:var(--blue)}.card h2{font-size:18px;line-height:1.35;margin:0 0 7px}.meta{color:var(--muted);font-size:13px}.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:20px}.open-link{color:var(--blue);font-weight:750;text-decoration:none}.open-link:hover{text-decoration:underline}.arrow{font-size:19px}
 .general,.status{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:19px}.general h2{font-size:18px;margin:0 0 10px}.general ul{margin:0;padding-left:20px;display:grid;gap:7px}.general a,.files a{color:var(--blue);text-decoration:none;overflow-wrap:anywhere}.general a:hover,.files a:hover{text-decoration:underline}
@@ -38,6 +48,20 @@ button,.theme-toggle{font:inherit;cursor:pointer}.theme-toggle{border:1px solid 
 </div></header>
 <main>
 <div class="toolbar"><input id="search" type="search" placeholder="Search subjects or files..." aria-label="Search subjects or files"><span class="count" id="count">Loading library…</span></div>
+<nav class="semester-nav" aria-label="Choose semester">
+ <button class="semester-button active" type="button" data-semester="1" aria-pressed="true">1st Semester</button>
+ <button class="semester-button" type="button" data-semester="2" aria-pressed="false">2nd Semester</button>
+ <button class="semester-button" type="button" data-semester="3" aria-pressed="false">3rd Semester</button>
+ <button class="semester-button" type="button" data-semester="4" aria-pressed="false">4th Semester</button>
+ <button class="semester-button" type="button" data-semester="5" aria-pressed="false">undefined Semester</button>
+ <button class="semester-button" type="button" data-semester="6" aria-pressed="false">undefined Semester</button>
+</nav>
+<section id="semesterMessage" class="semester-message" hidden aria-live="polite">
+ <div class="progress-icon">◷</div>
+ <h2 id="semesterMessageTitle">Semester in progress</h2>
+ <p id="semesterMessageText">Materials for this semester are being prepared. Please check back later.</p>
+ <span class="progress-label">IN PROGRESS</span>
+</section>
 <div id="status" class="status">Connecting to the library…</div>
 <div id="subjects" class="grid"></div>
 <section id="general" class="general" hidden><h2>General library documents</h2><ul id="generalFiles"></ul></section>
@@ -65,6 +89,26 @@ function render(data){
 }
 function filter(){const q=$("search").value.trim().toLowerCase();let shown=0;document.querySelectorAll(".card").forEach(card=>{const yes=!q||card.dataset.search.includes(q);card.hidden=!yes;if(yes)shown++;});$("count").textContent=shown+" of "+(library?.folders||[]).filter(x=>x.folders&&x.name).length+" subjects";}
 $("search").addEventListener("input",filter);
+function selectSemester(n){
+ document.querySelectorAll(".semester-button").forEach(button=>{
+  const active=Number(button.dataset.semester)===n;
+  button.classList.toggle("active",active);
+  button.setAttribute("aria-pressed",String(active));
+ });
+ const first=n===1;
+ $("subjects").hidden=!first;
+ $("general").hidden=first?!(library&&(library.files||[]).length):true;
+ $("status").hidden=true;
+ $("semesterMessage").hidden=first;
+ if(first){filter();return;}
+ const ordinal=["","1st","2nd","3rd","4th","5th","6th"][n];
+ $("semesterMessageTitle").textContent=ordinal+" Semester";
+ $("semesterMessageText").textContent="Materials for the "+ordinal+" semester are not available yet. We're still preparing this section. Please check back later!";
+ $("count").textContent="Semester "+ordinal+" · In progress";
+}
+document.querySelectorAll(".semester-button").forEach(button=>{
+ button.addEventListener("click",()=>selectSemester(Number(button.dataset.semester)));
+});
 const CACHE_KEY="uib-online-library-cache-v1";
 function load(){let hasCache=false;try{const saved=localStorage.getItem(CACHE_KEY);if(saved){const cached=JSON.parse(saved);if(cached&&Array.isArray(cached.folders)){render(cached);hasCache=true;$("count").textContent+=" · updating";}}}catch(e){console.warn("Could not read library cache:",e);}
  const callback="uibLibraryCallback";let finished=false;const s=document.createElement("script");const timeout=setTimeout(()=>{if(!finished&&!hasCache)$("status").textContent="The library is taking longer than usual to respond. Please wait or refresh.";},12000);
