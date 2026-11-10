@@ -140,7 +140,7 @@ status.textContent=ended?"Banner ended":"No banner data";
 host.innerHTML=ended?'<div class="current-banner-empty"><div style="font-size:48px;line-height:1.3">🫡✨</div><strong>That banner has ended!</strong><br>Its warp has left the station. We await the next one, Trailblazer.</div>':'<div class="current-banner-empty">No Character Event Warp is available in the live feed right now. The section will update when banner data arrives.</div>';
 return;
 }
-const isUpcoming=!active.length,label=isUpcoming?"Upcoming banner":"Now featuring",image=chosen.image?'<img src="'+esc(chosen.image)+'" alt="'+esc(chosen.name)+' artwork" loading="lazy" onerror="this.remove()">':"";
+const isUpcoming=!active.length,label=isUpcoming?"Upcoming banner":"Now featuring",artwork=bannerArtwork(chosen),image=artwork?'<img src="'+esc(artwork)+'" alt="'+esc(chosen.name)+' full splash artwork" loading="lazy" onerror="this.remove()">':"";
 host.innerHTML='<article class="current-banner-grid"><div class="current-banner-art">'+image+'</div><div class="current-banner-copy"><span class="tag">'+label+'</span><h3>'+esc(chosen.name)+'</h3><p>'+esc(chosen.description||"Featured warp details will appear when supplied by the live calendar.")+'</p><div class="dates">Starts: '+fmt(chosen.start)+"<br>Ends: "+fmt(chosen.end)+'</div><div class="banner-countdown">'+(isUpcoming?"Starts in ":"Ends in ")+remaining(isUpcoming?chosen.start:chosen.end)+'</div>'+(chosen.url?'<a class="card-link" href="'+esc(chosen.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+"</div></article>";
 status.textContent=isUpcoming?"Next banner":"Live now";
 }catch(err){
