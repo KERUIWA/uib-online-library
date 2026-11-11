@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-11T04:05:47Z",
+  "updatedAt": "2026-11-11T04:40:30Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-11T04:05:47Z",
-      "lastSuccess": "2026-11-11T04:05:47Z",
+      "checkedAt": "2026-11-11T04:40:30Z",
+      "lastSuccess": "2026-11-11T04:40:30Z",
       "error": null,
       "data": [
         {
@@ -1364,6 +1364,15 @@
           "type": "event"
         },
         {
+          "id": "47396790",
+          "title": "The player return web event \"Come With Me, Take the Journey\" is now available. Participate to obtain up to 480 Stellar Jades and more!",
+          "description": "Dear Trailblazer, your companions aboard the Express are waiting for you to take the journey by their side and re-embark on your cosmic adventure! Earn up to 480 Stellar Jades! ▌ Event Period After the Version 4.7 update — 2026/12/23 06:00 (UTC+8) Participate:",
+          "created_at": 1794371405,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/05/46700ae4a9fdcff265f1639b88ff2b58_1576273973494050846.png",
+          "url": "https://www.hoyolab.com/article/47396790",
+          "type": "info"
+        },
+        {
           "id": "47396370",
           "title": "Project Astro-Warp Beta Sign-Up Reminder",
           "description": "The Honkai: Star Rail Project Astro-Warp is about to begin a new round of small-scale full-wipe confidential beta testing. Trailblazers who have successfully signed up before 2026/11/16 09:59 (UTC+8) have a chance to be selected for this round of testing. ※ Trailblazers who have previously been part of Project Astro-Warp need not re-apply. ※ For future recruitment notifications, Trailblazers should pay attention to the in-game mail.",
@@ -1487,15 +1496,6 @@
           "created_at": 1793872805,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/05/7b724aee2562767acb1399b7a69a2101_1273055526605509502.jpg",
           "url": "https://www.hoyolab.com/article/47330493",
-          "type": "info"
-        },
-        {
-          "id": "47310096",
-          "title": "Light Cone Preview | Version 4.7 \"Now, Lay Laughter to All Stars\"",
-          "description": "Hello, Trailblazers! Come have a look at the new Light Cone \"See You at the World's End! (Elation)\" in Version 4.7 \"Now, Lay Laughter to All Stars\"~",
-          "created_at": 1793768404,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/03/be98c0c669d319f47c0c665d94578419_3982206031955735010.jpg",
-          "url": "https://www.hoyolab.com/article/47310096",
           "type": "info"
         }
       ]
