@@ -40,6 +40,11 @@ header{animation:pageRise .75s both}
 input,select,textarea{transition:border-color .2s,box-shadow .2s,background .2s}
 input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,var(--blue) 13%,transparent)}
 
+
+/* Consistent theme toggle across every library page */
+#themeToggle{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:5px;min-width:112px;height:36px;padding:0 12px;border:1px solid #3157d5;border-radius:999px;background:#3157d5;color:#fff;font:700 12px/1.2 Inter,Segoe UI,Arial,sans-serif;white-space:nowrap;text-decoration:none;cursor:pointer;box-shadow:0 2px 7px #17203318;transition:background .2s,border-color .2s,transform .2s,filter .2s}
+#themeToggle:hover{background:#2548bd;border-color:#2548bd;transform:translateY(-1px);filter:brightness(1.04)}
+#themeToggle:focus-visible{outline:3px solid color-mix(in srgb,#3157d5 35%,transparent);outline-offset:3px}
 </style></head><body>
 <header><div class="wrap"><div class="top"><div class="eyebrow">Universitas Internasional Batam · Class of 2026</div><div class="header-actions"><a href="index.html" aria-label="Course library">📚 <span>Library</span></a><button class="theme" id="themeToggle" type="button" aria-label="Toggle colour theme">☾ <span>Dark mode</span></button></div></div><h1>Academic Dashboard</h1><div class="sub" id="greeting">Your academic command centre. Everything important, in one place.</div></div></header>
 <main>
