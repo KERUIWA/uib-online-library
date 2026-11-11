@@ -840,6 +840,24 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
   .spotlight-copy p{line-height:1.4}
 }
 
+
+/* Cyrene's hidden visitor: isolated from the hub's existing layout */
+#cyreneEncounter{position:fixed;right:22px;bottom:22px;z-index:2147483000;width:min(390px,calc(100vw - 28px));display:grid;grid-template-columns:126px minmax(0,1fr);align-items:end;gap:0;border:1px solid #e9c9f2;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#fffafd 0%,#f4eaff 55%,#e9e5ff 100%);color:#30213e;box-shadow:0 18px 60px #24113e45;opacity:0;transform:translate3d(0,18px,0) scale(.97);pointer-events:none;transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+#cyreneEncounter[hidden]{display:none!important}
+#cyreneEncounter.open{opacity:1;transform:translate3d(0,0,0) scale(1);pointer-events:auto}
+#cyreneEncounter .cyrene-art{width:100%;height:208px;object-fit:contain;object-position:center bottom;align-self:end;filter:drop-shadow(0 8px 12px #9d76b655);animation:cyreneFloat 3.8s ease-in-out infinite}
+#cyreneEncounter .cyrene-copy{position:relative;padding:22px 17px 17px 4px;min-width:0}
+#cyreneEncounter .cyrene-kicker{display:block;margin:0 25px 7px 0;color:#9564a7;font-size:9px;font-weight:900;letter-spacing:.19em;text-transform:uppercase}
+#cyreneEncounter .cyrene-line{margin:0;color:#382747;font:500 14px/1.55 Georgia,serif}
+#cyreneEncounter .cyrene-signature{display:block;margin-top:10px;color:#9874a6;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+#cyreneEncounter .cyrene-dismiss{margin-top:13px;padding:6px 11px;border:1px solid #d9c1e6;border-radius:999px;background:#ffffffa8;color:#644878;font:800 10px/1.2 inherit;cursor:pointer}
+#cyreneEncounter .cyrene-dismiss:hover{background:#fff;border-color:#aa80c2}
+#cyreneEncounter .cyrene-close{position:absolute;top:9px;right:10px;width:27px;height:27px;border:0;border-radius:50%;background:#ffffffa8;color:#755987;font-size:17px;line-height:1;cursor:pointer}
+#cyreneEncounter .cyrene-close:hover{background:#fff}
+@keyframes cyreneFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@media(max-width:560px){#cyreneEncounter{right:14px;bottom:14px;width:calc(100vw - 28px);grid-template-columns:104px minmax(0,1fr);border-radius:17px}#cyreneEncounter .cyrene-art{height:174px}#cyreneEncounter .cyrene-copy{padding:20px 13px 13px 1px}#cyreneEncounter .cyrene-line{font-size:13px}#cyreneEncounter .cyrene-kicker{font-size:8px}}
+@media(prefers-reduced-motion:reduce){#cyreneEncounter,#cyreneEncounter .cyrene-art{transition:none;animation:none}}
+
 </style></head><body>
 <header>
 <div class="wrap">
@@ -883,6 +901,16 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 <section class="section"><div class="section-head"><div><h2>Trailblazer reminders</h2><p>Browser alerts for event starts and closing dates</p></div></div><div class="reminder-panel"><div><h3>🔔 Don't let a limited event slip away</h3><p>Enable notifications to receive an alert when an event is due to start or end within 24 hours. The page must remain open for these browser reminders to run.</p><p class="note" id="notificationStatus">Notifications are currently off. You can still see event dates here.</p></div><button class="btn primary" id="enableNotifications">Enable reminders</button></div></section>
 <p class="note">Live event dates are supplied by StarRailAssistant and announcement summaries by a community API that relays HoYoLAB posts. They are not official HoYoverse services. Always open the linked official announcement to confirm eligibility, server-time differences, and final details. Data refreshes every 15 minutes while this page is open. If a data source is unavailable, the official HoYoLAB link remains available.</p>
 </main><footer>UIB E-Library · Honkai: Star Rail Hub · Not affiliated with HoYoverse</footer>
+<aside id="cyreneEncounter" aria-live="polite" aria-hidden="true" hidden>
+<img class="cyrene-art" src="https://static.icy-veins.com/images/honkai-star-rail/characters/full/cyrene.webp" alt="Cyrene from Honkai: Star Rail">
+<div class="cyrene-copy">
+<button class="cyrene-close" id="cyreneClose" type="button" aria-label="Dismiss Cyrene">×</button>
+<span class="cyrene-kicker">A visitor from the Garden</span>
+<p class="cyrene-line" id="cyreneDialogue"></p>
+<span class="cyrene-signature">Cyrene</span>
+<button class="cyrene-dismiss" id="cyreneDismiss" type="button">Until we meet again</button>
+</div>
+</aside>
 <script>
 const ACTIVITY_API="https://starrailassistant.top/api/v1/activity/sr-en-US.json";
 const NEWS_API="https://api.ennead.cc/mihoyo/starrail/news/";
@@ -1264,4 +1292,71 @@ $("enableNotifications").addEventListener("click",async()=>{const s=$("notificat
 $("refreshBtn").addEventListener("click",refreshAll);$("themeToggle").addEventListener("click",()=>{const d=document.documentElement.dataset.theme!=="dark";document.documentElement.dataset.theme=d?"dark":"light";try{localStorage.setItem("uib-library-theme",d?"dark":"light")}catch(e){}$("themeToggle").textContent=d?"☀ Light mode":"☾ Dark mode"});$("themeToggle").textContent=document.documentElement.dataset.theme==="dark"?"☀ Light mode":"☾ Dark mode";
 if("Notification"in window&&Notification.permission==="granted")$("notificationStatus").textContent="✓ Browser reminders are enabled. Keep this page open to receive alerts.";
 refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil)applySavedScroll()},250);setTimeout(()=>{if(scrollRestoreUntil)applySavedScroll()},900)});setInterval(refreshAll,15*60*1000);setInterval(()=>{if(versionData)$("versionCountdown").textContent=remaining(versionData.endTime);updateBannerCountdowns();checkEventReminders()},1000);
+
+/* Cyrene Easter egg triggers: 47-second visit, five title clicks, and midnight hours. */
+(()=>{
+ const panel=document.getElementById("cyreneEncounter");
+ const dialogue=document.getElementById("cyreneDialogue");
+ const closeButton=document.getElementById("cyreneClose");
+ const dismissButton=document.getElementById("cyreneDismiss");
+ const title=document.querySelector(".hero h1");
+ if(!panel||!dialogue||!closeButton||!dismissButton||!title)return;
+ const KEY="uib-hsr-cyrene-encounters-v1";
+ const lines={
+  visitor:"Oh? You've been here for quite some time. Were you waiting for someone?",
+  curious:"Five times? Were you hoping something would happen? ...How interesting.",
+  midnight:"It's rather late, isn't it? Even the stars are resting. Why are you still awake?",
+  reunion:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence."
+ };
+ let seen={};
+ try{seen=JSON.parse(sessionStorage.getItem(KEY)||"{}")||{}}catch(e){}
+ let queue=[],showing=false;
+ const save=()=>{try{sessionStorage.setItem(KEY,JSON.stringify(seen))}catch(e){}};
+ function showNext(){
+  if(showing||!queue.length)return;
+  const id=queue.shift();
+  dialogue.textContent=lines[id];
+  panel.hidden=false;
+  panel.setAttribute("aria-hidden","false");
+  requestAnimationFrame(()=>panel.classList.add("open"));
+  showing=true;
+ }
+ function dismiss(){
+  if(!showing)return;
+  panel.classList.remove("open");
+  panel.setAttribute("aria-hidden","true");
+  showing=false;
+  setTimeout(()=>{
+   if(!showing)panel.hidden=true;
+   showNext();
+  },420);
+ }
+ function activate(id){
+  if(seen[id])return;
+  seen[id]=true;
+  save();
+  queue.push(id);
+  if(seen.visitor&&seen.curious&&seen.midnight&&!seen.reunion){
+   seen.reunion=true;
+   save();
+   queue.push("reunion");
+  }
+  showNext();
+ }
+ closeButton.addEventListener("click",dismiss);
+ dismissButton.addEventListener("click",dismiss);
+ let clicks=0;
+ title.addEventListener("click",()=>{
+  clicks++;
+  if(clicks>=5){clicks=0;activate("curious")}
+ });
+ setTimeout(()=>activate("visitor"),47000);
+ function checkMidnight(){
+  const hour=new Date().getHours();
+  if(hour>=0&&hour<4)activate("midnight");
+ }
+ checkMidnight();
+ setInterval(checkMidnight,60000);
+})();
+
 </script></body></html>
