@@ -1310,27 +1310,42 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  const title=document.querySelector(".hero h1");
  if(!panel||!dialogue||!dismissButton||!choicesHost||!title)return;
  const conversations={
-  visitor:{line:"Oh? You've been here for quite some time. Were you waiting for someone? I wonder if the stars brought you here, or if you simply lost track of time.",choices:[
-   ["I was just exploring.","Then I'm glad your wandering brought you here. Sometimes the loveliest discoveries are the unplanned ones."],
-   ["Maybe I was waiting for you.","For me? How sweet... Though I must admit, you have made this little visit rather special."]
+  visitor:{line:"Oh? You've been here for quite some time. Were you waiting for someone? I wonder if the stars brought you here, or if you simply lost track of time.",audio:"Oh-Youve-been-here-for-quite-some-time.-Were-yo.mp3.mpeg.mp3",choices:[
+   ["I was just exploring.","Then I'm glad your wandering brought you here. Sometimes the loveliest discoveries are the unplanned ones.","Then-Im-glad-your-wandering-brought-you-here.-S.mp3.mpeg.mp3"],
+   ["Maybe I was waiting for you.","For me? How sweet... Though I must admit, you have made this little visit rather special.","For-me-How-sweet...-Though-I-must-admit,-you-hav.mp3.mpeg.mp3"]
   ]},
-  curious:{line:"Five times? Were you hoping something would happen? ...How interesting. Perhaps I should leave you another little surprise.",choices:[
-   ["I wanted to see if you'd appear.","And here I am. You really are quite persistent, aren't you? I think I rather like that."],
-   ["It was an accident. Probably.","Probably? That sounds suspiciously like a little wish disguised as an accident."]
+  curious:{line:"Five times? Were you hoping something would happen? ...How interesting. Perhaps I should leave you another little surprise.",audio:"Five-times-Were-you-hoping-something-would-happe.mp3.mpeg.mp3",choices:[
+   ["I wanted to see if you'd appear.","And here I am. You really are quite persistent, aren't you? I think I rather like that.","And-here-I-am.-You-really-are-quite-persistent,.mp3.mpeg.mp3"],
+   ["It was an accident. Probably.","Probably? That sounds suspiciously like a little wish disguised as an accident.","Probably-That-sounds-suspiciously-like-a-little.mp3.mpeg.mp3"]
   ]},
-  midnight:{line:"It's rather late, isn't it? Even the stars are resting. Why are you still awake? Stay a little longer, if the quiet feels kind.",choices:[
-   ["I couldn't fall asleep.","Then let the quiet keep you company for a while. You don't have to rush back to the world just yet."],
-   ["I like the stars at this hour.","So do I. They seem a little closer when everything else has gone quiet, don't they?"]
+  midnight:{line:"It's rather late, isn't it? Even the stars are resting. Why are you still awake? Stay a little longer, if the quiet feels kind.",audio:"Its-rather-late,-isnt-it-Even-the-stars-are-re.mp3.mpeg.mp3",choices:[
+   ["I couldn't fall asleep.","Then let the quiet keep you company for a while. You don't have to rush back to the world just yet.","Then-let-the-quiet-keep-you-company-for-a-while..mp3.mp3"],
+   ["I like the stars at this hour.","So do I. They seem a little closer when everything else has gone quiet, don't they?","So-do-I.-They-seem-a-little-closer-when-everythi.mp3.mpeg.mp3"]
   ]},
-  reunion:{line:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence. Maybe some meetings are meant to happen more than once.",choices:[
-   ["Will we meet again?","I believe we will. Until then, keep a little room in your heart for the unexpected."],
-   ["I think I'll remember you.","Then this moment has already become something precious. I'll remember it too."]
+  reunion:{line:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence. Maybe some meetings are meant to happen more than once.",audio:"Ah...-weve-met-three-times-now,-havent-we-Perh.mp3.mpeg.mp3",choices:[
+   ["Will we meet again?","I believe we will. Until then, keep a little room in your heart for the unexpected.","I-believe-we-will.-Until-then,-keep-a-little-roo.mp3.mpeg.mp3"],
+   ["I think I'll remember you.","Then this moment has already become something precious. I'll remember it too.","Then-this-moment-has-already-become-something-pr.mp3.mp3"]
   ]}
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
  let seen={},queue=[],showing=false,typeTimer=null;
- function typeText(text,onComplete){
+ const cyreneVoice=new Audio();
+ cyreneVoice.preload="auto";
+ function playVoice(file){
+  if(!file)return;
+  cyreneVoice.pause();
+  cyreneVoice.currentTime=0;
+  cyreneVoice.src="./assets/audio/"+encodeURIComponent(file);
+  const playback=cyreneVoice.play();
+  if(playback&&typeof playback.catch==="function")playback.catch(()=>{});
+ }
+ function stopVoice(){
+  cyreneVoice.pause();
+  cyreneVoice.currentTime=0;
+ }
+ function typeText(text,onComplete,audioFile){
   clearTimeout(typeTimer);
+  playVoice(audioFile);
   function step(index){
    if(!showing)return;
    dialogue.textContent=text.slice(0,index);
@@ -1341,12 +1356,12 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  }
  function renderChoices(id){
   choicesHost.replaceChildren();
-  conversations[id].choices.forEach(([label,reply])=>{
+  conversations[id].choices.forEach(([label,reply],index)=>{
    const button=document.createElement("button");
    button.type="button";button.className="cyrene-choice";button.textContent=label;
    button.addEventListener("click",()=>{
     choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
-    typeText(reply,()=>{dismissButton.hidden=false;dismissButton.focus()});
+    typeText(reply,()=>{dismissButton.hidden=false;dismissButton.focus()},conversations[id].choices[index][2]);
    },{once:true});
    choicesHost.appendChild(button);
   });
@@ -1358,11 +1373,11 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   dialogue.textContent="";choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
   panel.hidden=false;panel.setAttribute("aria-hidden","false");showing=true;
   requestAnimationFrame(()=>panel.classList.add("open"));
-  typeText(conversations[id].line,()=>renderChoices(id));
+  typeText(conversations[id].line,()=>renderChoices(id),conversations[id].audio);
  }
  function dismiss(){
   if(!showing)return;
-  clearTimeout(typeTimer);typeTimer=null;choicesHost.hidden=true;choicesHost.replaceChildren();
+  clearTimeout(typeTimer);typeTimer=null;stopVoice();choicesHost.hidden=true;choicesHost.replaceChildren();
   panel.classList.remove("open");panel.setAttribute("aria-hidden","true");showing=false;
   setTimeout(()=>{if(!showing)panel.hidden=true;showNext()},420);
  }
