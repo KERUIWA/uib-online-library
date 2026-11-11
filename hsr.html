@@ -561,6 +561,60 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 }
 
 
+/* Let compact artwork bleed behind the label, title and description */
+#currentBanner[data-banner-view="compact"] .current-banner-grid{
+  position:relative!important;
+  isolation:isolate!important;
+  grid-template-rows:155px minmax(0,1fr)!important
+}
+#currentBanner[data-banner-view="compact"] .current-banner-art{
+  position:absolute!important;
+  inset:0 0 auto 0!important;
+  z-index:0!important;
+  width:100%!important;
+  height:258px!important;
+  min-height:258px!important;
+  max-height:258px!important;
+  overflow:hidden!important;
+  background:linear-gradient(180deg,#171a30 0%,#25213a 68%,#171a30 100%)!important
+}
+#currentBanner[data-banner-view="compact"] .current-banner-art:after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  pointer-events:none!important;
+  background:linear-gradient(180deg,#10142608 0%,#11142622 38%,#171a30c9 78%,#171a30 100%)!important
+}
+#currentBanner[data-banner-view="compact"] .current-banner-art img{
+  position:relative!important;
+  z-index:0!important;
+  width:100%!important;
+  height:258px!important;
+  min-height:258px!important;
+  max-height:258px!important;
+  object-fit:contain!important;
+  object-position:center 28%!important;
+  padding:8px 14px 0!important;
+  filter:drop-shadow(0 12px 22px #050817a8)!important
+}
+#currentBanner[data-banner-view="compact"] .current-banner-cycle{
+  padding:0 12px 30px!important
+}
+#currentBanner[data-banner-view="compact"] .current-banner-copy{
+  position:relative!important;
+  z-index:2!important;
+  background:linear-gradient(180deg,#171a3000 0%,#171a3040 14%,#171a30eF 42%,#171a30 72%)!important;
+  padding-top:15px!important
+}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .banner-labels,
+#currentBanner[data-banner-view="compact"] .current-banner-copy h3,
+#currentBanner[data-banner-view="compact"] .current-banner-copy>p:not(.current-banner-roster){
+  position:relative!important;
+  z-index:3!important;
+  text-shadow:0 2px 10px #080b1bcc!important
+}
+
 /* Keep featured roster hidden in compact cards at every viewport width */
 #currentBanner[data-banner-view="compact"] .current-banner-grid .current-banner-copy > p.current-banner-roster{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
 </style></head><body>
