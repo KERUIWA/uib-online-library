@@ -1,30 +1,1541 @@
 {
   "schemaVersion": 1,
-  "updatedAt": null,
+  "updatedAt": "2026-11-11T02:49:01Z",
   "feeds": {
     "calendar": {
-      "status": "error",
+      "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us",
-      "checkedAt": null,
-      "lastSuccess": null,
-      "error": "Awaiting first scheduled refresh",
-      "data": null
+      "checkedAt": "2026-11-11T02:48:59Z",
+      "lastSuccess": "2026-11-11T02:48:59Z",
+      "error": null,
+      "data": {
+        "events": [
+          {
+            "id": 293,
+            "name": "Aha Reckons You Need This",
+            "description": "",
+            "image_url": null,
+            "type_name": "ActivityTypeSign",
+            "start_time": 1794351600,
+            "end_time": 1797976740,
+            "rewards": [
+              {
+                "id": 102,
+                "name": "Star Rail Special Pass",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3424b76ffd1d245c9191272593339e7a.png",
+                "rarity": "5",
+                "amount": 20
+              }
+            ],
+            "special_reward": {
+              "id": 102,
+              "name": "Star Rail Special Pass",
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3424b76ffd1d245c9191272593339e7a.png",
+              "rarity": "5",
+              "amount": 20
+            }
+          },
+          {
+            "id": 292,
+            "name": "Magic Invitation",
+            "description": "",
+            "image_url": null,
+            "type_name": "ActivityTypeOther",
+            "start_time": 1794351600,
+            "end_time": 1797976740,
+            "rewards": [
+              {
+                "id": 1308,
+                "name": "Acheron",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/5117d1996da6d60397c94506dc1883b8.png",
+                "rarity": "5",
+                "amount": 0
+              },
+              {
+                "id": 1213,
+                "name": "Dan Heng • Imbibitor Lunae",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/99514c9f36815e22bfb84bd0b1c16aa7.png",
+                "rarity": "5",
+                "amount": 0
+              },
+              {
+                "id": 1204,
+                "name": "Jing Yuan",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/84dcc6f5544b88198384d527cb2e14e5.png",
+                "rarity": "5",
+                "amount": 0
+              }
+            ],
+            "special_reward": null
+          },
+          {
+            "id": 291,
+            "name": "Affinitive Starveil",
+            "description": "",
+            "image_url": null,
+            "type_name": "ActivityTypeOther",
+            "start_time": 1794351600,
+            "end_time": 1797976740,
+            "rewards": [
+              {
+                "id": 131308,
+                "name": "Acheron's Affinitive Eidolon",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/663c243bc211c85c474b6eda0025bb6d.png",
+                "rarity": "5",
+                "amount": 0
+              },
+              {
+                "id": 131213,
+                "name": "Dan Heng • Imbibitor Lunae's Affinitive Eidolon",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/a5f1d57f9724a7408891cb9f8d0388f6.png",
+                "rarity": "5",
+                "amount": 0
+              },
+              {
+                "id": 131204,
+                "name": "Jing Yuan's Affinitive Eidolon",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/52f9f9e0e2ebd66aa1563538beb0e0a1.png",
+                "rarity": "5",
+                "amount": 0
+              }
+            ],
+            "special_reward": null
+          },
+          {
+            "id": 295,
+            "name": "The Fluffy Movie: Overheated",
+            "description": "Finish <i>Fluffy Across the Blue</i> with an unsatisfactory ending? Sorry, but the greatest and most responsible comic artist, Blurry_QR_Colt, could never do such a thing. In fact, she's even going to draw a gourmet theatrical version! She has left behind an inheritance waiting to be claimed. To get your hands on it, you'll have to first finish this masterpiece. However, \"drawing\" comics isn't as simple as you think...",
+            "image_url": null,
+            "type_name": "ActivityTypeOther",
+            "start_time": 1794193200,
+            "end_time": 1797969599,
+            "rewards": [
+              {
+                "id": 236,
+                "name": "Self-Modeling Resin",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/38487fbf43013f5d73276365f84d6e58.png",
+                "rarity": "5",
+                "amount": 1
+              },
+              {
+                "id": 241,
+                "name": "Tracks of Destiny",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/fed0e3a332401dcf18f9989667a5a2d8.png",
+                "rarity": "5",
+                "amount": 2
+              },
+              {
+                "id": 1,
+                "name": "Stellar Jade",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+                "rarity": "5",
+                "amount": 1200
+              },
+              {
+                "id": 220013,
+                "name": "Cooking Master",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/1cdd1e471c4fc1c55bb4e255a75b8694.png",
+                "rarity": "4",
+                "amount": 0
+              },
+              {
+                "id": 213,
+                "name": "Traveler's Guide",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/835c8fbcd39880ab0892aa28950c3ae8.png",
+                "rarity": "4",
+                "amount": 0
+              },
+              {
+                "id": 223,
+                "name": "Refined Aether",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3e97329f9bc6b7c2b984c74eeaa6262f.png",
+                "rarity": "4",
+                "amount": 0
+              },
+              {
+                "id": 233,
+                "name": "Lost Crystal",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/cc36442783e0e78095a4abe469ba6270.png",
+                "rarity": "4",
+                "amount": 0
+              },
+              {
+                "id": 110262,
+                "name": "<i>The Fluffy</i> Serialization Memorial Issue",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/c7e78377ee6edafe2a7f0d06990b0567.png",
+                "rarity": "3",
+                "amount": 0
+              },
+              {
+                "id": 2,
+                "name": "Credit",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/11c9d7270b777d04f6242629f0d42000.png",
+                "rarity": "3",
+                "amount": 0
+              }
+            ],
+            "special_reward": {
+              "id": 1,
+              "name": "Stellar Jade",
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+              "rarity": "5",
+              "amount": 1200
+            }
+          },
+          {
+            "id": 294,
+            "name": "Interastral Peace Gala: Road to Fame",
+            "description": "Want to become the star of the show? Step onto the stage, take down your rivals, and win cheers and applause with your brilliance!",
+            "image_url": null,
+            "type_name": "ActivityTypeOther",
+            "start_time": 1794351600,
+            "end_time": 1797969599,
+            "rewards": [
+              {
+                "id": 241,
+                "name": "Tracks of Destiny",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/fed0e3a332401dcf18f9989667a5a2d8.png",
+                "rarity": "5",
+                "amount": 1
+              },
+              {
+                "id": 1,
+                "name": "Stellar Jade",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+                "rarity": "5",
+                "amount": 500
+              },
+              {
+                "id": 235,
+                "name": "Relic Remains",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/89a6b0a21f470d3abda1532d755319f3.png",
+                "rarity": "5",
+                "amount": 0
+              },
+              {
+                "id": 213,
+                "name": "Traveler's Guide",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/835c8fbcd39880ab0892aa28950c3ae8.png",
+                "rarity": "4",
+                "amount": 0
+              },
+              {
+                "id": 223,
+                "name": "Refined Aether",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3e97329f9bc6b7c2b984c74eeaa6262f.png",
+                "rarity": "4",
+                "amount": 0
+              },
+              {
+                "id": 232,
+                "name": "Lost Gold Fragment",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/5d456a3e8dda6982c06a255b0ee444bc.png",
+                "rarity": "3",
+                "amount": 0
+              },
+              {
+                "id": 2,
+                "name": "Credit",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/11c9d7270b777d04f6242629f0d42000.png",
+                "rarity": "3",
+                "amount": 0
+              }
+            ],
+            "special_reward": {
+              "id": 1,
+              "name": "Stellar Jade",
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+              "rarity": "5",
+              "amount": 500
+            }
+          },
+          {
+            "id": 296,
+            "name": "Relic Recon",
+            "description": "",
+            "image_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/e/ec/Event_Relic_Recon.png/revision/latest?cb=20251105025213",
+            "type_name": "ActivityTypeOther",
+            "start_time": 1794193200,
+            "end_time": 1797969599,
+            "rewards": [],
+            "special_reward": null
+          },
+          {
+            "id": 7,
+            "name": "Stellar Companions",
+            "description": "",
+            "image_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/6/60/Event_Stellar_Companions_2025-04-09.png/revision/latest?cb=20250409032926",
+            "type_name": "ActivityTypeOther",
+            "start_time": 1794351600,
+            "end_time": 1797976800,
+            "rewards": [
+              {
+                "id": 281,
+                "name": "Golden Companion Spirit",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/d2fe7069533cd3d200a258e281ef2e87.png",
+                "rarity": "5",
+                "amount": 0
+              }
+            ],
+            "special_reward": null
+          },
+          {
+            "id": 290,
+            "name": "Planar Fissure",
+            "description": "During the event, successfully challenge Simulated Universe or Divergent Universe to earn double Planar Ornaments rewards.",
+            "image_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/91/Event_Planar_Fissure.png/revision/latest?cb=20260726044453",
+            "type_name": "ActivityTypeDouble",
+            "start_time": 1795402800,
+            "end_time": 1796612399,
+            "rewards": [],
+            "special_reward": null
+          },
+          {
+            "id": 289,
+            "name": "Realm of the Strange",
+            "description": "During the event, successfully challenge Caverns of Corrosion to earn double rewards.",
+            "image_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/f/fa/Event_Realm_of_the_Strange.png/revision/latest?cb=20260726044507",
+            "type_name": "ActivityTypeDouble",
+            "start_time": 1796958000,
+            "end_time": 1797969599,
+            "rewards": [],
+            "special_reward": null
+          }
+        ],
+        "banners": [
+          {
+            "id": 101,
+            "name": "",
+            "version": "4.7",
+            "characters": [
+              {
+                "id": 1506,
+                "name": "Silver Wolf LV.999",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/7382a178049ca251557d5f7472f74022.png",
+                "element": "64",
+                "path": "9",
+                "rarity": 5
+              },
+              {
+                "id": 1501,
+                "name": "Sparxie",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/ab0b766e268e20f04eb3de01ddb3a7fe.png",
+                "element": "2",
+                "path": "9",
+                "rarity": 5
+              },
+              {
+                "id": 1502,
+                "name": "Yao Guang",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/ce359035d4cdd393cf993f04b4941a5d.png",
+                "element": "1",
+                "path": "9",
+                "rarity": 5
+              },
+              {
+                "id": 1009,
+                "name": "Asta",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/7e043e000cc3fc42316552232123d7f8.png",
+                "element": "2",
+                "path": "4",
+                "rarity": 4
+              },
+              {
+                "id": 1110,
+                "name": "Lynx",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/2efc0db0be97c359b0b0d23d949766f9.png",
+                "element": "32",
+                "path": "7",
+                "rarity": 4
+              },
+              {
+                "id": 1207,
+                "name": "Yukong",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/546aebfc360499f178c3be1a8399906f.png",
+                "element": "64",
+                "path": "4",
+                "rarity": 4
+              }
+            ],
+            "light_cones": [],
+            "start_time": 1794362400,
+            "end_time": 1796209140
+          },
+          {
+            "id": 105,
+            "name": "",
+            "version": "4.7",
+            "characters": [
+              {
+                "id": 1511,
+                "name": "Aeon ★ Aha",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/9992dd2ff280e580fe05729d34279568.png",
+                "element": "32",
+                "path": "9",
+                "rarity": 5
+              },
+              {
+                "id": 1009,
+                "name": "Asta",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/7e043e000cc3fc42316552232123d7f8.png",
+                "element": "2",
+                "path": "4",
+                "rarity": 4
+              },
+              {
+                "id": 1110,
+                "name": "Lynx",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/2efc0db0be97c359b0b0d23d949766f9.png",
+                "element": "32",
+                "path": "7",
+                "rarity": 4
+              },
+              {
+                "id": 1207,
+                "name": "Yukong",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/546aebfc360499f178c3be1a8399906f.png",
+                "element": "64",
+                "path": "4",
+                "rarity": 4
+              }
+            ],
+            "light_cones": [],
+            "start_time": 1794362400,
+            "end_time": 1797948000
+          },
+          {
+            "id": 102,
+            "name": "",
+            "version": "4.7",
+            "characters": [
+              {
+                "id": 1308,
+                "name": "Acheron",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/c071bbe4c455985e206fa702b6a56723.png",
+                "element": "8",
+                "path": "5",
+                "rarity": 5
+              },
+              {
+                "id": 1213,
+                "name": "Dan Heng • Imbibitor Lunae",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/7d80986246f00f89f2a2407f5da4be04.png",
+                "element": "64",
+                "path": "1",
+                "rarity": 5
+              },
+              {
+                "id": 1204,
+                "name": "Jing Yuan",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/48100fa519fabfee8fab7b836e27f128.png",
+                "element": "8",
+                "path": "3",
+                "rarity": 5
+              },
+              {
+                "id": 1009,
+                "name": "Asta",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/7e043e000cc3fc42316552232123d7f8.png",
+                "element": "2",
+                "path": "4",
+                "rarity": 4
+              },
+              {
+                "id": 1110,
+                "name": "Lynx",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/2efc0db0be97c359b0b0d23d949766f9.png",
+                "element": "32",
+                "path": "7",
+                "rarity": 4
+              },
+              {
+                "id": 1207,
+                "name": "Yukong",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/546aebfc360499f178c3be1a8399906f.png",
+                "element": "64",
+                "path": "4",
+                "rarity": 4
+              }
+            ],
+            "light_cones": [],
+            "start_time": 1796209200,
+            "end_time": 1797948000
+          },
+          {
+            "id": 103,
+            "name": "",
+            "version": "4.7",
+            "characters": [],
+            "light_cones": [
+              {
+                "id": 23057,
+                "name": "Welcome to the Cosmic City",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/4fcda005a458a2f69712f2567caf09c5.png",
+                "path": "9",
+                "rarity": 5
+              },
+              {
+                "id": 23053,
+                "name": "Dazzled by a Flowery World",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/9cbd87ffdb80ca2426a27abd912d6e9f.png",
+                "path": "9",
+                "rarity": 5
+              },
+              {
+                "id": 23054,
+                "name": "When She Decided to See",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/d06ca71a67581722526d0218c6305cc3.png",
+                "path": "9",
+                "rarity": 5
+              },
+              {
+                "id": 21016,
+                "name": "Trend of the Universal Market",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/25899fdae555d7010e1b48e30dcf9578.png",
+                "path": "6",
+                "rarity": 4
+              },
+              {
+                "id": 21020,
+                "name": "Geniuses' Repose",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8227ee547efa3bf425607d798bbcb343.png",
+                "path": "3",
+                "rarity": 4
+              },
+              {
+                "id": 21047,
+                "name": "Shadowed by Night",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/59d7499623af58d53f5ea7240e8d57e8.png",
+                "path": "2",
+                "rarity": 4
+              }
+            ],
+            "start_time": 1794362400,
+            "end_time": 1796209140
+          },
+          {
+            "id": 106,
+            "name": "",
+            "version": "4.7",
+            "characters": [],
+            "light_cones": [
+              {
+                "id": 23065,
+                "name": "Upon the First Echo of \"Aha\"",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/51fdfae17038d54f46df6b6b15c4aa9c.png",
+                "path": "9",
+                "rarity": 5
+              },
+              {
+                "id": 21016,
+                "name": "Trend of the Universal Market",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/25899fdae555d7010e1b48e30dcf9578.png",
+                "path": "6",
+                "rarity": 4
+              },
+              {
+                "id": 21020,
+                "name": "Geniuses' Repose",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8227ee547efa3bf425607d798bbcb343.png",
+                "path": "3",
+                "rarity": 4
+              },
+              {
+                "id": 21047,
+                "name": "Shadowed by Night",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/59d7499623af58d53f5ea7240e8d57e8.png",
+                "path": "2",
+                "rarity": 4
+              }
+            ],
+            "start_time": 1794362400,
+            "end_time": 1797948000
+          },
+          {
+            "id": 104,
+            "name": "",
+            "version": "4.7",
+            "characters": [],
+            "light_cones": [
+              {
+                "id": 23024,
+                "name": "Along the Passing Shore",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/d8174bc61c339e3283d6d313144cc2cf.png",
+                "path": "5",
+                "rarity": 5
+              },
+              {
+                "id": 23015,
+                "name": "Brighter Than the Sun",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/23e12d71d0f1c60956189af9292dae6c.png",
+                "path": "1",
+                "rarity": 5
+              },
+              {
+                "id": 23010,
+                "name": "Before Dawn",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/7bf84b42bbe169fc7f3d953b10191356.png",
+                "path": "3",
+                "rarity": 5
+              },
+              {
+                "id": 21016,
+                "name": "Trend of the Universal Market",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/25899fdae555d7010e1b48e30dcf9578.png",
+                "path": "6",
+                "rarity": 4
+              },
+              {
+                "id": 21020,
+                "name": "Geniuses' Repose",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8227ee547efa3bf425607d798bbcb343.png",
+                "path": "3",
+                "rarity": 4
+              },
+              {
+                "id": 21047,
+                "name": "Shadowed by Night",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/59d7499623af58d53f5ea7240e8d57e8.png",
+                "path": "2",
+                "rarity": 4
+              }
+            ],
+            "start_time": 1796209200,
+            "end_time": 1797948000
+          }
+        ],
+        "challenges": [
+          {
+            "id": 11,
+            "name": "Hidden Stage",
+            "type_name": "ChallengeTypePeak",
+            "start_time": 1794351600,
+            "end_time": 1797976800,
+            "rewards": [
+              {
+                "id": 263,
+                "name": "Lone Stardust",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/c2f8c8a4b9606a3138aa08cbe11dec34.png",
+                "rarity": "5",
+                "amount": 1200
+              },
+              {
+                "id": 239,
+                "name": "Interference Key",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/bef800305efa812044c827de53932935.png",
+                "rarity": "5",
+                "amount": 1
+              },
+              {
+                "id": 236,
+                "name": "Self-Modeling Resin",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/38487fbf43013f5d73276365f84d6e58.png",
+                "rarity": "5",
+                "amount": 3
+              }
+            ],
+            "special_reward": null
+          },
+          {
+            "id": 1036,
+            "name": "Survival of the Fittest",
+            "type_name": "ChallengeTypeChasm",
+            "start_time": 1793588400,
+            "end_time": 1797217200,
+            "rewards": [
+              {
+                "id": 1,
+                "name": "Stellar Jade",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+                "rarity": "5",
+                "amount": 900
+              },
+              {
+                "id": 262,
+                "name": "Jade Feather",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3f9ef99c9e0c6d2abb591333538d9b36.png",
+                "rarity": "5",
+                "amount": 600
+              },
+              {
+                "id": 213,
+                "name": "Traveler's Guide",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/835c8fbcd39880ab0892aa28950c3ae8.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 223,
+                "name": "Refined Aether",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3e97329f9bc6b7c2b984c74eeaa6262f.png",
+                "rarity": "4",
+                "amount": 12
+              },
+              {
+                "id": 233,
+                "name": "Lost Crystal",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/cc36442783e0e78095a4abe469ba6270.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 261,
+                "name": "Lucent Afterglow",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/e9e9336e8def2317ac7e029a60ef3710.png",
+                "rarity": "4",
+                "amount": 96
+              },
+              {
+                "id": 2,
+                "name": "Credit",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/11c9d7270b777d04f6242629f0d42000.png",
+                "rarity": "3",
+                "amount": 360000
+              }
+            ],
+            "special_reward": {
+              "id": 1,
+              "name": "Stellar Jade",
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+              "rarity": "5",
+              "amount": 900
+            }
+          },
+          {
+            "id": 2027,
+            "name": "Imagined Words",
+            "type_name": "ChallengeTypeStory",
+            "start_time": 1792378800,
+            "end_time": 1796007600,
+            "rewards": [
+              {
+                "id": 1,
+                "name": "Stellar Jade",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+                "rarity": "5",
+                "amount": 900
+              },
+              {
+                "id": 262,
+                "name": "Jade Feather",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3f9ef99c9e0c6d2abb591333538d9b36.png",
+                "rarity": "5",
+                "amount": 600
+              },
+              {
+                "id": 213,
+                "name": "Traveler's Guide",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/835c8fbcd39880ab0892aa28950c3ae8.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 223,
+                "name": "Refined Aether",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3e97329f9bc6b7c2b984c74eeaa6262f.png",
+                "rarity": "4",
+                "amount": 12
+              },
+              {
+                "id": 233,
+                "name": "Lost Crystal",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/cc36442783e0e78095a4abe469ba6270.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 261,
+                "name": "Lucent Afterglow",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/e9e9336e8def2317ac7e029a60ef3710.png",
+                "rarity": "4",
+                "amount": 96
+              },
+              {
+                "id": 2,
+                "name": "Credit",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/11c9d7270b777d04f6242629f0d42000.png",
+                "rarity": "3",
+                "amount": 360000
+              }
+            ],
+            "special_reward": {
+              "id": 1,
+              "name": "Stellar Jade",
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+              "rarity": "5",
+              "amount": 900
+            }
+          },
+          {
+            "id": 3021,
+            "name": "Dominance of Oblivion",
+            "type_name": "ChallengeTypeBoss",
+            "start_time": 1791169200,
+            "end_time": 1794798000,
+            "rewards": [
+              {
+                "id": 1,
+                "name": "Stellar Jade",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+                "rarity": "5",
+                "amount": 900
+              },
+              {
+                "id": 262,
+                "name": "Jade Feather",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3f9ef99c9e0c6d2abb591333538d9b36.png",
+                "rarity": "5",
+                "amount": 600
+              },
+              {
+                "id": 213,
+                "name": "Traveler's Guide",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/835c8fbcd39880ab0892aa28950c3ae8.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 223,
+                "name": "Refined Aether",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3e97329f9bc6b7c2b984c74eeaa6262f.png",
+                "rarity": "4",
+                "amount": 12
+              },
+              {
+                "id": 233,
+                "name": "Lost Crystal",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/cc36442783e0e78095a4abe469ba6270.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 261,
+                "name": "Lucent Afterglow",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/e9e9336e8def2317ac7e029a60ef3710.png",
+                "rarity": "4",
+                "amount": 96
+              },
+              {
+                "id": 2,
+                "name": "Credit",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/11c9d7270b777d04f6242629f0d42000.png",
+                "rarity": "3",
+                "amount": 360000
+              }
+            ],
+            "special_reward": {
+              "id": 1,
+              "name": "Stellar Jade",
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+              "rarity": "5",
+              "amount": 900
+            }
+          },
+          {
+            "id": 3022,
+            "name": "Navigator's Netherveil",
+            "type_name": "ChallengeTypeBoss",
+            "start_time": 1794798000,
+            "end_time": 1798426800,
+            "rewards": [
+              {
+                "id": 1,
+                "name": "Stellar Jade",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+                "rarity": "5",
+                "amount": 900
+              },
+              {
+                "id": 262,
+                "name": "Jade Feather",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3f9ef99c9e0c6d2abb591333538d9b36.png",
+                "rarity": "5",
+                "amount": 600
+              },
+              {
+                "id": 213,
+                "name": "Traveler's Guide",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/835c8fbcd39880ab0892aa28950c3ae8.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 223,
+                "name": "Refined Aether",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3e97329f9bc6b7c2b984c74eeaa6262f.png",
+                "rarity": "4",
+                "amount": 12
+              },
+              {
+                "id": 233,
+                "name": "Lost Crystal",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/cc36442783e0e78095a4abe469ba6270.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 261,
+                "name": "Lucent Afterglow",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/e9e9336e8def2317ac7e029a60ef3710.png",
+                "rarity": "4",
+                "amount": 96
+              },
+              {
+                "id": 2,
+                "name": "Credit",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/11c9d7270b777d04f6242629f0d42000.png",
+                "rarity": "3",
+                "amount": 360000
+              }
+            ],
+            "special_reward": {
+              "id": 1,
+              "name": "Stellar Jade",
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+              "rarity": "5",
+              "amount": 900
+            }
+          },
+          {
+            "id": 2028,
+            "name": "Fiction Made Truth",
+            "type_name": "ChallengeTypeStory",
+            "start_time": 1796007600,
+            "end_time": 1799636400,
+            "rewards": [
+              {
+                "id": 1,
+                "name": "Stellar Jade",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+                "rarity": "5",
+                "amount": 900
+              },
+              {
+                "id": 262,
+                "name": "Jade Feather",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3f9ef99c9e0c6d2abb591333538d9b36.png",
+                "rarity": "5",
+                "amount": 600
+              },
+              {
+                "id": 213,
+                "name": "Traveler's Guide",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/835c8fbcd39880ab0892aa28950c3ae8.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 223,
+                "name": "Refined Aether",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3e97329f9bc6b7c2b984c74eeaa6262f.png",
+                "rarity": "4",
+                "amount": 12
+              },
+              {
+                "id": 233,
+                "name": "Lost Crystal",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/cc36442783e0e78095a4abe469ba6270.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 261,
+                "name": "Lucent Afterglow",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/e9e9336e8def2317ac7e029a60ef3710.png",
+                "rarity": "4",
+                "amount": 96
+              },
+              {
+                "id": 2,
+                "name": "Credit",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/11c9d7270b777d04f6242629f0d42000.png",
+                "rarity": "3",
+                "amount": 360000
+              }
+            ],
+            "special_reward": {
+              "id": 1,
+              "name": "Stellar Jade",
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+              "rarity": "5",
+              "amount": 900
+            }
+          },
+          {
+            "id": 1037,
+            "name": "Echo of Darkness",
+            "type_name": "ChallengeTypeChasm",
+            "start_time": 1797217200,
+            "end_time": 1800846000,
+            "rewards": [
+              {
+                "id": 1,
+                "name": "Stellar Jade",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+                "rarity": "5",
+                "amount": 900
+              },
+              {
+                "id": 262,
+                "name": "Jade Feather",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3f9ef99c9e0c6d2abb591333538d9b36.png",
+                "rarity": "5",
+                "amount": 600
+              },
+              {
+                "id": 213,
+                "name": "Traveler's Guide",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/835c8fbcd39880ab0892aa28950c3ae8.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 223,
+                "name": "Refined Aether",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3e97329f9bc6b7c2b984c74eeaa6262f.png",
+                "rarity": "4",
+                "amount": 12
+              },
+              {
+                "id": 233,
+                "name": "Lost Crystal",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/cc36442783e0e78095a4abe469ba6270.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 261,
+                "name": "Lucent Afterglow",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/e9e9336e8def2317ac7e029a60ef3710.png",
+                "rarity": "4",
+                "amount": 96
+              },
+              {
+                "id": 2,
+                "name": "Credit",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/11c9d7270b777d04f6242629f0d42000.png",
+                "rarity": "3",
+                "amount": 360000
+              }
+            ],
+            "special_reward": {
+              "id": 1,
+              "name": "Stellar Jade",
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+              "rarity": "5",
+              "amount": 900
+            }
+          }
+        ]
+      }
     },
     "activity": {
-      "status": "error",
+      "status": "ok",
       "source": "https://starrailassistant.top/api/v1/activity/sr-en-US.json",
-      "checkedAt": null,
-      "lastSuccess": null,
-      "error": "Awaiting first scheduled refresh",
-      "data": null
+      "checkedAt": "2026-11-11T02:49:00Z",
+      "lastSuccess": "2026-11-11T02:49:00Z",
+      "error": null,
+      "data": {
+        "version": "4.6",
+        "versionName": "Dance With the Beast Before Moonrise",
+        "startTime": "2026-09-28T11:00:00",
+        "endTime": "2026-11-11T06:00:00",
+        "cover": "https://i0.hdslb.com/bfs/new_dyn/31af0eb88c8c6dcfab5b7cbc72d67c781340190821.jpg",
+        "activities": [
+          {
+            "name": "Fate Contract: Renewal",
+            "description": "During the event, log in to the game to claim the limited 5-star collaboration character Gilgamesh (Destruction: Lightning) ×1 or Archer (The Hunt: Quantum) ×1 and materials to build him to Lv. 60.",
+            "startTime": "2026-07-24T12:00:00",
+            "endTime": "2026-11-11T06:00:00",
+            "cover": ""
+          },
+          {
+            "name": "Apocalyptic Shadow: Celestial Lupine",
+            "description": "When an enemy unit with 'Steadfast Safeguard' is Weakness Broken, dispel control debuffs for all allies and activate their Ultimates. Increases Skill DMG taken by all enemy targets by 25% and increases Elation Skill DMG by 15%.",
+            "startTime": "2026-08-31T04:00:00",
+            "endTime": "2026-10-05T03:59:59",
+            "cover": "https://i0.hdslb.com/bfs/article/839c3f2ba8ffc2b63b4cd209f8f989041340190821.jpg"
+          },
+          {
+            "name": "Pure Fiction: Domain Genesis",
+            "description": "Each time Punchline is gained, allies will additionally accumulate 2 Grit Value.",
+            "startTime": "2026-09-14T04:00:00",
+            "endTime": "2026-10-19T03:59:59",
+            "cover": "https://i0.hdslb.com/bfs/new_dyn/13e21e998566cef8e41f4ae287c17fc11340190821.jpg"
+          },
+          {
+            "name": "Love, Ghosts & Robots",
+            "description": "A decommissioned mechatron pipeline, retrofitted by ghost Skott, has somehow become a production line for \"Lyndon™ EmbodiMech,\" capable of giving ghosts physical form! But the one time this old friend decides to do something good, he gets tangled up with the out-of-nowhere arrival of Rakshmi. You and your companions decide to lend a hand, help him pass the assessment, and get him out from under his \"rumored girlfriend\"'s thumb! Rewards include the Trailblaze Fashion headwear \"Lone Wolf Shades.\"",
+            "startTime": "2026-09-28T11:00:00",
+            "endTime": "2026-11-11T03:59:59",
+            "cover": ""
+          },
+          {
+            "name": "Wishpower UP! Down with Voracity!",
+            "description": "The ancient Aeon, the Voracity, is gradually awakening. THEIR power is steadily encroaching outward, spurring an uncontrollable, ravenous impulse within living beings... But I heard Aha's here to help!? Defeat enemies corroded by the Voracity and accumulate Wishpower to unlock Trendible Voucher ×18, Stellar Jade ×500, and a commemorative medal! You can even gain buffs when fighting against Voracity Corrosion!",
+            "startTime": "2026-09-28T11:00:00",
+            "endTime": "2026-11-11T05:59:59",
+            "cover": ""
+          },
+          {
+            "name": "Astral Slammers Squad!",
+            "description": "To celebrate the grand opening of the Imagea Park, the IPC is hosting an \"Astral Slammers\" event! Hurry up, team up with your friends, and complete the challenge together!",
+            "startTime": "2026-09-28T11:00:00",
+            "endTime": "2026-11-11T05:59:59",
+            "cover": ""
+          },
+          {
+            "name": "Astral Imagea Park: Astral Trendible",
+            "description": "Imageas available in this period's \"Astral Trendible\" Imagea draw event include: Collector's Edition Kitty Furb, Collector's Edition Chimera, Classic Edition Kitty Furb, and Classic Edition Chimera.",
+            "startTime": "2026-09-28T11:00:00",
+            "endTime": "2026-11-11T05:59:59",
+            "cover": ""
+          },
+          {
+            "name": "Astral Imagea Park: Park Souvenir",
+            "description": "During the event, log in to the game to claim Trendible Voucher ×6. Trendible Vouchers can be used to draw for Astral Imageas.",
+            "startTime": "2026-09-28T11:00:00",
+            "endTime": "2026-11-11T05:59:59",
+            "cover": ""
+          },
+          {
+            "name": "Gift of Odyssey",
+            "description": "Log in every day during the event to obtain check-in rewards. Trailblazers can claim Star Rail Special Pass ×10 after checking in for 7 days!",
+            "startTime": "2026-09-28T11:00:00",
+            "endTime": "2026-11-11T05:59:59",
+            "cover": ""
+          },
+          {
+            "name": "Anomaly Arbitration: Return to Roots",
+            "description": "High-difficulty challenge mode where players can earn rewards including Lone Stardust, Interference Keys, Self-Modeling Resin, and limited-time avatar frames.",
+            "startTime": "2026-09-28T11:00:00",
+            "endTime": "2026-11-11T05:59:59",
+            "cover": "https://i0.hdslb.com/bfs/new_dyn/0869ac215b041b4bbab8197c9c44cef71340190821.jpg"
+          },
+          {
+            "name": "Memory of Chaos: Crossing the Afterlife",
+            "description": "The character in position 1 of the ally lineup gains the Elation Skill \"Euphoric Maelstrom,\" dealing 100% Elation DMG of the character's Type to all enemies. When each Cycle begins, Aha immediately gains 1 extra turn with a fixed amount of 20 Punchlines taken into account. This turn does not consume Punchlines.",
+            "startTime": "2026-09-28T11:00:00",
+            "endTime": "2026-11-02T03:59:59",
+            "cover": ""
+          },
+          {
+            "name": "Apocalyptic Shadow: Dominance of Oblivion",
+            "description": "When an enemy target with \"Steadfast Safeguard\" is Weakness Broken, all ally targets are dispelled of control debuffs, their actions are advanced, and Aha immediately gains an extra turn (this turn takes a fixed 10 Punchlines into account). Increases Ultimate DMG taken by all enemy targets by 25% and increases Elation DMG by 15%.",
+            "startTime": "2026-10-05T04:00:00",
+            "endTime": "2026-11-16T03:59:59",
+            "cover": "https://i0.hdslb.com/bfs/article/839c3f2ba8ffc2b63b4cd209f8f989041340190821.jpg"
+          },
+          {
+            "name": "Pure Fiction: Imagined Words",
+            "description": "When an ally target inflicts a debuff on an enemy target, allies additionally accumulate 1 Grit Value. This effect can be triggered up to 10 times per enemy target.",
+            "startTime": "2026-10-19T04:00:00",
+            "endTime": "2026-11-30T03:59:59",
+            "cover": "https://i0.hdslb.com/bfs/new_dyn/13e21e998566cef8e41f4ae287c17fc11340190821.jpg"
+          },
+          {
+            "name": "Interastral Peace Gala: One Take",
+            "description": "Interastral Peace Entertainment's blockbuster reality show, Interastral Peace Gala: One Take, has officially started filming. Audition now, show off your combat skills, and the next action superstar could be you!",
+            "startTime": "2026-10-21T12:00:00",
+            "endTime": "2026-11-11T03:59:59",
+            "cover": ""
+          },
+          {
+            "name": "Memory of Chaos: Survival of the Fittest",
+            "description": "When an ally target uses their Ultimate, gains 5 Punchlines. When each Cycle begins, Aha immediately gains 1 extra turn with a fixed amount of 20 Punchlines taken into account. This turn does not consume Punchlines.",
+            "startTime": "2026-11-02T04:00:00",
+            "endTime": "2026-12-14T03:59:59",
+            "cover": ""
+          }
+        ]
+      }
     },
     "news": {
-      "status": "error",
+      "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": null,
-      "lastSuccess": null,
-      "error": "Awaiting first scheduled refresh",
-      "data": null
+      "checkedAt": "2026-11-11T02:49:01Z",
+      "lastSuccess": "2026-11-11T02:49:01Z",
+      "error": null,
+      "data": [
+        {
+          "id": "47394097",
+          "title": "Version 4.7 \"Now, Lay Laughter to All Stars\" Update Details",
+          "description": "In the maddening silence, a voice said: \"Laugh, and let THEM hear your existence.\" And thus, the stars were silent no more, pouring all their radiance into a single burst of laughter. Hello, Trailblazers!",
+          "created_at": 1794351603,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/10/47dd91f383c975ddb4b40075f9c2ac41_4757348028215137557.png",
+          "url": "https://www.hoyolab.com/article/47394097",
+          "type": "notice"
+        },
+        {
+          "id": "47385253",
+          "title": "Version 4.7 Event Warp: Phase I",
+          "description": "Hello, Trailblazers: The drop rates for the limited 5-star character Aeon ★ Aha (Elation: Quantum) and the limited 5-star Light Cone \"Upon the First Echo of 'Aha' (Elation)\" will be boosted for a limited time. The drop rates for the 4-star characters Asta (Harmony: Fire), Lynx (Abundance: Quantum), and Yukong (Harmony: Imaginary), as well as the 4-star Light Cones \"Trend of the Universal Market (Preservation),\" \"Geniuses' Repose (Erudition),\" and \"Shadowed by Night (The Hunt)\" will be boosted for a limited time. The Warp period is from after the Version 4.7 update on 2026/11/11 – 2026/12/22 15:00 (server time). The limited 5-star characters Silver Wolf LV.999 (Elation: Imaginary), Sparxie (Elation: Fire), and Yao Guang (Elation: Physical), and the limited 5-star Light Cones \"Welcome to the Cosmic City (Elation),\" \"Dazzled by a Flowery World (Elation),\" and \"When She Decided to See (Elation)\" will return. The Warp period is from after the Version 4.7 update on 2026/11/11 – 2026/12/02 11:59 (server time).",
+          "created_at": 1794279606,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/09/fb1fcaf0b5d5470b20b230dde8dcb25e_4889943443179696435.png",
+          "url": "https://www.hoyolab.com/article/47385253",
+          "type": "notice"
+        },
+        {
+          "id": "47375930",
+          "title": "Version 4.7 Update and Maintenance Notice",
+          "description": "Hello, Trailblazers! The Version 4.7 pre-installation will begin at 2026/11/09 14:00 (UTC+8). Trailblazers can download some resources in advance, allowing for faster game access after the version update maintenance is complete. Additionally, the Express Crew will conduct version update maintenance on 2026/11/11 06:00 (UTC+8). After maintenance, the game will be updated to Version 4.7 \"Now, Lay Laughter to All Stars.\" During the maintenance, Trailblazers will not be able to log in to the game. Please note the maintenance schedule and plan your gaming time accordingly. The game client must be updated after the maintenance. Due to the large size of the new game resources, we recommended Trailblazers to use a Wi-Fi connection to download the update. ▌ Update Time",
+          "created_at": 1794204004,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/07/698a28dde3128af48c0d459118b8eea5_3070445272741543546.png",
+          "url": "https://www.hoyolab.com/article/47375930",
+          "type": "notice"
+        },
+        {
+          "id": "47375703",
+          "title": "Relic Recon: Participate to get 5-star +15 Relics!",
+          "description": "A mysterious collection vault in the Herta Space Station has opened its doors to you, filled with countless chests containing wondrous items. If you could get your hands on a special access card... ▌Event Period",
+          "created_at": 1794202208,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/07/f8eec42433db0059907e90e373c59cd7_930801714997872062.png",
+          "url": "https://www.hoyolab.com/article/47375703",
+          "type": "notice"
+        },
+        {
+          "id": "47375599",
+          "title": "Version 4.7 New Stages",
+          "description": "Hello, Trailblazers! After the Version 4.7 update on 2026/11/11, the new stages \"Echo of War: Moon of Indulgence\" and \"Divergent Universe: Dramatis Personae\" will be added. ▌Echo of War: Moon of Indulgence",
+          "created_at": 1794201307,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/07/72b0bd724e02cbb95cf3670810a3b6e4_4022170654524224771.png",
+          "url": "https://www.hoyolab.com/article/47375599",
+          "type": "notice"
+        },
+        {
+          "id": "47375521",
+          "title": "\"Now, Lay Laughter to All Stars\" Mission Description",
+          "description": "In the maddening silence, a voice said: \"Laugh, and let THEM hear your existence.\" And thus, the stars were silent no more, pouring all their radiance into a single burst of laughter. ▌Availability",
+          "created_at": 1794200407,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/07/89c496cdc2477fd388495d91a34493a0_6699095977596567875.png",
+          "url": "https://www.hoyolab.com/article/47375521",
+          "type": "notice"
+        },
+        {
+          "id": "47351677",
+          "title": "Version 4.7 \"Nameless Honor\" Update",
+          "description": "Hello, Trailblazers! During the event, Trailblazers can increase their Nameless Honor level to obtain rewards such as Star Rail Passes, Self-Modeling Resins, and Tracks of Destiny. After unlocking Nameless Glory, you will immediately obtain Stellar Jade ×680. In addition, increasing Nameless Honor levels will allow Trailblazers to obtain Light Cone Memory Shard ×1, Star Rail Special Pass ×4, a 4-star Light Cone of your choice, Variable Dice ×1, Self-Modeling Resin ×2, Relic Remains, the universal Path material Tears of Dreams, and more!",
+          "created_at": 1794024306,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/68fd9ce3c1468e22ef6a797def913917_3276151572975679299.png",
+          "url": "https://www.hoyolab.com/article/47351677",
+          "type": "notice"
+        },
+        {
+          "id": "47271769",
+          "title": "A brand-new season of \"Currency Wars: Voyage Into the Canvas\" is here!",
+          "description": "After the Version 4.7 update on 2026/11/11, the IPC officially partners up with the copyright holders of The Fluffy comics to launch a brand-new season, \"Currency Wars: Voyage Into the Canvas\"! Play to obtain Stellar Jade ×4,000, Variable Dice ×2, Self-Modeling Resin ×2, Tracks of Destiny ×3, and other rewards! The new season brings a massive update, featuring the brand-new seasonal gameplay, \"Escapade\" and \"Plot Armor.\" Meanwhile, Bonds have been completely revamped. Employee Bonds, costs, on/off-field positioning, and Character Empowerments have all been fully reworked. Brand-new equipment, Investment Environments, and strategies also await your selection. Come and experience a different gameplay strategy! ▌New Season Availability",
+          "created_at": 1793505605,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/10/30/f7d1bb8a55c2eb319155eb5b3c405153_2429655916980457886.png",
+          "url": "https://www.hoyolab.com/article/47271769",
+          "type": "notice"
+        },
+        {
+          "id": "47252649",
+          "title": "Version 4.7 Store Update",
+          "description": "Hello, Trailblazers! After the Version 4.7 update on 2026/11/11, value packs will be available for a limited time! Consume Star Rail Special Passes or consume Stellar Jades in \"Phantasia Showstage\" to participate in the outfit draw event to obtain Resonance for claiming Affinitive Eidolons. In addition, Trailblaze Fashion and more will be added to the \"Gift of Stardust\" Exchange Shop! ▌Limited-Time Pack \"Special Ticket\"",
+          "created_at": 1793364904,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/10/30/0b3e7a986a821b4e34e9875ba053239a_2747945596507353206.png",
+          "url": "https://www.hoyolab.com/article/47252649",
+          "type": "notice"
+        },
+        {
+          "id": "47252509",
+          "title": "\"Cosmic Aesthetics: Phantasia Showstage\" Outfit Draw Event Details",
+          "description": "Hello, Trailblazers! Starlight and moonlight adorn the Lotto Goddess's bespoke outfit. Aeon ★ Aha's new outfit \"Star Lotto\" will be available in Version 4.7! ▌\"Phantasia Showstage\" Outfit Draw Event Details",
+          "created_at": 1793364307,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/10/29/89bb5e1b0033f7915090bfe1c8e9cea5_8205611972943861976.png",
+          "url": "https://www.hoyolab.com/article/47252509",
+          "type": "notice"
+        },
+        {
+          "id": "47252072",
+          "title": "\"Grab Your Opening Gifts\" Event Details",
+          "description": "Let the show begin! Aha brought a ton of great gifts! THEY sure have clout! ■Collection Time After the Version 4.7 update on 2026/11/11 – 2026/12/23 05:59 (UTC+8) ■Requirement Trailblaze Level ≥ 4 ▌Affinitive Starveil",
+          "created_at": 1793362807,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/10/30/09d22b6552bf3f58ab9c4aaba917fc94_172118495244651005.png",
+          "url": "https://www.hoyolab.com/article/47252072",
+          "type": "notice"
+        },
+        {
+          "id": "47238004",
+          "title": "Garden of Plenty Event: Calyx Drop Rate Doubled for a Limited Time",
+          "description": "▌Event Period 2026/10/30 04:00 (server time) - 2026/11/11 03:59 (UTC+8) ▌Participation Requirement Complete the Adventure Mission \"Calyx (Golden): Bud of Memories\" ▌Event Details During the Garden of Plenty event, beat Calyx (Golden) and Calyx (Crimson) challenges to receive double rewards. You will get an additional set of rewards on top of default drops after consuming an event double reward opportunity and Trailblaze Power. During the event, the number of double reward opportunities is limited. The limit and remaining attempts can be viewed in the Garden of Plenty event stage page. The double reward count will not reset during the event. Be sure to schedule your time for this challenge accordingly, Trailblazers.",
+          "created_at": 1793242806,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/10/27/997c5b2d0a629cabbdfc5b31a9f3b489_2045029242702547151.png",
+          "url": "https://www.hoyolab.com/article/47238004",
+          "type": "notice"
+        },
+        {
+          "id": "47142215",
+          "title": "Version 4.6 Event Warp: Phase II",
+          "description": "Hello, Trailblazers! The drop rates for the limited 5-star character Pearl (Elation: Ice) and the limited 5-star Light Cone \"Colors for Tomorrow (Elation)\" will be boosted for a limited time. The drop rates for the 4-star characters Qingque (Erudition: Quantum), Xueyi (Destruction: Quantum), and Misha (Destruction: Ice), as well as the 4-star Light Cones \"Post-Op Conversation (Abundance),\" \"Planetary Rendezvous (Harmony),\" and \"Boundless Choreo (Nihility)\" will be boosted for a limited time. The Warp period is from after the Version 4.6 update on 2026/09/28 – 2026/11/10 15:00 (server time). The limited 5-star character Mortenax Blade (Nihility: Fire) and the limited 5-star Light Cone \"Reforged in Hellfire (Nihility)\" will return. The Warp period is from 2026/10/21 12:00 – 2026/11/10 15:00 (server time). ▌\"An Ocean in a Pearl\" and \"Brilliant Fixation: Colors for Tomorrow\" Event Warps",
+          "created_at": 1792476008,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/10/16/c4ad4cf76730b8e15324610efd9c22c3_8253529473331117229.png",
+          "url": "https://www.hoyolab.com/article/47142215",
+          "type": "notice"
+        },
+        {
+          "id": "47043223",
+          "title": "Planar Fissure Event: Planar Ornaments Drop Rate Doubled for a Limited Time",
+          "description": "▌Event Period 2026/10/12 04:00 - 2026/10/25 03:59 (server time) ▌Participation Requirement Unlock Planar Ornament ▌Event Details During the Planar Fissure event, receive double rewards when obtaining Immersion Rewards or performing Ornament Extraction in the Simulated Universe. You will get additional rewards on top of default drops after consuming an event double reward opportunity and Immersifiers (or Trailblaze Power). During the event, the number of double reward opportunities is limited and can be viewed in the Planar Fissure event page. The double reward count will not reset during the event. Be sure to schedule your time for this challenge accordingly, Trailblazers.",
+          "created_at": 1791687603,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/10/08/445eff9915166d9bcdbd60b279933ff8_739955734522521317.png",
+          "url": "https://www.hoyolab.com/article/47043223",
+          "type": "notice"
+        },
+        {
+          "id": "46861607",
+          "title": "Version 4.6 \"Dance With the Beast Before Moonrise\" Update Details",
+          "description": "The beast stirring in the darkness opens THEIR maw once more, demanding a god as a sacrifice. Before the moon rises again, only the blood of the wise can sate THEIR hunger... Hello, Trailblazers! Welcome to Version 4.6 \"Dance With the Beast Before Moonrise\"! ▌Update and Compensation Details",
+          "created_at": 1790550006,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/09/24/694e777822e0964cdaa7458804c82fef_8989305327318684464.png",
+          "url": "https://www.hoyolab.com/article/46861607",
+          "type": "notice"
+        },
+        {
+          "id": "47395082",
+          "title": "[Stellar Jade Rewards] Take Part in the Discussions for Aeon ★ Aha's Debut and Win Stellar Jades",
+          "description": "Greetings, Trailblazers! Stepping back onto the stage of the Path, I tear off the god's mask. Who is Aha? The Trailblazer has also come to witness... an improv tour where humans and gods dance as one! Participate in the event to get a guaranteed Personal Homepage Background and Avatar Frame, and have a chance to win Stellar Jade Rewards!",
+          "created_at": 1794362407,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/10/47e15b6cc78ec157770b0e6be0eb3049_6828545940427943916.png",
+          "url": "https://www.hoyolab.com/article/47395082",
+          "type": "event"
+        },
+        {
+          "id": "47251829",
+          "title": "Event with Rewards — Join Our V4.7 Preview Discussion! What Are You Looking Forward to in V4.7?",
+          "description": "Greetings, Trailblazers! The Version 4.7 preview stream has concluded. What are you looking forward to in the new version? Participate in the 4.7 Version Preview live discussion, and get a guaranteed personal homepage background!",
+          "created_at": 1793361607,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/10/30/13dd0be6b567b098132a6f0f544f490c_6148636406654450707.png",
+          "url": "https://www.hoyolab.com/article/47251829",
+          "type": "event"
+        },
+        {
+          "id": "46862618",
+          "title": "[Stellar Jade Rewards] Take Part in the Discussions for Pearl's Debut and Win Stellar Jades",
+          "description": "Greetings, Trailblazers! Color the stars, trace the myriad phenomena, and the lost pearls of civilization regain their luster. What kind of insights will the Trailblazer harvest after being baptized by art? Participate in the event to get a guaranteed Personal Homepage Background and Avatar Frame, and have a chance to win Stellar Jade Rewards!",
+          "created_at": 1790560807,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/09/24/ede0d21450537f8c4065df35929595af_834730297494981128.png",
+          "url": "https://www.hoyolab.com/article/46862618",
+          "type": "event"
+        },
+        {
+          "id": "46763050",
+          "title": "Event with Rewards — Join Our V4.6 Preview Discussion! What Are You Looking Forward to in V4.6?",
+          "description": "Greetings, Trailblazers! The Version 4.6 preview stream has concluded. What are you looking forward to in the new version? Participate in the 4.6 Version Preview live discussion, and get a guaranteed personal homepage background!",
+          "created_at": 1789905607,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/09/20/13dd0be6b567b098132a6f0f544f490c_4084330593884206035.png",
+          "url": "https://www.hoyolab.com/article/46763050",
+          "type": "event"
+        },
+        {
+          "id": "46653679",
+          "title": "[Stellar Jade Reward] Take Part in the Discussions for Aventurine • Waveflair's Debut and Win Stellar Jades",
+          "description": "Greetings, Trailblazers! Secret orders in hand, step back into the eye of the storm to shake up this long holiday— Trailblazers, come break the deadlock with us and feel the storm within the revelry! Participate in the event to get a guaranteed Personal Homepage Background and Avatar Frame, and have a chance to win Stellar Jade Rewards!",
+          "created_at": 1789185610,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/09/11/47e15b6cc78ec157770b0e6be0eb3049_4103965895962718588.png",
+          "url": "https://www.hoyolab.com/article/46653679",
+          "type": "event"
+        },
+        {
+          "id": "46508058",
+          "title": "All Aboard the Summer Express! | Clock In to Win Stellar Jade Rewards",
+          "description": "The Summer Express bound for Astropolis is setting off! Bring Robin • Summeretto & Aventurine • Waveflair along to capture your vacation life! Event Period 2026/08/30 12:00 (UTC+8) — 2026/09/27 23:59 (UTC+8) How to Participate",
+          "created_at": 1788062707,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/08/27/83c795c31b586c9e72e6973322b0a6c0_6492803804058090789.png",
+          "url": "https://www.hoyolab.com/article/46508058",
+          "type": "event"
+        },
+        {
+          "id": "46451354",
+          "title": "[Stellar Jade Reward] Take Part in the Discussions for Robin • Summeretto's Debut and Win Stellar Jades",
+          "description": "Greetings, Trailblazers! Following the lingering echoes of memory, embracing the unexpected along the way, seeking inspiration for a melodic variation— What kind of unique inspiration will the Trailblazer bring to Robin's new song? Participate in the event to get a guaranteed Personal Homepage Background and Avatar Frame, and have a chance to win Stellar Jade Rewards!",
+          "created_at": 1787716807,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/08/26/ede0d21450537f8c4065df35929595af_5152564563725003269.png",
+          "url": "https://www.hoyolab.com/article/46451354",
+          "type": "event"
+        },
+        {
+          "id": "46286874",
+          "title": "Event with Rewards — Join Our V4.5 Preview Discussion! What Are You Looking Forward to in V4.5?",
+          "description": "Greetings, Trailblazers! The Version 4.5 preview stream has concluded. What are you looking forward to in the new version? Participate in the 4.5 Version Preview live discussion, and get a guaranteed personal homepage background!",
+          "created_at": 1786708806,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/08/13/13dd0be6b567b098132a6f0f544f490c_458308834019940728.png",
+          "url": "https://www.hoyolab.com/article/46286874",
+          "type": "event"
+        },
+        {
+          "id": "45978005",
+          "title": "Take on the challenge of infiltrating Gilgamesh's treasury with Rin",
+          "description": "Rin Tohsaka & Gilgamesh Simultaneous Rate-Up! Honkai: Star Rail × Fate[UBW] Collab in Progress💥 Team up with Rin and steal some treasures from Gilgamesh's treasury 💎 Stealth, disguise, or a frontal assault? What kind of strategy will you choose? Leave a comment on this post or share your strategy under the topic",
+          "created_at": 1784865906,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/07/23/e505230909b1b20e9a307069ff09f820_4582119469163907002.png",
+          "url": "https://www.hoyolab.com/article/45978005",
+          "type": "event"
+        },
+        {
+          "id": "45858065",
+          "title": "Depart Anew When the Phantasmoon is Full | Share Screenshots to Win Stellar Jades and Gift Cards",
+          "description": "The villain character comes charging in, yelling stuff about sacrifice and destruction! Hehe, good thing Himeko fulfilled her promise with a certain \"someone\" under the full Phantasmoon, obtained the strength of the giant robot \"Starblazer,\" and came out on top with the Express Crew. Navigator Himeko will continue to lead the Express Crew forward. I bet the Trailblazer and Himeko have a ton of stories to tell too, right? Follow the instructions in this post to share your \"story\" with Himeko, and the Express Crew will randomly select 195 Trailblazers to receive Stellar Jades and gift card rewards. ※ Reviews or posts with screenshots are more likely to be picked by the Express Crew! ▌ Event Duration",
+          "created_at": 1784106006,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/07/13/458da72b7faeb48f720f9099aa6f9a5a_6878259505548510034.jpg",
+          "url": "https://www.hoyolab.com/article/45858065",
+          "type": "event"
+        },
+        {
+          "id": "45852900",
+          "title": "[Stellar Jade Reward] Take Part in the Discussions for Himeko • Nova's Debut and Win Stellar Jades",
+          "description": "Greetings, Trailblazers! Some fight by your side, while others watch over you, the Trailblaze is never a solitary voyage. Himeko is your family, always looking out at the same horizon as you! Participate in the event to get a guaranteed Personal Homepage Background and Avatar Frame, and have a chance to win Stellar Jade Rewards!",
+          "created_at": 1784080807,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/07/14/47e15b6cc78ec157770b0e6be0eb3049_252961669583462378.png",
+          "url": "https://www.hoyolab.com/article/45852900",
+          "type": "event"
+        },
+        {
+          "id": "45747564",
+          "title": "Event with Rewards — Join Our V4.4 Preview Discussion! What Are You Looking Forward to in V4.4?",
+          "description": "Greetings, Trailblazers! The Version 4.4 preview stream has concluded. What are you looking forward to in the new version? Participate in the 4.4 Version Preview live discussion, and get a guaranteed personal homepage background!",
+          "created_at": 1783312205,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/07/03/13dd0be6b567b098132a6f0f544f490c_8886792719085230125.png",
+          "url": "https://www.hoyolab.com/article/45747564",
+          "type": "event"
+        },
+        {
+          "id": "47387949",
+          "title": "Aha All-Stars | \"World's End Beauty Salon\"",
+          "description": "Lord Ravager Asat Pramad yearns for a reroll? The show might be facing the biggest challenge in makeover history! ✧ Starring Ace Beautician \"Aeon ★ Aha\" ✧ After a decade of honing their skills, the Supplicant team faces the ultimate test... \"After years of looking in the mirror, he finally decides he no longer wants to destroy the world.\" An exclusive Honkai: Star Rail online release on 11/11! ★ This content is purely fictional and for entertainment purposes only ★",
+          "created_at": 1794304805,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/09/93b1e93440b82516d03ad0b66091160e_6864426294440169056.jpg",
+          "url": "https://www.hoyolab.com/article/47387949",
+          "type": "info"
+        },
+        {
+          "id": "47386628",
+          "title": "\"Interastral Peace Gala: Road to Fame\" Event Introduction",
+          "description": "Want to become the star of the show? Step onto the stage, take down your rivals, and win cheers and applause with your brilliance! ※ For more information, please refer to the in-game notice.",
+          "created_at": 1794294004,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/07/cc8e81cea50afa8cad4767fdb7016ee9_9219320819695219261.jpg",
+          "url": "https://www.hoyolab.com/article/47386628",
+          "type": "info"
+        },
+        {
+          "id": "47386304",
+          "title": "You have an inheritance from \"Blurry_QR_Colt\" to claim (Note: Real estate)",
+          "description": "Leave Fluffy Across the Blue unfinished? Sorry, but the greatest and most responsible comic artist, Blurry_QR_Colt, could never do such a thing. In fact, she's even going to draw a gourmet story version! She has left behind an inheritance waiting to be claimed. To get your hands on it, you'll have to first finish this masterpiece. However, \"drawing\" comics isn't as simple as you think... ※ For more information, please refer to the in-game notice.",
+          "created_at": 1794290407,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/07/a2ad413112fbbc0c5302f3a3f793bfb3_5318431053071134921.jpg",
+          "url": "https://www.hoyolab.com/article/47386304",
+          "type": "info"
+        },
+        {
+          "id": "47385591",
+          "title": "Keeping Up With Star Rail — \"Currency Wars: Voyage Into the Canvas\" Special Program | Honkai: Star Rail",
+          "description": "Breaking news! \"Fluffy Across the Blue\" is about to launch a major collaboration with \"Currency Wars\"! The Fluffy crew joins the fray in \"Currency Wars\"! Paired with the brand-new \"Plot Armor\" and newly adjusted characters, equipment, and Bonds, this season brings a completely fresh gameplay experience! For more details, please tune in to this special episode of \"Keeping Up With Star Rail\"! ※ The stats and mechanics displayed are for reference only. Please regard the launch version as final.",
+          "created_at": 1794283207,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/10/0/a0302fec3c4e5227c5eb766ac8333fe8_4837567322925059125.png",
+          "url": "https://www.hoyolab.com/article/47385591",
+          "type": "info"
+        },
+        {
+          "id": "47377831",
+          "title": "Aha All-Stars | \"Here Comes the Ha\"",
+          "description": "\"M-Mom? Is this script for real?\" ┏━━━ The Elation's Epic Drama ━━━┓ Flipping the Script | The Stellaron Hunters Join In ╭ Stay ╮ Higher-Dimensional Comedy | An Aeon's Untold Secret ╰ Tuned ╯ ✧ Honkai: Star Rail exclusive broadcast on 11/11 ✧ Lead Actors: Silver Wolf LV.999, Mortenax Blade, Aeon ★ Aha ┗━━━ Brace for a Shocking Time ━━━┛ ★ This content is purely fictional and for entertainment purposes only ★",
+          "created_at": 1794218407,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/09/acf4157f85937e1d167bee223ec4d59c_5187104214813693497.jpg",
+          "url": "https://www.hoyolab.com/article/47377831",
+          "type": "info"
+        },
+        {
+          "id": "47366686",
+          "title": "Aha All-Stars | \"My Broke Bestie Is Actually the Richest Person in the Universe\"",
+          "description": "The moment she smiles, this game has only just begun... Our first encounter! I sought only to give you the best. Lies! The inevitable trial of friendship has arrived. The latest episode of \"My Broke Bestie Is Actually the Richest Person in the Universe\" is now airing. Honkai: Star Rail updates on 11/11! Under the watchful eye of Blurry_QR_Colt, their story may just hit a major turning point!!! ★ This content is purely fictional and for entertainment purposes only ★",
+          "created_at": 1794132005,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/aac2780aefe94e87927bd289528c955c_2791365905643116677.jpg",
+          "url": "https://www.hoyolab.com/article/47366686",
+          "type": "info"
+        },
+        {
+          "id": "47363694",
+          "title": "Aeon ★ Aha Character Trailer: \"Let the Die Fly\" | Honkai: Star Rail",
+          "description": "\"What's the name of this brilliant plan of yours?\" \"To beat a boss, use a boss. I call this operation B2B: Boss-to-Boss.\" English Voice: Aeon ★ Aha — Amber Lee Connors Male Trailblazer — Shaun Mendum Lygus — Blythe Melin Silver Wolf — Melissa Fahn Acheron — Allegra Clark",
+          "created_at": 1794110408,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/07/0/5e9a2705c47e9e34ebcf152852f1db81_1502609315161875703.png",
+          "url": "https://www.hoyolab.com/article/47363694",
+          "type": "info"
+        },
+        {
+          "id": "47354878",
+          "title": "Aha All-Stars | \"Veteran's Got Talent\"",
+          "description": "Piano Prince ✧Sunday✧ Elegant fingers upon piano keys and gentle feathers by his ears. On stage, he is a quiet storyteller. Wolf's Temptation ✧Ashveil✧ Secrets of the hook, revealed on the spot! Clues of the flow, untangled from the knot! What kind of unexpected sparks will fly in their showdown? On 11/11, let's ignite the Honkai: Star Rail stage together. ★ This content is purely fictional and for entertainment purposes only ★",
+          "created_at": 1794045604,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/a41c480d2d78c6e711be693d1f32dbe3_8367397384526031617.jpg",
+          "url": "https://www.hoyolab.com/article/47354878",
+          "type": "info"
+        },
+        {
+          "id": "47351625",
+          "title": "\"Now, Lay Laughter to All Stars\" Version 4.7 Preview",
+          "description": "Greetings, Trailblazer! Let's take a look at the new events coming in Version 4.7!",
+          "created_at": 1794024009,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/47a6a974c73e15b2284bb441dda70d0f_4005566568712660945.jpg",
+          "url": "https://www.hoyolab.com/article/47351625",
+          "type": "info"
+        },
+        {
+          "id": "47342931",
+          "title": "Aha All-Stars | \"Dunelation\"",
+          "description": "✧ World's End Tavern FUN-tastic Watch Party ✧ [Trending] Sparxie × Trailblazer × Aeon ★ Aha [Even] Comedy | Adventure | Drama [Before] Annual HAMAX Blockbuster [Release] Exclusive Honkai: Star Rail Release on 11/11",
+          "created_at": 1793959207,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/b41258ded411f8d8eaba79d3a0682fe3_1283279401499872592.jpg",
+          "url": "https://www.hoyolab.com/article/47342931",
+          "type": "info"
+        },
+        {
+          "id": "47340203",
+          "title": "Color Restoration Magic",
+          "description": "Ms. Colt found a painting that had lost its color and was difficult to recolor with normal paint. She used restoration magic to uncover a possibility in the gray world... \"Sometimes, colors hide away for a bit. That's okay. They haven't disappeared. Slow down, take it easy. There will always come a day when they're seen again.\"",
+          "created_at": 1793941207,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/05/6a8c914ae8ca96676c1a4c1eabfde2f1_9003431991922157236.jpg",
+          "url": "https://www.hoyolab.com/article/47340203",
+          "type": "info"
+        },
+        {
+          "id": "47330493",
+          "title": "Holy Furboly! Nihilux | Aha: Magic Tour",
+          "description": "Lady Nihilux is making her debut on the cover of Furbobo Gossip, and the publisher is dropping a \"Nihil-Always-Lux\" limited edition. Aha sure has clout~ Firsthand news on the Voracity's divine war and the latest updates on the Aeons and Supplicants, all in this issue of Holy Furboly! Official version only: look for the furbo watermark. Counterfeits will be prosecuted. This Issue's Reporter: Furbulitzer (Furbo Magician's Assistant Edition) This Issue's Editors: Furbo Reporters ✧ All rights reserved by Furbobo Weekly ✧ ✧ Any Similarities? Blame Aha ✧",
+          "created_at": 1793872805,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/05/7b724aee2562767acb1399b7a69a2101_1273055526605509502.jpg",
+          "url": "https://www.hoyolab.com/article/47330493",
+          "type": "info"
+        },
+        {
+          "id": "47310096",
+          "title": "Light Cone Preview | Version 4.7 \"Now, Lay Laughter to All Stars\"",
+          "description": "Hello, Trailblazers! Come have a look at the new Light Cone \"See You at the World's End! (Elation)\" in Version 4.7 \"Now, Lay Laughter to All Stars\"~",
+          "created_at": 1793768404,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/03/be98c0c669d319f47c0c665d94578419_3982206031955735010.jpg",
+          "url": "https://www.hoyolab.com/article/47310096",
+          "type": "info"
+        },
+        {
+          "id": "47309012",
+          "title": "Improv Tour Trailer: \"When Aha Comes Knocking\" | Honkai: Star Rail",
+          "description": "If life plays a cruel joke on you, don't fret, and don't despair... Aha is watching over every moment of your dejection. English Voice: Aeon ★ Aha — Amber Lee Connors",
+          "created_at": 1793764806,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/04/0/5f84a71dbc7a9db59ece4f36722bb4df_8602696741357095087.jpeg",
+          "url": "https://www.hoyolab.com/article/47309012",
+          "type": "info"
+        },
+        {
+          "id": "47307963",
+          "title": "Aeon Preview | Aeon ★ Aha",
+          "description": "Hello, Trailblazers~ Today, we bring you the preview for the Aeon, Aeon ★ Aha (Elation: Quantum), and the Light Cone, \"Upon the First Echo of 'Aha' (Elation)\"!",
+          "created_at": 1793761210,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/03/edb29fb7cf64b5eb1797f1747ad27593_4343287217262303725.jpg",
+          "url": "https://www.hoyolab.com/article/47307963",
+          "type": "info"
+        }
+      ]
     }
   }
 }
