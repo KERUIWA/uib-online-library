@@ -251,32 +251,88 @@ function checkEventReminders(){if(!("Notification"in window)||Notification.permi
 async function fetchJSON(url,timeoutMs=12000){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeoutMs);try{const r=await fetch(url,{cache:"no-store",signal:controller.signal});if(!r.ok)throw new Error("HTTP "+r.status);return await r.json()}finally{clearTimeout(timer)}}
 async function refreshAll(){
  const btn=$("refreshBtn");if(btn.disabled)return;
- try{
- btn.disabled=true;btn.textContent="↻ Updating…";$("updatedPill").textContent="Refreshing live data…";
- const calendarTask=fetchJSON("https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us").catch(()=>null);
- const activityTask=fetchJSON(ACTIVITY_API).catch(()=>null);
- const [activityData,calendarData]=await Promise.all([activityTask,calendarTask]);
- let rendered=false;
- const calendarEvents=calendarData&&Array.isArray(calendarData.events)?calendarData.events:[];
- const calendarBanners=calendarData&&Array.isArray(calendarData.banners)?calendarData.banners:[];
- if(calendarData&&(Array.isArray(calendarData.events)||Array.isArray(calendarData.banners))){
+ btn.disabled=true;btn.textContent="↻ Updating…";$("updatedPill").textContent="Refreshing independent feeds…";
+ const feedState={calendar:"loading",activity:"loading",news:"loading"};
+ const setOverall=()=>{
+  const values=Object.values(feedState),ok=values.filter(x=>x==="ok").length,failed=values.filter(x=>x==="error").length;
+  $("dataStatus").textContent=failed===0&&ok===3?"All feeds connected":ok?("Partial connection · "+ok+"/3 feeds"):"Live feeds unavailable";
+ };
+ const calendarTask=fetchJSON("https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us").then(data=>{
+  if(!data||(!Array.isArray(data.events)&&!Array.isArray(data.banners)))throw new Error("Calendar response has an unexpected format");
+  return data;
+ });
+ const activityTask=fetchJSON(ACTIVITY_API).then(data=>{
+  if(!data||!Array.isArray(data.activities)||!data.version)throw new Error("Activity response has an unexpected format");
+  return data;
+ });
+ const newsTask=Promise.all(["notices","events","info"].map(type=>
+  fetchJSON(NEWS_API+type+"?lang=en-us").catch(async firstError=>{
+   const fallback="https://api.ennead.cc/mihoyo/starrail/news/"+type+"?lang=en";
+   if(fallback===NEWS_API+type+"?lang=en-us")throw firstError;
+   return fetchJSON(fallback);
+  })
+ )).then(groups=>{
+  const combined=groups.flatMap(x=>Array.isArray(x)?x:[]);
+  const dedup=new Map();combined.forEach(x=>dedup.set(String(x.id||x.url||x.title),x));
+  if(!dedup.size)throw new Error("News feeds returned no articles");
+  return Array.from(dedup.values());
+ });
+ const [calendarResult,activityResult,newsResult]=await Promise.allSettled([calendarTask,activityTask,newsTask]);
+ const calendarData=calendarResult.status==="fulfilled"?calendarResult.value:null;
+ const activityData=activityResult.status==="fulfilled"?activityResult.value:null;
+ if(calendarData){
+  feedState.calendar="ok";
+  const calendarEvents=Array.isArray(calendarData.events)?calendarData.events:[];
+  const calendarBanners=Array.isArray(calendarData.banners)?calendarData.banners:[];
   const acts=calendarEvents.map(x=>({id:x.id,name:x.name,kind:x.type_name||"Event",description:x.description||"",startTime:x.start_time?new Date(x.start_time*1000).toISOString():null,endTime:x.end_time?new Date(x.end_time*1000).toISOString():null,cover:x.image_url}));
-  const banners=calendarBanners.map((x,i)=>{const chars=Array.isArray(x.characters)?x.characters:[],cones=Array.isArray(x.light_cones)?x.light_cones:[],charNames=chars.map(y=>typeof y==="string"?y:(y.full_name||y.name)).filter(Boolean),coneNames=cones.map(y=>typeof y==="string"?y:y.name).filter(Boolean),isLightConeWarp=coneNames.length>0&&charNames.length===0;return{id:x.id||"live-warp-"+i,name:x.name||charNames.join(" / ")||(isLightConeWarp?"Light Cone Event Warp":"Character Event Warp"),kind:isLightConeWarp?"Light Cone Warp":"Character Warp",description:[charNames.length?"Featured characters: "+charNames.join(", "):"",coneNames.length?"Featured Light Cones: "+coneNames.join(", "):""].filter(Boolean).join(" · "),characters:chars,light_cones:cones,image:bannerArtwork(x),url:x.url||x.link||"",startTime:x.start_time?new Date(x.start_time*1000).toISOString():null,endTime:x.end_time?new Date(x.end_time*1000).toISOString():null,_isWarp:true}});
+  const banners=calendarBanners.map((x,i)=>{
+   const chars=Array.isArray(x.characters)?x.characters:[],cones=Array.isArray(x.light_cones)?x.light_cones:[];
+   const charNames=chars.map(y=>typeof y==="string"?y:(y.full_name||y.name)).filter(Boolean);
+   const coneNames=cones.map(y=>typeof y==="string"?y:y.name).filter(Boolean);
+   const isLightConeWarp=coneNames.length>0&&charNames.length===0;
+   return{id:x.id||"live-warp-"+i,name:x.name||charNames.join(" / ")||(isLightConeWarp?"Light Cone Event Warp":"Character Event Warp"),kind:isLightConeWarp?"Light Cone Warp":"Character Warp",description:[charNames.length?"Featured characters: "+charNames.join(", "):"",coneNames.length?"Featured Light Cones: "+coneNames.join(", "):""].filter(Boolean).join(" · "),characters:chars,light_cones:cones,image:bannerArtwork(x),url:x.url||x.link||"",startTime:x.start_time?new Date(x.start_time*1000).toISOString():null,endTime:x.end_time?new Date(x.end_time*1000).toISOString():null,_isWarp:true};
+  });
   const liveVersion=calendarBanners.map(x=>x.version).find(Boolean);
   const activityEnd=activityData&&activityData.endTime?parseDate(activityData.endTime):null;
   const activityFresh=!!(activityData&&activityData.version&&activityEnd&&activityEnd.getTime()>Date.now());
-  if(activityFresh){renderVersion(activityData);}else if(liveVersion){const starts=calendarBanners.map(x=>x.start_time).filter(Number.isFinite),ends=calendarBanners.map(x=>x.end_time).filter(Number.isFinite);renderVersion({version:liveVersion,versionName:"Live event calendar",startTime:starts.length?new Date(Math.min(...starts)*1000).toISOString():null,endTime:ends.length?new Date(Math.max(...ends)*1000).toISOString():null});}else{$("versionPill").textContent="Version data updating";$("versionTitle").textContent="Version schedule unavailable";$("versionDescription").textContent="The version feed has not returned a current schedule yet.";$("versionStart").textContent="—";$("versionEnd").textContent="—";$("versionCountdown").textContent="Awaiting current data";}
-  renderEvents(normalizeActivities({activities:acts,banners}));rendered=true;
- }else if(activityData&&activityData.version){
-  const activityEnd=activityData.endTime?parseDate(activityData.endTime):null;
-  if(activityEnd&&activityEnd.getTime()>Date.now()){renderVersion(activityData);renderEvents(normalizeActivities(activityData));rendered=true;}
+  if(activityFresh){renderVersion(activityData);feedState.activity="ok";}
+  else if(liveVersion){const starts=calendarBanners.map(x=>x.start_time).filter(Number.isFinite),ends=calendarBanners.map(x=>x.end_time).filter(Number.isFinite);renderVersion({version:liveVersion,versionName:"Live event calendar",startTime:starts.length?new Date(Math.min(...starts)*1000).toISOString():null,endTime:ends.length?new Date(Math.max(...ends)*1000).toISOString():null});feedState.activity=activityData?"stale":"error";}
+  else if(activityData){renderVersion(activityData);feedState.activity="stale";}
+  else{feedState.activity="error";}
+  renderEvents(normalizeActivities({activities:acts,banners}));
+  $("currentBannerStatus").textContent=calendarBanners.length?"Banner feed connected": "Calendar connected · no banner records";
+  if(!calendarEvents.length)$("eventCards").innerHTML='<div class="empty">The calendar feed is reachable, but it returned no event records.</div>';
+ }else{
+  feedState.calendar="error";
+  if(activityData){
+   feedState.activity="stale";
+   renderVersion(activityData);
+   renderEvents(normalizeActivities(activityData));
+   $("currentBannerStatus").textContent="Banner feed unavailable · activity fallback only";
+  }else{
+   feedState.activity="error";
+   $("eventCards").innerHTML='<div class="empty">Calendar and activity feeds are unavailable. Try refreshing later.</div>';
+   $("currentBannerStatus").textContent="Banner data unavailable";
+   $("versionTitle").textContent="Version schedule unavailable";
+   $("versionDescription").textContent="Both version and calendar providers failed to respond.";
+   $("versionStart").textContent="—";$("versionEnd").textContent="—";$("versionCountdown").textContent="Awaiting data";
+   $("currentBanner").innerHTML='<div class="current-banner-empty">The banner providers did not return data. No banner lineup has been guessed.</div>';
+  }
  }
- if(!rendered){$("dataStatus").textContent="Live calendar unavailable";$("eventCards").innerHTML='<div class="empty">The live calendar sources did not return current data. Please refresh later.</div>';$("versionDescription").textContent="No current version or event data is available from the live sources.";}
- const groups=await Promise.all(["notices","events","info"].map(type=>fetchJSON(NEWS_API+type+"?lang=en-us").catch(()=>[])));
- const combined=groups.flatMap(x=>Array.isArray(x)?x:[]);const dedup=new Map();combined.forEach(x=>dedup.set(String(x.id||x.url||x.title),x));renderNews(Array.from(dedup.values()));
- $("updatedPill").textContent="Updated "+new Date().toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"});if(rendered)$("dataStatus").textContent="Connected";
- }catch(error){console.error("HSR live data refresh failed:",error);$("dataStatus").textContent="Live data unavailable";$("versionDescription").textContent="Live data could not finish loading. Please try Refresh now.";const eventHost=$("eventCards");if(eventHost&&!events.length)eventHost.innerHTML='<div class="empty">Live data could not finish loading. Please try refreshing.</div>';const bannerStatus=$("currentBannerStatus");if(bannerStatus)bannerStatus.textContent="Live data unavailable";
- }finally{btn.disabled=false;btn.textContent="↻ Refresh now";}
+ if(activityResult.status==="fulfilled"&&feedState.activity==="loading")feedState.activity="ok";
+ if(newsResult.status==="fulfilled"){
+  feedState.news="ok";renderNews(newsResult.value);
+ }else{
+  feedState.news="error";
+  $("newsList").innerHTML='<div class="empty">The announcement feed is unavailable right now. Calendar and banner data can still load independently.</div>';
+  console.warn("HSR news feed failed:",newsResult.reason);
+ }
+ if(calendarResult.status==="rejected")console.warn("HSR calendar feed failed:",calendarResult.reason);
+ if(activityResult.status==="rejected")console.warn("HSR activity feed failed:",activityResult.reason);
+ setOverall();
+ const successful=Object.values(feedState).filter(x=>x==="ok").length;
+ $("updatedPill").textContent=successful?"Checked "+new Date().toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"}):"No feeds updated";
+ btn.disabled=false;btn.textContent="↻ Refresh now";
 }
 const spotlightModal=$("spotlightModal");function openSpotlightDetails(card){$("spotlightModalTitle").textContent=card.dataset.spotlightTitle||"Version spotlight";$("spotlightModalType").textContent=card.dataset.spotlightType||"Featured item";$("spotlightModalDescription").textContent=card.dataset.spotlightDescription||"";const source=card.querySelector("img"),modalImage=$("spotlightModalImage");if(source&&source.src){modalImage.src=source.src;modalImage.alt=source.alt||card.dataset.spotlightTitle||"Spotlight artwork";modalImage.hidden=false}else{modalImage.removeAttribute("src");modalImage.hidden=true}spotlightModal.classList.add("open");spotlightModal.setAttribute("aria-hidden","false");$("spotlightModalClose").focus()}function closeSpotlightDetails(){spotlightModal.classList.remove("open");spotlightModal.setAttribute("aria-hidden","true")}document.querySelectorAll(".spotlight-clickable").forEach(card=>{card.addEventListener("click",e=>{if(e.target.closest("a"))return;openSpotlightDetails(card)});card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openSpotlightDetails(card)}})});$("spotlightModalClose").addEventListener("click",closeSpotlightDetails);spotlightModal.addEventListener("click",e=>{if(e.target===spotlightModal)closeSpotlightDetails()});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&spotlightModal.classList.contains("open"))closeSpotlightDetails()});
 $("enableNotifications").addEventListener("click",async()=>{const s=$("notificationStatus");if(!window.isSecureContext){s.textContent="Notifications need the secure GitHub Pages HTTPS address.";return;}if(!("Notification"in window)){s.textContent="This browser does not support desktop notifications.";return;}if(Notification.permission==="denied"){s.textContent="Notifications are blocked in browser site settings. Allow them for this site, then try again.";return;}const p=await Notification.requestPermission();if(p==="granted"){s.textContent="✓ Reminders enabled. Keep this page open for event and announcement alerts.";new Notification("Trailblazer reminders enabled",{body:"We'll alert you about upcoming event starts, event endings, and new announcements while this page is open."});checkEventReminders();}else{s.textContent="Permission was not granted. You can enable it in browser site settings.";}}); 
