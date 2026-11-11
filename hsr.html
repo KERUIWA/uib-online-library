@@ -428,31 +428,6 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
   z-index:6!important;
 }
 @media(max-width:650px){
-  /* MINI ROSTER LABEL: show featured characters as individual selectable-looking chips */
-#currentBanner .current-banner-cycle-name{
- display:flex!important;flex-direction:column!important;align-items:center!important;gap:5px!important;
- width:max-content!important;max-width:calc(100% - 24px)!important;
- padding:8px 10px!important;border-radius:14px!important;
- white-space:normal!important;overflow:visible!important;
-}
-#currentBanner .current-banner-roster-kicker{
- display:block!important;color:#f5dcae!important;font-size:8px!important;
- font-weight:950!important;letter-spacing:.18em!important;line-height:1!important;
-}
-#currentBanner .current-banner-roster-list{
- display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:4px!important;
-}
-#currentBanner .current-banner-roster-chip{
- display:inline-flex!important;align-items:center!important;justify-content:center!important;
- padding:4px 7px!important;border:1px solid #ffffff38!important;border-radius:7px!important;
- background:#ffffff12!important;color:#f4efff!important;font-size:9px!important;
- font-weight:850!important;letter-spacing:.02em!important;line-height:1.1!important;
-}
-#currentBanner .current-banner-roster-chip.is-active{
- border-color:#f0cf83!important;background:linear-gradient(135deg,#a77a35,#d3a84e)!important;
- color:#20172a!important;box-shadow:0 0 12px #e9c87955!important;
-}
-@media(max-width:650px){
  #currentBanner .current-banner-cycle-name{top:8px!important;max-width:calc(100% - 18px)!important;padding:7px 8px!important}
  #currentBanner .current-banner-roster-chip{padding:4px 6px!important;font-size:8px!important}
 }
@@ -590,7 +565,7 @@ function bannerCardMarkup(x,label,map){
   imageMarkup='<div class="current-banner-art"><img src="'+esc(coneArt)+'" alt="'+esc(coneNames[0]||"Featured Light Cone")+'" loading="eager" style="object-fit:contain;padding:22px"></div>';
  }else{
   const slideData=encodeURIComponent(JSON.stringify(slides));
-  imageMarkup='<div class="current-banner-art current-banner-cycle" data-slide-index="0" data-cycle-slides="'+esc(slideData)+'">'+(first.src?'<img src="'+esc(first.src)+'" alt="'+esc(first.name)+' character artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name">'+bannerRosterLabelMarkup(slides,0)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / '+slides.length+'</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
+  imageMarkup='<div class="current-banner-art current-banner-cycle" data-slide-index="0" data-cycle-slides="'+esc(slideData)+'">'+(first.src?'<img src="'+esc(first.src)+'" alt="'+esc(first.name)+' character artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / '+slides.length+'</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
  }
  const title=isLightCone?(x.name||"Light Cone Event Warp"):(x.name||names.join(" / ")||"Character Event Warp");
  const featured=names.length?"Featured characters: "+names.join(", "):coneNames.length?"Featured Light Cones: "+coneNames.join(", "):(x.description||"Character Event Warp");
@@ -598,15 +573,6 @@ function bannerCardMarkup(x,label,map){
  const statusLabel=isLive?'<span class="tag live">LIVE</span>':isUpcoming?'<span class="tag">UPCOMING</span>':"";
  const countdownLabel=isUpcoming?"Starts in ":"Ends in ";
  return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><div class="banner-labels"><span class="tag">'+typeLabel+'</span>'+statusLabel+'</div><h3>'+esc(title)+'</h3><p>'+esc(featured)+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+countdownLabel+remaining(isUpcoming?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
-}
-function bannerRosterLabelMarkup(slides,index){
- const names=(slides||[]).map(item=>String(item.name||""));
- const aeon=names.some(name=>/^Aeon\s*★/i.test(name));
- const chips=names.map((name,i)=>{
-  const clean=name.replace(/^Aeon\s*★\s*/i,"").trim()||name;
-  return '<span class="current-banner-roster-chip'+(i===index?' is-active':'')+'">'+esc(clean)+'</span>';
- }).join("");
- return (aeon?'<span class="current-banner-roster-kicker">Aeon ★</span>':"")+'<span class="current-banner-roster-list">'+chips+'</span>';
 }
 function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
  const slide=slides[index],img=panel.querySelector("img"),placeholder=panel.querySelector(".current-banner-cycle-placeholder"),label=panel.querySelector(".current-banner-cycle-name"),position=panel.querySelector(".current-banner-cycle-position");
@@ -618,7 +584,7 @@ function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
   if(img)img.hidden=true;
   if(placeholder)placeholder.hidden=false;
  }
- if(label)label.innerHTML=bannerRosterLabelMarkup(slides,index);
+ if(label)label.textContent=slide.name;
  if(position)position.textContent=(index+1)+" / "+slides.length;
 }
 function startBannerArtworkCycle(host){
