@@ -679,11 +679,22 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #currentBanner[data-banner-view="compact"] .current-banner-copy .card-link{
   margin:0!important
 }
-/* Keep featured character/Light Cone details vertically centered between title and dates */
-#currentBanner[data-banner-view="compact"] .current-banner-copy > p{
+/* Center featured character/Light Cone details in the middle space, vertically and horizontally */
+#currentBanner[data-banner-view="compact"] .current-banner-copy > p.current-banner-roster{
+  display:flex!important;
+  flex:1 1 auto!important;
+  min-height:0!important;
+  align-items:center!important;
+  align-content:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  margin:0!important
+}
+#currentBanner[data-banner-view="compact"] .current-banner-copy > p:not(.current-banner-roster){
   flex:1 1 auto!important;
   min-height:0!important;
   align-content:center!important;
+  text-align:center!important;
   margin:0!important
 }
 #currentBanner[data-banner-view="compact"] .current-banner-copy .dates{
