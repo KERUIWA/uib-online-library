@@ -667,6 +667,24 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
   bottom:58px!important;
   z-index:4!important
 }
+/* Use one consistent vertical rhythm between every compact-card content block */
+#currentBanner[data-banner-view="compact"] .current-banner-copy{
+  gap:10px!important
+}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .banner-labels,
+#currentBanner[data-banner-view="compact"] .current-banner-copy h3,
+#currentBanner[data-banner-view="compact"] .current-banner-copy p.current-banner-roster,
+#currentBanner[data-banner-view="compact"] .current-banner-copy .dates,
+#currentBanner[data-banner-view="compact"] .current-banner-copy .banner-countdown,
+#currentBanner[data-banner-view="compact"] .current-banner-copy .card-link{
+  margin:0!important
+}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .dates{
+  margin-top:auto!important
+}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .banner-countdown{
+  margin-top:0!important
+}
 /* Restore featured character and Light Cone labels in compact cards at every viewport width */
 #currentBanner[data-banner-view="compact"] .current-banner-grid .current-banner-copy > p.current-banner-roster{display:flex!important;visibility:visible!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;overflow:visible!important;flex-wrap:wrap!important;gap:4px!important}
 </style></head><body>
