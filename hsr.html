@@ -679,8 +679,15 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #currentBanner[data-banner-view="compact"] .current-banner-copy .card-link{
   margin:0!important
 }
+/* Keep featured character/Light Cone details vertically centered between title and dates */
+#currentBanner[data-banner-view="compact"] .current-banner-copy > p{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  align-content:center!important;
+  margin:0!important
+}
 #currentBanner[data-banner-view="compact"] .current-banner-copy .dates{
-  margin-top:auto!important
+  margin-top:0!important
 }
 #currentBanner[data-banner-view="compact"] .current-banner-copy .banner-countdown{
   margin-top:-6px!important
