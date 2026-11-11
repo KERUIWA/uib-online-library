@@ -568,15 +568,15 @@ function bannerCardMarkup(x,label,map){
   const slideData=encodeURIComponent(JSON.stringify(slides));
   imageMarkup='<div class="current-banner-art current-banner-cycle" data-slide-index="0" data-cycle-slides="'+esc(slideData)+'">'+(first.src?'<img src="'+esc(first.src)+'" alt="'+esc(first.name)+' character artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / '+slides.length+'</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
  }
- const title=isLightCone?(x.name||"Light Cone Event Warp"):"Featured Warp Lineup";
+ const title=isLightCone?(x.name||"Light Cone Event Warp"):first.name;
  const featured=names.length?"Featured characters: "+names.join(", "):coneNames.length?"Featured Light Cones: "+coneNames.join(", "):(x.description||"Character Event Warp");
  const typeLabel=isLightCone?"Light Cone Event Warp":"Character Event Warp";
  const statusLabel=isLive?'<span class="tag live">LIVE</span>':isUpcoming?'<span class="tag">UPCOMING</span>':"";
  const countdownLabel=isUpcoming?"Starts in ":"Ends in ";
- return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><div class="banner-labels"><span class="tag">'+typeLabel+'</span>'+statusLabel+'</div><h3>'+esc(title)+'</h3><p>'+esc(featured)+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+countdownLabel+remaining(isUpcoming?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
+ return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><div class="banner-labels"><span class="tag">'+typeLabel+'</span>'+statusLabel+'</div><h3 class="current-banner-character-heading">'+esc(title)+'</h3><p>'+esc(featured)+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+countdownLabel+remaining(isUpcoming?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
 }
 function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
- const slide=slides[index],img=panel.querySelector("img"),placeholder=panel.querySelector(".current-banner-cycle-placeholder"),label=panel.querySelector(".current-banner-cycle-name"),position=panel.querySelector(".current-banner-cycle-position");
+ const slide=slides[index],img=panel.querySelector("img"),placeholder=panel.querySelector(".current-banner-cycle-placeholder"),label=panel.querySelector(".current-banner-cycle-name"),position=panel.querySelector(".current-banner-cycle-position"),heading=panel.closest(".current-banner-grid")?.querySelector(".current-banner-character-heading");
  panel.dataset.slideIndex=String(index);
  if(slide.src||fallbackSrc){
   if(img){img.src=slide.src||fallbackSrc;img.alt=slide.name+" character artwork";img.hidden=false;}
@@ -585,7 +585,9 @@ function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
   if(img)img.hidden=true;
   if(placeholder)placeholder.hidden=false;
  }
- if(position)position.textContent=(index+1)+" / "+slides.length;
+ if(label)label.textContent=slide.name;
+  if(heading)heading.textContent=slide.name;
+  if(position)position.textContent=(index+1)+" / "+slides.length;
 }
 function startBannerArtworkCycle(host){
  if(bannerCycleTimer){clearInterval(bannerCycleTimer);bannerCycleTimer=null;}
