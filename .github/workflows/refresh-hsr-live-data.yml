@@ -1,6 +1,12 @@
 name: Refresh HSR live data
 
 on:
+  push:
+    paths:
+      - "hsr.html"
+      - "assets/hsr/live-data.json"
+      - ".github/scripts/refresh_hsr_live_data.py"
+      - ".github/workflows/refresh-hsr-live-data.yml"
   schedule:
     - cron: "*/15 * * * *"
   workflow_dispatch:
