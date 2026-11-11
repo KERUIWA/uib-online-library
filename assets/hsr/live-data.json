@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-11T08:08:37Z",
+  "updatedAt": "2026-11-11T10:37:26Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-11T08:08:37Z",
-      "lastSuccess": "2026-11-11T08:08:37Z",
+      "checkedAt": "2026-11-11T10:37:26Z",
+      "lastSuccess": "2026-11-11T10:37:26Z",
       "error": null,
       "data": [
         {
@@ -1364,6 +1364,15 @@
           "type": "event"
         },
         {
+          "id": "47401368",
+          "title": "A Moment Among the Stars — \"All's Well That Ends Well\" | Honkai: Star Rail",
+          "description": "All the universe is a stage, And everyone merely players. They have their exits and their entrances. And one in their time plays many parts. Until the show ends, and then An anticipated announcement is made: The Elation never takes a curtain call!",
+          "created_at": 1794391206,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/11/0/ff7a734634c9446ddd60ff05031fff04_8513200727923580871.jpeg",
+          "url": "https://www.hoyolab.com/article/47401368",
+          "type": "info"
+        },
+        {
           "id": "47399652",
           "title": "Discord \"Account Linking Check-In Event\" Reminder",
           "description": "Dear Trailblazers, With the release of Version 4.7 \"Now, Lay Laughter to All Stars,\" the Discord \"Account Linking Check-In\" event has been updated with a brand-new batch of redemption codes! Link your Discord account and check in via the Astral Express bot on the official Discord server to claim 30 Stellar Jades!",
@@ -1487,15 +1496,6 @@
           "created_at": 1794024009,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/47a6a974c73e15b2284bb441dda70d0f_4005566568712660945.jpg",
           "url": "https://www.hoyolab.com/article/47351625",
-          "type": "info"
-        },
-        {
-          "id": "47342931",
-          "title": "Aha All-Stars | \"Dunelation\"",
-          "description": "✧ World's End Tavern FUN-tastic Watch Party ✧ [Trending] Sparxie × Trailblazer × Aeon ★ Aha [Even] Comedy | Adventure | Drama [Before] Annual HAMAX Blockbuster [Release] Exclusive Honkai: Star Rail Release on 11/11",
-          "created_at": 1793959207,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/b41258ded411f8d8eaba79d3a0682fe3_1283279401499872592.jpg",
-          "url": "https://www.hoyolab.com/article/47342931",
           "type": "info"
         }
       ]
