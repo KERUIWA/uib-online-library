@@ -33,6 +33,14 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
 @media(max-width:480px){.spotlight-feature.character{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;padding:9px;min-height:220px}.spotlight-feature.character img{min-height:220px}.spotlight-copy{padding:15px 8px}.spotlight-copy h3{font-size:20px}.spotlight-cones{grid-template-columns:1fr}.cone-tile{grid-template-columns:105px 1fr}.cone-tile img{height:125px}}
 
 
+/* Mobile modal scrolling: keep the full popup reachable on short screens. */
+@media(max-width:760px){
+.spotlight-modal{align-items:flex-start;justify-content:center;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:14px 12px}
+.spotlight-modal-card{width:100%;max-height:calc(100vh - 28px);max-height:calc(100dvh - 28px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;margin:auto 0}
+.spotlight-modal-image{max-height:32vh;max-height:32dvh}
+}
+
+
 /* Motion system: subtle entrances, hover lift and soft ambient light */
 @keyframes pageRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes softFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
