@@ -397,6 +397,46 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
   }
 }
 
+
+/* WARP CAROUSEL LABEL FIX: keep character name at the top, page counter at the bottom */
+#currentBanner .current-banner-cycle-name{
+  top:12px!important;
+  bottom:auto!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  width:max-content!important;
+  max-width:calc(100% - 112px)!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+  text-align:center!important;
+  line-height:1.25!important;
+  z-index:4!important;
+}
+#currentBanner .current-banner-cycle-controls{
+  left:12px!important;
+  right:12px!important;
+  bottom:10px!important;
+  z-index:5!important;
+}
+#currentBanner .current-banner-cycle-position{
+  grid-column:2!important;
+  grid-row:1!important;
+  justify-self:center!important;
+  align-self:center!important;
+  white-space:nowrap!important;
+  position:relative!important;
+  z-index:6!important;
+}
+@media(max-width:650px){
+  #currentBanner .current-banner-cycle-name{
+    top:10px!important;
+    max-width:calc(100% - 96px)!important;
+    padding:6px 10px!important;
+    font-size:10px!important;
+    letter-spacing:.06em!important;
+  }
+}
+
 </style></head><body>
 <header>
 <div class="wrap">
