@@ -806,10 +806,13 @@ function startBannerArtworkCycle(host){
 }
 
 /* Switch between full-size banner cards and a compact card grid. */
+const BANNER_VIEW_KEY="hsr-hub-banner-view";
+const PAGE_SCROLL_KEY="hsr-hub-scroll:"+location.pathname;
 function setBannerView(view){
  const host=$("currentBanner");
  if(!host||!["large","compact"].includes(view))return;
  host.dataset.bannerView=view;
+ try{localStorage.setItem(BANNER_VIEW_KEY,view)}catch(e){}
  document.querySelectorAll("[data-banner-view-button]").forEach(button=>{
   const selected=button.dataset.bannerViewButton===view;
   button.classList.toggle("active",selected);
@@ -819,6 +822,25 @@ function setBannerView(view){
 document.querySelectorAll("[data-banner-view-button]").forEach(button=>{
  button.addEventListener("click",()=>setBannerView(button.dataset.bannerViewButton));
 });
+let savedBannerView="large";
+try{savedBannerView=localStorage.getItem(BANNER_VIEW_KEY)||"large"}catch(e){}
+setBannerView(savedBannerView);
+let scrollSaveQueued=false;
+function savePageScroll(){
+ try{localStorage.setItem(PAGE_SCROLL_KEY,String(Math.max(0,window.scrollY||window.pageYOffset||0)))}catch(e){}
+}
+window.addEventListener("scroll",()=>{
+ if(scrollSaveQueued)return;
+ scrollSaveQueued=true;
+ requestAnimationFrame(()=>{savePageScroll();scrollSaveQueued=false});
+},{passive:true});
+window.addEventListener("pagehide",savePageScroll);
+function restorePageScroll(){
+ let saved=0;
+ try{saved=Number(localStorage.getItem(PAGE_SCROLL_KEY)||0)}catch(e){}
+ if(Number.isFinite(saved)&&saved>0)window.scrollTo(0,saved);
+}
+window.history.scrollRestoration="manual";
 
 async function renderCurrentBanner(){
  const host=$("currentBanner"),status=$("currentBannerStatus"),now=Date.now();
@@ -955,5 +977,5 @@ const spotlightModal=$("spotlightModal");function openSpotlightDetails(card){$("
 $("enableNotifications").addEventListener("click",async()=>{const s=$("notificationStatus");if(!window.isSecureContext){s.textContent="Notifications need the secure GitHub Pages HTTPS address.";return;}if(!("Notification"in window)){s.textContent="This browser does not support desktop notifications.";return;}if(Notification.permission==="denied"){s.textContent="Notifications are blocked in browser site settings. Allow them for this site, then try again.";return;}const p=await Notification.requestPermission();if(p==="granted"){s.textContent="✓ Reminders enabled. Keep this page open for event and announcement alerts.";new Notification("Trailblazer reminders enabled",{body:"We'll alert you about upcoming event starts, event endings, and new announcements while this page is open."});checkEventReminders();}else{s.textContent="Permission was not granted. You can enable it in browser site settings.";}}); 
 $("refreshBtn").addEventListener("click",refreshAll);$("themeToggle").addEventListener("click",()=>{const d=document.documentElement.dataset.theme!=="dark";document.documentElement.dataset.theme=d?"dark":"light";try{localStorage.setItem("uib-library-theme",d?"dark":"light")}catch(e){}$("themeToggle").textContent=d?"☀ Light mode":"☾ Dark mode"});$("themeToggle").textContent=document.documentElement.dataset.theme==="dark"?"☀ Light mode":"☾ Dark mode";
 if("Notification"in window&&Notification.permission==="granted")$("notificationStatus").textContent="✓ Browser reminders are enabled. Keep this page open to receive alerts.";
-refreshAll();setInterval(refreshAll,15*60*1000);setInterval(()=>{if(versionData)$("versionCountdown").textContent=remaining(versionData.endTime);updateBannerCountdowns();checkEventReminders()},1000);
+refreshAll().then(()=>{restorePageScroll();setTimeout(restorePageScroll,350);setTimeout(restorePageScroll,1100)});setInterval(refreshAll,15*60*1000);setInterval(()=>{if(versionData)$("versionCountdown").textContent=remaining(versionData.endTime);updateBannerCountdowns();checkEventReminders()},1000);
 </script></body></html>
