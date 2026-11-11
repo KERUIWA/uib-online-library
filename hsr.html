@@ -143,7 +143,7 @@ async function loadDripArtwork(){
  if(dripArtworkMap)return dripArtworkMap;
  if(dripArtworkPromise)return dripArtworkPromise;
  dripArtworkPromise=(async()=>{
-  const api="https://honkai-star-rail.fandom.com/api.php?action=query&generator=categorymembers&gcmtitle=Category:Character_Introductions&gcmtype=file&gcmlimit=500&prop=imageinfo&iiprop=url&iiurlwidth=1400&format=json&origin=*";
+  const api="https://honkai-star-rail.fandom.com/api.php?action=query&generator=categorymembers&gcmtitle=Category:Drip_Marketing&gcmtype=file&gcmlimit=500&prop=imageinfo&iiprop=url&iiurlwidth=1400&format=json&origin=*";
   const response=await fetch(api,{cache:"force-cache"});
   if(!response.ok)throw new Error("Drip artwork request failed");
   const data=await response.json(),pages=Object.values(data.query?.pages||{}),map={};
@@ -157,7 +157,7 @@ async function loadDripArtwork(){
  })();
  try{return await dripArtworkPromise}catch(e){dripArtworkPromise=null;console.warn("Drip Marketing artwork unavailable:",e);return{}}
 }
-function bannerArtwork(x){const names=[x.name,...(Array.isArray(x.characters)?x.characters.map(y=>typeof y==="string"?y:y.name):[])].filter(Boolean).join(" ");if(/\\baha\\b/i.test(names))return "https://i.gachabase.net/mZQZSbIAQyJXbDElL_RE2AwSR7C4X0pOBxgQ3ybCNnA/q%3A50/f%3Awebp/plain/hsr/assets/f8b5630e85022ab8b2761e4e3f614b42.png";return x.image_url||x.cover||x.image||x.banner||x.poster||(Array.isArray(x.characters)&&x.characters[0]&&x.characters[0].icon)||"";}
+function bannerArtwork(x){const names=[x.name,x.description,x.kind,...(Array.isArray(x.characters)?x.characters.map(y=>typeof y==="string"?y:y.name):[])].filter(Boolean).join(" ");if(/aha/i.test(names))return "https://i.gachabase.net/mZQZSbIAQyJXbDElL_RE2AwSR7C4X0pOBxgQ3ybCNnA/q%3A50/f%3Awebp/plain/hsr/assets/f8b5630e85022ab8b2761e4e3f614b42.png";return x.image_url||x.cover||x.image||x.banner||x.poster||(Array.isArray(x.characters)&&x.characters[0]&&x.characters[0].icon)||"";}
 function bannerCharacters(x){
  const raw=Array.isArray(x.characters)?x.characters:[];
  return raw.map(y=>typeof y==="string"?y:(y.full_name||y.name||"")).filter(Boolean);
@@ -169,10 +169,11 @@ function bannerImageForCharacter(name,map){
 }
 const BANNER_ART_CYCLE=["Silver Wolf LV.999","Sparxie","Yao Guang","Asta","Lynx","Yukong"];
 function bannerCardMarkup(x,label,map){
- const names=bannerCharacters(x),slides=BANNER_ART_CYCLE.map(name=>({name,src:bannerImageForCharacter(name,map)}));
- const first=slides[0],firstSrc=first.src||x.image||"";
- const art=firstSrc?'<img src="'+esc(firstSrc)+'" alt="'+esc(first.name)+' character artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>';
- const imageMarkup='<div class="current-banner-art current-banner-cycle" data-slide-index="0">'+art+'<span class="current-banner-cycle-name">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / 6</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
+ const names=bannerCharacters(x),isAha=/aha/i.test([x.name,x.description,x.kind].filter(Boolean).join(" "));
+ const slides=BANNER_ART_CYCLE.map(name=>({name,src:bannerImageForCharacter(name,map)}));
+ const first=slides[0],firstSrc=first.src;
+ const art=isAha?bannerArtwork(x):firstSrc;
+ const imageMarkup=isAha?'<div class="current-banner-art"><img src="'+esc(art)+'" alt="Aha banner artwork" loading="eager"></div>':'<div class="current-banner-art current-banner-cycle" data-slide-index="0">'+(firstSrc?'<img src="'+esc(firstSrc)+'" alt="'+esc(first.name)+' drip marketing artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / 6</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
  const title=x.name||names.join(" / ")||"Character Event Warp";
  return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><span class="tag">'+label+'</span><h3>'+esc(title)+'</h3><p>'+esc(names.length?"Featured character"+(names.length>1?"s":"")+": "+names.join(", "):(x.description||"Character Event Warp"))+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+(label==="Upcoming"?"Starts in ":"Ends in ")+remaining(label==="Upcoming"?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
 }
