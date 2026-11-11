@@ -455,6 +455,37 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #currentBanner .current-banner-phase{color:#ffe2a0;border-color:#d6a94e;background:linear-gradient(135deg,#493416,#241b13);letter-spacing:.07em}
 #currentBanner .current-banner-character-chip{display:inline-flex;align-items:center;padding:5px 10px;margin:3px 5px 3px 0;border:1px solid;border-radius:999px;font-size:12px;font-weight:850;white-space:nowrap}
 #currentBanner .current-banner-copy p.current-banner-roster{display:flex;flex-wrap:wrap;align-items:center;gap:2px;margin-top:2px}
+
+/* Banner card size switch */
+.warp-view-tools{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.warp-view-toggle{display:inline-flex;align-items:center;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--surface2)}
+.warp-view-toggle button{border:0;border-radius:999px;padding:7px 11px;background:transparent;color:var(--muted);font:inherit;font-size:11px;font-weight:850;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s,box-shadow .2s}
+.warp-view-toggle button.active{background:var(--blue);color:#fff;box-shadow:0 3px 10px #0002}
+#currentBanner[data-banner-view="compact"] .current-banner-stack{gap:24px}
+#currentBanner[data-banner-view="compact"] .current-banner-group{gap:10px}
+#currentBanner[data-banner-view="compact"] .current-banner-group:has(.current-banner-grid){display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));align-items:stretch;gap:14px}
+#currentBanner[data-banner-view="compact"] .current-banner-group-title{grid-column:1/-1;margin-bottom:1px}
+#currentBanner[data-banner-view="compact"] .current-banner-grid{grid-template-columns:1fr;grid-template-rows:155px auto;min-height:0;align-content:start;border-radius:15px}
+#currentBanner[data-banner-view="compact"] .current-banner-art{height:155px;min-height:155px}
+#currentBanner[data-banner-view="compact"] .current-banner-art img{height:155px;min-height:155px;max-height:155px}
+#currentBanner[data-banner-view="compact"] .current-banner-character-art img{height:155px;min-height:155px}
+#currentBanner[data-banner-view="compact"] .current-banner-cycle{padding:6px 12px 30px}
+#currentBanner[data-banner-view="compact"] .current-banner-cycle img{height:155px;min-height:155px;max-height:155px}
+#currentBanner[data-banner-view="compact"] .current-banner-copy{padding:15px;align-self:start}
+#currentBanner[data-banner-view="compact"] .current-banner-copy h3{font-size:18px;margin:7px 0}
+#currentBanner[data-banner-view="compact"] .current-banner-copy p{font-size:12px}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .dates{font-size:11px;margin-top:8px}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .banner-countdown{font-size:12px;margin-top:7px}
+#currentBanner[data-banner-view="compact"] .current-banner-grid>.current-banner-status{top:10px;right:10px;padding:6px 9px}
+@media(max-width:650px){
+ .warp-view-tools{align-items:flex-end;flex-direction:column}
+ #currentBanner[data-banner-view="compact"] .current-banner-group:has(.current-banner-grid){grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+}
+@media(max-width:430px){
+ .warp-view-tools{align-items:flex-start}
+ .warp-view-toggle button{padding:7px 9px;font-size:10px}
+ #currentBanner[data-banner-view="compact"] .current-banner-group:has(.current-banner-grid){grid-template-columns:1fr}
+}
 </style></head><body>
 <header>
 <div class="wrap">
@@ -481,7 +512,7 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 </div>
 </section>
 <div class="spotlight-modal" id="spotlightModal" aria-hidden="true"><div class="spotlight-modal-card" role="dialog" aria-modal="true" aria-labelledby="spotlightModalTitle"><button class="spotlight-modal-close" id="spotlightModalClose" aria-label="Close">×</button><div class="mini" id="spotlightModalType">Version spotlight</div><h3 id="spotlightModalTitle"></h3><img class="spotlight-modal-image" id="spotlightModalImage" alt="" hidden><p id="spotlightModalDescription"></p></div></div>
-<section class="section" id="warpSection"><div class="section-head"><div><span class="section-eyebrow">02 / LIMITED WARP TERMINAL</span><h2>Current banner</h2><p>Featured Character Event Warp, with a little farewell when its run is over</p></div><span class="status" id="currentBannerStatus">Waiting for live data</span></div><div id="currentBanner"><div class="empty">Loading current banner…</div></div></section>
+<section class="section" id="warpSection"><div class="section-head"><div><span class="section-eyebrow">02 / LIMITED WARP TERMINAL</span><h2>Current banner</h2><p>Featured Character Event Warp, with a little farewell when its run is over</p></div><div class="warp-view-tools"><div class="warp-view-toggle" role="group" aria-label="Banner card size"><button type="button" class="active" data-banner-view-button="large" aria-pressed="true">Large cards</button><button type="button" data-banner-view-button="compact" aria-pressed="false">Compact cards</button></div><span class="status" id="currentBannerStatus">Waiting for live data</span></div></div><div id="currentBanner" data-banner-view="large"><div class="empty">Loading current banner…</div></div></section>
 <section class="section" id="eventsSection"><div class="section-head"><div><span class="section-eyebrow">03 / TRAILBLAZE ACTIVITIES</span><h2>Events & banners</h2><p>Current and upcoming activities, automatically refreshed</p></div><span class="status" id="eventCount"></span></div><div class="cards" id="eventCards"><div class="empty">Loading event calendar…</div></div></section>
 <section class="section" id="newsSection"><div class="section-head"><div><span class="section-eyebrow">04 / INTELLIGENCE NETWORK</span><h2>Latest announcements</h2><p>Notices, event announcements, and game info</p></div><a class="btn" href="https://www.hoyolab.com/accountcenter/postList?id=172534910" target="_blank" rel="noopener">Official HoYoLAB ↗</a></div><div class="news-list" id="newsList"><div class="empty">Loading announcements…</div></div></section>
 <section class="section"><div class="section-head"><div><h2>Trailblazer reminders</h2><p>Browser alerts for event starts and closing dates</p></div></div><div class="reminder-panel"><div><h3>🔔 Don't let a limited event slip away</h3><p>Enable notifications to receive an alert when an event is due to start or end within 24 hours. The page must remain open for these browser reminders to run.</p><p class="note" id="notificationStatus">Notifications are currently off. You can still see event dates here.</p></div><button class="btn primary" id="enableNotifications">Enable reminders</button></div></section>
@@ -639,6 +670,22 @@ function startBannerArtworkCycle(host){
   });
  },4500);
 }
+
+/* Switch between full-size banner cards and a compact card grid. */
+function setBannerView(view){
+ const host=$("currentBanner");
+ if(!host||!["large","compact"].includes(view))return;
+ host.dataset.bannerView=view;
+ document.querySelectorAll("[data-banner-view-button]").forEach(button=>{
+  const selected=button.dataset.bannerViewButton===view;
+  button.classList.toggle("active",selected);
+  button.setAttribute("aria-pressed",String(selected));
+ });
+}
+document.querySelectorAll("[data-banner-view-button]").forEach(button=>{
+ button.addEventListener("click",()=>setBannerView(button.dataset.bannerViewButton));
+});
+
 async function renderCurrentBanner(){
  const host=$("currentBanner"),status=$("currentBannerStatus"),now=Date.now();
  const warps=events.filter(x=>x.isWarp);
