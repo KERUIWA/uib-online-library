@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": null,
+  "feeds": {
+    "calendar": {
+      "status": "error",
+      "source": "https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us",
+      "checkedAt": null,
+      "lastSuccess": null,
+      "error": "Awaiting first scheduled refresh",
+      "data": null
+    },
+    "activity": {
+      "status": "error",
+      "source": "https://starrailassistant.top/api/v1/activity/sr-en-US.json",
+      "checkedAt": null,
+      "lastSuccess": null,
+      "error": "Awaiting first scheduled refresh",
+      "data": null
+    },
+    "news": {
+      "status": "error",
+      "source": "https://api.ennead.cc/mihoyo/starrail/news/",
+      "checkedAt": null,
+      "lastSuccess": null,
+      "error": "Awaiting first scheduled refresh",
+      "data": null
+    }
+  }
+}
