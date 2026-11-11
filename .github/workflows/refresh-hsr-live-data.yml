@@ -31,6 +31,24 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Set up Node for inline JavaScript validation
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate HSR page JavaScript syntax
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          html = Path("hsr.html").read_text(encoding="utf-8")
+          scripts = re.findall(r"<script>([\\s\\S]*?)</script>", html)
+          if not scripts:
+              raise SystemExit("No inline scripts found in hsr.html")
+          Path("/tmp/hsr-inline.js").write_text(scripts[-1], encoding="utf-8")
+          PY
+          node --check /tmp/hsr-inline.js
+
       - name: Fetch and validate independent HSR feeds
         run: python .github/scripts/refresh_hsr_live_data.py
 
