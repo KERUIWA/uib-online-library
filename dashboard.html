@@ -46,6 +46,27 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 #themeToggle{box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;width:124px!important;min-width:124px!important;height:38px!important;min-height:38px!important;padding:0 12px!important;border:1px solid #3157d5!important;border-radius:999px!important;background:#3157d5!important;color:#fff!important;font-family:Inter,Segoe UI,Arial,sans-serif!important;font-size:12px!important;font-weight:700!important;line-height:1.2!important;white-space:nowrap!important;text-decoration:none!important;cursor:pointer!important;box-shadow:0 2px 7px #17203318!important;}
 #themeToggle:hover{background:#2548bd!important;border-color:#2548bd!important;transform:translateY(-1px)!important;}
 #themeToggle:focus-visible{outline:3px solid #3157d559!important;outline-offset:3px!important;}
+
+/* Dedicated Astral Express feature card, distinct from academic shortcuts. */
+.quick-hsr{grid-column:1/-1;position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) 170px;align-items:center;gap:22px;min-height:190px;padding:28px 34px;overflow:hidden;border:1px solid #d6b77b;background:radial-gradient(ellipse at 82% 48%,#a879c955,transparent 35%),linear-gradient(115deg,#11172e 0%,#25264e 48%,#55365f 100%);color:#fff;box-shadow:0 18px 42px #17132e30}
+.quick-hsr:before,.quick-hsr:after{content:"";position:absolute;z-index:-1;pointer-events:none;border:1px solid #f4d9a755;border-radius:50%}
+.quick-hsr:before{width:290px;height:290px;right:95px;top:-145px;box-shadow:0 0 0 24px #ffffff08,0 0 0 58px #ffffff06}
+.quick-hsr:after{width:180px;height:180px;right:150px;bottom:-125px;border-color:#ffffff28}
+.quick-hsr:hover{border-color:#f5d99c;box-shadow:0 23px 48px #17132e45;filter:brightness(1.08)}
+.quick-hsr .hsr-copy{position:relative;z-index:1;min-width:0}
+.quick-hsr .hsr-kicker{display:inline-flex;align-items:center;gap:8px;color:#f4d69b;font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}
+.quick-hsr .hsr-kicker:before{content:"";width:22px;height:1px;background:#f4d69b}
+.quick-hsr strong{display:block;margin:9px 0 5px;color:#fff;font-family:Georgia,serif;font-size:clamp(24px,3vw,34px);line-height:1.12;letter-spacing:.01em}
+.quick-hsr small{display:block;max-width:490px;color:#e2dced;font-size:12px;line-height:1.6}
+.quick-hsr .hsr-enter{display:inline-flex;align-items:center;gap:9px;margin-top:18px;color:#f7dba7;font-size:10px;font-weight:950;letter-spacing:.15em}
+.quick-hsr .hsr-enter span{display:grid;place-items:center;width:25px;height:25px;border:1px solid #f7dba788;border-radius:50%;font-size:15px;transition:transform .2s}
+.quick-hsr:hover .hsr-enter span{transform:translateX(4px)}
+.quick-hsr .hsr-emblem{position:relative;z-index:1;display:grid;place-items:center;width:142px;height:142px;justify-self:center;border:1px solid #f4d69b88;border-radius:50%;background:radial-gradient(circle,#f4d69b22 0 36%,#ffffff0b 37% 68%,transparent 69%);box-shadow:0 0 0 10px #ffffff08,inset 0 0 28px #f4d69b18}
+.quick-hsr .hsr-emblem:before,.quick-hsr .hsr-emblem:after{content:"✦";position:absolute;color:#f7dba7}
+.quick-hsr .hsr-emblem:before{top:8px;right:14px;font-size:15px}
+.quick-hsr .hsr-emblem:after{bottom:13px;left:13px;font-size:10px}
+.quick-hsr .hsr-emblem .ico{font-size:66px;line-height:1;filter:drop-shadow(0 8px 12px #0008)}
+@media(max-width:560px){.quick-hsr{grid-template-columns:minmax(0,1fr) 86px;gap:8px;min-height:164px;padding:21px 18px}.quick-hsr .hsr-emblem{width:82px;height:82px;box-shadow:0 0 0 6px #ffffff08}.quick-hsr .hsr-emblem .ico{font-size:39px}.quick-hsr:before{right:-105px}.quick-hsr:after{right:-55px}.quick-hsr strong{font-size:23px}.quick-hsr small{font-size:11px}.quick-hsr .hsr-enter{margin-top:13px;font-size:9px}}
 </style></head><body>
 <header><div class="wrap"><div class="top"><div class="eyebrow">Universitas Internasional Batam · Class of 2026</div><div class="header-actions"><a href="index.html" aria-label="Course library">📚 <span>Library</span></a><button class="theme" id="themeToggle" type="button" aria-label="Toggle colour theme">☾ <span>Dark mode</span></button></div></div><h1>Academic Dashboard</h1><div class="sub" id="greeting">Your academic command centre. Everything important, in one place.</div></div></header>
 <main>
@@ -64,7 +85,7 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 <section class="quick-grid">
 <a class="quick" href="index.html"><span class="ico">📚</span><strong>Course Library</strong><small>Browse materials by semester and week</small></a>
 <a class="quick" href="assignments.html"><span class="ico">📝</span><strong>Assignment Tracker</strong><small>Add, update and complete tasks</small></a>
-<a class="quick" href="tracker.html"><span class="ico">📊</span><strong>IPS & IPK Tracker</strong><small>Record grades and monitor GPA</small></a><a class="quick" href="hsr.html"><span class="ico">🚄</span><strong>Honkai: Star Rail</strong><small>Version news, events, and reminders</small></a>
+<a class="quick" href="tracker.html"><span class="ico">📊</span><strong>IPS & IPK Tracker</strong><small>Record grades and monitor GPA</small></a><a class="quick quick-hsr" href="hsr.html" aria-label="Open Honkai: Star Rail Hub"><span class="hsr-copy"><span class="hsr-kicker">Special interest · Astral Express</span><strong>Honkai: Star Rail</strong><small>Your dedicated Trailblazer hub for version spotlights, live warps, event artwork, and the latest announcements.</small><span class="hsr-enter">BOARD THE EXPRESS <span>↗</span></span></span><span class="hsr-emblem" aria-hidden="true"><span class="ico">🚄</span></span></a>
 </section>
 <p class="footnote">Dashboard data is personal to this browser, except assignments, which are loaded from the shared class list. Grade records remain private on this device.</p>
 
