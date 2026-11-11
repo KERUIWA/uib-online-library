@@ -825,11 +825,20 @@ document.querySelectorAll("[data-banner-view-button]").forEach(button=>{
 let savedBannerView="large";
 try{savedBannerView=localStorage.getItem(BANNER_VIEW_KEY)||"large"}catch(e){}
 setBannerView(savedBannerView);
-let scrollSaveQueued=false;
+let scrollSaveQueued=false,scrollRestoreUntil=0,scrollRestoreTarget=0,scrollRestoreFrame=0;
 function savePageScroll(){
+ if(Date.now()<scrollRestoreUntil)return;
  try{localStorage.setItem(PAGE_SCROLL_KEY,String(Math.max(0,window.scrollY||window.pageYOffset||0)))}catch(e){}
 }
-window.addEventListener("scroll",()=>{
+function applySavedScroll(){
+ if(Date.now()>=scrollRestoreUntil)return;
+ window.scrollTo(0,scrollRestoreTarget);
+}
+window.addEventListener("scroll",event=>{
+ if(event.isTrusted&&Date.now()<scrollRestoreUntil){
+  scrollRestoreUntil=0;
+  if(scrollRestoreFrame)cancelAnimationFrame(scrollRestoreFrame);
+ }
  if(scrollSaveQueued)return;
  scrollSaveQueued=true;
  requestAnimationFrame(()=>{savePageScroll();scrollSaveQueued=false});
@@ -838,7 +847,25 @@ window.addEventListener("pagehide",savePageScroll);
 function restorePageScroll(){
  let saved=0;
  try{saved=Number(localStorage.getItem(PAGE_SCROLL_KEY)||0)}catch(e){}
- if(Number.isFinite(saved)&&saved>0)window.scrollTo(0,saved);
+ if(!Number.isFinite(saved)||saved<=0)return;
+ scrollRestoreTarget=saved;
+ scrollRestoreUntil=Date.now()+6500;
+ applySavedScroll();
+ const keepPosition=()=>{
+  if(Date.now()>=scrollRestoreUntil){if(scrollRestoreFrame)cancelAnimationFrame(scrollRestoreFrame);scrollRestoreFrame=0;return}
+  applySavedScroll();
+  scrollRestoreFrame=requestAnimationFrame(keepPosition);
+ };
+ if(scrollRestoreFrame)cancelAnimationFrame(scrollRestoreFrame);
+ scrollRestoreFrame=requestAnimationFrame(keepPosition);
+}
+window.addEventListener("load",()=>{if(scrollRestoreUntil)applySavedScroll()});
+window.addEventListener("resize",()=>{if(scrollRestoreUntil)applySavedScroll()},{passive:true});
+document.addEventListener("load",event=>{if(event.target&&event.target.tagName==="IMG"&&scrollRestoreUntil)applySavedScroll()},true);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(scrollRestoreUntil)applySavedScroll()});
+if("ResizeObserver"in window){
+ const scrollLayoutObserver=new ResizeObserver(()=>{if(scrollRestoreUntil)applySavedScroll()});
+ scrollLayoutObserver.observe(document.documentElement);
 }
 window.history.scrollRestoration="manual";
 
@@ -977,5 +1004,5 @@ const spotlightModal=$("spotlightModal");function openSpotlightDetails(card){$("
 $("enableNotifications").addEventListener("click",async()=>{const s=$("notificationStatus");if(!window.isSecureContext){s.textContent="Notifications need the secure GitHub Pages HTTPS address.";return;}if(!("Notification"in window)){s.textContent="This browser does not support desktop notifications.";return;}if(Notification.permission==="denied"){s.textContent="Notifications are blocked in browser site settings. Allow them for this site, then try again.";return;}const p=await Notification.requestPermission();if(p==="granted"){s.textContent="✓ Reminders enabled. Keep this page open for event and announcement alerts.";new Notification("Trailblazer reminders enabled",{body:"We'll alert you about upcoming event starts, event endings, and new announcements while this page is open."});checkEventReminders();}else{s.textContent="Permission was not granted. You can enable it in browser site settings.";}}); 
 $("refreshBtn").addEventListener("click",refreshAll);$("themeToggle").addEventListener("click",()=>{const d=document.documentElement.dataset.theme!=="dark";document.documentElement.dataset.theme=d?"dark":"light";try{localStorage.setItem("uib-library-theme",d?"dark":"light")}catch(e){}$("themeToggle").textContent=d?"☀ Light mode":"☾ Dark mode"});$("themeToggle").textContent=document.documentElement.dataset.theme==="dark"?"☀ Light mode":"☾ Dark mode";
 if("Notification"in window&&Notification.permission==="granted")$("notificationStatus").textContent="✓ Browser reminders are enabled. Keep this page open to receive alerts.";
-refreshAll().then(()=>{restorePageScroll();setTimeout(restorePageScroll,350);setTimeout(restorePageScroll,1100)});setInterval(refreshAll,15*60*1000);setInterval(()=>{if(versionData)$("versionCountdown").textContent=remaining(versionData.endTime);updateBannerCountdowns();checkEventReminders()},1000);
+refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil)applySavedScroll()},250);setTimeout(()=>{if(scrollRestoreUntil)applySavedScroll()},900)});setInterval(refreshAll,15*60*1000);setInterval(()=>{if(versionData)$("versionCountdown").textContent=remaining(versionData.endTime);updateBannerCountdowns();checkEventReminders()},1000);
 </script></body></html>
