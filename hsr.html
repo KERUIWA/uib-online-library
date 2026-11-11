@@ -440,6 +440,48 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
   }
 }
 
+
+/* CHARACTER CYCLE TITLE: category eyebrow above a clear, stable title */
+#currentBanner .current-banner-cycle-name{
+  top:12px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  gap:3px!important;
+  width:max-content!important;
+  max-width:calc(100% - 112px)!important;
+  padding:8px 16px!important;
+  border:1px solid #ffffff55!important;
+  border-radius:13px!important;
+  background:linear-gradient(135deg,#17132ee8,#49315fdc)!important;
+  box-shadow:0 5px 18px #0005,inset 0 1px #ffffff30!important;
+  white-space:normal!important;
+  text-align:center!important;
+}
+#currentBanner .current-banner-cycle-eyebrow{
+  color:#f3d18f!important;
+  font-size:9px!important;
+  font-weight:950!important;
+  letter-spacing:.2em!important;
+  line-height:1.1!important;
+}
+#currentBanner .current-banner-cycle-title{
+  color:#fff!important;
+  font-size:13px!important;
+  font-weight:950!important;
+  letter-spacing:.04em!important;
+  line-height:1.2!important;
+}
+@media(max-width:650px){
+  #currentBanner .current-banner-cycle-name{
+    top:10px!important;
+    max-width:calc(100% - 96px)!important;
+    padding:7px 12px!important;
+  }
+  #currentBanner .current-banner-cycle-eyebrow{font-size:8px!important}
+  #currentBanner .current-banner-cycle-title{font-size:11px!important}
+}
+
 </style></head><body>
 <header>
 <div class="wrap">
@@ -565,7 +607,7 @@ function bannerCardMarkup(x,label,map){
   imageMarkup='<div class="current-banner-art"><img src="'+esc(coneArt)+'" alt="'+esc(coneNames[0]||"Featured Light Cone")+'" loading="eager" style="object-fit:contain;padding:22px"></div>';
  }else{
   const slideData=encodeURIComponent(JSON.stringify(slides));
-  imageMarkup='<div class="current-banner-art current-banner-cycle" data-slide-index="0" data-cycle-slides="'+esc(slideData)+'">'+(first.src?'<img src="'+esc(first.src)+'" alt="'+esc(first.name)+' character artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / '+slides.length+'</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
+  imageMarkup='<div class="current-banner-art current-banner-cycle" data-slide-index="0" data-cycle-slides="'+esc(slideData)+'">'+(first.src?'<img src="'+esc(first.src)+'" alt="'+esc(first.name)+' character artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name"><span class="current-banner-cycle-eyebrow">AEON ★</span><span class="current-banner-cycle-title">Featured Characters</span></span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / '+slides.length+'</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
  }
  const title=isLightCone?(x.name||"Light Cone Event Warp"):(x.name||names.join(" / ")||"Character Event Warp");
  const featured=names.length?"Featured characters: "+names.join(", "):coneNames.length?"Featured Light Cones: "+coneNames.join(", "):(x.description||"Character Event Warp");
@@ -584,7 +626,6 @@ function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
   if(img)img.hidden=true;
   if(placeholder)placeholder.hidden=false;
  }
- if(label)label.textContent=slide.name;
  if(position)position.textContent=(index+1)+" / "+slides.length;
 }
 function startBannerArtworkCycle(host){
