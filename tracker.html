@@ -30,10 +30,11 @@ input,select,textarea{transition:border-color .2s,box-shadow .2s,background .2s}
 input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,var(--blue) 13%,transparent)}
 
 .header-nav{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.header-nav a{display:inline-flex;align-items:center;border:1px solid #ffffff55;background:#ffffff18;color:inherit;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:750;text-decoration:none}.header-nav button{border-radius:999px}\n
-/* Consistent theme toggle across every library page */
-#themeToggle{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:5px;min-width:112px;height:36px;padding:0 12px;border:1px solid #3157d5;border-radius:999px;background:#3157d5;color:#fff;font:700 12px/1.2 Inter,Segoe UI,Arial,sans-serif;white-space:nowrap;text-decoration:none;cursor:pointer;box-shadow:0 2px 7px #17203318;transition:background .2s,border-color .2s,transform .2s,filter .2s}
-#themeToggle:hover{background:#2548bd;border-color:#2548bd;transform:translateY(-1px);filter:brightness(1.04)}
-#themeToggle:focus-visible{outline:3px solid color-mix(in srgb,#3157d5 35%,transparent);outline-offset:3px}
+
+/* One shared appearance for the theme control on every page */
+#themeToggle{box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;width:124px!important;min-width:124px!important;height:38px!important;min-height:38px!important;padding:0 12px!important;border:1px solid #3157d5!important;border-radius:999px!important;background:#3157d5!important;color:#fff!important;font-family:Inter,Segoe UI,Arial,sans-serif!important;font-size:12px!important;font-weight:700!important;line-height:1.2!important;white-space:nowrap!important;text-decoration:none!important;cursor:pointer!important;box-shadow:0 2px 7px #17203318!important;}
+#themeToggle:hover{background:#2548bd!important;border-color:#2548bd!important;transform:translateY(-1px)!important;}
+#themeToggle:focus-visible{outline:3px solid #3157d559!important;outline-offset:3px!important;}
 </style></head><body>
 <header><div class="wrap"><div class="top"><div class="eyebrow">Universitas Internasional Batam · Class of 2026</div><nav class="header-nav"><a href="dashboard.html">🎓 Dashboard</a><a href="index.html">📚 Library</a><button class="theme" id="themeToggle" type="button">☾ Dark mode</button></nav></div><h1>IPS & IPK Tracker</h1><div class="sub">Track your semester grades and cumulative academic progress.</div></div></header>
 <main><section class="summary"><div class="metric"><span>Selected semester IPS</span><strong id="currentIps">0.00</strong><small id="currentSks">0 SKS recorded</small></div><div class="metric"><span>Cumulative IPK</span><strong id="overallIpk">0.00</strong><small id="overallSks">0 total SKS</small></div><div class="metric"><span>Semesters with grades</span><strong id="semesterCount">0 / 6</strong><small>Based on entered courses</small></div></section>
