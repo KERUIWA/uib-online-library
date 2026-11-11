@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-11T06:04:50Z",
+  "updatedAt": "2026-11-11T08:08:37Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-11T06:04:50Z",
-      "lastSuccess": "2026-11-11T06:04:50Z",
+      "checkedAt": "2026-11-11T08:08:37Z",
+      "lastSuccess": "2026-11-11T08:08:37Z",
       "error": null,
       "data": [
         {
@@ -1364,6 +1364,15 @@
           "type": "event"
         },
         {
+          "id": "47399652",
+          "title": "Discord \"Account Linking Check-In Event\" Reminder",
+          "description": "Dear Trailblazers, With the release of Version 4.7 \"Now, Lay Laughter to All Stars,\" the Discord \"Account Linking Check-In\" event has been updated with a brand-new batch of redemption codes! Link your Discord account and check in via the Astral Express bot on the official Discord server to claim 30 Stellar Jades!",
+          "created_at": 1794384008,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/10/bbcef537d92b416df6e414cc9cb8c1cd_4489582251811439297.png",
+          "url": "https://www.hoyolab.com/article/47399652",
+          "type": "info"
+        },
+        {
           "id": "47398071",
           "title": "Version 4.7 Now, Lay Laughter to All Stars Discord Quest Event",
           "description": "Greetings, Trailblazer! The Discord Quest event is underway! Participate in the event and log in to the game to experience the content of Version 4.7 Now, Lay Laughter to All Stars for a chance to get great rewards, including Stellar Jades!",
@@ -1487,15 +1496,6 @@
           "created_at": 1793959207,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/b41258ded411f8d8eaba79d3a0682fe3_1283279401499872592.jpg",
           "url": "https://www.hoyolab.com/article/47342931",
-          "type": "info"
-        },
-        {
-          "id": "47340203",
-          "title": "Color Restoration Magic",
-          "description": "Ms. Colt found a painting that had lost its color and was difficult to recolor with normal paint. She used restoration magic to uncover a possibility in the gray world... \"Sometimes, colors hide away for a bit. That's okay. They haven't disappeared. Slow down, take it easy. There will always come a day when they're seen again.\"",
-          "created_at": 1793941207,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/05/6a8c914ae8ca96676c1a4c1eabfde2f1_9003431991922157236.jpg",
-          "url": "https://www.hoyolab.com/article/47340203",
           "type": "info"
         }
       ]
