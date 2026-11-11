@@ -157,6 +157,7 @@ async function loadDripArtwork(){
  })();
  try{return await dripArtworkPromise}catch(e){dripArtworkPromise=null;console.warn("Drip Marketing artwork unavailable:",e);return{}}
 }
+function bannerArtwork(x){const names=[x.name,...(Array.isArray(x.characters)?x.characters.map(y=>typeof y==="string"?y:y.name):[])].filter(Boolean).join(" ");if(/\\baha\\b/i.test(names))return "https://i.gachabase.net/mZQZSbIAQyJXbDElL_RE2AwSR7C4X0pOBxgQ3ybCNnA/q%3A50/f%3Awebp/plain/hsr/assets/f8b5630e85022ab8b2761e4e3f614b42.png";return x.image_url||x.cover||x.image||x.banner||x.poster||(Array.isArray(x.characters)&&x.characters[0]&&x.characters[0].icon)||"";}
 function bannerCharacters(x){
  const raw=Array.isArray(x.characters)?x.characters:[];
  return raw.map(y=>typeof y==="string"?y:(y.full_name||y.name||"")).filter(Boolean);
