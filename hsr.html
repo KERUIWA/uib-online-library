@@ -189,7 +189,16 @@ function bannerImageForCharacter(name,map){
  return map[key]||"";
 }
 const BANNER_ART_PRIORITY=["Silver Wolf LV.999","Sparxie","Yao Guang","Asta","Lynx","Yukong"];
-function bannerArtworkSlides(map){
+function bannerArtworkSlides(map,characters){
+ const roster=Array.isArray(characters)?characters:[];
+ if(roster.length){
+  return roster.map(item=>{
+   const name=typeof item==="string"?item:(item.full_name||item.name||"");
+   const icon=typeof item==="object"?(item.icon||item.image||item.icon_url||""):"";
+   const key=normalizeCharacterName(name);
+   return{name,src:map[key]||icon};
+  }).filter(item=>item.name&&item.src);
+ }
  const names=Object.keys(map||{}),priority=BANNER_ART_PRIORITY.filter(name=>map[normalizeCharacterName(name)]);
  if(!names.length)return BANNER_ART_PRIORITY.map(name=>({name,src:""}));
  const remaining=names.filter(key=>!priority.some(name=>normalizeCharacterName(name)===key)).sort((a,b)=>a.localeCompare(b));
@@ -201,20 +210,25 @@ function bannerCardMarkup(x,label,map){
  const coneNames=cones.map(y=>typeof y==="string"?y:(y.name||y.full_name||"")).filter(Boolean);
  const isLightCone=cones.length>0&&names.length===0;
  const isAha=/aha/i.test([x.name,x.description,x.kind].filter(Boolean).join(" "));
- const slides=bannerArtworkSlides(map),first=slides[0],firstSrc=first.src;
+ const slides=bannerArtworkSlides(map,x.characters),first=slides[0]||{name:"Featured character",src:""};
  const coneArt=isLightCone?(typeof cones[0]==="object"?(cones[0].icon||cones[0].image||cones[0].icon_url||""):""):"";
  const art=isAha?bannerArtwork(x):coneArt;
+ const isLive=label==="Live",isUpcoming=label==="Upcoming";
  let imageMarkup;
  if(isAha){
   imageMarkup='<div class="current-banner-art"><img src="'+esc(art)+'" alt="Aha banner artwork" loading="eager"></div>';
  }else if(isLightCone){
   imageMarkup='<div class="current-banner-art"><img src="'+esc(art)+'" alt="'+esc(coneNames[0]||"Featured Light Cone")+'" loading="eager" style="object-fit:contain;padding:22px"></div>';
  }else{
-  imageMarkup='<div class="current-banner-art current-banner-cycle" data-slide-index="0">'+(firstSrc?'<img src="'+esc(firstSrc)+'" alt="'+esc(first.name)+' drip marketing artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / '+slides.length+' </span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
+  const slideData=encodeURIComponent(JSON.stringify(slides));
+  imageMarkup='<div class="current-banner-art current-banner-cycle" data-slide-index="0" data-cycle-slides="'+esc(slideData)+'">'+(first.src?'<img src="'+esc(first.src)+'" alt="'+esc(first.name)+' character artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / '+slides.length+'</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
  }
  const title=isLightCone?(x.name||"Light Cone Event Warp"):(x.name||names.join(" / ")||"Character Event Warp");
- const featured=names.length?"Featured character"+(names.length>1?"s":"")+": "+names.join(", "):coneNames.length?"Featured Light Cones: "+coneNames.join(", "):(x.description||"Character Event Warp");
- return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><span class="tag">'+(isLightCone?"Light Cone Event Warp":label)+'</span><h3>'+esc(title)+'</h3><p>'+esc(featured)+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+(label==="Upcoming"?"Starts in ":"Ends in ")+remaining(label==="Upcoming"?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
+ const featured=names.length?"Featured characters: "+names.join(", "):coneNames.length?"Featured Light Cones: "+coneNames.join(", "):(x.description||"Character Event Warp");
+ const typeLabel=isLightCone?"Light Cone Event Warp":"Character Event Warp";
+ const statusLabel=isLive?'<span class="tag live">LIVE</span>':isUpcoming?'<span class="tag">UPCOMING</span>':"";
+ const countdownLabel=isUpcoming?"Starts in ":"Ends in ";
+ return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><div class="banner-labels"><span class="tag">'+typeLabel+'</span>'+statusLabel+'</div><h3>'+esc(title)+'</h3><p>'+esc(featured)+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+countdownLabel+remaining(isUpcoming?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
 }
 function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
  const slide=slides[index],img=panel.querySelector("img"),placeholder=panel.querySelector(".current-banner-cycle-placeholder"),label=panel.querySelector(".current-banner-cycle-name"),position=panel.querySelector(".current-banner-cycle-position");
@@ -229,22 +243,26 @@ function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
  if(label)label.textContent=slide.name;
  if(position)position.textContent=(index+1)+" / "+slides.length;
 }
-function startBannerArtworkCycle(host,map){
+function startBannerArtworkCycle(host){
  if(bannerCycleTimer){clearInterval(bannerCycleTimer);bannerCycleTimer=null;}
  if(!host)return;
- const slides=bannerArtworkSlides(map);
- const fallbackSrc="";
  host.querySelectorAll(".current-banner-cycle").forEach(panel=>{
+  let slides=[];
+  try{slides=JSON.parse(decodeURIComponent(panel.dataset.cycleSlides||"[]"));}catch(e){slides=[];}
+  panel._bannerSlides=slides;
+  if(!slides.length)return;
   panel.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>{
    const current=Number(panel.dataset.slideIndex||0),direction=button.classList.contains("current-banner-cycle-next")?1:-1;
-   setBannerArtworkSlide(panel,(current+direction+slides.length)%slides.length,slides,fallbackSrc);
+   setBannerArtworkSlide(panel,(current+direction+slides.length)%slides.length,slides,"");
   }));
  });
  bannerCycleTimer=setInterval(()=>{
   if(!host.isConnected){clearInterval(bannerCycleTimer);bannerCycleTimer=null;return;}
   host.querySelectorAll(".current-banner-cycle").forEach(panel=>{
+   const slides=panel._bannerSlides||[];
+   if(!slides.length)return;
    const current=Number(panel.dataset.slideIndex||0);
-   setBannerArtworkSlide(panel,(current+1)%slides.length,slides,fallbackSrc);
+   setBannerArtworkSlide(panel,(current+1)%slides.length,slides,"");
   });
  },4500);
 }
@@ -266,11 +284,11 @@ async function renderCurrentBanner(){
  const map=await loadDripArtwork();
  const currentHost=$("currentBanner");
  if(!currentHost||!currentHost.isConnected)return;
- currentHost.innerHTML='<div class="current-banner-stack">'+(active.length?'<div class="current-banner-group"><h3 class="current-banner-group-title">✦ Currently running</h3>'+active.map(x=>bannerCardMarkup(x,"Now featuring",map)).join("")+'</div>':'')+(next.length?'<div class="current-banner-group"><h3 class="current-banner-group-title">✦ Up next</h3>'+next.map(x=>bannerCardMarkup(x,"Upcoming",map)).join("")+'</div>':'')+'</div>';
- startBannerArtworkCycle(currentHost,map);
+ currentHost.innerHTML='<div class="current-banner-stack">'+(active.length?'<div class="current-banner-group"><h3 class="current-banner-group-title">✦ Currently running</h3>'+active.map(x=>bannerCardMarkup(x,"Live",map)).join("")+'</div>':'')+(next.length?'<div class="current-banner-group"><h3 class="current-banner-group-title">✦ Up next</h3>'+next.map(x=>bannerCardMarkup(x,"Upcoming",map)).join("")+'</div>':'')+'</div>';
+ startBannerArtworkCycle(currentHost);
 }
 function eventPoster(x){return '<div class="event-poster"><span class="poster-top">✦ Honkai: Star Rail · Event</span><strong>'+esc(x.name)+'</strong><small>'+esc(x.kind||"In-game activity")+'</small></div>'}
-function renderEvents(list){events=list.slice().sort((a,b)=>(a.start?.getTime()||0)-(b.start?.getTime()||0));try{renderCurrentBanner()}catch(err){console.warn("Current banner failed independently:",err);const host=$("currentBanner");if(host)host.innerHTML='<div class="current-banner-empty">Banner display temporarily unavailable. Events are unaffected.</div>';}const visible=events.filter(x=>!x.end||x.end>Date.now());$("eventCount").textContent=visible.length+" active / upcoming";$("eventCards").innerHTML=visible.length?visible.map(x=>{const starts=x.start&&x.start>Date.now(),ends=x.end&&x.end-Date.now()<86400000,tag=ends?"Ending soon":starts?"Upcoming":"Live";return '<article class="card">'+(x.image?'<img loading="lazy" src="'+esc(x.image)+'" alt="'+esc(x.name)+' poster" onerror="this.outerHTML=decodeURIComponent(\''+encodeURIComponent(eventPoster(x))+'\')">':eventPoster(x))+'<div class="card-body"><span class="tag '+(ends?"ending":"")+'">'+tag+' · '+esc(x.kind)+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||"Check the official event notice for details.")+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown" data-countdown="'+esc(x.id)+'">'+countdownText(x)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View details ↗</a>':'')+'</div></article>'}).join(""):'<div class="empty">No active or upcoming activities were returned. Check the official announcement feed for the latest details.</div>';checkEventReminders();}
+function renderEvents(list){events=list.slice().sort((a,b)=>(a.start?.getTime()||0)-(b.start?.getTime()||0));try{renderCurrentBanner()}catch(err){console.warn("Current banner failed independently:",err);const host=$("currentBanner");if(host)host.innerHTML='<div class="current-banner-empty">Banner display temporarily unavailable. Events are unaffected.</div>';}const visible=events.filter(x=>!x.isWarp&&!/(?:banner announcement|character event warp|light cone event warp|warp banner)/i.test([x.name,x.kind,x.description].filter(Boolean).join(" "))&&(!x.end||x.end>Date.now()));$("eventCount").textContent=visible.length+" active / upcoming";$("eventCards").innerHTML=visible.length?visible.map(x=>{const starts=x.start&&x.start>Date.now(),ends=x.end&&x.end-Date.now()<86400000,tag=ends?"Ending soon":starts?"Upcoming":"Live";return '<article class="card">'+(x.image?'<img loading="lazy" src="'+esc(x.image)+'" alt="'+esc(x.name)+' poster" onerror="this.outerHTML=decodeURIComponent(\''+encodeURIComponent(eventPoster(x))+'\')">':eventPoster(x))+'<div class="card-body"><span class="tag '+(ends?"ending":"")+'">'+tag+' · '+esc(x.kind)+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||"Check the official event notice for details.")+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown" data-countdown="'+esc(x.id)+'">'+countdownText(x)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View details ↗</a>':'')+'</div></article>'}).join(""):'<div class="empty">No active or upcoming activities were returned. Check the official announcement feed for the latest details.</div>';checkEventReminders();}
 function countdownText(x){const target=x.start&&x.start>Date.now()?x.start:x.end;if(!target)return "Schedule not announced";const ms=target.getTime()-Date.now();if(ms<=0)return x.end&&x.end<=Date.now()?"Ended":"Live";const d=Math.floor(ms/86400000),h=Math.floor(ms%86400000/3600000),m=Math.floor(ms%3600000/60000),s=Math.floor(ms%60000/1000);return (x.start&&x.start>Date.now()?"Starts in ":"Ends in ")+(d?d+"d ":"")+h+"h "+m+"m "+s+"s"}
 function updateBannerCountdowns(){document.querySelectorAll("[data-countdown]").forEach(el=>{const x=events.find(item=>item.id===el.dataset.countdown);if(x)el.textContent=countdownText(x)})}
 function renderNews(items){news=items.slice().sort((a,b)=>(b.created_at||0)-(a.created_at||0));$("newsList").innerHTML=news.length?news.slice(0,12).map(x=>'<article class="news-item"><div class="news-date">'+fmt(x.created_at).split(",")[0]+'</div><div class="news-copy"><h3>'+esc(x.title||"Honkai: Star Rail announcement")+'</h3><p>'+esc(x.description||"Open the announcement to read the full details.")+'</p>'+(x.url?'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">Read announcement ↗</a>':'')+'</div></article>').join(""):'<div class="empty">The announcement feed could not be loaded. Use the official HoYoLAB link above.</div>';notifyNewNews();}
