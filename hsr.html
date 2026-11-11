@@ -353,12 +353,13 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
  #currentBanner .current-banner-art{flex-basis:220px;height:220px}
 }
 
-/* FINAL WARP SPACING OVERRIDE: keep headings and cards tightly grouped */
-#warpSection > .section-head{margin-bottom:2px!important;padding-bottom:0!important}
-#currentBanner{margin-top:0!important;padding-top:0!important}
-#currentBanner .current-banner-stack{display:grid!important;gap:8px!important;margin:0!important;padding:0!important}
-#currentBanner .current-banner-group{display:grid!important;gap:4px!important;margin:0!important;padding:0!important}
-#currentBanner .current-banner-group-title{margin:0!important;padding:0!important;line-height:1.25!important}
+/* WARP SPACING FIX: remove inherited vertical spacing at every banner boundary */
+#warpSection > .section-head{margin:0!important;padding:0!important}
+#warpSection > #currentBanner{display:block!important;margin:0!important;padding:0!important}
+#warpSection > .section-head + #currentBanner{margin-block-start:0!important}
+#currentBanner > .current-banner-stack{display:flex!important;flex-direction:column!important;gap:10px!important;margin:0!important;padding:0!important}
+#currentBanner .current-banner-group{display:flex!important;flex-direction:column!important;gap:5px!important;margin:0!important;padding:0!important}
+#currentBanner .current-banner-group-title{display:flex!important;align-items:center!important;margin:0!important;padding:0!important;line-height:1.25!important}
 #currentBanner .current-banner-grid{margin:0!important}
 </style></head><body>
 <header>
