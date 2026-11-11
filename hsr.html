@@ -361,6 +361,42 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #currentBanner .current-banner-group{display:flex!important;flex-direction:column!important;gap:5px!important;margin:0!important;padding:0!important}
 #currentBanner .current-banner-group-title{display:flex!important;align-items:center!important;margin:0!important;padding:0!important;line-height:1.25!important}
 #currentBanner .current-banner-grid{margin:0!important}
+
+/* WARP SECTION LABELS: stronger hierarchy for live and upcoming groups */
+#currentBanner .current-banner-group-title{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-height:44px!important;
+  padding:10px 14px!important;
+  border-radius:12px!important;
+  font-size:15px!important;
+  line-height:1.25!important;
+  font-weight:950!important;
+  letter-spacing:.09em!important;
+  color:#fff!important;
+  text-shadow:0 1px 8px #0005!important;
+  box-shadow:inset 0 1px #ffffff30,0 5px 16px #090d1d20!important;
+}
+#currentBanner .current-banner-group-title:after{
+  content:none!important;
+}
+#currentBanner .current-banner-group:first-child .current-banner-group-title{
+  background:linear-gradient(100deg,#9b7130,#d4a94e 58%,#f0cf83)!important;
+  border:1px solid #f2d99a99!important;
+}
+#currentBanner .current-banner-group:nth-child(2) .current-banner-group-title{
+  background:linear-gradient(100deg,#51418f,#7966c5 58%,#a99be8)!important;
+  border:1px solid #c6b9ff88!important;
+}
+@media(max-width:650px){
+  #currentBanner .current-banner-group-title{
+    min-height:42px!important;
+    padding:10px 12px!important;
+    font-size:14px!important;
+    letter-spacing:.07em!important;
+  }
+}
+
 </style></head><body>
 <header>
 <div class="wrap">
