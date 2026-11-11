@@ -463,8 +463,9 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 .warp-view-toggle button.active{background:var(--blue);color:#fff;box-shadow:0 3px 10px #0002}
 #currentBanner[data-banner-view="compact"] .current-banner-stack{gap:24px}
 #currentBanner[data-banner-view="compact"] .current-banner-group{gap:10px}
-#currentBanner[data-banner-view="compact"] .current-banner-group:has(.current-banner-grid){display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));align-items:stretch;gap:14px}
-#currentBanner[data-banner-view="compact"] .current-banner-group-title{grid-column:1/-1;margin-bottom:1px}
+#currentBanner[data-banner-view="compact"] .current-banner-group:has(.current-banner-grid){display:flex;align-items:stretch;gap:14px;overflow-x:auto;overflow-y:hidden;padding:2px 2px 14px;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--blue) var(--surface2)}
+#currentBanner[data-banner-view="compact"] .current-banner-group-title{flex:0 0 100%;margin-bottom:1px}
+#currentBanner[data-banner-view="compact"] .current-banner-grid{flex:0 0 calc(50% - 7px);min-width:0;scroll-snap-align:start}
 #currentBanner[data-banner-view="compact"] .current-banner-grid{grid-template-columns:1fr;grid-template-rows:155px auto;min-height:0;align-content:start;border-radius:15px}
 #currentBanner[data-banner-view="compact"] .current-banner-art{height:155px;min-height:155px}
 #currentBanner[data-banner-view="compact"] .current-banner-art img{height:155px;min-height:155px;max-height:155px}
@@ -479,12 +480,12 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #currentBanner[data-banner-view="compact"] .current-banner-grid>.current-banner-status{top:10px;right:10px;padding:6px 9px}
 @media(max-width:650px){
  .warp-view-tools{align-items:flex-end;flex-direction:column}
- #currentBanner[data-banner-view="compact"] .current-banner-group:has(.current-banner-grid){grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+ #currentBanner[data-banner-view="compact"] .current-banner-grid{flex-basis:min(86%,340px)}
 }
 @media(max-width:430px){
  .warp-view-tools{align-items:flex-start}
  .warp-view-toggle button{padding:7px 9px;font-size:10px}
- #currentBanner[data-banner-view="compact"] .current-banner-group:has(.current-banner-grid){grid-template-columns:1fr}
+ #currentBanner[data-banner-view="compact"] .current-banner-grid{flex-basis:88%}
 }
 </style></head><body>
 <header>
