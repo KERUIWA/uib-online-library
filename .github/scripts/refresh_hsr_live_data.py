@@ -74,6 +74,8 @@ def refresh_feed(previous, name, url, validator):
         }
     except Exception as exc:
         print(f"{name}: refresh failed: {exc}")
+        if old.get("status") in ("stale", "error") and old.get("error") == str(exc):
+            return old
         return {
             "status": "stale" if old.get("data") is not None else "error",
             "source": old.get("source") or url,
@@ -115,12 +117,15 @@ def main():
             }
     except Exception as exc:
         print(f"news: refresh failed: {exc}")
-        feeds["news"] = {
+        if old_news.get("status") in ("stale", "error") and old_news.get("error") == str(exc):
+            feeds["news"] = old_news
+        else:
+            feeds["news"] = {
             "status": "stale" if old_news.get("data") is not None else "error",
             "source": old_news.get("source") or news_url, "checkedAt": now_iso(),
             "lastSuccess": old_news.get("lastSuccess"), "error": str(exc),
             "data": old_news.get("data"),
-        }
+            }
 
     unchanged = feeds == previous.get("feeds", {})
     snapshot = {"schemaVersion": 1, "updatedAt": previous.get("updatedAt") if unchanged else now_iso(), "feeds": feeds}
