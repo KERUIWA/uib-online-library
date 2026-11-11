@@ -487,12 +487,12 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
  .warp-view-tools{align-items:flex-start}
  .warp-view-toggle button{padding:7px 9px;font-size:10px}
  #currentBanner[data-banner-view="compact"] .current-banner-row>.current-banner-grid{flex-basis:88%}
-/* Compact cards: reserve consistent text space without clipping titles or dates */
-#currentBanner[data-banner-view="compact"] .current-banner-grid{height:auto;min-height:500px;grid-template-rows:155px minmax(0,1fr);overflow:hidden}
-#currentBanner[data-banner-view="compact"] .current-banner-copy{height:100%;min-height:0;overflow:visible;display:flex;flex-direction:column}
-#currentBanner[data-banner-view="compact"] .current-banner-copy h3{height:auto;min-height:3.2em;max-height:none;overflow:visible;display:block;overflow-wrap:anywhere}
-#currentBanner[data-banner-view="compact"] .current-banner-copy p{height:auto;min-height:3.4em;max-height:none;overflow:visible;display:flex;flex-wrap:wrap;align-content:flex-start;overflow-wrap:anywhere}
-#currentBanner[data-banner-view="compact"] .current-banner-copy .dates{height:auto;min-height:3.8em;max-height:none;overflow:visible;white-space:normal;line-height:1.7;margin-top:auto;padding-top:8px;overflow-wrap:anywhere}
+/* Compact cards: natural title-to-description spacing while keeping dates readable */
+#currentBanner[data-banner-view="compact"] .current-banner-copy{height:auto!important;min-height:0;overflow:visible;display:flex!important;flex-direction:column;gap:0}
+#currentBanner[data-banner-view="compact"] .current-banner-copy h3{height:auto;min-height:0;max-height:none;overflow:visible;display:block;margin:0 0 5px!important;line-height:1.2;overflow-wrap:anywhere}
+#currentBanner[data-banner-view="compact"] .current-banner-copy p{height:auto;min-height:0;max-height:none;overflow:visible;display:flex;flex-wrap:wrap;align-content:flex-start;margin:0!important;line-height:1.5;overflow-wrap:anywhere}
+#currentBanner[data-banner-view="compact"] .current-banner-copy p.current-banner-roster{margin:0!important;gap:3px}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .dates{height:auto;min-height:3.8em;max-height:none;overflow:visible;white-space:normal;line-height:1.7;margin-top:auto!important;padding-top:8px;overflow-wrap:anywhere}
 #currentBanner[data-banner-view="compact"] .current-banner-copy .banner-countdown{flex:0 0 auto;white-space:normal;line-height:1.45}
 
 }
