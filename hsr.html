@@ -441,6 +441,11 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 }
 
 
+/* Banner character rarity accents */
+#currentBanner .current-banner-cycle-name.rarity-five,#currentBanner .current-banner-character-chip.rarity-five{color:#ffe0a0;border-color:#e8bd62aa;background:linear-gradient(135deg,#4b3518ed,#241b19ed)}
+#currentBanner .current-banner-cycle-name.rarity-four,#currentBanner .current-banner-character-chip.rarity-four{color:#e3c5ff;border-color:#b88beaaa;background:linear-gradient(135deg,#39234fed,#211a35ed)}
+#currentBanner .current-banner-character-chip{display:inline-flex;align-items:center;padding:5px 10px;margin:3px 5px 3px 0;border:1px solid;border-radius:999px;font-size:12px;font-weight:850;white-space:nowrap}
+#currentBanner .current-banner-copy p.current-banner-roster{display:flex;flex-wrap:wrap;align-items:center;gap:2px;margin-top:2px}
 </style></head><body>
 <header>
 <div class="wrap">
@@ -545,7 +550,8 @@ function bannerArtworkSlides(map,characters){
    const name=typeof item==="string"?item:(item.full_name||item.name||"");
    const icon=typeof item==="object"?(item.icon||item.image||item.icon_url||""):"";
    const key=normalizeCharacterName(name);
-   return{name,src:map[key]||icon};
+   const rarity=typeof item==="object"?(item.rarity??item.stars??item.rank??item.rarity_num??item.rarity_type):null;
+    return{name,src:map[key]||icon,rarity};
   }).filter(item=>item.name&&item.src);
  }
  const names=Object.keys(map||{}),priority=BANNER_ART_PRIORITY.filter(name=>map[normalizeCharacterName(name)]);
@@ -568,15 +574,15 @@ function bannerCardMarkup(x,label,map){
   const slideData=encodeURIComponent(JSON.stringify(slides));
   imageMarkup='<div class="current-banner-art current-banner-cycle" data-slide-index="0" data-cycle-slides="'+esc(slideData)+'">'+(first.src?'<img src="'+esc(first.src)+'" alt="'+esc(first.name)+' character artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / '+slides.length+'</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
  }
- const title=isLightCone?(x.name||"Light Cone Event Warp"):first.name;
- const featured=names.length?"Featured characters: "+names.join(", "):coneNames.length?"Featured Light Cones: "+coneNames.join(", "):(x.description||"Character Event Warp");
+ const title=isLightCone?(x.name||"Light Cone Event Warp"):"Featured Warp Lineup";
+ const featured=names.length?'<span class="current-banner-roster-label">Featured characters</span>'+slides.map(item=>'<span class="current-banner-character-chip '+(String(item.rarity).includes("4")?"rarity-four":"rarity-five")+'">'+esc(item.name)+'</span>').join(""):coneNames.length?"Featured Light Cones: "+coneNames.join(", "):(x.description||"Character Event Warp");
  const typeLabel=isLightCone?"Light Cone Event Warp":"Character Event Warp";
  const statusLabel=isLive?'<span class="tag live">LIVE</span>':isUpcoming?'<span class="tag">UPCOMING</span>':"";
  const countdownLabel=isUpcoming?"Starts in ":"Ends in ";
- return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><div class="banner-labels"><span class="tag">'+typeLabel+'</span>'+statusLabel+'</div><h3 class="current-banner-character-heading">'+esc(title)+'</h3><p>'+esc(featured)+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+countdownLabel+remaining(isUpcoming?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
+ return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><div class="banner-labels"><span class="tag">'+typeLabel+'</span>'+statusLabel+'</div><h3>'+esc(title)+'</h3><p class="'+(names.length?"current-banner-roster":"")+'">'+featured+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+countdownLabel+remaining(isUpcoming?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
 }
 function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
- const slide=slides[index],img=panel.querySelector("img"),placeholder=panel.querySelector(".current-banner-cycle-placeholder"),label=panel.querySelector(".current-banner-cycle-name"),position=panel.querySelector(".current-banner-cycle-position"),heading=panel.closest(".current-banner-grid")?.querySelector(".current-banner-character-heading");
+ const slide=slides[index],img=panel.querySelector("img"),placeholder=panel.querySelector(".current-banner-cycle-placeholder"),label=panel.querySelector(".current-banner-cycle-name"),position=panel.querySelector(".current-banner-cycle-position");
  panel.dataset.slideIndex=String(index);
  if(slide.src||fallbackSrc){
   if(img){img.src=slide.src||fallbackSrc;img.alt=slide.name+" character artwork";img.hidden=false;}
@@ -585,8 +591,7 @@ function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
   if(img)img.hidden=true;
   if(placeholder)placeholder.hidden=false;
  }
- if(label)label.textContent=slide.name;
-  if(heading)heading.textContent=slide.name;
+ if(label){label.textContent=slide.name;label.classList.toggle("rarity-four",String(slide.rarity).includes("4"));label.classList.toggle("rarity-five",!String(slide.rarity).includes("4"));}
   if(position)position.textContent=(index+1)+" / "+slides.length;
 }
 function startBannerArtworkCycle(host){
