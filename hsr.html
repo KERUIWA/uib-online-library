@@ -852,6 +852,7 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #cyreneEncounter .cyrene-control{width:29px;height:29px;display:grid;place-items:center;padding:0;border:1px solid #c8a87899;border-radius:50%;background:#211b30eF;color:#f2d9ad;font:15px/1 Inter,Segoe UI,Arial,sans-serif;cursor:pointer;box-shadow:0 2px 8px #08061166;transition:background .2s,border-color .2s,transform .2s}
 #cyreneEncounter .cyrene-control:hover{background:#493653;border-color:#e5c38b;transform:translateY(-1px)}
 #cyreneEncounter .cyrene-control:focus-visible{outline:2px solid #e5c38b;outline-offset:2px}
+#cyreneEncounter .cyrene-control:disabled{opacity:.4;cursor:not-allowed;transform:none}
 #cyreneEncounter .cyrene-language{width:34px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.04em}
 #cyreneEncounter .cyrene-kicker{display:block;margin:0 25px 10px 0;color:#e7c995;font-size:9px;font-weight:850;letter-spacing:.18em;text-transform:uppercase}
 #cyreneEncounter .cyrene-line{margin:0;color:#fff8ee;font:500 15px/1.55 Georgia,serif;text-wrap:pretty}
@@ -1379,6 +1380,8 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
    else{typeTimer=null;if(onComplete)onComplete()}
   }
   playVoice(currentAudioFiles[voiceLanguage],()=>{if(showing)step(1)});
+  replayButton.disabled=voiceMuted||!currentAudioFile;
+  replayButton.title=currentAudioFile?"Replay voice":"No audio added for this language yet";
  }
  function replayVoice(){
   if(!currentAudioFile||voiceMuted)return;
@@ -1395,8 +1398,8 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   languageButton.setAttribute("aria-pressed",String(voiceLanguage==="ja"));
   languageButton.setAttribute("aria-label",voiceLanguage==="en"?"Switch voice language to Japanese":"Switch voice language to English");
   languageButton.title=voiceLanguage==="en"?"Switch to Japanese audio":"Switch to English audio";
-  replayButton.disabled=!currentAudioFile;
-  replayButton.title=currentAudioFile?"Replay voice":"No audio added for this language yet";
+  replayButton.disabled=voiceMuted||!currentAudioFile;
+  replayButton.title=voiceMuted?"Unmute to replay":currentAudioFile?"Replay voice":"No audio added for this language yet";
  }
  function renderChoices(id){
   choicesHost.replaceChildren();
@@ -1444,6 +1447,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   muteButton.setAttribute("aria-pressed",String(voiceMuted));
   muteButton.title=voiceMuted?"Unmute voice":"Mute voice";
   replayButton.disabled=voiceMuted||!currentAudioFile;
+  replayButton.title=voiceMuted?"Unmute to replay":currentAudioFile?"Replay voice":"No audio added for this language yet";
  });
  dismissButton.addEventListener("click",dismiss);
  let clicks=0;
