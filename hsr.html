@@ -143,19 +143,24 @@ async function loadDripArtwork(){
  if(dripArtworkMap)return dripArtworkMap;
  if(dripArtworkPromise)return dripArtworkPromise;
  dripArtworkPromise=(async()=>{
-  const api="https://honkai-star-rail.fandom.com/api.php?action=query&generator=categorymembers&gcmtitle=Category:Drip_Marketing&gcmtype=file&gcmlimit=500&prop=imageinfo&iiprop=url&iiurlwidth=1400&format=json&origin=*";
-  const response=await fetch(api,{cache:"force-cache"});
-  if(!response.ok)throw new Error("Drip artwork request failed");
-  const data=await response.json(),pages=Object.values(data.query?.pages||{}),map={};
-  pages.forEach(page=>{
-   const title=(page.title||"").replace(/^File:/,"");
-   const match=title.match(/^Character (.+?) Introduction\.(?:png|jpe?g|webp)$/i);
-   const src=page.imageinfo?.[0]?.thumburl||page.imageinfo?.[0]?.url;
-   if(match&&src)map[normalizeCharacterName(match[1])]=src;
+  const indexUrl=new URL("./assets/hsr/drip-marketing/index.json",document.baseURI);
+  const response=await fetch(indexUrl,{cache:"no-store"});
+  if(!response.ok)throw new Error("Local drip artwork index unavailable: HTTP "+response.status);
+  const data=await response.json(),map={};
+  const entries=Array.isArray(data.characters)?data.characters:[];
+  entries.forEach(item=>{
+   if(!item||typeof item!=="object")return;
+   const name=item.name||item.character||item.slug||"";
+   const file=item.file||item.src||item.image||"";
+   if(name&&file)map[normalizeCharacterName(name)]=new URL(file,indexUrl).href;
   });
+  if(data.artwork&&typeof data.artwork==="object"){
+   Object.entries(data.artwork).forEach(([name,file])=>{if(typeof file==="string"&&file)map[normalizeCharacterName(name)]=new URL(file,indexUrl).href;});
+  }
+  if(!Object.keys(map).length)throw new Error("Local drip artwork index contains no character entries");
   dripArtworkMap=map;return map;
  })();
- try{return await dripArtworkPromise}catch(e){dripArtworkPromise=null;console.warn("Drip Marketing artwork unavailable:",e);return{}}
+ try{return await dripArtworkPromise}catch(e){dripArtworkPromise=null;console.warn("Local drip marketing artwork unavailable:",e);return{}}
 }
 function bannerArtwork(x){const names=[x.name,x.description,x.kind,...(Array.isArray(x.characters)?x.characters.map(y=>typeof y==="string"?y:y.name):[])].filter(Boolean).join(" ");if(/aha/i.test(names))return "https://i.gachabase.net/mZQZSbIAQyJXbDElL_RE2AwSR7C4X0pOBxgQ3ybCNnA/q%3A50/f%3Awebp/plain/hsr/assets/f8b5630e85022ab8b2761e4e3f614b42.png";return x.image_url||x.cover||x.image||x.banner||x.poster||(Array.isArray(x.characters)&&x.characters[0]&&x.characters[0].icon)||"";}
 function bannerCharacters(x){
