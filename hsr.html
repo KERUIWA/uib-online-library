@@ -146,16 +146,16 @@ async function loadDripArtwork(){
   const indexUrl=new URL("./assets/hsr/drip-marketing/index.json",document.baseURI);
   const response=await fetch(indexUrl,{cache:"no-store"});
   if(!response.ok)throw new Error("Local drip artwork index unavailable: HTTP "+response.status);
-  const data=await response.json(),map={};
+  const data=await response.json(),map={},displayNames={};
   const entries=Array.isArray(data.characters)?data.characters:[];
   entries.forEach(item=>{
    if(!item||typeof item!=="object")return;
    const name=item.name||item.character||item.slug||"";
    const file=item.file||item.src||item.image||"";
-   if(name&&file)map[normalizeCharacterName(name)]=new URL(file,indexUrl).href;
+   if(name&&file){const key=normalizeCharacterName(name);map[key]=new URL(file,indexUrl).href;displayNames[key]=name;}
   });
   if(data.artwork&&typeof data.artwork==="object"){
-   Object.entries(data.artwork).forEach(([name,file])=>{if(typeof file==="string"&&file)map[normalizeCharacterName(name)]=new URL(file,indexUrl).href;});
+   Object.entries(data.artwork).forEach(([name,file])=>{if(typeof file==="string"&&file){const key=normalizeCharacterName(name);map[key]=new URL(file,indexUrl).href;displayNames[key]=name;}});
   }
   if(!Object.keys(map).length)throw new Error("Local drip artwork index contains no character entries");
   dripArtworkMap=map;return map;
@@ -175,8 +175,9 @@ function bannerImageForCharacter(name,map){
 const BANNER_ART_PRIORITY=["Silver Wolf LV.999","Sparxie","Yao Guang","Asta","Lynx","Yukong"];
 function bannerArtworkSlides(map){
  const names=Object.keys(map||{}),priority=BANNER_ART_PRIORITY.filter(name=>map[normalizeCharacterName(name)]);
+ if(!names.length)return BANNER_ART_PRIORITY.map(name=>({name,src:""}));
  const remaining=names.filter(key=>!priority.some(name=>normalizeCharacterName(name)===key)).sort((a,b)=>a.localeCompare(b));
- return [...priority.map(name=>({name,src:map[normalizeCharacterName(name)]})),...remaining.map(key=>({name:key,src:map[key]}))];
+ return [...priority.map(name=>({name,src:map[normalizeCharacterName(name)]})),...remaining.map(key=>({name:map.__names?.[key]||key,src:map[key]}))];
 }
 function bannerCardMarkup(x,label,map){
  const names=bannerCharacters(x),isAha=/aha/i.test([x.name,x.description,x.kind].filter(Boolean).join(" "));
