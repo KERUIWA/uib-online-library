@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-11T03:16:53Z",
+  "updatedAt": "2026-11-11T04:05:47Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-11T02:49:01Z",
-      "lastSuccess": "2026-11-11T02:49:01Z",
+      "checkedAt": "2026-11-11T04:05:47Z",
+      "lastSuccess": "2026-11-11T04:05:47Z",
       "error": null,
       "data": [
         {
@@ -1364,13 +1364,22 @@
           "type": "event"
         },
         {
-          "id": "45747564",
-          "title": "Event with Rewards — Join Our V4.4 Preview Discussion! What Are You Looking Forward to in V4.4?",
-          "description": "Greetings, Trailblazers! The Version 4.4 preview stream has concluded. What are you looking forward to in the new version? Participate in the 4.4 Version Preview live discussion, and get a guaranteed personal homepage background!",
-          "created_at": 1783312205,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/07/03/13dd0be6b567b098132a6f0f544f490c_8886792719085230125.png",
-          "url": "https://www.hoyolab.com/article/45747564",
-          "type": "event"
+          "id": "47396370",
+          "title": "Project Astro-Warp Beta Sign-Up Reminder",
+          "description": "The Honkai: Star Rail Project Astro-Warp is about to begin a new round of small-scale full-wipe confidential beta testing. Trailblazers who have successfully signed up before 2026/11/16 09:59 (UTC+8) have a chance to be selected for this round of testing. ※ Trailblazers who have previously been part of Project Astro-Warp need not re-apply. ※ For future recruitment notifications, Trailblazers should pay attention to the in-game mail.",
+          "created_at": 1794369603,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/10/addec2d24a1f50df8d94fec2c70705f1_359826799021973590.png",
+          "url": "https://www.hoyolab.com/article/47396370",
+          "type": "info"
+        },
+        {
+          "id": "47396371",
+          "title": "Animated Short: \"A Joyful Funeral Beneath the Moon\" | Honkai: Star Rail",
+          "description": "Dearest travelers from afar, \"Why not try starting a game once more? Savor the pain it brings once more, tremble at its cruelty once more, and wander through the hell within yourself once more. Do this over and over, and eventually, you'll get better at this game. Eventually, you'll learn to laugh.\" Yours truly, the unwelcoming Aha ※ We recommend viewing this video after experiencing Version 4.7 Trailblaze Mission.",
+          "created_at": 1794369603,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/11/0/8ef30e5a7d2074fb0abb63bd8b42d8dc_7929374346152601504.jpeg",
+          "url": "https://www.hoyolab.com/article/47396371",
+          "type": "info"
         },
         {
           "id": "47387949",
@@ -1487,24 +1496,6 @@
           "created_at": 1793768404,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/03/be98c0c669d319f47c0c665d94578419_3982206031955735010.jpg",
           "url": "https://www.hoyolab.com/article/47310096",
-          "type": "info"
-        },
-        {
-          "id": "47309012",
-          "title": "Improv Tour Trailer: \"When Aha Comes Knocking\" | Honkai: Star Rail",
-          "description": "If life plays a cruel joke on you, don't fret, and don't despair... Aha is watching over every moment of your dejection. English Voice: Aeon ★ Aha — Amber Lee Connors",
-          "created_at": 1793764806,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/04/0/5f84a71dbc7a9db59ece4f36722bb4df_8602696741357095087.jpeg",
-          "url": "https://www.hoyolab.com/article/47309012",
-          "type": "info"
-        },
-        {
-          "id": "47307963",
-          "title": "Aeon Preview | Aeon ★ Aha",
-          "description": "Hello, Trailblazers~ Today, we bring you the preview for the Aeon, Aeon ★ Aha (Elation: Quantum), and the Light Cone, \"Upon the First Echo of 'Aha' (Elation)\"!",
-          "created_at": 1793761210,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/03/edb29fb7cf64b5eb1797f1747ad27593_4343287217262303725.jpg",
-          "url": "https://www.hoyolab.com/article/47307963",
           "type": "info"
         }
       ]
