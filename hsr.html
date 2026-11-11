@@ -1303,10 +1303,10 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  const title=document.querySelector(".hero h1");
  if(!panel||!dialogue||!dismissButton||!title)return;
  const lines={
-  visitor:"Oh? You've been here for quite some time. Were you waiting for someone?",
-  curious:"Five times? Were you hoping something would happen? ...How interesting.",
-  midnight:"It's rather late, isn't it? Even the stars are resting. Why are you still awake?",
-  reunion:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence."
+  visitor:"Oh? You've been here for quite some time. Were you waiting for someone? I wonder if the stars brought you here, or if you simply lost track of time.",
+  curious:"Five times? Were you hoping something would happen? ...How interesting. Perhaps I should leave you another little surprise.",
+  midnight:"It's rather late, isn't it? Even the stars are resting. Why are you still awake? Stay a little longer, if the quiet feels kind.",
+  reunion:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence. Maybe some meetings are meant to happen more than once."
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
  let seen={},queue=[],showing=false,typeTimer=null;
