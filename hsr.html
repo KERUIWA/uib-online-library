@@ -253,31 +253,38 @@ async function refreshAll(){
  const btn=$("refreshBtn");if(btn.disabled)return;
  btn.disabled=true;btn.textContent="↻ Updating…";$("updatedPill").textContent="Refreshing independent feeds…";
  const feedState={calendar:"loading",activity:"loading",news:"loading"};
+ const snapshotStates={};
  const setOverall=()=>{
-  const values=Object.values(feedState),ok=values.filter(x=>x==="ok").length,failed=values.filter(x=>x==="error").length;
-  $("dataStatus").textContent=failed===0&&ok===3?"All feeds connected":ok?("Partial connection · "+ok+"/3 feeds"):"Live feeds unavailable";
+  const values=Object.values(feedState),ok=values.filter(x=>x==="ok").length,stale=values.filter(x=>x==="stale").length,failed=values.filter(x=>x==="error").length;
+  const usable=ok+stale;
+  $("dataStatus").textContent=usable===3&&stale===0?"All feeds connected":usable?("Partial connection · "+ok+" live, "+stale+" cached"):"Live feeds unavailable";
  };
- const calendarTask=fetchJSON("https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us").then(data=>{
+ const snapshotTask=fetchJSON("./assets/hsr/live-data.json").catch(()=>null);
+ async function snapshotOrDirect(name,validator,direct){
+  const snapshot=await snapshotTask,feed=snapshot&&snapshot.feeds&&snapshot.feeds[name];
+  if(feed&&validator(feed.data)){
+   snapshotStates[name]=feed.status==="ok"?"ok":"stale";
+   return feed.data;
+  }
+  const data=await direct();
+  snapshotStates[name]="ok";
+  return data;
+ }
+ const calendarTask=snapshotOrDirect("calendar",data=>data&&(!(!Array.isArray(data.events)&&!Array.isArray(data.banners)),()=>fetchJSON("https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us").then(data=>{
   if(!data||(!Array.isArray(data.events)&&!Array.isArray(data.banners)))throw new Error("Calendar response has an unexpected format");
   return data;
- });
- const activityTask=fetchJSON(ACTIVITY_API).then(data=>{
+ }));
+ const activityTask=snapshotOrDirect("activity",data=>data&&Array.isArray(data.activities)&&!!data.version,()=>fetchJSON(ACTIVITY_API).then(data=>{
   if(!data||!Array.isArray(data.activities)||!data.version)throw new Error("Activity response has an unexpected format");
   return data;
- });
- const newsTask=Promise.all(["notices","events","info"].map(type=>
-  fetchJSON(NEWS_API+type+"?lang=en-us").catch(async firstError=>{
-   const fallback="https://api.ennead.cc/mihoyo/starrail/news/"+type+"?lang=en";
-   if(fallback===NEWS_API+type+"?lang=en-us")throw firstError;
-   return fetchJSON(fallback);
-  })
- )).then(groups=>{
+ }));
+ const newsTask=snapshotOrDirect("news",data=>Array.isArray(data)&&data.length>0,async()=>{
+  const groups=await Promise.all(["notices","events","info"].map(type=>fetchJSON(NEWS_API+type+"?lang=en-us")));
   const combined=groups.flatMap(x=>Array.isArray(x)?x:[]);
   const dedup=new Map();combined.forEach(x=>dedup.set(String(x.id||x.url||x.title),x));
   if(!dedup.size)throw new Error("News feeds returned no articles");
   return Array.from(dedup.values());
  });
-
  try{
   const [calendarResult,activityResult,newsResult]=await Promise.allSettled([calendarTask,activityTask,newsTask]);
   const calendarData=calendarResult.status==="fulfilled"?calendarResult.value:null;
@@ -297,7 +304,7 @@ async function refreshAll(){
    const liveVersion=calendarBanners.map(x=>x.version).find(Boolean);
    const activityEnd=activityData&&activityData.endTime?parseDate(activityData.endTime):null;
    const activityFresh=!!(activityData&&activityData.version&&activityEnd&&activityEnd.getTime()>Date.now());
-   if(activityFresh){renderVersion(activityData);feedState.activity="ok";}
+   if(activityFresh){renderVersion(activityData);feedState.activity=snapshotStates.activity||"ok";}
    else if(liveVersion){const starts=calendarBanners.map(x=>x.start_time).filter(Number.isFinite),ends=calendarBanners.map(x=>x.end_time).filter(Number.isFinite);renderVersion({version:liveVersion,versionName:"Live event calendar",startTime:starts.length?new Date(Math.min(...starts)*1000).toISOString():null,endTime:ends.length?new Date(Math.max(...ends)*1000).toISOString():null});feedState.activity=activityData?"stale":"error";}
    else if(activityData){renderVersion(activityData);feedState.activity="stale";}
    else{feedState.activity="error";}
@@ -321,9 +328,9 @@ async function refreshAll(){
     $("currentBanner").innerHTML='<div class="current-banner-empty">The banner providers did not return data. No banner lineup has been guessed.</div>';
    }
   }
-  if(activityResult.status==="fulfilled"&&feedState.activity==="loading")feedState.activity="ok";
+  if(activityResult.status==="fulfilled"&&feedState.activity==="loading")feedState.activity=snapshotStates.activity||"ok";
   if(newsResult.status==="fulfilled"){
-   feedState.news="ok";renderNews(newsResult.value);
+   feedState.news=snapshotStates.news||"ok";renderNews(newsResult.value);
   }else{
    feedState.news="error";
    $("newsList").innerHTML='<div class="empty">The announcement feed is unavailable right now. Calendar and banner data can still load independently.</div>';
