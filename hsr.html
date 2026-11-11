@@ -880,10 +880,13 @@ function bannerCardMarkup(x,label,map){
  const isLive=label==="Live",isUpcoming=label==="Upcoming";
  let imageMarkup;
  if(isLightCone){
-  imageMarkup='<div class="current-banner-art"><img src="'+esc(coneArt)+'" alt="'+esc(coneNames[0]||"Featured Light Cone")+'" loading="eager" style="object-fit:contain;padding:22px"></div>';
+  const coneSlides=cones.map(item=>({name:typeof item==="string"?item:(item.name||item.full_name||"Featured Light Cone"),src:typeof item==="object"?(item.icon||item.image||item.icon_url||item.art||""):"",rarity:typeof item==="object"?(item.rarity??item.stars??item.rank??"5★"):"5★"}));
+  const firstCone=coneSlides[0]||{name:"Featured Light Cone",src:""};
+  const slideData=encodeURIComponent(JSON.stringify(coneSlides));
+  imageMarkup='<div class="current-banner-art current-banner-cycle" data-cycle-kind="Light Cone" data-slide-index="0" data-cycle-slides="'+esc(slideData)+'">'+(firstCone.src?'<img src="'+esc(firstCone.src)+'" alt="'+esc(firstCone.name)+' Light Cone artwork" loading="eager" style="object-fit:contain;padding:22px">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name '+(String(firstCone.rarity).includes("4")?"rarity-four":"rarity-five")+'">'+esc(firstCone.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous Light Cone">‹</button><span class="current-banner-cycle-position">1 / '+coneSlides.length+'</span><button type="button" class="current-banner-cycle-next" aria-label="Next Light Cone">›</button></div></div>';
  }else{
   const slideData=encodeURIComponent(JSON.stringify(slides));
-  imageMarkup='<div class="current-banner-art current-banner-cycle" data-slide-index="0" data-cycle-slides="'+esc(slideData)+'">'+(first.src?'<img src="'+esc(first.src)+'" alt="'+esc(first.name)+' character artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name '+(String(first.rarity).includes("4")?"rarity-four":"rarity-five")+'">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / '+slides.length+'</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
+  imageMarkup='<div class="current-banner-art current-banner-cycle" data-cycle-kind="Character" data-slide-index="0" data-cycle-slides="'+esc(slideData)+'">'+(first.src?'<img src="'+esc(first.src)+'" alt="'+esc(first.name)+' character artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name '+(String(first.rarity).includes("4")?"rarity-four":"rarity-five")+'">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / '+slides.length+'</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
  }
  const title=isLightCone?(x.name||"Light Cone Event Warp"):"Featured Warp Lineup";
  const featured=names.length?slides.map(item=>'<span class="current-banner-character-chip '+(String(item.rarity).includes("4")?"rarity-four":"rarity-five")+'">'+esc(item.name)+'</span>').join(""):coneNames.length?"Featured Light Cones: "+coneNames.join(", "):(x.description||"Character Event Warp");
@@ -898,7 +901,7 @@ function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
  const slide=slides[index],img=panel.querySelector("img"),placeholder=panel.querySelector(".current-banner-cycle-placeholder"),label=panel.querySelector(".current-banner-cycle-name"),position=panel.querySelector(".current-banner-cycle-position");
  panel.dataset.slideIndex=String(index);
  if(slide.src||fallbackSrc){
-  if(img){img.src=slide.src||fallbackSrc;img.alt=slide.name+" character artwork";img.hidden=false;}
+  if(img){img.src=slide.src||fallbackSrc;img.alt=slide.name+" "+(panel.dataset.cycleKind==="Light Cone"?"Light Cone artwork":"character artwork");img.hidden=false;}
   else if(placeholder){placeholder.outerHTML='<img src="'+esc(slide.src||fallbackSrc)+'" alt="'+esc(slide.name)+' character artwork">';}
  }else{
   if(img)img.hidden=true;
