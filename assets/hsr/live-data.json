@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-11T04:40:30Z",
+  "updatedAt": "2026-11-11T06:04:50Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-11T04:40:30Z",
-      "lastSuccess": "2026-11-11T04:40:30Z",
+      "checkedAt": "2026-11-11T06:04:50Z",
+      "lastSuccess": "2026-11-11T06:04:50Z",
       "error": null,
       "data": [
         {
@@ -1364,6 +1364,15 @@
           "type": "event"
         },
         {
+          "id": "47398071",
+          "title": "Version 4.7 Now, Lay Laughter to All Stars Discord Quest Event",
+          "description": "Greetings, Trailblazer! The Discord Quest event is underway! Participate in the event and log in to the game to experience the content of Version 4.7 Now, Lay Laughter to All Stars for a chance to get great rewards, including Stellar Jades!",
+          "created_at": 1794376804,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/09/4f3cc35e64a76923a443a02a84b785a3_5392164014926069146.png",
+          "url": "https://www.hoyolab.com/article/47398071",
+          "type": "info"
+        },
+        {
           "id": "47396790",
           "title": "The player return web event \"Come With Me, Take the Journey\" is now available. Participate to obtain up to 480 Stellar Jades and more!",
           "description": "Dear Trailblazer, your companions aboard the Express are waiting for you to take the journey by their side and re-embark on your cosmic adventure! Earn up to 480 Stellar Jades! ▌ Event Period After the Version 4.7 update — 2026/12/23 06:00 (UTC+8) Participate:",
@@ -1487,15 +1496,6 @@
           "created_at": 1793941207,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/05/6a8c914ae8ca96676c1a4c1eabfde2f1_9003431991922157236.jpg",
           "url": "https://www.hoyolab.com/article/47340203",
-          "type": "info"
-        },
-        {
-          "id": "47330493",
-          "title": "Holy Furboly! Nihilux | Aha: Magic Tour",
-          "description": "Lady Nihilux is making her debut on the cover of Furbobo Gossip, and the publisher is dropping a \"Nihil-Always-Lux\" limited edition. Aha sure has clout~ Firsthand news on the Voracity's divine war and the latest updates on the Aeons and Supplicants, all in this issue of Holy Furboly! Official version only: look for the furbo watermark. Counterfeits will be prosecuted. This Issue's Reporter: Furbulitzer (Furbo Magician's Assistant Edition) This Issue's Editors: Furbo Reporters ✧ All rights reserved by Furbobo Weekly ✧ ✧ Any Similarities? Blame Aha ✧",
-          "created_at": 1793872805,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/05/7b724aee2562767acb1399b7a69a2101_1273055526605509502.jpg",
-          "url": "https://www.hoyolab.com/article/47330493",
           "type": "info"
         }
       ]
