@@ -62,6 +62,8 @@ def refresh_feed(previous, name, url, validator):
         data = get_json(url)
         if not validator(data):
             raise RuntimeError("Response failed schema validation")
+        if old.get("status") == "ok" and old.get("data") == data:
+            return old
         return {
             "status": "ok",
             "source": url,
@@ -103,10 +105,14 @@ def main():
                 unique[str(item.get("id") or item.get("url") or item.get("title") or len(unique))] = item
         if not unique:
             raise RuntimeError("News endpoints returned no articles")
-        feeds["news"] = {
+        news_data = list(unique.values())
+        if old_news.get("status") == "ok" and old_news.get("data") == news_data:
+            feeds["news"] = old_news
+        else:
+            feeds["news"] = {
             "status": "ok", "source": news_url, "checkedAt": now_iso(),
-            "lastSuccess": now_iso(), "error": None, "data": list(unique.values()),
-        }
+            "lastSuccess": now_iso(), "error": None, "data": news_data,
+            }
     except Exception as exc:
         print(f"news: refresh failed: {exc}")
         feeds["news"] = {
@@ -116,7 +122,8 @@ def main():
             "data": old_news.get("data"),
         }
 
-    snapshot = {"schemaVersion": 1, "updatedAt": now_iso(), "feeds": feeds}
+    unchanged = feeds == previous.get("feeds", {})
+    snapshot = {"schemaVersion": 1, "updatedAt": previous.get("updatedAt") if unchanged else now_iso(), "feeds": feeds}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     for name, feed in feeds.items():
