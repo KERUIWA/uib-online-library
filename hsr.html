@@ -172,10 +172,15 @@ function bannerImageForCharacter(name,map){
  if(map[key])return map[key];
  return map[key]||"";
 }
-const BANNER_ART_CYCLE=["Silver Wolf LV.999","Sparxie","Yao Guang","Asta","Lynx","Yukong"];
+const BANNER_ART_PRIORITY=["Silver Wolf LV.999","Sparxie","Yao Guang","Asta","Lynx","Yukong"];
+function bannerArtworkSlides(map){
+ const names=Object.keys(map||{}),priority=BANNER_ART_PRIORITY.filter(name=>map[normalizeCharacterName(name)]);
+ const remaining=names.filter(key=>!priority.some(name=>normalizeCharacterName(name)===key)).sort((a,b)=>a.localeCompare(b));
+ return [...priority.map(name=>({name,src:map[normalizeCharacterName(name)]})),...remaining.map(key=>({name:key,src:map[key]}))];
+}
 function bannerCardMarkup(x,label,map){
  const names=bannerCharacters(x),isAha=/aha/i.test([x.name,x.description,x.kind].filter(Boolean).join(" "));
- const slides=BANNER_ART_CYCLE.map(name=>({name,src:bannerImageForCharacter(name,map)}));
+ const slides=bannerArtworkSlides(map);
  const first=slides[0],firstSrc=first.src;
  const art=isAha?bannerArtwork(x):firstSrc;
  const imageMarkup=isAha?'<div class="current-banner-art"><img src="'+esc(art)+'" alt="Aha banner artwork" loading="eager"></div>':'<div class="current-banner-art current-banner-cycle" data-slide-index="0">'+(firstSrc?'<img src="'+esc(firstSrc)+'" alt="'+esc(first.name)+' drip marketing artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / 6</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
@@ -198,7 +203,7 @@ function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
 function startBannerArtworkCycle(host,map){
  if(bannerCycleTimer){clearInterval(bannerCycleTimer);bannerCycleTimer=null;}
  if(!host)return;
- const slides=BANNER_ART_CYCLE.map(name=>({name,src:bannerImageForCharacter(name,map)}));
+ const slides=bannerArtworkSlides(map);
  const fallbackSrc="";
  host.querySelectorAll(".current-banner-cycle").forEach(panel=>{
   panel.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>{
