@@ -494,7 +494,6 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 }
 
 /* Compact layout refinement: natural content height, clean hierarchy, no clipping */
-#currentBanner[data-banner-view="compact"] .current-banner-copy p.current-banner-roster{display:none!important}
 
 #currentBanner[data-banner-view="compact"] .current-banner-row{align-items:stretch;overflow-y:visible}
 #currentBanner[data-banner-view="compact"] .current-banner-grid{height:auto!important;min-height:0!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:155px auto!important;align-content:start;overflow:hidden}
@@ -617,8 +616,8 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
   text-shadow:0 2px 10px #080b1bcc!important
 }
 
-/* Keep featured roster hidden in compact cards at every viewport width */
-#currentBanner[data-banner-view="compact"] .current-banner-grid .current-banner-copy > p.current-banner-roster{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
+/* Restore featured character and Light Cone labels in compact cards at every viewport width */
+#currentBanner[data-banner-view="compact"] .current-banner-grid .current-banner-copy > p.current-banner-roster{display:flex!important;visibility:visible!important;height:auto!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;overflow:visible!important;flex-wrap:wrap!important;gap:4px!important}
 </style></head><body>
 <header>
 <div class="wrap">
