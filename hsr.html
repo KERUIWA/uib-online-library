@@ -262,7 +262,7 @@ function startBannerArtworkCycle(host){
   });
  },4500);
 }
-async async function renderCurrentBanner(){
+async function renderCurrentBanner(){
  const host=$("currentBanner"),status=$("currentBannerStatus"),now=Date.now();
  const warps=events.filter(x=>x.isWarp);
  const active=warps.filter(x=>(!x.start||x.start.getTime()<=now)&&(!x.end||x.end.getTime()>now));
