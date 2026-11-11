@@ -511,12 +511,33 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #currentBanner[data-banner-view="compact"] .current-banner-copy .banner-countdown{flex:0 0 auto;white-space:normal;line-height:1.45;margin-top:9px!important}
 #currentBanner[data-banner-view="compact"] .current-banner-copy .card-link{margin-top:10px!important}
 
-/* Align date blocks to the same baseline across every compact card, desktop and mobile */
-#currentBanner[data-banner-view="compact"] .current-banner-row{align-items:stretch!important}
-#currentBanner[data-banner-view="compact"] .current-banner-row>.current-banner-grid{align-self:stretch!important}
-#currentBanner[data-banner-view="compact"] .current-banner-grid{height:100%!important;grid-template-rows:155px minmax(0,1fr)!important}
-#currentBanner[data-banner-view="compact"] .current-banner-copy{height:100%!important;min-height:0!important;box-sizing:border-box!important}
-#currentBanner[data-banner-view="compact"] .current-banner-copy .dates{margin-top:auto!important;flex:0 0 auto!important}
+/* Compact cards use one fixed size; date blocks share an identical bottom position */
+#currentBanner[data-banner-view="compact"] .current-banner-grid{
+  height:440px!important;
+  min-height:440px!important;
+  max-height:440px!important;
+  box-sizing:border-box!important;
+  grid-template-rows:155px minmax(0,1fr)!important;
+  overflow:hidden!important
+}
+#currentBanner[data-banner-view="compact"] .current-banner-copy{
+  height:285px!important;
+  min-height:0!important;
+  max-height:285px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  display:flex!important;
+  flex-direction:column!important
+}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .dates{
+  flex:0 0 48px!important;
+  height:48px!important;
+  min-height:48px!important;
+  max-height:48px!important;
+  box-sizing:border-box!important;
+  margin: auto 0 0!important;
+  overflow:hidden!important
+}
 
 /* Keep featured roster hidden in compact cards at every viewport width */
 #currentBanner[data-banner-view="compact"] .current-banner-grid .current-banner-copy > p.current-banner-roster{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
