@@ -270,7 +270,7 @@ async function refreshAll(){
   snapshotStates[name]="ok";
   return data;
  }
- const calendarTask=snapshotOrDirect("calendar",data=>data&&(!(!Array.isArray(data.events)&&!Array.isArray(data.banners)),()=>fetchJSON("https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us").then(data=>{
+ const calendarTask=snapshotOrDirect("calendar",data=>data&&(Array.isArray(data.events)||Array.isArray(data.banners)),()=>fetchJSON("https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us").then(data=>{
   if(!data||(!Array.isArray(data.events)&&!Array.isArray(data.banners)))throw new Error("Calendar response has an unexpected format");
   return data;
  }));
@@ -290,7 +290,7 @@ async function refreshAll(){
   const calendarData=calendarResult.status==="fulfilled"?calendarResult.value:null;
   const activityData=activityResult.status==="fulfilled"?activityResult.value:null;
   if(calendarData){
-   feedState.calendar="ok";
+   feedState.calendar=snapshotStates.calendar||"ok";
    const calendarEvents=Array.isArray(calendarData.events)?calendarData.events:[];
    const calendarBanners=Array.isArray(calendarData.banners)?calendarData.banners:[];
    const acts=calendarEvents.map(x=>({id:x.id,name:x.name,kind:x.type_name||"Event",description:x.description||"",startTime:x.start_time?new Date(x.start_time*1000).toISOString():null,endTime:x.end_time?new Date(x.end_time*1000).toISOString():null,cover:x.image_url}));
