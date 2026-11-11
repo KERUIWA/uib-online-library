@@ -1394,7 +1394,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   currentAudioFile=currentAudioFiles[voiceLanguage]||null;
   cyreneVoice.pause();
   cyreneVoice.currentTime=0;
-  languageButton.textContent=voiceLanguage.toUpperCase();
+  languageButton.textContent=voiceLanguage==="ja"?"JP":"EN";
   languageButton.setAttribute("aria-pressed",String(voiceLanguage==="ja"));
   languageButton.setAttribute("aria-label",voiceLanguage==="en"?"Switch voice language to Japanese":"Switch voice language to English");
   languageButton.title=voiceLanguage==="en"?"Switch to Japanese audio":"Switch to English audio";
