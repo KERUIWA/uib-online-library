@@ -15,10 +15,11 @@
 .confetti-piece{position:fixed;z-index:1100;top:-14px;width:9px;height:14px;pointer-events:none;animation:confettiFall 6.8s cubic-bezier(.12,.58,.2,1) forwards;will-change:transform,opacity}@keyframes confettiFall{0%{transform:translate3d(0,-2vh,0) rotate(0);opacity:1}78%{opacity:1}100%{transform:translate3d(var(--drift),110vh,0) rotate(var(--spin));opacity:0}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 .header-nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.header-nav a{display:inline-flex;align-items:center;border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:999px;padding:8px 11px;font-size:12px;font-weight:750;text-decoration:none}.topline{flex-wrap:wrap}\n
-/* Consistent theme toggle across every library page */
-#themeToggle{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:5px;min-width:112px;height:36px;padding:0 12px;border:1px solid #3157d5;border-radius:999px;background:#3157d5;color:#fff;font:700 12px/1.2 Inter,Segoe UI,Arial,sans-serif;white-space:nowrap;text-decoration:none;cursor:pointer;box-shadow:0 2px 7px #17203318;transition:background .2s,border-color .2s,transform .2s,filter .2s}
-#themeToggle:hover{background:#2548bd;border-color:#2548bd;transform:translateY(-1px);filter:brightness(1.04)}
-#themeToggle:focus-visible{outline:3px solid color-mix(in srgb,#3157d5 35%,transparent);outline-offset:3px}
+
+/* One shared appearance for the theme control on every page */
+#themeToggle{box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;width:124px!important;min-width:124px!important;height:38px!important;min-height:38px!important;padding:0 12px!important;border:1px solid #3157d5!important;border-radius:999px!important;background:#3157d5!important;color:#fff!important;font-family:Inter,Segoe UI,Arial,sans-serif!important;font-size:12px!important;font-weight:700!important;line-height:1.2!important;white-space:nowrap!important;text-decoration:none!important;cursor:pointer!important;box-shadow:0 2px 7px #17203318!important;}
+#themeToggle:hover{background:#2548bd!important;border-color:#2548bd!important;transform:translateY(-1px)!important;}
+#themeToggle:focus-visible{outline:3px solid #3157d559!important;outline-offset:3px!important;}
 </style></head><body>
 <header><div class="wrap"><div class="topline"><div class="eyebrow">Universitas Internasional Batam · Class of 2026</div><nav class="header-nav"><a href="dashboard.html">🎓 Dashboard</a><a href="index.html">📚 Library</a><button class="theme-toggle" id="themeToggle" type="button">☾ Dark mode</button></nav></div><h1>Assignment & Deadline Tracker</h1><div class="sub">Keep every task visible. Never let a deadline sneak up on you.</div></div></header>
 <div class="toast" id="toast" role="status" aria-live="polite">✓ Assignment saved!</div><main>
