@@ -683,7 +683,8 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #currentBanner[data-banner-view="compact"] .current-banner-copy .card-link{
   margin:0!important
 }
-/* Keep title and dates anchored; let featured details sit immediately below the title */
+/* Keep title and date positions fixed; use the middle paragraph as a spacer,
+   while aligning its actual text/chips to the top directly under the title. */
 #currentBanner[data-banner-view="compact"] .current-banner-copy .banner-labels{
   margin:0 0 4px!important
 }
@@ -692,16 +693,16 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 }
 #currentBanner[data-banner-view="compact"] .current-banner-copy > p.current-banner-roster{
   display:flex!important;
-  flex:0 0 auto!important;
+  flex:1 1 auto!important;
   min-height:0!important;
-  align-items:center!important;
+  align-items:flex-start!important;
   align-content:flex-start!important;
   justify-content:center!important;
   text-align:center!important;
   margin:0!important
 }
 #currentBanner[data-banner-view="compact"] .current-banner-copy > p:not(.current-banner-roster){
-  flex:0 0 auto!important;
+  flex:1 1 auto!important;
   min-height:0!important;
   align-content:flex-start!important;
   text-align:center!important;
