@@ -42,7 +42,7 @@ jobs:
           import re
           from pathlib import Path
           html = Path("hsr.html").read_text(encoding="utf-8")
-          scripts = re.findall(r"<script>([\\s\\S]*?)</script>", html)
+          scripts = re.findall(r"<script>(.*?)</script>", html, re.S)
           if not scripts:
               raise SystemExit("No inline scripts found in hsr.html")
           Path("/tmp/hsr-inline.js").write_text(scripts[-1], encoding="utf-8")
