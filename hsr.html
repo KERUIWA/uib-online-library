@@ -853,8 +853,6 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #cyreneEncounter .cyrene-signature{display:block;margin-top:12px;color:#d9bd91;font-size:9px;font-weight:850;letter-spacing:.2em;text-transform:uppercase}
 #cyreneEncounter .cyrene-dismiss{margin-top:13px;padding:7px 12px;border:1px solid #c8a87888;border-radius:999px;background:#ffffff0a;color:#f2d9ad;font:750 10px/1.2 Inter,Segoe UI,Arial,sans-serif;cursor:pointer;transition:background .2s,border-color .2s}
 #cyreneEncounter .cyrene-dismiss:hover{background:#ffffff18;border-color:#e5c38b}
-#cyreneEncounter .cyrene-close{position:absolute;top:14px;right:13px;z-index:4;width:25px;height:25px;border:1px solid #ffffff30;border-radius:50%;background:#100e1c88;color:#f8e9d1;font-size:16px;line-height:1;cursor:pointer}
-#cyreneEncounter .cyrene-close:hover{background:#ffffff20}
 @keyframes cyreneFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @media(max-width:560px){#cyreneEncounter{right:14px;bottom:14px;width:calc(100vw - 28px);min-height:166px;grid-template-columns:minmax(0,1fr) 112px;border-radius:16px}#cyreneEncounter .cyrene-art{min-height:166px;max-height:190px}#cyreneEncounter .cyrene-copy{padding:23px 2px 16px 18px}#cyreneEncounter .cyrene-line{font-size:13px;line-height:1.48}#cyreneEncounter .cyrene-kicker{font-size:8px;letter-spacing:.13em;margin-bottom:8px}#cyreneEncounter .cyrene-signature{margin-top:9px}#cyreneEncounter .cyrene-dismiss{margin-top:10px;padding:6px 9px;font-size:9px}}
 @media(max-width:370px){#cyreneEncounter{grid-template-columns:minmax(0,1fr) 92px}#cyreneEncounter .cyrene-copy{padding-left:15px}#cyreneEncounter .cyrene-line{font-size:12px}}
@@ -909,7 +907,6 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 <aside id="cyreneEncounter" aria-live="polite" aria-hidden="true" hidden>
 <img class="cyrene-art" src="https://static.icy-veins.com/images/honkai-star-rail/characters/full/cyrene.webp" alt="Cyrene from Honkai: Star Rail">
 <div class="cyrene-copy">
-<button class="cyrene-close" id="cyreneClose" type="button" aria-label="Dismiss Cyrene">×</button>
 <span class="cyrene-kicker">A visitor from the Garden</span>
 <p class="cyrene-line" id="cyreneDialogue"></p>
 <span class="cyrene-signature">Cyrene</span>
@@ -1302,10 +1299,9 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
 (()=>{
  const panel=document.getElementById("cyreneEncounter");
  const dialogue=document.getElementById("cyreneDialogue");
- const closeButton=document.getElementById("cyreneClose");
  const dismissButton=document.getElementById("cyreneDismiss");
  const title=document.querySelector(".hero h1");
- if(!panel||!dialogue||!closeButton||!dismissButton||!title)return;
+ if(!panel||!dialogue||!dismissButton||!title)return;
  const KEY="uib-hsr-cyrene-encounters-v1";
  const lines={
   visitor:"Oh? You've been here for quite some time. Were you waiting for someone?",
@@ -1315,19 +1311,28 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  };
  let seen={};
  try{seen=JSON.parse(sessionStorage.getItem(KEY)||"{}")||{}}catch(e){}
- let queue=[],showing=false;
+ let queue=[],showing=false,typeTimer=null;
  const save=()=>{try{sessionStorage.setItem(KEY,JSON.stringify(seen))}catch(e){}};
+ function typeLine(id,index){
+  if(!showing)return;
+  dialogue.textContent=lines[id].slice(0,index);
+  if(index<lines[id].length)typeTimer=setTimeout(()=>typeLine(id,index+1),28);
+  else typeTimer=null;
+ }
  function showNext(){
   if(showing||!queue.length)return;
   const id=queue.shift();
-  dialogue.textContent=lines[id];
+  dialogue.textContent="";
   panel.hidden=false;
   panel.setAttribute("aria-hidden","false");
-  requestAnimationFrame(()=>panel.classList.add("open"));
   showing=true;
+  requestAnimationFrame(()=>panel.classList.add("open"));
+  typeLine(id,1);
  }
  function dismiss(){
   if(!showing)return;
+  clearTimeout(typeTimer);
+  typeTimer=null;
   panel.classList.remove("open");
   panel.setAttribute("aria-hidden","true");
   showing=false;
@@ -1348,7 +1353,6 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   }
   showNext();
  }
- closeButton.addEventListener("click",dismiss);
  dismissButton.addEventListener("click",dismiss);
  let clicks=0;
  title.addEventListener("click",()=>{
