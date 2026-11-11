@@ -442,8 +442,14 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 
 
 /* Banner character rarity accents */
-#currentBanner .current-banner-cycle-name.rarity-five,#currentBanner .current-banner-character-chip.rarity-five{color:#ffe0a0;border-color:#e8bd62aa;background:linear-gradient(135deg,#4b3518ed,#241b19ed)}
+#currentBanner .current-banner-cycle-name.rarity-five,#currentBanner .current-banner-character-chip.rarity-five{color:#fff0a6;border-color:#ffd34f;background:linear-gradient(135deg,#76500feF,#3b2809f2);box-shadow:0 0 0 1px #ffd34f44,0 0 14px #ffca3a55;text-shadow:0 0 9px #ffd34f99}
 #currentBanner .current-banner-cycle-name.rarity-four,#currentBanner .current-banner-character-chip.rarity-four{color:#e3c5ff;border-color:#b88beaaa;background:linear-gradient(135deg,#39234fed,#211a35ed)}
+#currentBanner .current-banner-cycle-name.rarity-five{border-width:1px;box-shadow:0 0 0 1px #ffd34f55,0 0 18px #ffca3a88,0 0 32px #ffb30044;text-shadow:0 0 7px #fff1a8,0 0 15px #ffc533;animation:bannerGoldSparkle 2.4s ease-in-out infinite alternate}
+#currentBanner .current-banner-cycle-name.rarity-five:before,#currentBanner .current-banner-cycle-name.rarity-five:after{content:"✦";position:absolute;color:#fff3b5;font-size:10px;text-shadow:0 0 8px #ffd34f;pointer-events:none}
+#currentBanner .current-banner-cycle-name.rarity-five:before{left:-9px;top:-7px}
+#currentBanner .current-banner-cycle-name.rarity-five:after{right:-8px;bottom:-7px;font-size:8px}
+@keyframes bannerGoldSparkle{from{filter:brightness(1);box-shadow:0 0 0 1px #ffd34f55,0 0 12px #ffca3a66}to{filter:brightness(1.22);box-shadow:0 0 0 1px #fff0a688,0 0 22px #ffca3aaa,0 0 34px #ffb30055}}
+#currentBanner .current-banner-phase{color:#ffe2a0;border-color:#d6a94e;background:linear-gradient(135deg,#493416,#241b13);letter-spacing:.07em}
 #currentBanner .current-banner-character-chip{display:inline-flex;align-items:center;padding:5px 10px;margin:3px 5px 3px 0;border:1px solid;border-radius:999px;font-size:12px;font-weight:850;white-space:nowrap}
 #currentBanner .current-banner-copy p.current-banner-roster{display:flex;flex-wrap:wrap;align-items:center;gap:2px;margin-top:2px}
 </style></head><body>
@@ -575,11 +581,11 @@ function bannerCardMarkup(x,label,map){
   imageMarkup='<div class="current-banner-art current-banner-cycle" data-slide-index="0" data-cycle-slides="'+esc(slideData)+'">'+(first.src?'<img src="'+esc(first.src)+'" alt="'+esc(first.name)+' character artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name '+(String(first.rarity).includes("4")?"rarity-four":"rarity-five")+'">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / '+slides.length+'</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
  }
  const title=isLightCone?(x.name||"Light Cone Event Warp"):"Featured Warp Lineup";
- const featured=names.length?'<span class="current-banner-roster-label">Featured characters</span>'+slides.map(item=>'<span class="current-banner-character-chip '+(String(item.rarity).includes("4")?"rarity-four":"rarity-five")+'">'+esc(item.name)+'</span>').join(""):coneNames.length?"Featured Light Cones: "+coneNames.join(", "):(x.description||"Character Event Warp");
+ const featured=names.length?slides.map(item=>'<span class="current-banner-character-chip '+(String(item.rarity).includes("4")?"rarity-four":"rarity-five")+'">'+esc(item.name)+'</span>').join(""):coneNames.length?"Featured Light Cones: "+coneNames.join(", "):(x.description||"Character Event Warp");
  const typeLabel=isLightCone?"Light Cone Event Warp":"Character Event Warp";
  const statusLabel=isLive?'<span class="tag live">LIVE</span>':isUpcoming?'<span class="tag">UPCOMING</span>':"";
  const countdownLabel=isUpcoming?"Starts in ":"Ends in ";
- return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><div class="banner-labels"><span class="tag">'+typeLabel+'</span>'+statusLabel+'</div><h3>'+esc(title)+'</h3><p class="'+(names.length?"current-banner-roster":"")+'">'+featured+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+countdownLabel+remaining(isUpcoming?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
+ return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><div class="banner-labels"><span class="tag">'+typeLabel+'</span>'+(isLightCone?"":'<span class="tag current-banner-phase">PHASE 1/2</span>')+statusLabel+'</div><h3>'+esc(title)+'</h3><p class="'+(names.length?"current-banner-roster":"")+'">'+featured+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+countdownLabel+remaining(isUpcoming?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
 }
 function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
  const slide=slides[index],img=panel.querySelector("img"),placeholder=panel.querySelector(".current-banner-cycle-placeholder"),label=panel.querySelector(".current-banner-cycle-name"),position=panel.querySelector(".current-banner-cycle-position");
