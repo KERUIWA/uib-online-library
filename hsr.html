@@ -209,15 +209,11 @@ function bannerCardMarkup(x,label,map){
  const cones=Array.isArray(x.light_cones)?x.light_cones:[];
  const coneNames=cones.map(y=>typeof y==="string"?y:(y.name||y.full_name||"")).filter(Boolean);
  const isLightCone=cones.length>0&&names.length===0;
- const isAha=/aha/i.test([x.name,x.description,x.kind].filter(Boolean).join(" "));
  const slides=bannerArtworkSlides(map,x.characters),first=slides[0]||{name:"Featured character",src:""};
  const coneArt=isLightCone?(typeof cones[0]==="object"?(cones[0].icon||cones[0].image||cones[0].icon_url||""):""):"";
- const art=isAha?bannerArtwork(x):coneArt;
  const isLive=label==="Live",isUpcoming=label==="Upcoming";
  let imageMarkup;
- if(isAha){
-  imageMarkup='<div class="current-banner-art"><img src="'+esc(art)+'" alt="Aha banner artwork" loading="eager"></div>';
- }else if(isLightCone){
+ if(isLightCone){
   imageMarkup='<div class="current-banner-art"><img src="'+esc(art)+'" alt="'+esc(coneNames[0]||"Featured Light Cone")+'" loading="eager" style="object-fit:contain;padding:22px"></div>';
  }else{
   const slideData=encodeURIComponent(JSON.stringify(slides));
