@@ -848,9 +848,11 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #cyreneEncounter.open{opacity:1;transform:translate3d(0,0,0) scale(1);pointer-events:auto}
 #cyreneEncounter .cyrene-art{grid-column:2;grid-row:1;width:100%;height:100%;min-height:190px;max-height:230px;object-fit:contain;object-position:center bottom;align-self:end;filter:drop-shadow(0 8px 16px #080611aa);animation:cyreneFloat 4.2s ease-in-out infinite;z-index:1}
 #cyreneEncounter .cyrene-copy{grid-column:1;grid-row:1;position:relative;z-index:2;align-self:center;padding:25px 8px 20px 23px;min-width:0}
-#cyreneEncounter .cyrene-mute{position:absolute;top:9px;right:9px;z-index:4;width:27px;height:27px;display:grid;place-items:center;padding:0;border:1px solid #c8a87888;border-radius:50%;background:#ffffff0d;color:#f2d9ad;font:14px/1 Arial,sans-serif;cursor:pointer;transition:background .2s,border-color .2s}
-#cyreneEncounter .cyrene-mute:hover{background:#ffffff20;border-color:#e5c38b}
-#cyreneEncounter .cyrene-mute:focus-visible{outline:2px solid #e5c38b;outline-offset:2px}
+#cyreneEncounter .cyrene-controls{position:absolute;right:10px;bottom:9px;z-index:5;display:flex;align-items:center;gap:5px}
+#cyreneEncounter .cyrene-control{width:29px;height:29px;display:grid;place-items:center;padding:0;border:1px solid #c8a87899;border-radius:50%;background:#211b30eF;color:#f2d9ad;font:15px/1 Inter,Segoe UI,Arial,sans-serif;cursor:pointer;box-shadow:0 2px 8px #08061166;transition:background .2s,border-color .2s,transform .2s}
+#cyreneEncounter .cyrene-control:hover{background:#493653;border-color:#e5c38b;transform:translateY(-1px)}
+#cyreneEncounter .cyrene-control:focus-visible{outline:2px solid #e5c38b;outline-offset:2px}
+#cyreneEncounter .cyrene-language{width:34px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.04em}
 #cyreneEncounter .cyrene-kicker{display:block;margin:0 25px 10px 0;color:#e7c995;font-size:9px;font-weight:850;letter-spacing:.18em;text-transform:uppercase}
 #cyreneEncounter .cyrene-line{margin:0;color:#fff8ee;font:500 15px/1.55 Georgia,serif;text-wrap:pretty}
 #cyreneEncounter .cyrene-signature{display:block;margin-top:12px;color:#d9bd91;font-size:9px;font-weight:850;letter-spacing:.2em;text-transform:uppercase}
@@ -915,12 +917,16 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 <aside id="cyreneEncounter" aria-live="polite" aria-hidden="true" hidden>
 <img class="cyrene-art" src="https://static.icy-veins.com/images/honkai-star-rail/characters/full/cyrene.webp" alt="Cyrene from Honkai: Star Rail">
 <div class="cyrene-copy">
-<button class="cyrene-mute" id="cyreneMute" type="button" aria-label="Mute Cyrene voice" aria-pressed="false" title="Mute voice">🔊</button>
 <span class="cyrene-kicker">A visitor from the Garden</span>
 <p class="cyrene-line" id="cyreneDialogue"></p>
 <div class="cyrene-choices" id="cyreneChoices" hidden></div>
 <span class="cyrene-signature">Cyrene</span>
 <button class="cyrene-dismiss" id="cyreneDismiss" type="button" hidden>Until we meet again</button>
+</div>
+<div class="cyrene-controls" role="group" aria-label="Cyrene voice controls">
+ <button class="cyrene-control" id="cyreneMute" type="button" aria-label="Mute Cyrene voice" aria-pressed="false" title="Mute voice">🔊</button>
+ <button class="cyrene-control" id="cyreneReplay" type="button" aria-label="Replay current voice line" title="Replay voice">↻</button>
+ <button class="cyrene-control cyrene-language" id="cyreneLanguage" type="button" aria-label="Switch voice language to Japanese" aria-pressed="false" title="Switch to Japanese audio">EN</button>
 </div>
 </aside>
 <script>
@@ -1311,6 +1317,8 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  const dialogue=document.getElementById("cyreneDialogue");
  const dismissButton=document.getElementById("cyreneDismiss");
  const muteButton=document.getElementById("cyreneMute");
+ const replayButton=document.getElementById("cyreneReplay");
+ const languageButton=document.getElementById("cyreneLanguage");
  const choicesHost=document.getElementById("cyreneChoices");
  const title=document.querySelector(".hero h1");
  if(!panel||!dialogue||!dismissButton||!choicesHost||!title)return;
@@ -1333,11 +1341,12 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   ]}
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
- let seen={},queue=[],showing=false,typeTimer=null,voiceMuted=false;
+ let seen={},queue=[],showing=false,typeTimer=null,voiceMuted=false,voiceLanguage="en",currentAudioFiles={en:null,ja:null},currentAudioFile=null;
  const cyreneVoice=new Audio();
  cyreneVoice.preload="auto";
  cyreneVoice.muted=voiceMuted;
  function playVoice(file,onStarted){
+  currentAudioFile=file||null;
   if(!file){onStarted();return}
   cyreneVoice.pause();
   cyreneVoice.currentTime=0;
@@ -1360,15 +1369,34 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   cyreneVoice.pause();
   cyreneVoice.currentTime=0;
  }
- function typeText(text,onComplete,audioFile){
+ function typeText(text,onComplete,audioFiles){
   clearTimeout(typeTimer);
+  currentAudioFiles=audioFiles||{en:null,ja:null};
   function step(index){
    if(!showing)return;
    dialogue.textContent=text.slice(0,index);
    if(index<text.length)typeTimer=setTimeout(()=>step(index+1),28);
    else{typeTimer=null;if(onComplete)onComplete()}
   }
-  playVoice(audioFile,()=>{if(showing)step(1)});
+  playVoice(currentAudioFiles[voiceLanguage],()=>{if(showing)step(1)});
+ }
+ function replayVoice(){
+  if(!currentAudioFile||voiceMuted)return;
+  cyreneVoice.pause();
+  cyreneVoice.currentTime=0;
+  const playback=cyreneVoice.play();
+  if(playback&&typeof playback.catch==="function")playback.catch(()=>{});
+ }
+ function updateVoiceLanguage(){
+  currentAudioFile=currentAudioFiles[voiceLanguage]||null;
+  cyreneVoice.pause();
+  cyreneVoice.currentTime=0;
+  languageButton.textContent=voiceLanguage.toUpperCase();
+  languageButton.setAttribute("aria-pressed",String(voiceLanguage==="ja"));
+  languageButton.setAttribute("aria-label",voiceLanguage==="en"?"Switch voice language to Japanese":"Switch voice language to English");
+  languageButton.title=voiceLanguage==="en"?"Switch to Japanese audio":"Switch to English audio";
+  replayButton.disabled=!currentAudioFile;
+  replayButton.title=currentAudioFile?"Replay voice":"No audio added for this language yet";
  }
  function renderChoices(id){
   choicesHost.replaceChildren();
@@ -1377,7 +1405,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
    button.type="button";button.className="cyrene-choice";button.textContent=label;
    button.addEventListener("click",()=>{
     choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
-    typeText(reply,()=>{dismissButton.hidden=false;dismissButton.focus()},conversations[id].choices[index][2]);
+    typeText(reply,()=>{dismissButton.hidden=false;dismissButton.focus()},{en:conversations[id].choices[index][2],ja:conversations[id].choices[index][3]||null});
    },{once:true});
    choicesHost.appendChild(button);
   });
@@ -1389,7 +1417,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   dialogue.textContent="";choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
   panel.hidden=false;panel.setAttribute("aria-hidden","false");showing=true;
   requestAnimationFrame(()=>panel.classList.add("open"));
-  typeText(conversations[id].line,()=>renderChoices(id),conversations[id].audio);
+  typeText(conversations[id].line,()=>renderChoices(id),{en:conversations[id].audio,ja:conversations[id].audioJa||null});
  }
  function dismiss(){
   if(!showing)return;
@@ -1403,6 +1431,11 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   if(seen.visitor&&seen.curious&&seen.midnight&&!seen.reunion){seen.reunion=true;queue.push("reunion")}
   showNext();
  }
+ replayButton.addEventListener("click",replayVoice);
+ languageButton.addEventListener("click",()=>{
+  voiceLanguage=voiceLanguage==="en"?"ja":"en";
+  updateVoiceLanguage();
+ });
  muteButton.addEventListener("click",()=>{
   voiceMuted=!voiceMuted;
   cyreneVoice.muted=voiceMuted;
@@ -1410,6 +1443,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   muteButton.setAttribute("aria-label",voiceMuted?"Unmute Cyrene voice":"Mute Cyrene voice");
   muteButton.setAttribute("aria-pressed",String(voiceMuted));
   muteButton.title=voiceMuted?"Unmute voice":"Mute voice";
+  replayButton.disabled=voiceMuted||!currentAudioFile;
  });
  dismissButton.addEventListener("click",dismiss);
  let clicks=0;
