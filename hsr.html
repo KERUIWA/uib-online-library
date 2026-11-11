@@ -601,9 +601,9 @@ function bannerCardMarkup(x,label,map){
 }
 function bannerRosterLabelMarkup(slides,index){
  const names=(slides||[]).map(item=>String(item.name||""));
- const aeon=names.some(name=>/^Aeon\\s*★/i.test(name));
+ const aeon=names.some(name=>/^Aeon\s*★/i.test(name));
  const chips=names.map((name,i)=>{
-  const clean=name.replace(/^Aeon\\s*★\\s*/i,"").trim()||name;
+  const clean=name.replace(/^Aeon\s*★\s*/i,"").trim()||name;
   return '<span class="current-banner-roster-chip'+(i===index?' is-active':'')+'">'+esc(clean)+'</span>';
  }).join("");
  return (aeon?'<span class="current-banner-roster-kicker">Aeon ★</span>':"")+'<span class="current-banner-roster-list">'+chips+'</span>';
