@@ -510,7 +510,8 @@ function normalizeActivities(data){
   image:x.cover||x.image||x.image_url||x.banner||x.poster||"",
   url:x.url||x.link||"",
   characters:Array.isArray(x.characters)?x.characters:[],
-  light_cones:Array.isArray(x.light_cones)?x.light_cones:[]
+  light_cones:Array.isArray(x.light_cones)?x.light_cones:[],
+  phase:x.phase??x.phase_number??x.phaseNumber??x.banner_phase??x.bannerPhase??null
  })).filter(x=>x.name);
 }
 let dripArtworkMap=null,dripArtworkPromise=null,bannerCycleTimer=null;
@@ -565,6 +566,18 @@ function bannerArtworkSlides(map,characters){
  const remaining=names.filter(key=>!priority.some(name=>normalizeCharacterName(name)===key)).sort((a,b)=>a.localeCompare(b));
  return [...priority.map(name=>({name,src:map[normalizeCharacterName(name)]})),...remaining.map(key=>({name:map.__names?.[key]||key,src:map[key]}))];
 }
+function bannerPhaseNumber(x){
+ const explicit=String(x.phase??"").match(/[12]/);
+ if(explicit)return explicit[0];
+ const start=x.start instanceof Date?x.start:parseDate(x.start);
+ const versionStart=versionData?.startTime?parseDate(versionData.startTime):null;
+ const versionEnd=versionData?.endTime?parseDate(versionData.endTime):null;
+ if(start&&versionStart&&versionEnd&&versionEnd>versionStart){
+  const midpoint=new Date((versionStart.getTime()+versionEnd.getTime())/2);
+  return start<midpoint?"1":"2";
+ }
+ return "";
+}
 function bannerCardMarkup(x,label,map){
  const names=bannerCharacters(x);
  const cones=Array.isArray(x.light_cones)?x.light_cones:[];
@@ -585,7 +598,7 @@ function bannerCardMarkup(x,label,map){
  const typeLabel=isLightCone?"Light Cone Event Warp":"Character Event Warp";
  const statusLabel=isLive?'<span class="tag live">LIVE</span>':isUpcoming?'<span class="tag">UPCOMING</span>':"";
  const countdownLabel=isUpcoming?"Starts in ":"Ends in ";
- return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><div class="banner-labels"><span class="tag">'+typeLabel+'</span>'+(isLightCone?"":'<span class="tag current-banner-phase">PHASE 1/2</span>')+statusLabel+'</div><h3>'+esc(title)+'</h3><p class="'+(names.length?"current-banner-roster":"")+'">'+featured+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+countdownLabel+remaining(isUpcoming?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
+ return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><div class="banner-labels"><span class="tag">'+typeLabel+'</span>'+(bannerPhaseNumber(x)?'<span class="tag current-banner-phase">PHASE '+bannerPhaseNumber(x)+'</span>':"")+statusLabel+'</div><h3>'+esc(title)+'</h3><p class="'+(names.length?"current-banner-roster":"")+'">'+featured+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+countdownLabel+remaining(isUpcoming?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
 }
 function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
  const slide=slides[index],img=panel.querySelector("img"),placeholder=panel.querySelector(".current-banner-cycle-placeholder"),label=panel.querySelector(".current-banner-cycle-name"),position=panel.querySelector(".current-banner-cycle-position");
