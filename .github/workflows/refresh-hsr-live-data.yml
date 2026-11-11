@@ -1,4 +1,5 @@
 name: Refresh HSR live data
+# Validates hsr.html before publishing the same-origin live snapshot.
 
 on:
   push:
