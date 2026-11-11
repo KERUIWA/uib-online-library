@@ -284,6 +284,52 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 /* Spotlight portrait balance: lift Aha artwork slightly so the figure sits visually centered. */
 .spotlight .aha-poster img{transform:translateY(-12px)}
 @media(max-width:760px){.spotlight .aha-poster img{transform:translateY(-8px)}}
+
+/* HSR CURRENT WARP REDESIGN: cinematic in-game Warp presentation */
+#warpSection .section-head{align-items:center;margin-bottom:20px}
+#warpSection .section-head h2{font-family:Georgia,serif;font-size:clamp(25px,3vw,34px);letter-spacing:.025em}
+#warpSection .section-head p{max-width:560px}
+#currentBanner{--warp-gold:#f4d49a;--warp-ink:#f8f2ff}
+#currentBanner .current-banner-stack{gap:34px}
+#currentBanner .current-banner-group{gap:13px}
+#currentBanner .current-banner-group-title{display:flex;align-items:center;gap:10px;color:var(--warp-gold);font-size:11px;font-weight:900;letter-spacing:.19em;text-transform:uppercase}
+#currentBanner .current-banner-group-title:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,#d8b87888,transparent)}
+#currentBanner .current-banner-grid{position:relative;isolation:isolate;grid-template-columns:minmax(0,1.48fr) minmax(280px,.82fr);gap:0;min-height:390px;border:1px solid #d8c18b55;border-radius:18px;background:radial-gradient(ellipse at 78% 15%,#7660a633,transparent 38%),linear-gradient(125deg,#11182b,#17152c 55%,#29203c);box-shadow:0 18px 55px #05081766,inset 0 1px #ffffff1c;overflow:hidden}
+#currentBanner .current-banner-grid:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(110deg,transparent 45%,#c8a86d0d 70%,#c8a86d18);border-radius:inherit}
+#currentBanner .current-banner-art{min-height:390px;height:100%;background:radial-gradient(ellipse at 52% 55%,#8c72b655,transparent 58%),linear-gradient(120deg,#202345,#32264c 62%,#51354f)}
+#currentBanner .current-banner-art:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 65%,#15172a88 100%),linear-gradient(0deg,#12162966,transparent 38%);box-shadow:inset 0 0 70px #090d1d55}
+#currentBanner .current-banner-art img{min-height:390px;height:100%;object-fit:contain;background:transparent;filter:drop-shadow(0 12px 24px #080b1b88)}
+#currentBanner .current-banner-cycle{padding:12px 26px 43px}
+#currentBanner .current-banner-cycle img{max-height:440px;min-height:320px;object-fit:contain}
+#currentBanner .current-banner-cycle-name{top:auto;bottom:13px;left:50%;padding:6px 15px;border:1px solid #e7d19a66;background:#111629dd;color:#fff2d8;font-size:11px;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 5px 20px #0005}
+#currentBanner .current-banner-cycle-controls{bottom:12px;z-index:3}
+#currentBanner .current-banner-cycle-controls button{width:36px;height:36px;border-color:#e8d29b88;background:#17182de8;color:#f7dfb1;transition:background .2s,transform .2s}
+#currentBanner .current-banner-cycle-controls button:hover{background:#55416f;transform:scale(1.08)}
+#currentBanner .current-banner-cycle-position{background:#111629dd;color:#f8e6c5;border:1px solid #e8d29b55}
+#currentBanner .current-banner-copy{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;align-self:stretch;padding:clamp(22px,3vw,38px);background:linear-gradient(145deg,#171b30e8,#171426f5);border-left:1px solid #e6cb8a2b;color:var(--warp-ink)}
+#currentBanner .banner-labels{gap:8px;margin-bottom:17px}
+#currentBanner .current-banner-copy .tag{padding:6px 10px;border:1px solid #d9c18b66;background:#d9c18b16;color:#f5dcae;font-size:9px;letter-spacing:.12em}
+#currentBanner .current-banner-copy .tag.live{border-color:#70dca7a6;background:#1c8c5c2b;color:#91f0bd;box-shadow:0 0 18px #40d58b24}
+#currentBanner .current-banner-copy h3{font-family:Georgia,serif;font-size:clamp(25px,3vw,37px);line-height:1.06;letter-spacing:.015em;color:#fff5e6;margin:0 0 13px;text-shadow:0 3px 22px #0008}
+#currentBanner .current-banner-copy p{font-size:12px;line-height:1.7;color:#c9c6d8}
+#currentBanner .current-banner-copy .dates{margin-top:20px;padding-top:15px;border-top:1px solid #ffffff1c;color:#aaaec2;font-size:11px;line-height:1.9}
+#currentBanner .current-banner-copy .banner-countdown{margin-top:14px;padding:11px 13px;border:1px solid #d9bd7d55;border-radius:10px;background:linear-gradient(100deg,#c49b4d22,#7561a522);color:#f5dcae;font-size:12px;letter-spacing:.035em}
+#currentBanner .current-banner-copy .card-link{align-self:flex-start;margin-top:17px;color:#f4d49a;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+#currentBanner .current-banner-empty{background:var(--surface)}
+@media(max-width:760px){
+ #currentBanner .current-banner-grid{grid-template-columns:minmax(0,1fr);min-height:0}
+ #currentBanner .current-banner-art{min-height:300px;height:clamp(300px,76vw,430px)}
+ #currentBanner .current-banner-art img{min-height:300px}
+ #currentBanner .current-banner-cycle img{min-height:260px;max-height:380px}
+ #currentBanner .current-banner-copy{padding:23px 22px 25px;border-left:0;border-top:1px solid #e6cb8a2b}
+}
+@media(max-width:430px){
+ #currentBanner .current-banner-art{height:300px;min-height:300px}
+ #currentBanner .current-banner-art img{min-height:300px}
+ #currentBanner .current-banner-cycle{padding-inline:15px}
+ #currentBanner .current-banner-copy h3{font-size:27px}
+}
+
 </style></head><body>
 <header>
 <div class="wrap">
