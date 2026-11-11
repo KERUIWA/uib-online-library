@@ -851,6 +851,11 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #cyreneEncounter .cyrene-kicker{display:block;margin:0 25px 10px 0;color:#e7c995;font-size:9px;font-weight:850;letter-spacing:.18em;text-transform:uppercase}
 #cyreneEncounter .cyrene-line{margin:0;color:#fff8ee;font:500 15px/1.55 Georgia,serif;text-wrap:pretty}
 #cyreneEncounter .cyrene-signature{display:block;margin-top:12px;color:#d9bd91;font-size:9px;font-weight:850;letter-spacing:.2em;text-transform:uppercase}
+#cyreneEncounter .cyrene-choices{display:grid;gap:6px;margin-top:12px}
+#cyreneEncounter .cyrene-choice{width:100%;padding:7px 9px;border:1px solid #c8a87888;border-radius:9px;background:#ffffff0a;color:#f7e8ce;text-align:left;font:500 11px/1.35 Inter,Segoe UI,Arial,sans-serif;cursor:pointer;transition:background .2s,border-color .2s}
+#cyreneEncounter .cyrene-choice:hover{background:#ffffff18;border-color:#e5c38b}
+#cyreneEncounter .cyrene-choice:focus-visible{outline:2px solid #e5c38b;outline-offset:2px}
+#cyreneEncounter .cyrene-choices[hidden],#cyreneEncounter .cyrene-dismiss[hidden]{display:none!important}
 #cyreneEncounter .cyrene-dismiss{margin-top:13px;padding:7px 12px;border:1px solid #c8a87888;border-radius:999px;background:#ffffff0a;color:#f2d9ad;font:750 10px/1.2 Inter,Segoe UI,Arial,sans-serif;cursor:pointer;transition:background .2s,border-color .2s}
 #cyreneEncounter .cyrene-dismiss:hover{background:#ffffff18;border-color:#e5c38b}
 @keyframes cyreneFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
@@ -909,8 +914,9 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 <div class="cyrene-copy">
 <span class="cyrene-kicker">A visitor from the Garden</span>
 <p class="cyrene-line" id="cyreneDialogue"></p>
+<div class="cyrene-choices" id="cyreneChoices" hidden></div>
 <span class="cyrene-signature">Cyrene</span>
-<button class="cyrene-dismiss" id="cyreneDismiss" type="button">Until we meet again</button>
+<button class="cyrene-dismiss" id="cyreneDismiss" type="button" hidden>Until we meet again</button>
 </div>
 </aside>
 <script>
@@ -1300,69 +1306,78 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  const panel=document.getElementById("cyreneEncounter");
  const dialogue=document.getElementById("cyreneDialogue");
  const dismissButton=document.getElementById("cyreneDismiss");
+ const choicesHost=document.getElementById("cyreneChoices");
  const title=document.querySelector(".hero h1");
- if(!panel||!dialogue||!dismissButton||!title)return;
- const lines={
-  visitor:"Oh? You've been here for quite some time. Were you waiting for someone? I wonder if the stars brought you here, or if you simply lost track of time.",
-  curious:"Five times? Were you hoping something would happen? ...How interesting. Perhaps I should leave you another little surprise.",
-  midnight:"It's rather late, isn't it? Even the stars are resting. Why are you still awake? Stay a little longer, if the quiet feels kind.",
-  reunion:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence. Maybe some meetings are meant to happen more than once."
+ if(!panel||!dialogue||!dismissButton||!choicesHost||!title)return;
+ const conversations={
+  visitor:{line:"Oh? You've been here for quite some time. Were you waiting for someone? I wonder if the stars brought you here, or if you simply lost track of time.",choices:[
+   ["I was just exploring.","Then I'm glad your wandering brought you here. Sometimes the loveliest discoveries are the unplanned ones."],
+   ["Maybe I was waiting for you.","For me? How sweet... Though I must admit, you have made this little visit rather special."]
+  ]},
+  curious:{line:"Five times? Were you hoping something would happen? ...How interesting. Perhaps I should leave you another little surprise.",choices:[
+   ["I wanted to see if you'd appear.","And here I am. You really are quite persistent, aren't you? I think I rather like that."],
+   ["It was an accident. Probably.","Probably? That sounds suspiciously like a little wish disguised as an accident."]
+  ]},
+  midnight:{line:"It's rather late, isn't it? Even the stars are resting. Why are you still awake? Stay a little longer, if the quiet feels kind.",choices:[
+   ["I couldn't fall asleep.","Then let the quiet keep you company for a while. You don't have to rush back to the world just yet."],
+   ["I like the stars at this hour.","So do I. They seem a little closer when everything else has gone quiet, don't they?"]
+  ]},
+  reunion:{line:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence. Maybe some meetings are meant to happen more than once.",choices:[
+   ["Will we meet again?","I believe we will. Until then, keep a little room in your heart for the unexpected."],
+   ["I think I'll remember you.","Then this moment has already become something precious. I'll remember it too."]
+  ]}
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
  let seen={},queue=[],showing=false,typeTimer=null;
- function typeLine(id,index){
-  if(!showing)return;
-  dialogue.textContent=lines[id].slice(0,index);
-  if(index<lines[id].length)typeTimer=setTimeout(()=>typeLine(id,index+1),28);
-  else typeTimer=null;
+ function typeText(text,onComplete){
+  clearTimeout(typeTimer);
+  function step(index){
+   if(!showing)return;
+   dialogue.textContent=text.slice(0,index);
+   if(index<text.length)typeTimer=setTimeout(()=>step(index+1),28);
+   else{typeTimer=null;if(onComplete)onComplete()}
+  }
+  step(1);
+ }
+ function renderChoices(id){
+  choicesHost.replaceChildren();
+  conversations[id].choices.forEach(([label,reply])=>{
+   const button=document.createElement("button");
+   button.type="button";button.className="cyrene-choice";button.textContent=label;
+   button.addEventListener("click",()=>{
+    choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
+    typeText(reply,()=>{dismissButton.hidden=false;dismissButton.focus()});
+   },{once:true});
+   choicesHost.appendChild(button);
+  });
+  choicesHost.hidden=false;
  }
  function showNext(){
   if(showing||!queue.length)return;
   const id=queue.shift();
-  dialogue.textContent="";
-  panel.hidden=false;
-  panel.setAttribute("aria-hidden","false");
-  showing=true;
+  dialogue.textContent="";choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
+  panel.hidden=false;panel.setAttribute("aria-hidden","false");showing=true;
   requestAnimationFrame(()=>panel.classList.add("open"));
-  typeLine(id,1);
+  typeText(conversations[id].line,()=>renderChoices(id));
  }
  function dismiss(){
   if(!showing)return;
-  clearTimeout(typeTimer);
-  typeTimer=null;
-  panel.classList.remove("open");
-  panel.setAttribute("aria-hidden","true");
-  showing=false;
-  setTimeout(()=>{
-   if(!showing)panel.hidden=true;
-   showNext();
-  },420);
+  clearTimeout(typeTimer);typeTimer=null;choicesHost.hidden=true;choicesHost.replaceChildren();
+  panel.classList.remove("open");panel.setAttribute("aria-hidden","true");showing=false;
+  setTimeout(()=>{if(!showing)panel.hidden=true;showNext()},420);
  }
  function activate(id){
   if(seen[id])return;
-  seen[id]=true;
-
-  queue.push(id);
-  if(seen.visitor&&seen.curious&&seen.midnight&&!seen.reunion){
-   seen.reunion=true;
-
-   queue.push("reunion");
-  }
+  seen[id]=true;queue.push(id);
+  if(seen.visitor&&seen.curious&&seen.midnight&&!seen.reunion){seen.reunion=true;queue.push("reunion")}
   showNext();
  }
  dismissButton.addEventListener("click",dismiss);
  let clicks=0;
- title.addEventListener("click",()=>{
-  clicks++;
-  if(clicks>=5){clicks=0;activate("curious")}
- });
+ title.addEventListener("click",()=>{clicks++;if(clicks>=5){clicks=0;activate("curious")}});
  setTimeout(()=>activate("visitor"),47000);
- function checkMidnight(){
-  const hour=new Date().getHours();
-  if(hour>=0&&hour<4)activate("midnight");
- }
- checkMidnight();
- setInterval(checkMidnight,60000);
+ function checkMidnight(){const hour=new Date().getHours();if(hour>=0&&hour<4)activate("midnight")}
+ checkMidnight();setInterval(checkMidnight,60000);
 })();
 
 </script></body></html>
