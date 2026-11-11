@@ -214,7 +214,7 @@ function bannerCardMarkup(x,label,map){
  const isLive=label==="Live",isUpcoming=label==="Upcoming";
  let imageMarkup;
  if(isLightCone){
-  imageMarkup='<div class="current-banner-art"><img src="'+esc(art)+'" alt="'+esc(coneNames[0]||"Featured Light Cone")+'" loading="eager" style="object-fit:contain;padding:22px"></div>';
+  imageMarkup='<div class="current-banner-art"><img src="'+esc(coneArt)+'" alt="'+esc(coneNames[0]||"Featured Light Cone")+'" loading="eager" style="object-fit:contain;padding:22px"></div>';
  }else{
   const slideData=encodeURIComponent(JSON.stringify(slides));
   imageMarkup='<div class="current-banner-art current-banner-cycle" data-slide-index="0" data-cycle-slides="'+esc(slideData)+'">'+(first.src?'<img src="'+esc(first.src)+'" alt="'+esc(first.name)+' character artwork" loading="eager">':'<div class="current-banner-cycle-placeholder">✦</div>')+'<span class="current-banner-cycle-name">'+esc(first.name)+'</span><div class="current-banner-cycle-controls"><button type="button" class="current-banner-cycle-prev" aria-label="Previous character">‹</button><span class="current-banner-cycle-position">1 / '+slides.length+'</span><button type="button" class="current-banner-cycle-next" aria-label="Next character">›</button></div></div>';
@@ -262,7 +262,7 @@ function startBannerArtworkCycle(host){
   });
  },4500);
 }
-async function renderCurrentBanner(){
+async async function renderCurrentBanner(){
  const host=$("currentBanner"),status=$("currentBannerStatus"),now=Date.now();
  const warps=events.filter(x=>x.isWarp);
  const active=warps.filter(x=>(!x.start||x.start.getTime()<=now)&&(!x.end||x.end.getTime()>now));
