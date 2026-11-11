@@ -848,6 +848,9 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #cyreneEncounter.open{opacity:1;transform:translate3d(0,0,0) scale(1);pointer-events:auto}
 #cyreneEncounter .cyrene-art{grid-column:2;grid-row:1;width:100%;height:100%;min-height:190px;max-height:230px;object-fit:contain;object-position:center bottom;align-self:end;filter:drop-shadow(0 8px 16px #080611aa);animation:cyreneFloat 4.2s ease-in-out infinite;z-index:1}
 #cyreneEncounter .cyrene-copy{grid-column:1;grid-row:1;position:relative;z-index:2;align-self:center;padding:25px 8px 20px 23px;min-width:0}
+#cyreneEncounter .cyrene-mute{position:absolute;top:9px;right:9px;z-index:4;width:27px;height:27px;display:grid;place-items:center;padding:0;border:1px solid #c8a87888;border-radius:50%;background:#ffffff0d;color:#f2d9ad;font:14px/1 Arial,sans-serif;cursor:pointer;transition:background .2s,border-color .2s}
+#cyreneEncounter .cyrene-mute:hover{background:#ffffff20;border-color:#e5c38b}
+#cyreneEncounter .cyrene-mute:focus-visible{outline:2px solid #e5c38b;outline-offset:2px}
 #cyreneEncounter .cyrene-kicker{display:block;margin:0 25px 10px 0;color:#e7c995;font-size:9px;font-weight:850;letter-spacing:.18em;text-transform:uppercase}
 #cyreneEncounter .cyrene-line{margin:0;color:#fff8ee;font:500 15px/1.55 Georgia,serif;text-wrap:pretty}
 #cyreneEncounter .cyrene-signature{display:block;margin-top:12px;color:#d9bd91;font-size:9px;font-weight:850;letter-spacing:.2em;text-transform:uppercase}
@@ -912,6 +915,7 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 <aside id="cyreneEncounter" aria-live="polite" aria-hidden="true" hidden>
 <img class="cyrene-art" src="https://static.icy-veins.com/images/honkai-star-rail/characters/full/cyrene.webp" alt="Cyrene from Honkai: Star Rail">
 <div class="cyrene-copy">
+<button class="cyrene-mute" id="cyreneMute" type="button" aria-label="Mute Cyrene voice" aria-pressed="false" title="Mute voice">🔊</button>
 <span class="cyrene-kicker">A visitor from the Garden</span>
 <p class="cyrene-line" id="cyreneDialogue"></p>
 <div class="cyrene-choices" id="cyreneChoices" hidden></div>
@@ -1306,6 +1310,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  const panel=document.getElementById("cyreneEncounter");
  const dialogue=document.getElementById("cyreneDialogue");
  const dismissButton=document.getElementById("cyreneDismiss");
+ const muteButton=document.getElementById("cyreneMute");
  const choicesHost=document.getElementById("cyreneChoices");
  const title=document.querySelector(".hero h1");
  if(!panel||!dialogue||!dismissButton||!choicesHost||!title)return;
@@ -1328,9 +1333,10 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   ]}
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
- let seen={},queue=[],showing=false,typeTimer=null;
+ let seen={},queue=[],showing=false,typeTimer=null,voiceMuted=false;
  const cyreneVoice=new Audio();
  cyreneVoice.preload="auto";
+ cyreneVoice.muted=voiceMuted;
  function playVoice(file,onStarted){
   if(!file){onStarted();return}
   cyreneVoice.pause();
@@ -1397,6 +1403,14 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   if(seen.visitor&&seen.curious&&seen.midnight&&!seen.reunion){seen.reunion=true;queue.push("reunion")}
   showNext();
  }
+ muteButton.addEventListener("click",()=>{
+  voiceMuted=!voiceMuted;
+  cyreneVoice.muted=voiceMuted;
+  muteButton.textContent=voiceMuted?"🔇":"🔊";
+  muteButton.setAttribute("aria-label",voiceMuted?"Unmute Cyrene voice":"Mute Cyrene voice");
+  muteButton.setAttribute("aria-pressed",String(voiceMuted));
+  muteButton.title=voiceMuted?"Unmute voice":"Mute voice";
+ });
  dismissButton.addEventListener("click",dismiss);
  let clicks=0;
  title.addEventListener("click",()=>{clicks++;if(clicks>=5){clicks=0;activate("curious")}});
