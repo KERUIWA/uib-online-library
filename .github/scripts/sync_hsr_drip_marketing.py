@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """Sync official HSR character drip-marketing artwork from the Fandom wiki category."""
 import json
-import os
 import re
-import sys
 import time
 import unicodedata
 import urllib.parse
@@ -100,7 +98,7 @@ def main():
             "file": filename,
             "sourceFile": item["title"],
             "sourceUrl": item["source_url"],
-            "license": "CC BY-SA (Fandom community content; verify file-specific licensing)",
+            "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse.",
         })
 
     INDEX.write_text(json.dumps({
