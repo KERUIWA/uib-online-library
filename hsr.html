@@ -1342,7 +1342,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   ]}
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
- let seen={},queue=[],showing=false,typeTimer=null,voiceMuted=false,voiceLanguage="en",currentAudioFiles={en:null,ja:null},currentAudioFile=null;
+ let seen={},queue=[],showing=false,typeTimer=null,voiceMuted=false,voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
  const cyreneVoice=new Audio();
  cyreneVoice.preload="auto";
  cyreneVoice.muted=voiceMuted;
@@ -1373,6 +1373,8 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  function typeText(text,onComplete,audioFiles){
   clearTimeout(typeTimer);
   currentAudioFiles=audioFiles||{en:null,ja:null};
+  currentDialogueText=text;
+  currentDialogueComplete=onComplete||null;
   function step(index){
    if(!showing)return;
    dialogue.textContent=text.slice(0,index);
@@ -1437,8 +1439,13 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  replayButton.addEventListener("click",replayVoice);
  languageButton.addEventListener("click",()=>{
   voiceLanguage=voiceLanguage==="en"?"ja":"en";
+  try{localStorage.setItem("cyrene-voice-language",voiceLanguage)}catch(e){}
   updateVoiceLanguage();
+  if(showing&&currentDialogueText){
+   typeText(currentDialogueText,currentDialogueComplete,currentAudioFiles);
+  }
  });
+ updateVoiceLanguage();
  muteButton.addEventListener("click",()=>{
   voiceMuted=!voiceMuted;
   cyreneVoice.muted=voiceMuted;
