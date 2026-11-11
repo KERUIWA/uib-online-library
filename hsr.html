@@ -1028,8 +1028,14 @@ function startBannerArtworkCycle(host){
   panel.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>{
    const current=Number(panel.dataset.slideIndex||0),direction=button.classList.contains("current-banner-cycle-next")?1:-1;
    setBannerArtworkSlide(panel,(current+direction+slides.length)%slides.length,slides,"");
+   scheduleBannerArtworkCycle(host);
   }));
  });
+ scheduleBannerArtworkCycle(host);
+}
+function scheduleBannerArtworkCycle(host){
+ if(bannerCycleTimer){clearInterval(bannerCycleTimer);bannerCycleTimer=null;}
+ if(!host)return;
  bannerCycleTimer=setInterval(()=>{
   if(!host.isConnected){clearInterval(bannerCycleTimer);bannerCycleTimer=null;return;}
   host.querySelectorAll(".current-banner-cycle").forEach(panel=>{
