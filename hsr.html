@@ -449,6 +449,9 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #currentBanner .current-banner-cycle-name.rarity-five:before{left:-9px;top:-7px}
 #currentBanner .current-banner-cycle-name.rarity-five:after{right:-8px;bottom:-7px;font-size:8px}
 @keyframes bannerGoldSparkle{from{filter:brightness(1);box-shadow:0 0 0 1px #ffd34f55,0 0 12px #ffca3a66}to{filter:brightness(1.22);box-shadow:0 0 0 1px #fff0a688,0 0 22px #ffca3aaa,0 0 34px #ffb30055}}
+#currentBanner .current-banner-grid>.current-banner-status{position:absolute;top:14px;right:16px;z-index:8;padding:7px 12px;border-radius:999px;font-size:10px;font-weight:950;letter-spacing:.12em;box-shadow:0 4px 14px #0005}
+#currentBanner .current-banner-grid>.current-banner-status.upcoming{color:#c9f3ff;border:1px solid #69c9e8aa;background:linear-gradient(135deg,#124d68f2,#142d4af2);box-shadow:0 0 16px #38bde633,0 4px 14px #0005}
+@media(max-width:650px){#currentBanner .current-banner-grid>.current-banner-status{top:10px;right:10px;padding:6px 9px;font-size:9px}}
 #currentBanner .current-banner-phase{color:#ffe2a0;border-color:#d6a94e;background:linear-gradient(135deg,#493416,#241b13);letter-spacing:.07em}
 #currentBanner .current-banner-character-chip{display:inline-flex;align-items:center;padding:5px 10px;margin:3px 5px 3px 0;border:1px solid;border-radius:999px;font-size:12px;font-weight:850;white-space:nowrap}
 #currentBanner .current-banner-copy p.current-banner-roster{display:flex;flex-wrap:wrap;align-items:center;gap:2px;margin-top:2px}
@@ -596,9 +599,9 @@ function bannerCardMarkup(x,label,map){
  const title=isLightCone?(x.name||"Light Cone Event Warp"):"Featured Warp Lineup";
  const featured=names.length?slides.map(item=>'<span class="current-banner-character-chip '+(String(item.rarity).includes("4")?"rarity-four":"rarity-five")+'">'+esc(item.name)+'</span>').join(""):coneNames.length?"Featured Light Cones: "+coneNames.join(", "):(x.description||"Character Event Warp");
  const typeLabel=isLightCone?"Light Cone Event Warp":"Character Event Warp";
- const statusLabel=isLive?'<span class="tag live">LIVE</span>':isUpcoming?'<span class="tag">UPCOMING</span>':"";
+ const statusLabel=isLive?'<span class="tag live current-banner-status">LIVE</span>':isUpcoming?'<span class="tag current-banner-status upcoming">UPCOMING</span>':"";
  const countdownLabel=isUpcoming?"Starts in ":"Ends in ";
- return '<article class="current-banner-grid">'+imageMarkup+'<div class="current-banner-copy"><div class="banner-labels"><span class="tag">'+typeLabel+'</span>'+(bannerPhaseNumber(x)?'<span class="tag current-banner-phase">PHASE '+bannerPhaseNumber(x)+'</span>':"")+statusLabel+'</div><h3>'+esc(title)+'</h3><p class="'+(names.length?"current-banner-roster":"")+'">'+featured+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+countdownLabel+remaining(isUpcoming?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
+ return '<article class="current-banner-grid">'+imageMarkup+statusLabel+'<div class="current-banner-copy"><div class="banner-labels"><span class="tag">'+typeLabel+'</span>'+(bannerPhaseNumber(x)?'<span class="tag current-banner-phase">PHASE '+bannerPhaseNumber(x)+'</span>':"")+'</div><h3>'+esc(title)+'</h3><p class="'+(names.length?"current-banner-roster":"")+'">'+featured+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown">'+countdownLabel+remaining(isUpcoming?x.start:x.end)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View banner details ↗</a>':"")+'</div></article>';
 }
 function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
  const slide=slides[index],img=panel.querySelector("img"),placeholder=panel.querySelector(".current-banner-cycle-placeholder"),label=panel.querySelector(".current-banner-cycle-name"),position=panel.querySelector(".current-banner-cycle-position");
