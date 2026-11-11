@@ -489,14 +489,23 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
  #currentBanner[data-banner-view="compact"] .current-banner-row>.current-banner-grid{flex-basis:88%}
 
 
-/* Compact cards: let content determine card height, never crop the text */
+
+
+/* Compact layout refinement: natural content height, clean hierarchy, no clipping */
+#currentBanner[data-banner-view="compact"] .current-banner-row{align-items:stretch;overflow-y:visible}
 #currentBanner[data-banner-view="compact"] .current-banner-grid{height:auto!important;min-height:0!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:155px auto!important;align-content:start;overflow:hidden}
-#currentBanner[data-banner-view="compact"] .current-banner-copy{height:auto!important;min-height:0!important;overflow:visible!important;display:flex!important;flex-direction:column!important;gap:0;padding:15px!important;align-self:stretch!important}
-#currentBanner[data-banner-view="compact"] .current-banner-copy h3{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:block!important;margin:0 0 5px!important;line-height:1.2;overflow-wrap:anywhere}
-#currentBanner[data-banner-view="compact"] .current-banner-copy p{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:flex;flex-wrap:wrap;align-content:flex-start;margin:0!important;line-height:1.5;overflow-wrap:anywhere}
-#currentBanner[data-banner-view="compact"] .current-banner-copy p.current-banner-roster{margin:0!important;gap:3px}
-#currentBanner[data-banner-view="compact"] .current-banner-copy .dates{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;white-space:normal;line-height:1.7;margin-top:14px!important;padding-top:8px;overflow-wrap:anywhere}
-#currentBanner[data-banner-view="compact"] .current-banner-copy .banner-countdown{flex:0 0 auto;white-space:normal;line-height:1.45}
+#currentBanner[data-banner-view="compact"] .current-banner-art,
+#currentBanner[data-banner-view="compact"] .current-banner-art img,
+#currentBanner[data-banner-view="compact"] .current-banner-character-art img{height:155px!important;min-height:155px!important;max-height:155px!important}
+#currentBanner[data-banner-view="compact"] .current-banner-copy{height:auto!important;min-height:0!important;overflow:visible!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;gap:0;padding:15px!important;align-self:stretch!important}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .banner-labels{margin:0 0 9px!important;gap:6px}
+#currentBanner[data-banner-view="compact"] .current-banner-copy h3{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:block!important;margin:0 0 7px!important;font-size:18px!important;line-height:1.22!important;overflow-wrap:anywhere}
+#currentBanner[data-banner-view="compact"] .current-banner-copy p{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:flex;flex-wrap:wrap;align-content:flex-start;margin:0!important;font-size:12px!important;line-height:1.5!important;overflow-wrap:anywhere}
+#currentBanner[data-banner-view="compact"] .current-banner-copy p.current-banner-roster{margin:0!important;gap:4px}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .current-banner-character-chip{font-size:10px;padding:4px 8px;margin:0}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .dates{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;white-space:normal;line-height:1.65;margin:12px 0 0!important;padding:9px 0 0!important;border-top:1px solid #ffffff1c;overflow-wrap:anywhere}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .banner-countdown{flex:0 0 auto;white-space:normal;line-height:1.45;margin-top:9px!important}
+#currentBanner[data-banner-view="compact"] .current-banner-copy .card-link{margin-top:10px!important}
 </style></head><body>
 <header>
 <div class="wrap">
