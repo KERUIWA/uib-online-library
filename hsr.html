@@ -1302,17 +1302,14 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  const dismissButton=document.getElementById("cyreneDismiss");
  const title=document.querySelector(".hero h1");
  if(!panel||!dialogue||!dismissButton||!title)return;
- const KEY="uib-hsr-cyrene-encounters-v1";
  const lines={
   visitor:"Oh? You've been here for quite some time. Were you waiting for someone?",
   curious:"Five times? Were you hoping something would happen? ...How interesting.",
   midnight:"It's rather late, isn't it? Even the stars are resting. Why are you still awake?",
   reunion:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence."
  };
- let seen={};
- try{seen=JSON.parse(sessionStorage.getItem(KEY)||"{}")||{}}catch(e){}
- let queue=[],showing=false,typeTimer=null;
- const save=()=>{try{sessionStorage.setItem(KEY,JSON.stringify(seen))}catch(e){}};
+ /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
+ let seen={},queue=[],showing=false,typeTimer=null;
  function typeLine(id,index){
   if(!showing)return;
   dialogue.textContent=lines[id].slice(0,index);
@@ -1344,11 +1341,11 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  function activate(id){
   if(seen[id])return;
   seen[id]=true;
-  save();
+
   queue.push(id);
   if(seen.visitor&&seen.curious&&seen.midnight&&!seen.reunion){
    seen.reunion=true;
-   save();
+
    queue.push("reunion");
   }
   showNext();
