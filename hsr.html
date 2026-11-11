@@ -330,6 +330,51 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
  #currentBanner .current-banner-copy h3{font-size:27px}
 }
 
+
+/* HSR WARP CARDS V3: compact, colourful character-led cards */
+#currentBanner .current-banner-stack{gap:27px}
+#currentBanner .current-banner-group{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+#currentBanner .current-banner-group-title{grid-column:1/-1;margin-bottom:1px}
+#currentBanner .current-banner-grid{display:flex;flex-direction:column;min-width:0;min-height:0;gap:0;border:1px solid #bba4dc55;border-radius:17px;overflow:hidden;background:linear-gradient(155deg,#211d39,#151a2d 75%);box-shadow:0 12px 30px #05081755;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+#currentBanner .current-banner-grid:hover{transform:translateY(-4px);border-color:#e7cb91aa;box-shadow:0 18px 38px #05081788,0 0 24px #a78bfa1c}
+#currentBanner .current-banner-grid:before{display:none}
+#currentBanner .current-banner-art{height:clamp(175px,22vw,235px);min-height:0;flex:0 0 auto;position:relative;display:flex;align-items:center;justify-content:center;padding:8px 12px 27px;background:radial-gradient(ellipse at 50% 35%,#a78bfa88,transparent 58%),linear-gradient(135deg,#242b58,#513d70 58%,#7b456e)}
+#currentBanner .current-banner-grid:nth-of-type(2n) .current-banner-art{background:radial-gradient(ellipse at 50% 35%,#f3c87988,transparent 58%),linear-gradient(135deg,#3b3155,#76506b 58%,#9a674f)}
+#currentBanner .current-banner-grid:nth-of-type(3n) .current-banner-art{background:radial-gradient(ellipse at 50% 35%,#78d8d188,transparent 58%),linear-gradient(135deg,#183c50,#315e70 58%,#526c78)}
+#currentBanner .current-banner-grid:nth-of-type(4n) .current-banner-art{background:radial-gradient(ellipse at 50% 35%,#f18caa88,transparent 58%),linear-gradient(135deg,#482943,#81435f 58%,#9d596a)}
+#currentBanner .current-banner-art:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#121629c9,transparent 48%),linear-gradient(90deg,#10172b22,transparent 25%,transparent 75%,#10172b22);box-shadow:inset 0 0 35px #090d1d44}
+#currentBanner .current-banner-art img{position:relative;z-index:1;width:100%;height:100%;min-height:0;max-height:220px;object-fit:contain;object-position:center;background:transparent;filter:drop-shadow(0 8px 18px #080b1b88)}
+#currentBanner .current-banner-character-art{height:100%;width:100%;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));align-items:center}
+#currentBanner .current-banner-character-art img{min-height:0;height:100%;max-height:220px}
+#currentBanner .current-banner-cycle{padding:9px 14px 39px}
+#currentBanner .current-banner-cycle img{min-height:0;max-height:210px}
+#currentBanner .current-banner-cycle-name{bottom:9px;top:auto;left:50%;font-size:9px;padding:4px 11px;letter-spacing:.1em}
+#currentBanner .current-banner-cycle-controls{left:9px;right:9px;bottom:8px}
+#currentBanner .current-banner-cycle-controls button{width:29px;height:29px;font-size:20px}
+#currentBanner .current-banner-cycle-position{font-size:9px;padding:3px 7px}
+#currentBanner .current-banner-copy{display:flex;flex-direction:column;align-self:stretch;justify-content:flex-start;gap:0;min-height:0;padding:15px 16px 16px;border:0;background:linear-gradient(145deg,#211e38,#171a2b);color:#f8f2ff}
+#currentBanner .banner-labels{margin:0 0 9px;gap:6px}
+#currentBanner .current-banner-copy .tag{font-size:8px;padding:4px 7px;letter-spacing:.09em}
+#currentBanner .current-banner-copy h3{font-family:Georgia,serif;font-size:clamp(17px,1.7vw,21px);line-height:1.16;margin:0 0 7px;color:#fff4e5}
+#currentBanner .current-banner-copy p{font-size:11px;line-height:1.5;color:#c9c6d8}
+#currentBanner .current-banner-copy .dates{margin-top:10px;padding-top:9px;font-size:10px;line-height:1.65;border-top:1px solid #ffffff18}
+#currentBanner .current-banner-copy .banner-countdown{margin-top:10px;padding:8px 10px;border-radius:8px;font-size:10px}
+#currentBanner .current-banner-copy .card-link{margin-top:10px;font-size:9px}
+@media(max-width:700px){
+ #currentBanner .current-banner-group{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ #currentBanner .current-banner-art{height:clamp(145px,34vw,205px)}
+ #currentBanner .current-banner-art img{max-height:190px}
+ #currentBanner .current-banner-copy{padding:12px}
+ #currentBanner .current-banner-copy h3{font-size:17px}
+}
+@media(max-width:460px){
+ #currentBanner .current-banner-group{grid-template-columns:1fr}
+ #currentBanner .current-banner-art{height:225px}
+ #currentBanner .current-banner-art img{max-height:215px}
+ #currentBanner .current-banner-copy{padding:15px}
+ #currentBanner .current-banner-copy h3{font-size:20px}
+}
+
 </style></head><body>
 <header>
 <div class="wrap">
