@@ -2,6 +2,9 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Academic Dashboard · UIB E-Library</title>
 <script>try{if(localStorage.getItem("uib-library-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <style>
+/* Keep async deadline updates from changing the browser's restored scroll position. */
+html{overflow-anchor:none}
+
 :root{color-scheme:light;--bg:#f4f6fb;--surface:#fff;--surface2:#f8f9fd;--ink:#172033;--muted:#687386;--line:#e5e9f1;--blue:#3157d5;--blue-soft:#edf1ff;--red:#c83242;--orange:#b85a12;--green:#187343;--shadow:0 8px 28px #1720330b}
 :root[data-theme="dark"]{color-scheme:dark;--bg:#101522;--surface:#192131;--surface2:#202b3e;--ink:#edf2fc;--muted:#a2aec2;--line:#303c50;--blue:#9aafff;--blue-soft:#263454;--red:#ff8993;--orange:#ffc49d;--green:#9de2b8;--shadow:0 8px 28px #0003}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,Segoe UI,Arial,sans-serif;transition:background .2s,color .2s}header{background:linear-gradient(115deg,#17264b,#3157d5);color:#fff;padding:28px 20px 36px}.wrap{max-width:1080px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:800;opacity:.8}h1{font-size:clamp(30px,5vw,43px);line-height:1.1;letter-spacing:-.04em;margin:16px 0 6px}.sub{opacity:.84}.header-actions{display:flex;gap:8px;flex-wrap:wrap}.header-actions a,.theme{border:1px solid #ffffff55;background:#ffffff18;color:white;border-radius:999px;padding:8px 12px;font:700 12px inherit;text-decoration:none;cursor:pointer}.theme{font:700 12px inherit}
