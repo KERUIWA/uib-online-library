@@ -858,6 +858,9 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 @keyframes cyreneFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @media(max-width:560px){#cyreneEncounter{right:14px;bottom:14px;width:calc(100vw - 28px);min-height:166px;grid-template-columns:minmax(0,1fr) 112px;border-radius:16px}#cyreneEncounter .cyrene-art{min-height:166px;max-height:190px}#cyreneEncounter .cyrene-copy{padding:23px 2px 16px 18px}#cyreneEncounter .cyrene-line{font-size:13px;line-height:1.48}#cyreneEncounter .cyrene-kicker{font-size:8px;letter-spacing:.13em;margin-bottom:8px}#cyreneEncounter .cyrene-signature{margin-top:9px}#cyreneEncounter .cyrene-dismiss{margin-top:10px;padding:6px 9px;font-size:9px}}
 @media(max-width:370px){#cyreneEncounter{grid-template-columns:minmax(0,1fr) 92px}#cyreneEncounter .cyrene-copy{padding-left:15px}#cyreneEncounter .cyrene-line{font-size:12px}}
+/* Keep Cyrene visually centered inside the dialogue card at every breakpoint. */
+#cyreneEncounter .cyrene-art{align-self:stretch;height:100%;min-height:0;max-height:none;object-fit:contain;object-position:center center;box-sizing:border-box;padding:10px 8px 8px 0}
+@media(max-width:560px){#cyreneEncounter .cyrene-art{padding:8px 5px 8px 0}}
 @media(prefers-reduced-motion:reduce){#cyreneEncounter,#cyreneEncounter .cyrene-art{transition:none;animation:none}}
 
 </style></head><body>
