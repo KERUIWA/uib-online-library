@@ -1331,13 +1331,24 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  let seen={},queue=[],showing=false,typeTimer=null;
  const cyreneVoice=new Audio();
  cyreneVoice.preload="auto";
- function playVoice(file){
-  if(!file)return;
+ function playVoice(file,onStarted){
+  if(!file){onStarted();return}
   cyreneVoice.pause();
   cyreneVoice.currentTime=0;
   cyreneVoice.src="./assets/audio/"+encodeURIComponent(file);
+  let started=false;
+  const beginText=()=>{
+   if(started)return;
+   started=true;
+   cyreneVoice.removeEventListener("playing",beginText);
+   onStarted();
+  };
+  cyreneVoice.addEventListener("playing",beginText);
   const playback=cyreneVoice.play();
-  if(playback&&typeof playback.catch==="function")playback.catch(()=>{});
+  if(playback&&typeof playback.catch==="function")playback.catch(()=>{
+   cyreneVoice.removeEventListener("playing",beginText);
+   beginText();
+  });
  }
  function stopVoice(){
   cyreneVoice.pause();
@@ -1345,14 +1356,13 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  }
  function typeText(text,onComplete,audioFile){
   clearTimeout(typeTimer);
-  playVoice(audioFile);
   function step(index){
    if(!showing)return;
    dialogue.textContent=text.slice(0,index);
    if(index<text.length)typeTimer=setTimeout(()=>step(index+1),28);
    else{typeTimer=null;if(onComplete)onComplete()}
   }
-  step(1);
+  playVoice(audioFile,()=>{if(showing)step(1)});
  }
  function renderChoices(id){
   choicesHost.replaceChildren();
