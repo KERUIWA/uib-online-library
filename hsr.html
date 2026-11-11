@@ -679,23 +679,25 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 #currentBanner[data-banner-view="compact"] .current-banner-copy .card-link{
   margin:0!important
 }
-/* Center featured character/Light Cone details in the middle space, vertically and horizontally */
+/* Keep equal vertical space above and below the featured details */
 #currentBanner[data-banner-view="compact"] .current-banner-copy > p.current-banner-roster{
   display:flex!important;
-  flex:1 1 auto!important;
+  flex:0 0 auto!important;
   min-height:0!important;
   align-items:center!important;
   align-content:center!important;
   justify-content:center!important;
   text-align:center!important;
-  margin:0!important
+  margin-block:auto!important;
+  margin-inline:0!important
 }
 #currentBanner[data-banner-view="compact"] .current-banner-copy > p:not(.current-banner-roster){
-  flex:1 1 auto!important;
+  flex:0 0 auto!important;
   min-height:0!important;
   align-content:center!important;
   text-align:center!important;
-  margin:0!important
+  margin-block:auto!important;
+  margin-inline:0!important
 }
 #currentBanner[data-banner-view="compact"] .current-banner-copy .dates{
   margin-top:0!important
