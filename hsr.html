@@ -1373,6 +1373,16 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
 (()=>{
  const panel=document.getElementById("cyreneEncounter");
  const tip=document.getElementById("cyreneTip");
+ function positionCyreneTip(){
+  if(!tip||!showing||panel.hidden)return;
+  const rect=panel.getBoundingClientRect();
+  tip.style.right=Math.max(14,window.innerWidth-rect.right)+"px";
+  tip.style.bottom=Math.max(14,window.innerHeight-rect.top+9)+"px";
+ }
+ if("ResizeObserver"in window){
+  const tipObserver=new ResizeObserver(()=>positionCyreneTip());
+  tipObserver.observe(panel);
+ }
  const dialogue=document.getElementById("cyreneDialogue");
  const dismissButton=document.getElementById("cyreneDismiss");
  const muteButton=document.getElementById("cyreneMute");
@@ -1436,6 +1446,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   function step(index){
    if(!showing)return;
    dialogue.textContent=text.slice(0,index);
+   positionCyreneTip();
    if(index<text.length)typeTimer=setTimeout(()=>step(index+1),28);
    else{typeTimer=null;if(onComplete)onComplete()}
   }
@@ -1482,9 +1493,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   requestAnimationFrame(()=>{
    panel.classList.add("open");
    if(tip){
-    const rect=panel.getBoundingClientRect();
-    tip.style.right=Math.max(14,window.innerWidth-rect.right)+"px";
-    tip.style.bottom=Math.max(14,window.innerHeight-rect.top+9)+"px";
+    positionCyreneTip();
     tip.classList.remove("open");
     const timer=tip.querySelector(".cyrene-tip-timer");
     if(timer){timer.style.animation="none";void timer.offsetWidth;timer.style.animation="";}
