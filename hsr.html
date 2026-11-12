@@ -262,7 +262,7 @@ header>.wrap{position:relative}.top{padding-top:18px}
 .hero-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:28px}
 .hero-actions a{display:inline-flex;align-items:center;gap:20px;padding:12px 17px;border:1px solid #e7c88b88;border-radius:11px;background:linear-gradient(120deg,#e8c98d,#b88b58);color:#211b2a;font-size:11px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 8px 28px #d4ad6525}
 .hero-actions a+a{background:#ffffff0c;color:#fff;border-color:#ffffff50}
-.hsr-dock{position:sticky;top:0;z-index:80;background:#0b1021ef;border-bottom:1px solid #ffffff20;backdrop-filter:blur(18px);box-shadow:0 10px 35px #0003}
+.hsr-dock{position:sticky;top:64px;z-index:80;background:#0b1021ef;border-bottom:1px solid #ffffff20;backdrop-filter:blur(18px);box-shadow:0 10px 35px #0003}
 .hsr-dock-inner{max-width:1160px;min-height:57px;margin:auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .dock-brand{display:flex;align-items:center;gap:8px;color:#f2d59f;font-size:14px;font-weight:950;letter-spacing:.16em;white-space:nowrap}
 .dock-links{display:flex;align-items:center;gap:7px;overflow-x:auto;scrollbar-width:none}.dock-links::-webkit-scrollbar{display:none}
@@ -872,6 +872,13 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 @media(max-width:560px){#cyreneEncounter .cyrene-art{padding:8px 5px 8px 0}}
 @media(prefers-reduced-motion:reduce){#cyreneEncounter,#cyreneEncounter .cyrene-art{transition:none;animation:none}}
 
+
+.site-topbar{position:sticky;top:0;z-index:2500;width:100%;background:var(--surface,#fff);color:var(--ink,#172033);border-bottom:1px solid var(--line,rgba(128,128,128,.2));box-shadow:0 3px 14px rgba(15,23,42,.07);}
+.site-topbar-inner{max-width:1160px;min-height:64px;margin:0 auto;padding:10px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+.site-topbar-brand{font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase;color:var(--ink,#172033);line-height:1.35;}
+.site-topbar .site-icon-btn,#themeToggle.site-icon-btn{background:var(--surface2,#f4f6fb)!important;border:1px solid var(--line,#e5e9f1)!important;color:var(--ink,#172033)!important;backdrop-filter:none!important;}
+.site-topbar .site-icon-btn:hover{background:var(--blue-soft,#edf1ff)!important;border-color:var(--blue,#3157d5)!important;}
+@media(max-width:560px){.site-topbar-inner{min-height:58px;padding:8px 15px;}.site-topbar-brand{font-size:10px;letter-spacing:.09em;}}
 </style><style>
 /* Shared header controls and slide-in navigation */
 .site-controls{display:flex;align-items:center;gap:9px;flex:0 0 auto}
@@ -900,7 +907,7 @@ body.site-menu-open{overflow:hidden}
 </style></head><body>
 <header>
 <div class="wrap">
-<div class="top"><div class="eyebrow">UIB E-Library · Special Interest Hub</div><div class="site-controls"><button class="site-icon-btn site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div>
+<div class="site-topbar"><div class="site-topbar-inner"><div class="site-topbar-brand">Universitas Internasional Batam</div><div class="site-controls"><button class="site-icon-btn site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div></div>
 <div class="hero"><h1>Honkai: Star Rail</h1><p>Your little corner of the Astral Express. Keep track of version updates, limited-time events, banners, and official announcements without chasing them across the galaxy.</p><div class="hero-meta"><span class="pill">🚄 Trailblazer Hub</span><span class="pill" id="versionPill">Checking game version…</span><span class="pill" id="updatedPill">Waiting for live data</span></div></div>
 </div></header>
 <div class="hsr-dock"><div class="hsr-dock-inner"><a class="dock-brand" href="#top" aria-label="Back to top">✦ <span>ASTRAL EXPRESS</span></a><nav class="dock-links" aria-label="Hub navigation"><a href="#versionSection">Overview</a><a href="#spotlightSection">Spotlight</a><a href="#warpSection">Warps</a><a href="#eventsSection">Events</a><a href="#newsSection">Intel</a></nav><a class="dock-top" href="#top">↑ Top</a></div></div>
