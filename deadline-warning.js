@@ -19,16 +19,82 @@
    #uib-deadline-warning .uib-dw-list{display:grid;gap:6px;margin:0;padding:0;list-style:none}
    #uib-deadline-warning .uib-dw-list li{font-size:13px;line-height:1.4;overflow-wrap:anywhere}#uib-deadline-warning .uib-dw-item{padding:5px 7px;margin:0 -7px;border-radius:8px;cursor:pointer}#uib-deadline-warning .uib-dw-item:hover,#uib-deadline-warning .uib-dw-item:focus-visible{background:rgba(128,128,128,.12);outline:none}
    #uib-deadline-warning .uib-dw-list small{display:block;margin-top:1px;color:var(--muted,#737b8e);font-size:11px}
-   #uib-deadline-warning .uib-dw-footer{display:flex;align-items:center;justify-content:flex-start;width:100%;min-width:0;margin-top:12px;padding:10px 0 0;border-top:1px solid rgba(128,128,128,.16);box-sizing:border-box}
-   #uib-deadline-warning .uib-dw-never{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:9px!important;width:100%!important;min-width:0!important;margin:0!important;padding:3px 0!important;color:var(--muted,#737b8e)!important;font-family:inherit!important;font-size:12px!important;font-weight:500!important;line-height:18px!important;text-align:left!important;white-space:normal!important;cursor:pointer;user-select:none}
-   #uib-deadline-warning .uib-dw-never input{appearance:auto!important;-webkit-appearance:checkbox!important;display:block!important;flex:0 0 16px!important;width:16px!important;height:16px!important;min-width:16px!important;min-height:16px!important;margin:0!important;padding:0!important;accent-color:#b7791f;cursor:pointer}
+   #uib-deadline-warning .uib-dw-popup-pref{display:flex;align-items:center;gap:9px;margin-top:18px;padding-top:13px;border-top:1px solid var(--line,rgba(128,128,128,.2));color:var(--muted,#737b8e);font-size:12px;line-height:18px;cursor:pointer;user-select:none}
+   #uib-deadline-warning .uib-dw-popup-pref input{appearance:auto;-webkit-appearance:checkbox;width:16px;height:16px;flex:0 0 16px;margin:0;accent-color:var(--blue,#4778d8);cursor:pointer}
+   .uib-dw-generic-backdrop{position:fixed;inset:0;z-index:1600;display:grid;place-items:center;padding:18px;background:#0a1020a8;backdrop-filter:blur(5px);opacity:0;visibility:hidden;transition:opacity .22s,visibility .22s}
+   .uib-dw-generic-backdrop.open{opacity:1;visibility:visible}
+   .uib-dw-generic-popup{width:min(560px,100%);max-height:min(82vh,760px);overflow:auto;background:var(--surface,#fff);color:var(--ink,#202536);border:1px solid var(--line,#ddd);border-radius:20px;padding:22px;box-shadow:0 24px 80px #0005;transform:translateY(14px) scale(.985);transition:transform .24s}
+   .uib-dw-generic-backdrop.open .uib-dw-generic-popup{transform:translateY(0) scale(1)}
+   .uib-dw-generic-popup .assignment-detail-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+   .uib-dw-generic-popup h2{font-size:22px;line-height:1.25;margin:0 0 6px;overflow-wrap:anywhere}
+   .uib-dw-generic-popup .assignment-detail-close{flex:0 0 auto;width:36px;height:36px;border:1px solid var(--line,#ddd);border-radius:50%;background:var(--surface2,#f4f4f4);color:var(--ink,#202536);font-size:20px;cursor:pointer}
+   .uib-dw-generic-popup .assignment-detail-course{font-size:13px;color:var(--muted,#737b8e);margin-bottom:17px}
+   .uib-dw-generic-popup .assignment-detail-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}
+   .uib-dw-generic-popup .assignment-detail-meta div{padding:11px 12px;border:1px solid var(--line,#ddd);border-radius:12px;background:var(--surface2,#f4f4f4)}
+   .uib-dw-generic-popup .assignment-detail-meta small{display:block;color:var(--muted,#737b8e);font-size:11px}
+   .uib-dw-generic-popup .assignment-detail-meta strong{display:block;font-size:13px;margin-top:3px;overflow-wrap:anywhere}
+   .uib-dw-generic-popup .assignment-detail-description{border-top:1px solid var(--line,#ddd);padding-top:15px;margin-top:14px}
+   .uib-dw-generic-popup .assignment-detail-description h3{font-size:13px;margin:0 0 7px}
+   .uib-dw-generic-popup .assignment-detail-description p{font-size:14px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;margin:0;color:var(--muted,#737b8e)}
+   @media(max-width:500px){.uib-dw-generic-popup{padding:18px}.uib-dw-generic-popup .assignment-detail-meta{grid-template-columns:1fr}}
+   @media(prefers-reduced-motion:reduce){.uib-dw-generic-backdrop,.uib-dw-generic-popup{transition:none!important}}
    #uib-deadline-warning .uib-dw-close{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:30px;height:30px;padding:0;border:0;border-radius:9px;background:transparent;color:var(--muted,#737b8e);font:inherit;font-size:22px;line-height:1;cursor:pointer}
    #uib-deadline-warning .uib-dw-close:hover{background:rgba(128,128,128,.13);color:var(--ink,#202536)}
    @keyframes uibDeadlineIn{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:translateY(0)}}
    @media(max-width:600px){#uib-deadline-warning{top:10px;right:10px;width:calc(100vw - 20px);padding:14px 44px 14px 14px;border-radius:13px}}
    @media(prefers-reduced-motion:reduce){#uib-deadline-warning{animation:none}}
   `;document.head.appendChild(style);}
-  function ensureNotice(){let box=document.getElementById("uib-deadline-warning");if(box)return box;ensureStyles();box=document.createElement("aside");box.id="uib-deadline-warning";box.hidden=true;box.setAttribute("role","alert");box.setAttribute("aria-live","polite");box.innerHTML='<button class="uib-dw-close" type="button" aria-label="Close deadline warning">×</button><span class="uib-dw-kicker">Assignment reminder</span><strong class="uib-dw-title">Deadline tomorrow</strong><ul class="uib-dw-list"></ul><div class="uib-dw-footer"><label class="uib-dw-never"><input class="uib-dw-never-input" type="checkbox"> Don\'t show again</label></div>';box.querySelector(".uib-dw-close").addEventListener("click",()=>{if(box.querySelector(".uib-dw-never-input").checked)saveNeverShowAgain();dismissedThisVisit=true;box.hidden=true;});box.querySelector(".uib-dw-list").addEventListener("click",e=>{const row=e.target.closest("[data-assignment-id]");if(row){if(typeof window.openAssignmentDetail==="function")window.openAssignmentDetail(row.dataset.assignmentId);else location.href="assignments.html#assignment-"+encodeURIComponent(row.dataset.assignmentId);}});box.querySelector(".uib-dw-list").addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches("[data-assignment-id]")){e.preventDefault();if(typeof window.openAssignmentDetail==="function")window.openAssignmentDetail(e.target.dataset.assignmentId);else location.href="assignments.html#assignment-"+encodeURIComponent(e.target.dataset.assignmentId);}});document.body.appendChild(box);return box;}
+  function ensureNotice(){let box=document.getElementById("uib-deadline-warning");if(box)return box;ensureStyles();box=document.createElement("aside");box.id="uib-deadline-warning";box.hidden=true;box.setAttribute("role","alert");box.setAttribute("aria-live","polite");box.innerHTML='<button class="uib-dw-close" type="button" aria-label="Close deadline warning">×</button><span class="uib-dw-kicker">Assignment reminder</span><strong class="uib-dw-title">Deadline tomorrow</strong><ul class="uib-dw-list"></ul>';box.querySelector(".uib-dw-close").addEventListener("click",()=>{dismissedThisVisit=true;box.hidden=true;});box.querySelector(".uib-dw-list").addEventListener("click",e=>{const row=e.target.closest("[data-assignment-id]");if(row){openNotificationAssignmentDetail(row.dataset.assignmentId);}});box.querySelector(".uib-dw-list").addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches("[data-assignment-id]")){e.preventDefault();openNotificationAssignmentDetail(e.target.dataset.assignmentId);}});document.body.appendChild(box);return box;}
+
+  function saveNeverShowAgain(){try{localStorage.setItem(NEVER_SHOW_KEY,"1");}catch(e){}render();}
+  function clearNeverShowAgain(){try{localStorage.removeItem(NEVER_SHOW_KEY);}catch(e){}render();}
+  function attachPopupPreference(popup){
+    if(!popup||popup.querySelector(".uib-dw-popup-pref"))return;
+    const label=document.createElement("label");
+    label.className="uib-dw-popup-pref";
+    label.innerHTML='<input type="checkbox"> Don\'t show notifications again';
+    const input=label.querySelector("input");
+    input.checked=neverShowAgain();
+    input.addEventListener("change",()=>{if(input.checked)saveNeverShowAgain();else clearNeverShowAgain();});
+    popup.appendChild(label);
+  }
+  function openNotificationAssignmentDetail(id){
+    const item=assignments.find(x=>String(x.id)===String(id));
+    if(!item)return;
+    if(typeof window.openAssignmentDetail==="function"){
+      window.openAssignmentDetail(id);
+      const existing=document.querySelector("#assignmentDetailBackdrop .assignment-detail");
+      if(existing)attachPopupPreference(existing);
+      return;
+    }
+    let backdrop=document.getElementById("uib-dw-generic-backdrop");
+    if(!backdrop){
+      backdrop=document.createElement("div");
+      backdrop.id="uib-dw-generic-backdrop";
+      backdrop.className="uib-dw-generic-backdrop";
+      backdrop.innerHTML='<section class="uib-dw-generic-popup" role="dialog" aria-modal="true" aria-labelledby="uibDwPopupTitle"><div class="assignment-detail-head"><div><h2 id="uibDwPopupTitle"></h2><div class="assignment-detail-course"></div></div><button class="assignment-detail-close" type="button" aria-label="Close assignment details">×</button></div><div class="assignment-detail-meta"><div><small>Deadline</small><strong data-field="deadline"></strong></div><div><small>Priority</small><strong data-field="priority"></strong></div><div><small>Status</small><strong data-field="status"></strong></div></div><div class="assignment-detail-description"><h3>Description / instructions</h3><p></p></div></section>';
+      document.body.appendChild(backdrop);
+      backdrop.querySelector(".assignment-detail-close").addEventListener("click",()=>{backdrop.classList.remove("open");backdrop.setAttribute("aria-hidden","true");});
+      backdrop.addEventListener("click",e=>{if(e.target===backdrop){backdrop.classList.remove("open");backdrop.setAttribute("aria-hidden","true");}});
+      document.addEventListener("keydown",e=>{if(e.key==="Escape"){backdrop.classList.remove("open");backdrop.setAttribute("aria-hidden","true");}});
+    }
+    const due=new Date(item.due+"T"+(item.time||"23:59")+":00");
+    const today=new Date();
+    const todayKey=dateKey(today);
+    const status=item.done?"Completed":due<Date.now()?"Overdue":item.due===todayKey?"Due today":"Upcoming";
+    const popup=backdrop.querySelector(".uib-dw-generic-popup");
+    popup.querySelector("h2").textContent=item.title||"Untitled assignment";
+    popup.querySelector(".assignment-detail-course").textContent=item.course||"Course not specified";
+    popup.querySelector('[data-field="deadline"]').textContent=due.toLocaleString(undefined,{dateStyle:"full",timeStyle:"short"});
+    popup.querySelector('[data-field="priority"]').textContent=item.priority||"Normal";
+    popup.querySelector('[data-field="status"]').textContent=status;
+    popup.querySelector(".assignment-detail-description p").textContent=item.description||"No description has been added for this assignment.";
+    attachPopupPreference(popup);
+    backdrop.classList.add("open");
+    backdrop.setAttribute("aria-hidden","false");
+    backdrop.querySelector(".assignment-detail-close").focus();
+  }
+
   function render(){if(!document.body)return;const box=ensureNotice(),upcoming=dueTodayOrTomorrow(assignments);if(!upcoming.length||dismissedThisVisit||neverShowAgain()){box.hidden=true;return;}const today=dateKey(new Date()),todayCount=upcoming.filter(x=>x.due===today).length,tomorrowCount=upcoming.length-todayCount;const key=signature(upcoming);box.dataset.signature=key;box.querySelector(".uib-dw-title").textContent=todayCount&&tomorrowCount?todayCount+" due today · "+tomorrowCount+" due tomorrow":todayCount?(todayCount===1?"1 assignment is due today":todayCount+" assignments are due today"):(tomorrowCount===1?"1 assignment is due tomorrow":tomorrowCount+" assignments are due tomorrow");box.querySelector(".uib-dw-list").innerHTML=upcoming.slice(0,4).map(x=>'<li class="uib-dw-item" data-assignment-id="'+esc(x.id)+'" tabindex="0" role="button"><strong>'+esc(x.title)+'</strong><small>'+esc(x.course||"")+(x.course?" · ":"")+(x.due===today?"Due today":"Due tomorrow")+" · "+esc(x.time||"23:59")+'</small></li>').join("")+(upcoming.length>4?'<li>+'+(upcoming.length-4)+' more assignment(s)</li>':"");box.hidden=false;}
   function load(){if(requestActive)return;requestActive=true;const callback="uibDeadlineWarning_"+Date.now()+"_"+Math.random().toString(36).slice(2);const script=document.createElement("script");let settled=false;const timeout=setTimeout(finish,12000);function finish(){if(settled)return;settled=true;requestActive=false;clearTimeout(timeout);try{delete window[callback];}catch(e){window[callback]=undefined;}script.remove();}window[callback]=data=>{if(settled)return;assignments=data&&data.ok&&Array.isArray(data.assignments)?data.assignments:[];finish();render();};script.onerror=()=>{finish();};script.src=API+"?action=assignments&callback="+encodeURIComponent(callback)+"&_="+Date.now();document.head.appendChild(script);}
   function start(){ensureNotice();load();setInterval(load,60000);setInterval(render,30000);window.addEventListener("storage",e=>{if(e.key===NEVER_SHOW_KEY)render();});}
