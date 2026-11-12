@@ -79,8 +79,14 @@
    @media(prefers-reduced-motion:reduce){#uib-deadline-warning{animation:none}}
     .uib-dw-generic-backdrop{position:fixed;inset:0;z-index:99995;display:none;place-items:center;padding:18px;background:#0a1020a8;backdrop-filter:blur(5px)}
     .uib-dw-generic-backdrop.open{display:grid}
-    .uib-dw-generic-popup{width:min(560px,100%);max-height:min(82vh,760px);overflow:auto;background:var(--surface,#fff);color:var(--ink,#202536);border:1px solid var(--line,rgba(128,128,128,.2));border-radius:20px;padding:22px;box-shadow:0 24px 80px #0005}
+    .uib-dw-generic-popup{position:relative;width:min(560px,100%);max-height:min(82vh,760px);overflow:auto;background:var(--surface,#fff);color:var(--ink,#202536);border:1px solid var(--line,rgba(128,128,128,.2));border-radius:20px;padding:22px;box-shadow:0 24px 80px #0005}
+    .uib-dw-generic-popup .assignment-detail-head{display:flex;align-items:flex-start;gap:12px;padding-right:44px}
     .uib-dw-generic-popup h2{font-size:22px;line-height:1.25;margin:0 0 6px}
+    .uib-dw-generic-popup .assignment-detail-close{position:absolute;top:18px;right:18px;display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--line,rgba(128,128,128,.2));border-radius:50%;background:var(--surface2,#f4f5f8);color:var(--ink,#202536);font-size:20px;cursor:pointer}
+    .uib-dw-generic-popup .assignment-detail-meta{display:grid;grid-template-columns:1fr 1fr;column-gap:12px;row-gap:12px;margin:18px 0}
+    .uib-dw-generic-popup .assignment-detail-meta div{display:flex;flex-direction:column;gap:6px;min-width:0;padding:12px 13px;border:1px solid var(--line,rgba(128,128,128,.2));border-radius:12px;background:var(--surface2,#f4f5f8)}
+    .uib-dw-generic-popup .assignment-detail-meta small{display:block;color:var(--muted,#737b8e);font-size:11px;line-height:1.35}
+    .uib-dw-generic-popup .assignment-detail-meta strong{display:block;font-size:13px;line-height:1.45;margin:0;overflow-wrap:anywhere}
     .uib-dw-popup-pref{display:flex;align-items:center;gap:8px;margin-top:16px;padding-top:12px;border-top:1px solid var(--line,rgba(128,128,128,.2));font-size:12px;color:var(--muted,#737b8e);cursor:pointer}
     .uib-dw-popup-pref input{accent-color:#b7791f}
     @media(max-width:500px){.uib-dw-generic-popup{padding:18px}}
