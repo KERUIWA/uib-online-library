@@ -929,6 +929,25 @@ body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-widt
 @media(max-width:560px){#cyreneTip{width:calc(100vw - 28px);padding:9px 11px 11px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){#cyreneTip.open{animation:none}#cyreneTip.open .cyrene-tip-timer{animation:none;transform:scaleX(1)}}
 </style>
+<style id="hsr-low-end-performance">
+/* Keep the HSR artwork and layout, but avoid expensive effects on touch devices. */
+@media (max-width:650px), (hover:none) and (pointer:coarse){
+ body:before{animation:none!important;opacity:.18!important}
+ header,header:after,header:before{animation:none!important}
+ header:before{background-size:auto,auto,auto!important}
+ .hero h1{animation:none!important;background-position:center!important}
+ .spotlight-stamp,.spotlight-feature.character img,.aha-poster img{animation:none!important}
+ .spotlight-feature.character img,.aha-poster img{filter:none!important}
+ .spotlight-feature,.cone-tile,.news-item,.hero-meta .pill,.pill,.hsr-dock,
+ .current-banner-cycle-name,.current-banner-cycle-controls button,
+ .current-banner-cycle-position,.aha-poster span,.site-menu-backdrop,
+ .spotlight-modal{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ .spotlight-feature,.cone-tile{box-shadow:0 5px 14px #09071918!important}
+ .hsr-dock{box-shadow:0 4px 12px #0002!important}
+ .spotlight-modal{background:#080817e8!important}
+ .spotlight-feature,.cone-tile,.news-item,.current-banner-cycle-controls button{transition:none!important}
+}
+</style>
 </head><body>
 <div class="site-topbar"><div class="site-topbar-inner"><div class="site-topbar-brand">Universitas Internasional Batam</div><div class="site-controls"><button class="site-icon-btn site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div></div>
 <header>
