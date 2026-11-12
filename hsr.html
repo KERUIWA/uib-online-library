@@ -916,7 +916,18 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 .site-menu-link.site-menu-hsr>span:first-child{width:auto!important;text-align:left!important;font-size:inherit!important}
 body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-width,0px)}
 @media(prefers-reduced-motion:reduce){.site-menu-backdrop,.site-menu-panel,.site-menu-link{transition:none}}
-</style></head><body>
+</style><style id="cyrene-tip-styles">
+#cyreneTip{position:fixed;z-index:2147483001;display:none;box-sizing:border-box;width:min(440px,calc(100vw - 32px));padding:10px 13px 12px;border:1px solid #b99a70;border-radius:12px;background:linear-gradient(120deg,#211b30f5,#49314ef5);color:#f8efff;font:600 11px/1.4 Inter,Segoe UI,Arial,sans-serif;letter-spacing:.025em;box-shadow:0 10px 28px #08061188;pointer-events:none}
+#cyreneTip.open{display:block;animation:cyreneTipIn .28s ease both}
+#cyreneTip .cyrene-tip-track{position:absolute;left:0;right:0;bottom:0;height:3px;overflow:hidden;border-radius:0 0 12px 12px;background:#ffffff20}
+#cyreneTip .cyrene-tip-timer{display:block;width:100%;height:100%;background:linear-gradient(90deg,#e8c58c,#fff0c9);transform:scaleX(0);transform-origin:right center}
+#cyreneTip.open .cyrene-tip-timer{animation:cyreneTipTimer 12s linear forwards}
+@keyframes cyreneTipIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cyreneTipTimer{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media(max-width:560px){#cyreneTip{width:calc(100vw - 28px);padding:9px 11px 11px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){#cyreneTip.open{animation:none}#cyreneTip.open .cyrene-tip-timer{animation:none;transform:scaleX(1)}}
+</style>
+</head><body>
 <div class="site-topbar"><div class="site-topbar-inner"><div class="site-topbar-brand">Universitas Internasional Batam</div><div class="site-controls"><button class="site-icon-btn site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div></div>
 <header>
 <div class="wrap">
@@ -960,6 +971,7 @@ body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-widt
 <section class="section"><div class="section-head"><div><h2>Trailblazer reminders</h2><p>Browser alerts for event starts and closing dates</p></div></div><div class="reminder-panel"><div><h3>🔔 Don't let a limited event slip away</h3><p>Enable notifications to receive an alert when an event is due to start or end within 24 hours. The page must remain open for these browser reminders to run.</p><p class="note" id="notificationStatus">Notifications are currently off. You can still see event dates here.</p></div><button class="btn primary" id="enableNotifications">Enable reminders</button></div></section>
 <p class="note">Live event dates are supplied by StarRailAssistant and announcement summaries by a community API that relays HoYoLAB posts. They are not official HoYoverse services. Always open the linked official announcement to confirm eligibility, server-time differences, and final details. Data refreshes every 15 minutes while this page is open. If a data source is unavailable, the official HoYoLAB link remains available.</p>
 </main><footer>UIB E-Library · Honkai: Star Rail Hub · Not affiliated with HoYoverse</footer>
+<div id="cyreneTip" role="status">Tip: You can deactivate the Cyrene dialog at the very bottom of the page.<span class="cyrene-tip-track" aria-hidden="true"><span class="cyrene-tip-timer"></span></span></div>
 <aside id="cyreneEncounter" aria-live="polite" aria-hidden="true" hidden>
 <img class="cyrene-art" src="https://static.icy-veins.com/images/honkai-star-rail/characters/full/cyrene.webp" alt="Cyrene from Honkai: Star Rail">
 <div class="cyrene-copy">
@@ -1360,6 +1372,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
 /* Cyrene Easter egg triggers: 47-second visit, five title clicks, and midnight hours. */
 (()=>{
  const panel=document.getElementById("cyreneEncounter");
+ const tip=document.getElementById("cyreneTip");
  const dialogue=document.getElementById("cyreneDialogue");
  const dismissButton=document.getElementById("cyreneDismiss");
  const muteButton=document.getElementById("cyreneMute");
@@ -1466,13 +1479,24 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   const id=queue.shift();
   dialogue.textContent="";choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
   panel.hidden=false;panel.setAttribute("aria-hidden","false");showing=true;
-  requestAnimationFrame(()=>panel.classList.add("open"));
+  requestAnimationFrame(()=>{
+   panel.classList.add("open");
+   if(tip){
+    const rect=panel.getBoundingClientRect();
+    tip.style.right=Math.max(14,window.innerWidth-rect.right)+"px";
+    tip.style.bottom=Math.max(14,window.innerHeight-rect.top+9)+"px";
+    tip.classList.remove("open");
+    const timer=tip.querySelector(".cyrene-tip-timer");
+    if(timer){timer.style.animation="none";void timer.offsetWidth;timer.style.animation="";}
+    requestAnimationFrame(()=>tip.classList.add("open"));
+   }
+  });
   typeText(conversations[id].line,()=>renderChoices(id),{en:conversations[id].audio,ja:conversations[id].audioJa||null});
  }
  function dismiss(){
   if(!showing)return;
   clearTimeout(typeTimer);typeTimer=null;stopVoice();choicesHost.hidden=true;choicesHost.replaceChildren();
-  panel.classList.remove("open");panel.setAttribute("aria-hidden","true");showing=false;
+  panel.classList.remove("open");if(tip)tip.classList.remove("open");panel.setAttribute("aria-hidden","true");showing=false;
   setTimeout(()=>{if(!showing)panel.hidden=true;showNext()},420);
  }
  function activate(id){
