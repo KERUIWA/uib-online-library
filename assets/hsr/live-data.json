@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-12T01:26:27Z",
+  "updatedAt": "2026-11-12T02:16:56Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-11T10:37:26Z",
-      "lastSuccess": "2026-11-11T10:37:26Z",
+      "checkedAt": "2026-11-12T02:16:56Z",
+      "lastSuccess": "2026-11-12T02:16:56Z",
       "error": null,
       "data": [
         {
@@ -1364,6 +1364,15 @@
           "type": "event"
         },
         {
+          "id": "47412533",
+          "title": "Razer | Honkai: Star Rail Collaboration Collection Is Officially Live",
+          "description": "Ctrl + Alt + Win. Control, alter, and win the battle! Inspired by Silver Wolf Lv.999's meta-breaking spirit, the Razer | Honkai: Star Rail collaboration collection is now for sale. The gaming chair, keyboard, mouse, and headset are now available to help Trailblazers level up their combat gear and break the established rules.",
+          "created_at": 1794448804,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/11/6faa50394eedf24ddd385d7533e54409_7697111409745255445.png",
+          "url": "https://www.hoyolab.com/article/47412533",
+          "type": "info"
+        },
+        {
           "id": "47401368",
           "title": "A Moment Among the Stars — \"All's Well That Ends Well\" | Honkai: Star Rail",
           "description": "All the universe is a stage, And everyone merely players. They have their exits and their entrances. And one in their time plays many parts. Until the show ends, and then An anticipated announcement is made: The Elation never takes a curtain call!",
@@ -1487,15 +1496,6 @@
           "created_at": 1794045604,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/a41c480d2d78c6e711be693d1f32dbe3_8367397384526031617.jpg",
           "url": "https://www.hoyolab.com/article/47354878",
-          "type": "info"
-        },
-        {
-          "id": "47351625",
-          "title": "\"Now, Lay Laughter to All Stars\" Version 4.7 Preview",
-          "description": "Greetings, Trailblazer! Let's take a look at the new events coming in Version 4.7!",
-          "created_at": 1794024009,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/47a6a974c73e15b2284bb441dda70d0f_4005566568712660945.jpg",
-          "url": "https://www.hoyolab.com/article/47351625",
           "type": "info"
         }
       ]
