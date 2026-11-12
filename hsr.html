@@ -1497,7 +1497,11 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
     tip.classList.remove("open");
     const timer=tip.querySelector(".cyrene-tip-timer");
     if(timer){timer.style.animation="none";void timer.offsetWidth;timer.style.animation="";}
-    requestAnimationFrame(()=>{\n     tip.classList.add("open");\n     clearTimeout(tipTimer);\n     tipTimer=setTimeout(()=>{tip.classList.remove("open");tipTimer=null},12000);\n    });
+    requestAnimationFrame(()=>{
+     tip.classList.add("open");
+     clearTimeout(tipTimer);
+     tipTimer=setTimeout(()=>{tip.classList.remove("open");tipTimer=null},12000);
+    });
    }
   });
   typeText(conversations[id].line,()=>renderChoices(id),{en:conversations[id].audio,ja:conversations[id].audioJa||null});
