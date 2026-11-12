@@ -40,10 +40,10 @@
 <footer>UIB E-Library · Assignment data stays in this browser</footer></main>
 <script>
 const $=id=>document.getElementById(id),KEY="uib-assignment-tracker-v1",names=["Agama","Bahasa Indonesia","Bahasa Inggris","Lab. Pengantar Akuntansi","Matematika Bisnis","Pengantar Akuntansi","Pengantar Manajemen dan Bisnis"];
-let items=[],editing=null,sharedReady=false,sharedSyncing=false;const SHARED_API="https://script.google.com/macros/s/AKfycbxTnLjon94xy4pum1O410O5pHHgjOk8FglMDtDFnteo6oJCttYX_Q3aV0_6xO15ocaEkA/exec";
+let items=[],editing=null,sharedReady=false,sharedSyncing=false,sharedSyncPending=false,deletedIds=new Set();const DELETED_KEY=KEY+"-deleted";try{const saved=JSON.parse(localStorage.getItem(DELETED_KEY)||"[]");if(Array.isArray(saved))deletedIds=new Set(saved.map(String));}catch(e){}const SHARED_API="https://script.google.com/macros/s/AKfycbxTnLjon94xy4pum1O410O5pHHgjOk8FglMDtDFnteo6oJCttYX_Q3aV0_6xO15ocaEkA/exec";
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 let toastTimer;function showToast(message){const t=$("toast");t.textContent=message;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2600);}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(items));$("saveStatus").textContent=sharedReady?"✓ Saved locally · syncing for everyone…":"✓ Saved on this device · shared sync is connecting…";showToast("✓ Assignment saved. Syncing shared class list…");if(sharedReady)syncSharedAssignments();else loadSharedAssignments((err,remote)=>{if(err){$("saveStatus").textContent="⚠ Saved only on this device. Shared API is not connected yet.";}else syncSharedAssignments();});return true;}catch(e){$("saveStatus").textContent="⚠ Could not save. Browser storage may be blocked or full." ;showToast("⚠ Could not save. Check browser storage.");return false;}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(items));localStorage.setItem(DELETED_KEY,JSON.stringify(Array.from(deletedIds)));$("saveStatus").textContent=sharedReady?"✓ Saved locally · syncing for everyone…":"✓ Saved on this device · shared sync is connecting…";showToast("✓ Assignment saved. Syncing shared class list…");if(sharedReady)syncSharedAssignments();else loadSharedAssignments((err)=>{if(err){$("saveStatus").textContent="⚠ Saved only on this device. Shared API is not connected yet.";}else syncSharedAssignments();});return true;}catch(e){$("saveStatus").textContent="⚠ Could not save. Browser storage may be blocked or full." ;showToast("⚠ Could not save. Check browser storage.");return false;}}
 function loadSharedAssignments(done){
   let attemptNumber=0, completed=false;
   function attempt(){
@@ -82,7 +82,7 @@ function loadSharedAssignments(done){
       completed=true;
       cleanup();
       sharedReady=true;
-      done(null,data.assignments);
+      done(null,data.assignments,Array.isArray(data.deletedIds)?data.deletedIds:[]);
     };
     script.onerror=()=>retry(new Error("Could not reach shared assignment service after "+attemptNumber+" attempts."));
     script.src=SHARED_API+"?action=assignments&callback="+encodeURIComponent(cb)+"&_="+Date.now()+"_"+attemptNumber;
@@ -107,22 +107,24 @@ function assignmentSignature(list){
     .map(normalizeAssignment)
     .sort((a,b)=>a.id.localeCompare(b.id)));
 }
-function mergeAssignments(local,remote){
+function mergeAssignments(local,remote,localDeleted,remoteDeleted){
   const merged=new Map();
   const diagnosticIds=new Set(["diagnostic-test-001","post-test-001","browser-post-test"]);
-  // Keep PC-only assignments, but let the shared copy win when an ID exists on both.
+  const deleted=new Set([...(Array.isArray(localDeleted)?localDeleted:[]),...(Array.isArray(remoteDeleted)?remoteDeleted:[])].map(String));
   (Array.isArray(local)?local:[]).forEach(x=>{
-    if(x&&typeof x==="object"&&x.id&&!diagnosticIds.has(String(x.id)))merged.set(String(x.id),normalizeAssignment(x));
+    if(x&&typeof x==="object"&&x.id&&!diagnosticIds.has(String(x.id))&&!deleted.has(String(x.id)))merged.set(String(x.id),normalizeAssignment(x));
   });
   (Array.isArray(remote)?remote:[]).forEach(x=>{
-    if(x&&x.id&&!diagnosticIds.has(String(x.id)))merged.set(String(x.id),normalizeAssignment(x));
+    if(x&&x.id&&!diagnosticIds.has(String(x.id))&&!deleted.has(String(x.id)))merged.set(String(x.id),normalizeAssignment(x));
   });
   return Array.from(merged.values());
 }
+function finishSharedSync(){sharedSyncing=false;if(sharedSyncPending){sharedSyncPending=false;syncSharedAssignments();}}
 function syncSharedAssignments(){
-  if(sharedSyncing)return;
+  if(sharedSyncing){sharedSyncPending=true;return;}
   sharedSyncing=true;
-  const snapshot=JSON.stringify(items.map(normalizeAssignment));
+  const payload={assignments:items.map(normalizeAssignment),deletedIds:Array.from(deletedIds)};
+  const snapshot=JSON.stringify(payload);
   fetch(SHARED_API,{
     method:"POST",
     mode:"no-cors",
@@ -131,29 +133,33 @@ function syncSharedAssignments(){
   }).then(()=>new Promise(resolve=>setTimeout(resolve,1200)))
     .then(()=>verifySharedUpload(snapshot,0))
     .catch(()=>{
-      sharedSyncing=false;
       $("saveStatus").textContent="⚠ Saved on this device, but shared sync failed. Your local copy is safe.";
+      finishSharedSync();
     });
 }
 function verifySharedUpload(snapshot,attempt){
-  loadSharedAssignments((err,remote)=>{
+  const expected=JSON.parse(snapshot);
+  loadSharedAssignments((err,remote,remoteDeleted)=>{
     if(err){
-      sharedSyncing=false;
       $("saveStatus").textContent="⚠ Saved on this device, but shared sync could not be verified.";
+      finishSharedSync();
       return;
     }
-    if(assignmentSignature(remote)===assignmentSignature(JSON.parse(snapshot))){
-      sharedSyncing=false;
+    const remoteIds=new Set((remoteDeleted||[]).map(String));
+    const deletionsSaved=expected.deletedIds.every(id=>remoteIds.has(String(id)));
+    const assignmentsSaved=expected.assignments.every(x=>{
+      const found=remote.find(y=>String(y.id)===String(x.id));
+      return found&&assignmentSignature([found])===assignmentSignature([x]);
+    });
+    if(deletionsSaved&&assignmentsSaved){
       $("saveStatus").textContent="✓ Shared with everyone · synced successfully";
       showToast("🌍 Assignment shared with everyone!");
+      finishSharedSync();
       return;
     }
-    if(attempt<3){
-      setTimeout(()=>verifySharedUpload(snapshot,attempt+1),900);
-      return;
-    }
-    sharedSyncing=false;
+    if(attempt<3){setTimeout(()=>verifySharedUpload(snapshot,attempt+1),900);return;}
     $("saveStatus").textContent="⚠ Upload reached the server, but the shared list differs. Your local copy is safe.";
+    finishSharedSync();
   });
 }
 function celebrate(){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;const colors=["#f94144","#f9c74f","#43aa8b","#577590","#b565d9","#f9844a"];for(let i=0;i<110;i++){const p=document.createElement("i");p.className="confetti-piece";p.style.left=(Math.random()*100)+"vw";p.style.background=colors[i%colors.length];p.style.borderRadius=Math.random()>.5?"50%":"2px";p.style.setProperty("--drift",((Math.random()-.5)*340)+"px");p.style.setProperty("--spin",(Math.random()*1500+720)+"deg");p.style.animationDelay=(Math.random()*2.2)+"s";p.style.width=(7+Math.random()*9)+"px";p.style.height=(11+Math.random()*16)+"px";document.body.appendChild(p);setTimeout(()=>p.remove(),9000);} }
@@ -173,12 +179,12 @@ function resetForm(){$("assignmentForm").reset();$("time").value="23:59";$("cust
 $("course").addEventListener("change",()=>{$("customCourseWrap").hidden=$("course").value!=="__other";$("customCourse").required=$("course").value==="__other";});
 $("assignmentForm").addEventListener("submit",e=>{e.preventDefault();const course=$("course").value==="__other"?$("customCourse").value.trim():$("course").value;if(!course)return;const data={id:editing||String(Date.now())+"-"+Math.random().toString(36).slice(2,7),title:$("title").value.trim(),course,due:$("due").value,time:$("time").value,priority:$("priority").value,description:$("description").value.trim(),done:false};if(!data.title||!data.due||!data.time)return;if(editing){const old=items.find(x=>x.id===editing);data.done=old?.done||false;items=items.map(x=>x.id===editing?data:x);}else items.push(data);save();resetForm();render();});
 $("cancelEdit").addEventListener("click",resetForm);
-$("list").addEventListener("click",e=>{const b=e.target.closest("button[data-action]");if(!b)return;const x=items.find(a=>a.id===b.dataset.id);if(!x)return;if(b.dataset.action==="toggle"){x.done=!x.done;if(x.done)celebrate();}if(b.dataset.action==="delete"){if(!confirm("Delete this assignment?"))return;items=items.filter(a=>a.id!==x.id);}if(b.dataset.action==="edit"){editing=x.id;$("title").value=x.title;$("course").value=names.includes(x.course)?x.course:"__other";$("customCourseWrap").hidden=$("course").value!=="__other";$("customCourse").required=$("course").value==="__other";$("customCourse").value=names.includes(x.course)?"":x.course;$("due").value=x.due;$("time").value=x.time;$("priority").value=x.priority;$("description").value=x.description;$("formTitle").textContent="✎ Edit assignment";$("saveBtn").textContent="Save changes";$("cancelEdit").hidden=false;$("editor").scrollIntoView({behavior:"smooth",block:"start"});return;}save();render();if(b.dataset.action==="toggle")showToast(x.done?"🎉 Assignment completed! Look at you go!":"↶ Assignment reopened");});
+$("list").addEventListener("click",e=>{const b=e.target.closest("button[data-action]");if(!b)return;const x=items.find(a=>a.id===b.dataset.id);if(!x)return;if(b.dataset.action==="toggle"){x.done=!x.done;if(x.done)celebrate();}if(b.dataset.action==="delete"){if(!confirm("Delete this assignment?"))return;deletedIds.add(String(x.id));items=items.filter(a=>a.id!==x.id);}if(b.dataset.action==="edit"){editing=x.id;$("title").value=x.title;$("course").value=names.includes(x.course)?x.course:"__other";$("customCourseWrap").hidden=$("course").value!=="__other";$("customCourse").required=$("course").value==="__other";$("customCourse").value=names.includes(x.course)?"":x.course;$("due").value=x.due;$("time").value=x.time;$("priority").value=x.priority;$("description").value=x.description;$("formTitle").textContent="✎ Edit assignment";$("saveBtn").textContent="Save changes";$("cancelEdit").hidden=false;$("editor").scrollIntoView({behavior:"smooth",block:"start"});return;}save();render();if(b.dataset.action==="toggle")showToast(x.done?"🎉 Assignment completed! Look at you go!":"↶ Assignment reopened");});
 $("filter").addEventListener("change",render);$("sort").addEventListener("change",render);
 function checkNotifications(){if(!("Notification"in window)||Notification.permission!=="granted")return;const now=Date.now();items.filter(x=>!x.done&&dueDate(x)-now>0&&dueDate(x)-now<=24*3600000).forEach(x=>{const k="uib-assignment-notified-"+x.id+"-"+x.due;if(localStorage.getItem(k))return;try{new Notification("Deadline approaching: "+x.title,{body:x.course+" · Due "+fmt(x),tag:x.id});localStorage.setItem(k,"1");}catch(e){}});}
 $("notifyBtn").addEventListener("click",async()=>{const status=$("notifyStatus");if(!window.isSecureContext){status.textContent="Notifications require a secure HTTPS page. Open the GitHub Pages address, not a local file.";return;}if(!("Notification"in window)){status.textContent="This browser does not support desktop notifications. On-page alerts still work.";return;}try{if(Notification.permission==="granted"){status.textContent="✓ Browser notifications are already enabled. Keep this tracker open for reminders.";checkNotifications();return;}if(Notification.permission==="denied"){status.textContent="Notifications are blocked in browser site settings. Allow them for this website, then try again.";return;}status.textContent="Waiting for browser permission…";const p=await Notification.requestPermission();if(p==="granted"){status.textContent="✓ Browser notifications enabled. Keep this tracker open for reminders.";new Notification("UIB Assignment Tracker",{body:"Notifications are working. We will alert you about deadlines within 24 hours."});checkNotifications();}else if(p==="denied"){status.textContent="Permission was blocked. Allow notifications for this site in your browser settings.";}else{status.textContent="Permission was dismissed. Click the button again and choose Allow.";}}catch(err){status.textContent="Could not request notification permission: "+(err?.message||"browser error");}});
 if("Notification"in window&&Notification.permission==="granted")$("notifyStatus").textContent="Browser notifications are enabled. Keep this tracker open for reminders.";
 $("themeToggle").addEventListener("click",()=>{const d=document.documentElement.dataset.theme!=="dark";document.documentElement.dataset.theme=d?"dark":"light";try{localStorage.setItem("uib-library-theme",d?"dark":"light")}catch(e){}$("themeToggle").textContent=d?"☀ Light mode":"☾ Dark mode";});$("themeToggle").textContent=document.documentElement.dataset.theme==="dark"?"☀ Light mode":"☾ Dark mode";
-try{const raw=JSON.parse(localStorage.getItem(KEY)||"[]");items=Array.isArray(raw)?raw:[];}catch(e){items=[];}render();checkNotifications();loadSharedAssignments((err,remote)=>{if(err){$("saveStatus").textContent="Local-only mode: shared assignment service needs deployment.";return;}const merged=mergeAssignments(items,remote);const needsUpload=assignmentSignature(merged)!==assignmentSignature(remote);items=merged;try{localStorage.setItem(KEY,JSON.stringify(items));}catch(e){}render();if(needsUpload){syncSharedAssignments();}else{$("saveStatus").textContent="✓ Connected · shared class assignments loaded";}});setInterval(()=>{render();checkNotifications();},60000);
+try{const raw=JSON.parse(localStorage.getItem(KEY)||"[]");items=Array.isArray(raw)?raw:[];}catch(e){items=[];}render();checkNotifications();loadSharedAssignments((err,remote,remoteDeleted)=>{if(err){$("saveStatus").textContent="Local-only mode: shared assignment service needs deployment.";return;}const previous=assignmentSignature(items);const previousDeleted=JSON.stringify(Array.from(deletedIds).sort());deletedIds=new Set([...deletedIds,...(remoteDeleted||[]).map(String)]);const merged=mergeAssignments(items,remote,Array.from(deletedIds),remoteDeleted);const needsUpload=assignmentSignature(merged)!==assignmentSignature(remote)||JSON.stringify(Array.from(deletedIds).sort())!==JSON.stringify((remoteDeleted||[]).map(String).sort());items=merged;try{localStorage.setItem(KEY,JSON.stringify(items));localStorage.setItem(DELETED_KEY,JSON.stringify(Array.from(deletedIds)));}catch(e){}render();if(needsUpload){syncSharedAssignments();}else{$("saveStatus").textContent="✓ Connected · shared class assignments loaded";}});setInterval(()=>{render();checkNotifications();},60000);
 </script><script src="deadline-warning.js?v=20261112-9" defer></script>
 </body></html>
