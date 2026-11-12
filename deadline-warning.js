@@ -111,10 +111,10 @@
   `;document.head.appendChild(style);}
   function parseDeadline(item){
     const raw=String(item&&item.due||"").trim(),time=String(item&&item.time||"23:59").trim();
-    const tm=time.match(/^(\\d{1,2}):(\\d{2})/),hour=tm?Math.min(23,Number(tm[1])):23,minute=tm?Math.min(59,Number(tm[2])):59;
-    let m=raw.match(/^(\\d{4})-(\\d{1,2})-(\\d{1,2})$/);
+    const tm=time.match(/^(\d{1,2}):(\d{2})/),hour=tm?Math.min(23,Number(tm[1])):23,minute=tm?Math.min(59,Number(tm[2])):59;
+    let m=raw.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
     if(m)return new Date(Number(m[1]),Number(m[2])-1,Number(m[3]),hour,minute,0,0);
-    m=raw.match(/^(\\d{1,2})[\\/-](\\d{1,2})[\\/-](\\d{4})$/);
+    m=raw.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/);
     if(m)return new Date(Number(m[3]),Number(m[2])-1,Number(m[1]),hour,minute,0,0);
     const parsed=new Date(raw);
     if(!Number.isFinite(parsed.getTime()))return new Date(NaN);
