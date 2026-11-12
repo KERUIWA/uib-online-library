@@ -52,9 +52,6 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 #themeToggle:hover{background:#2548bd!important;border-color:#2548bd!important;transform:translateY(-1px)!important;}
 #themeToggle:focus-visible{outline:3px solid #3157d559!important;outline-offset:3px!important;}
 
-/* Give each week card a gentle bottom-to-top entrance without locking its hover transform. */
-@keyframes weekCardReveal{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.week-grid.animate-weeks>.week{animation:weekCardReveal .48s cubic-bezier(.2,.75,.25,1) both!important;animation-delay:calc(var(--i,0)*18ms)!important;}
 </style>
 </head>
 <body>
@@ -83,7 +80,7 @@ function fileLink(f){const url=f.previewUrl||("https://drive.google.com/file/d/"
 function setTheme(theme){document.documentElement.dataset.theme=theme;try{localStorage.setItem("uib-library-theme",theme);}catch(e){}$("themeToggle").textContent=theme==="dark"?"☀ Light mode":"☾ Dark mode";}
 function initTheme(){setTheme(document.documentElement.dataset.theme==="dark"?"dark":"light");}
 $("themeToggle").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));initTheme();
-function render(data,animateWeeks=false){
+function render(data){
  const course=(data.folders||[]).find(x=>x.id===folderId);
  if(!course){$("subjectTitle").textContent="Subject not found";$("status").hidden=false;$("status").textContent="This subject could not be found. Return to the library and choose a subject again.";$("weekCount").textContent="";return;}
  document.title=course.name+" · UIB E-Library | Class of 2026";$("subjectTitle").textContent=course.name;const teacher=lecturer(course.name);if(teacher){$("teacherLine").textContent="Lecturer · "+teacher;$("teacherLine").hidden=false;}
@@ -92,7 +89,6 @@ function render(data,animateWeeks=false){
  const total=[...weekMap.values()].reduce((n,files)=>n+files.length,0);
  $("weekCount").textContent="16-week schedule · "+total+" files";$("status").hidden=true;
  const emptyMessages=["The files are playing hide-and-seek. Nobody has found them yet. 🙈","A little academic tumbleweed rolled through here. Nothing uploaded yet. 🌵","This week is currently powered by hopes, dreams, and absolutely zero files. ✨","The lecturer has entered stealth mode. Materials not spotted yet. 🥷","Your future notes are still in the making. Check back soon! 🛠️","So empty, even the echo is echoing. 📢"];
- $("weeks").classList.toggle("animate-weeks",animateWeeks);
  $("weeks").innerHTML=Array.from({length:16},(_,i)=>{
   const n=i+1,isCurrent=n===getCurrentAcademicWeek(),files=(weekMap.get(n)||[]).slice().sort((a,b)=>a.name.localeCompare(b.name));
   const kind=n===8?"uts":n===16?"uas":"",label=n===8?"UTS · Ujian Tengah Semester":n===16?"UAS · Ujian Akhir Semester":"";
@@ -107,9 +103,9 @@ function render(data,animateWeeks=false){
  if(other.length){$("other").hidden=false;$("otherFiles").innerHTML=other.map(fileLink).join("");}
 }
 function load(){if(!folderId){$("subjectTitle").textContent="No subject selected";$("status").textContent="Return to the library and select a subject.";return;}
- let hasCache=false;try{const saved=localStorage.getItem("uib-online-library-cache-v1");if(saved){const cached=JSON.parse(saved);if(cached&&Array.isArray(cached.folders)){render(cached,false);hasCache=true;}}}catch(e){}
+ let hasCache=false;try{const saved=localStorage.getItem("uib-online-library-cache-v1");if(saved){const cached=JSON.parse(saved);if(cached&&Array.isArray(cached.folders)){render(cached);hasCache=true;}}}catch(e){}
  const callback="uibSubjectCallback";let finished=false;const s=document.createElement("script");const timeout=setTimeout(()=>{if(!finished&&!hasCache)$("status").textContent="The library is taking longer than usual to respond. Please wait or refresh.";},12000);
- window[callback]=data=>{finished=true;clearTimeout(timeout);try{render(data,true);try{localStorage.setItem("uib-online-library-cache-v1",JSON.stringify(data));}catch(e){}}catch(e){if(!hasCache)$("status").textContent="Could not display subject materials: "+e.message;}};
+ window[callback]=data=>{finished=true;clearTimeout(timeout);try{render(data);try{localStorage.setItem("uib-online-library-cache-v1",JSON.stringify(data));}catch(e){}}catch(e){if(!hasCache)$("status").textContent="Could not display subject materials: "+e.message;}};
  s.src=API+"?callback="+callback+"&_="+Date.now();s.onerror=()=>{finished=true;clearTimeout(timeout);if(!hasCache)$("status").textContent="Could not connect to Google Drive. Check the deployment and sharing permissions.";};document.head.appendChild(s);
 }
 load();
