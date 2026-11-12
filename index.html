@@ -199,5 +199,5 @@ function load(){let hasCache=false;try{const saved=localStorage.getItem(CACHE_KE
  s.src=API+"?callback="+callback+"&_="+Date.now();s.onerror=()=>{finished=true;clearTimeout(timeout);if(!hasCache)$("status").textContent="Could not connect to Google Drive. Check the Apps Script deployment and sharing permissions, then refresh.";else $("count").textContent=$("count").textContent.replace(" · updating"," · offline copy");};document.head.appendChild(s);}
 load();
 </script>
-<script src="deadline-warning.js?v=20261112-3" defer></script>
+<script src="deadline-warning.js?v=20261112-4" defer></script>
 </body></html>
