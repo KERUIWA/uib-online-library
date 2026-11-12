@@ -1266,7 +1266,10 @@ function eventArtwork(x){
  return "";
 }
 function eventImageMarkup(x){
- return eventPoster(x);
+ const fallback=eventArtwork(x),primary=x.image||fallback;
+ if(!primary)return eventPoster(x);
+ const proxied="https://images.weserv.nl/?url="+encodeURIComponent(primary);
+ return '<img loading="eager" decoding="async" data-event-image="1" data-event-name="'+esc(x.name)+'" data-event-kind="'+esc(x.kind||"In-game activity")+'" data-fallback="'+esc(fallback&&primary!==fallback?fallback:"")+'" src="'+proxied+'" alt="'+esc(x.name)+' poster">';
 }
 function replaceFailedEventImage(img){
  if(!(img instanceof HTMLImageElement)||img.dataset.eventImage!=="1")return;
