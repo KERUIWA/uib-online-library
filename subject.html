@@ -54,10 +54,35 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 #themeToggle:focus-visible{outline:3px solid #3157d559!important;outline-offset:3px!important;}
 
 </style>
-</head>
+<style>
+/* Shared header controls and slide-in navigation */
+.site-controls{display:flex;align-items:center;gap:9px;flex:0 0 auto}
+.site-icon-btn{width:40px;height:40px;min-width:40px;border:1px solid #ffffff55;border-radius:12px;background:#ffffff18;color:inherit;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;backdrop-filter:blur(10px);transition:background .2s,border-color .2s,transform .2s}
+.site-icon-btn:hover{background:#ffffff2b;transform:translateY(-1px)}
+.site-icon-btn:focus-visible,.site-menu-close:focus-visible,.site-menu-link:focus-visible{outline:3px solid #8da5ff;outline-offset:3px}
+#themeToggle.site-icon-btn{font-size:0!important;width:40px!important;min-width:40px!important;height:40px!important;min-height:40px!important;padding:0!important;border:1px solid #ffffff55!important;border-radius:12px!important;background:#ffffff18!important;color:inherit!important;box-shadow:none!important}
+#themeToggle.site-icon-btn:before{content:"☾";font-size:21px;line-height:1}
+:root[data-theme="dark"] #themeToggle.site-icon-btn:before{content:"☀"}
+#themeToggle.site-icon-btn:hover{background:#ffffff2b!important;border-color:#ffffff77!important;transform:translateY(-1px)!important}
+.site-menu-icon{width:19px;height:16px;display:flex;flex-direction:column;justify-content:space-between}
+.site-menu-icon span{display:block;width:19px;height:2px;border-radius:2px;background:currentColor}
+.site-menu-backdrop{position:fixed;inset:0;z-index:3000;background:#080d19a6;backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.site-menu-backdrop.open{opacity:1;visibility:visible}
+.site-menu-panel{position:absolute;top:0;right:0;width:min(360px,88vw);height:100%;height:100dvh;overflow-y:auto;background:var(--surface,#fff);color:var(--ink,#172033);box-shadow:-18px 0 50px #0003;padding:25px 22px 30px;transform:translateX(102%);transition:transform .3s cubic-bezier(.2,.75,.25,1);display:flex;flex-direction:column;gap:22px}
+.site-menu-backdrop.open .site-menu-panel{transform:translateX(0)}
+.site-menu-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:17px;border-bottom:1px solid var(--line,#e5e9f1)}
+.site-menu-title{font-size:17px;font-weight:850;letter-spacing:-.02em}
+.site-menu-close{width:36px;height:36px;border:1px solid var(--line,#e5e9f1);border-radius:10px;background:var(--surface2,#f8f9fd);color:var(--ink,#172033);font-size:23px;line-height:1;cursor:pointer}
+.site-menu-links{display:grid;gap:9px}
+.site-menu-link{display:flex;align-items:center;gap:13px;padding:13px 14px;border:1px solid var(--line,#e5e9f1);border-radius:13px;background:var(--surface2,#f8f9fd);color:var(--ink,#172033);font-weight:750;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
+.site-menu-link:hover{background:var(--blue-soft,#edf1ff);border-color:var(--blue,#3157d5);transform:translateX(-2px)}
+.site-menu-link span:first-child{width:27px;text-align:center;font-size:19px}
+body.site-menu-open{overflow:hidden}
+@media(prefers-reduced-motion:reduce){.site-menu-backdrop,.site-menu-panel,.site-menu-link{transition:none}}
+</style></head>
 <body>
 <header><div class="wrap">
-<div class="topline"><div class="eyebrow">Universitas Internasional Batam · Class of 2026</div><button class="theme-toggle" id="themeToggle" type="button">☾ Dark mode</button></div>
+<div class="topline"><div class="eyebrow">Universitas Internasional Batam · Class of 2026</div><div class="site-controls"><button class="theme-toggle site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div>
 <h1 id="subjectTitle">Loading subject…</h1><div class="sub">Class of 2026 · Weekly course materials</div><div class="teacher-line" id="teacherLine" hidden></div>
 </div></header>
 <main>
@@ -112,4 +137,6 @@ function load(){if(!folderId){$("subjectTitle").textContent="No subject selected
 load();
 </script>
 <script src="deadline-warning.js?v=20261112-9" defer></script>
-</body></html>
+<div class="site-menu-backdrop" id="siteMenuBackdrop" aria-hidden="true"><aside class="site-menu-panel" role="dialog" aria-modal="true" aria-label="Site navigation"><div class="site-menu-head"><div class="site-menu-title">Navigate</div><button class="site-menu-close" id="siteMenuClose" type="button" aria-label="Close menu">×</button></div><nav class="site-menu-links" aria-label="Main menu"><a class="site-menu-link" href="dashboard.html"><span aria-hidden="true">🎓</span><span>Dashboard</span></a><a class="site-menu-link" href="index.html"><span aria-hidden="true">📚</span><span>Course Library</span></a><a class="site-menu-link" href="assignments.html"><span aria-hidden="true">🗓️</span><span>Assignments & Deadlines</span></a><a class="site-menu-link" href="tracker.html"><span aria-hidden="true">📊</span><span>IPS & IPK Tracker</span></a><a class="site-menu-link" href="hsr.html"><span aria-hidden="true">🚂</span><span>Honkai: Star Rail Hub</span></a></nav></aside></div><script>
+(()=>{const backdrop=document.getElementById("siteMenuBackdrop"),openBtn=document.getElementById("siteMenuOpen"),closeBtn=document.getElementById("siteMenuClose");if(!backdrop||!openBtn||!closeBtn)return;function closeMenu(){backdrop.classList.remove("open");backdrop.setAttribute("aria-hidden","true");document.body.classList.remove("site-menu-open");openBtn.setAttribute("aria-expanded","false");}function openMenu(){backdrop.classList.add("open");backdrop.setAttribute("aria-hidden","false");document.body.classList.add("site-menu-open");openBtn.setAttribute("aria-expanded","true");closeBtn.focus();}openBtn.addEventListener("click",openMenu);closeBtn.addEventListener("click",closeMenu);backdrop.addEventListener("click",e=>{if(e.target===backdrop)closeMenu();});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&backdrop.classList.contains("open")){closeMenu();openBtn.focus();}});})();
+</script></body></html>
