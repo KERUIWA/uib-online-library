@@ -94,7 +94,26 @@
   `;document.head.appendChild(style);}
   function ensureNotice(){let box=document.getElementById("uib-deadline-warning");if(box)return box;ensureStyles();box=document.createElement("aside");box.id="uib-deadline-warning";box.hidden=true;box.setAttribute("role","alert");box.setAttribute("aria-live","polite");box.innerHTML='<button class="uib-dw-close" type="button" aria-label="Close deadline warning">×</button><span class="uib-dw-kicker">Assignment reminder</span><strong class="uib-dw-title">Deadline tomorrow</strong><ul class="uib-dw-list"></ul>';box.querySelector(".uib-dw-close").addEventListener("click",()=>{dismissedThisVisit=true;box.hidden=true;});const openRow=row=>{if(row)openNotificationAssignmentDetail(row.dataset.assignmentId);};box.querySelector(".uib-dw-list").addEventListener("click",e=>openRow(e.target.closest("[data-assignment-id]")));box.querySelector(".uib-dw-list").addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches("[data-assignment-id]")){e.preventDefault();openRow(e.target);}});document.body.appendChild(box);return box;}
   function render(){if(!document.body)return;const box=ensureNotice(),upcoming=dueTodayOrTomorrow(assignments).filter(x=>!isAssignmentHidden(x.id));if(!upcoming.length||dismissedThisVisit){box.hidden=true;return;}const today=dateKey(new Date()),todayCount=upcoming.filter(x=>x.due===today).length,tomorrowCount=upcoming.length-todayCount;const key=signature(upcoming);box.dataset.signature=key;box.querySelector(".uib-dw-title").textContent=todayCount&&tomorrowCount?todayCount+" due today · "+tomorrowCount+" due tomorrow":todayCount?(todayCount===1?"1 assignment is due today":todayCount+" assignments are due today"):(tomorrowCount===1?"1 assignment is due tomorrow":tomorrowCount+" assignments are due tomorrow");box.querySelector(".uib-dw-list").innerHTML=upcoming.slice(0,4).map(x=>'<li class="uib-dw-item" data-assignment-id="'+esc(x.id)+'" tabindex="0" role="button"><strong>'+esc(x.title)+'</strong><small>'+esc(x.course||"")+(x.course?" · ":"")+(x.due===today?"Due today":"Due tomorrow")+" · "+esc(x.time||"23:59")+'</small></li>').join("")+(upcoming.length>4?'<li>+'+(upcoming.length-4)+' more assignment(s)</li>':"");box.hidden=false;}
-  function load(){if(requestActive)return;requestActive=true;const callback="uibDeadlineWarning_"+Date.now()+"_"+Math.random().toString(36).slice(2);const script=document.createElement("script");let settled=false;const timeout=setTimeout(finish,12000);function finish(){if(settled)return;settled=true;requestActive=false;clearTimeout(timeout);try{delete window[callback];}catch(e){window[callback]=undefined;}script.remove();}window[callback]=data=>{if(settled)return;assignments=data&&data.ok&&Array.isArray(data.assignments)?data.assignments:[];finish();render();};script.onerror=()=>{finish();};script.src=API+"?action=assignments&callback="+encodeURIComponent(callback)+"&_="+Date.now();document.head.appendChild(script);}
-  function start(){ensureNotice();load();setInterval(load,60000);setInterval(render,30000);window.addEventListener("storage",e=>{if(e.key===HIDDEN_ASSIGNMENTS_KEY)render();});}
+  function load(){if(requestActive)return;requestActive=true;const callback="uibDeadlineWarning_"+Date.now()+"_"+Math.random().toString(36).slice(2);const script=document.createElement("script");let settled=false;const timeout=setTimeout(finish,12000);function finish(){if(settled)return;settled=true;requestActive=false;clearTimeout(timeout);try{delete window[callback];}catch(e){window[callback]=undefined;}script.remove();}window[callback]=data=>{if(settled)return;assignments=data&&data.ok&&Array.isArray(data.assignments)?data.assignments:[];finish();render();checkFinalHourNotifications();};script.onerror=()=>{finish();};script.src=API+"?action=assignments&callback="+encodeURIComponent(callback)+"&_="+Date.now();document.head.appendChild(script);}
+  function checkFinalHourNotifications(){
+    if(!("Notification"in window)||Notification.permission!=="granted")return;
+    const now=Date.now(),windowMs=3*3600000,repeatMs=10*60000;
+    assignments.filter(x=>!x.done&&x.id&&x.due).forEach(x=>{
+      const due=new Date(x.due+"T"+(x.time||"23:59")+":00").getTime(),remaining=due-now;
+      if(!Number.isFinite(due)||remaining<=0||remaining>windowMs)return;
+      const key="uib-assignment-final-reminder-"+String(x.id)+"-"+x.due+"-"+(x.time||"23:59");
+      let last=0;try{last=Number(localStorage.getItem(key)||0);}catch(e){}
+      if(last&&now-last<repeatMs)return;
+      const mins=Math.max(1,Math.ceil(remaining/60000)),left=mins>=60?Math.floor(mins/60)+"h "+(mins%60)+"m":mins+"m";
+      try{
+        new Notification("⏰ Deadline in "+left+": "+(x.title||"Assignment"),{
+          body:(x.course||"Assignment")+" · Due "+new Date(due).toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"}),
+          tag:"uib-assignment-"+x.id,renotify:true
+        });
+        try{localStorage.setItem(key,String(now));}catch(e){}
+      }catch(e){}
+    });
+  }
+  function start(){ensureNotice();load();setInterval(load,60000);setInterval(render,30000);setInterval(checkFinalHourNotifications,30000);window.addEventListener("storage",e=>{if(e.key===HIDDEN_ASSIGNMENTS_KEY)render();});}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
