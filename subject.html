@@ -53,7 +53,8 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 #themeToggle:focus-visible{outline:3px solid #3157d559!important;outline-offset:3px!important;}
 
 /* Prevent the 16 week cards from running competing entrance animations. */
-.week-grid>.week{animation:none!important;}
+@keyframes weekCardReveal{from{opacity:0}to{opacity:1}}
+.week-grid>.week{animation:weekCardReveal .38s ease both!important;animation-delay:calc(var(--i,0)*18ms)!important;}
 </style>
 </head>
 <body>
