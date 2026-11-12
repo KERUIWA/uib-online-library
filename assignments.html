@@ -22,8 +22,8 @@
 #themeToggle:hover{background:#2548bd!important;border-color:#2548bd!important;transform:translateY(-1px)!important;}
 #themeToggle:focus-visible{outline:3px solid #3157d559!important;outline-offset:3px!important;}
 
-.site-topbar{position:sticky;top:0;z-index:2500;width:100%;background:var(--surface,#fff);color:var(--ink,#172033);border-bottom:1px solid var(--line,rgba(128,128,128,.2));box-shadow:0 3px 14px rgba(15,23,42,.07);}
-.site-topbar-inner{max-width:1160px;min-height:64px;margin:0 auto;padding:10px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+.site-topbar{position:sticky;top:0;z-index:5000;display:block;box-sizing:border-box;width:100%;margin:0;padding:0;background:var(--surface,#fff);color:var(--ink,#172033);border-bottom:1px solid var(--line,rgba(128,128,128,.2));box-shadow:0 3px 14px rgba(15,23,42,.07);}
+.site-topbar-inner{box-sizing:border-box;width:100%;max-width:1160px;min-height:64px;margin:0 auto;padding:10px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
 .site-topbar-brand{font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase;color:var(--ink,#172033);line-height:1.35;}
 .site-topbar .site-icon-btn,#themeToggle.site-icon-btn{background:var(--surface2,#f4f6fb)!important;border:1px solid var(--line,#e5e9f1)!important;color:var(--ink,#172033)!important;backdrop-filter:none!important;}
 .site-topbar .site-icon-btn:hover{background:var(--blue-soft,#edf1ff)!important;border-color:var(--blue,#3157d5)!important;}
@@ -54,7 +54,8 @@
 body.site-menu-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){.site-menu-backdrop,.site-menu-panel,.site-menu-link{transition:none}}
 </style></head><body>
-<header><div class="wrap"><div class="site-topbar"><div class="site-topbar-inner"><div class="site-topbar-brand">Universitas Internasional Batam</div><div class="site-controls"><button class="theme site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div></div><h1>Assignment & Deadline Tracker</h1><div class="sub">Keep every task visible. Never let a deadline sneak up on you.</div></div></header>
+<div class="site-topbar"><div class="site-topbar-inner"><div class="site-topbar-brand">Universitas Internasional Batam</div><div class="site-controls"><button class="theme site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div></div>
+<header><div class="wrap"><h1>Assignment & Deadline Tracker</h1><div class="sub">Keep every task visible. Never let a deadline sneak up on you.</div></div></header>
 <div class="toast" id="toast" role="status" aria-live="polite">✓ Assignment saved!</div><main>
 <section id="urgentAlert" class="alert" role="alert" aria-live="assertive" hidden><h2 id="alertTitle">🚨 Deadline alert</h2><p id="alertText"></p></section>
 <div class="toolbar"><button class="btn" id="notifyBtn" type="button">🔔 Enable browser notifications</button><span class="hint" id="notifyStatus">On-page alerts always appear when you open this tracker.</span></div>
