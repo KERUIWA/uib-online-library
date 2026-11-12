@@ -52,7 +52,7 @@
     if(!popup||popup.querySelector(".uib-dw-popup-pref"))return;
     const label=document.createElement("label");
     label.className="uib-dw-popup-pref";
-    label.innerHTML='<input type="checkbox"> Don\'t show notifications again';
+    label.innerHTML='<input type="checkbox"> Don\'t show notification again';
     const input=label.querySelector("input");
     input.checked=neverShowAgain();
     input.addEventListener("change",()=>{if(input.checked)saveNeverShowAgain();else clearNeverShowAgain();});
