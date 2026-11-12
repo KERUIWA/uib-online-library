@@ -89,7 +89,8 @@ function render(data){
  document.title=course.name+" · UIB E-Library | Class of 2026";$("subjectTitle").textContent=course.name;const teacher=lecturer(course.name);if(teacher){$("teacherLine").textContent="Lecturer · "+teacher;$("teacherLine").hidden=false;}
  const folders=(course.folders||[]).filter(x=>/^week\s*\d+/i.test(x.name));
  const weekMap=new Map();folders.forEach(w=>{const n=weekNumber(w.name);if(n>=1&&n<=16){if(!weekMap.has(n))weekMap.set(n,[]);weekMap.get(n).push(...(w.files||[]));}});
- const total=[...weekMap.values()].reduce((n,files)=>n+files.length,0);\n const currentWeek=getCurrentAcademicWeek();
+ const total=[...weekMap.values()].reduce((n,files)=>n+files.length,0);
+ const currentWeek=getCurrentAcademicWeek();
  $("weekCount").textContent="16-week schedule · "+total+" files";$("status").hidden=true;
  const emptyMessages=["The files are playing hide-and-seek. Nobody has found them yet. 🙈","A little academic tumbleweed rolled through here. Nothing uploaded yet. 🌵","This week is currently powered by hopes, dreams, and absolutely zero files. ✨","The lecturer has entered stealth mode. Materials not spotted yet. 🥷","Your future notes are still in the making. Check back soon! 🛠️","So empty, even the echo is echoing. 📢"];
  $("weeks").innerHTML=Array.from({length:16},(_,i)=>{
