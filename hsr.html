@@ -1157,16 +1157,30 @@ function bannerCardMarkup(x,label,map){
 }
 function setBannerArtworkSlide(panel,index,slides,fallbackSrc){
  const slide=slides[index],img=panel.querySelector("img"),placeholder=panel.querySelector(".current-banner-cycle-placeholder"),label=panel.querySelector(".current-banner-cycle-name"),position=panel.querySelector(".current-banner-cycle-position");
- panel.dataset.slideIndex=String(index);
- if(slide.src||fallbackSrc){
-  if(img){img.src=slide.src||fallbackSrc;img.alt=slide.name+" "+(panel.dataset.cycleKind==="Light Cone"?"Light Cone artwork":"character artwork");img.hidden=false;}
-  else if(placeholder){placeholder.outerHTML='<img src="'+esc(slide.src||fallbackSrc)+'" alt="'+esc(slide.name)+' character artwork">';}
+ const src=slide.src||fallbackSrc||"";
+ const token=String((Number(panel.dataset.slideRequest||0)+1));
+ panel.dataset.slideRequest=token;
+ const applyLabel=()=>{
+  if(label){label.textContent=slide.name;label.classList.toggle("rarity-four",String(slide.rarity).includes("4"));label.classList.toggle("rarity-five",!String(slide.rarity).includes("4"));}
+  if(position)position.textContent=(index+1)+" / "+slides.length;
+  panel.dataset.slideIndex=String(index);
+ };
+ if(src){
+  const preload=new Image();
+  preload.onload=()=>{
+   if(panel.dataset.slideRequest!==token)return;
+   let target=panel.querySelector("img");
+   if(!target&&placeholder){placeholder.outerHTML='<img src="'+esc(src)+'" alt="'+esc(slide.name)+' '+(panel.dataset.cycleKind==="Light Cone"?"Light Cone artwork":"character artwork")+'">';target=panel.querySelector("img");}
+   if(target){target.src=src;target.alt=slide.name+" "+(panel.dataset.cycleKind==="Light Cone"?"Light Cone artwork":"character artwork");target.hidden=false;}
+   if(placeholder)placeholder.hidden=true;
+   applyLabel();
+  };
+  preload.src=src;
  }else{
   if(img)img.hidden=true;
   if(placeholder)placeholder.hidden=false;
+  applyLabel();
  }
- if(label){label.textContent=slide.name;label.classList.toggle("rarity-four",String(slide.rarity).includes("4"));label.classList.toggle("rarity-five",!String(slide.rarity).includes("4"));}
-  if(position)position.textContent=(index+1)+" / "+slides.length;
 }
 function startBannerArtworkCycle(host){
  if(bannerCycleTimer){clearInterval(bannerCycleTimer);bannerCycleTimer=null;}
