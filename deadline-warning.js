@@ -62,7 +62,7 @@
   }
 
   function ensureStyles(){if(document.getElementById("uib-deadline-warning-style"))return;const style=document.createElement("style");style.id="uib-deadline-warning-style";style.textContent=`
-   #uib-deadline-warning{position:fixed;z-index:99990;top:18px;right:18px;width:min(390px,calc(100vw - 36px));box-sizing:border-box;padding:16px 48px 16px 17px;border:1px solid rgba(202,133,35,.34);border-left:4px solid #d58a25;border-radius:15px;background:var(--surface,#fff);color:var(--ink,#202536);box-shadow:0 14px 42px rgba(20,25,40,.2);font:inherit;animation:uibDeadlineIn .24s ease-out}
+   #uib-deadline-warning{position:fixed;z-index:99990;top:auto;right:18px;bottom:18px;width:min(390px,calc(100vw - 36px));box-sizing:border-box;padding:16px 48px 16px 17px;border:1px solid rgba(202,133,35,.34);border-left:4px solid #d58a25;border-radius:15px;background:var(--surface,#fff);color:var(--ink,#202536);box-shadow:0 14px 42px rgba(20,25,40,.2);font:inherit;animation:uibDeadlineIn .24s ease-out}
    #uib-deadline-warning[hidden]{display:none!important}
    #uib-deadline-warning .uib-dw-kicker{display:block;margin-bottom:5px;color:#b36b13;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
    #uib-deadline-warning .uib-dw-title{display:block;margin:0 0 7px;font-size:15px;line-height:1.35;font-weight:800}
@@ -74,8 +74,8 @@
    #uib-deadline-warning .uib-dw-never input{width:14px;height:14px;margin:0;accent-color:#b7791f}
    #uib-deadline-warning .uib-dw-close{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:30px;height:30px;padding:0;border:0;border-radius:9px;background:transparent;color:var(--muted,#737b8e);font:inherit;font-size:22px;line-height:1;cursor:pointer}
    #uib-deadline-warning .uib-dw-close:hover{background:rgba(128,128,128,.13);color:var(--ink,#202536)}
-   @keyframes uibDeadlineIn{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:translateY(0)}}
-   @media(max-width:600px){#uib-deadline-warning{top:10px;right:10px;width:calc(100vw - 20px);padding:14px 44px 14px 14px;border-radius:13px}}
+   @keyframes uibDeadlineIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+   @media(max-width:600px){#uib-deadline-warning{top:auto;right:10px;bottom:10px;width:calc(100vw - 20px);padding:14px 44px 14px 14px;border-radius:13px}}
    @media(prefers-reduced-motion:reduce){#uib-deadline-warning{animation:none}}
     .uib-dw-generic-backdrop{position:fixed;inset:0;z-index:99995;display:none;place-items:center;padding:18px;background:#0a1020a8;backdrop-filter:blur(5px)}
     .uib-dw-generic-backdrop.open{display:grid}
