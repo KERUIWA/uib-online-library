@@ -70,6 +70,13 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 .quick-hsr .hsr-emblem:after{bottom:13px;left:13px;font-size:10px}
 .quick-hsr .hsr-emblem .ico{font-size:66px;line-height:1;filter:drop-shadow(0 8px 12px #0008)}
 @media(max-width:560px){.quick-hsr{grid-template-columns:minmax(0,1fr) 86px;gap:8px;min-height:164px;padding:21px 18px}.quick-hsr .hsr-emblem{width:82px;height:82px;box-shadow:0 0 0 6px #ffffff08}.quick-hsr .hsr-emblem .ico{font-size:39px}.quick-hsr:before{right:-105px}.quick-hsr:after{right:-55px}.quick-hsr strong{font-size:23px}.quick-hsr small{font-size:11px}.quick-hsr .hsr-enter{margin-top:13px;font-size:9px}}
+
+.site-topbar{position:sticky;top:0;z-index:2500;width:100%;background:var(--surface,#fff);color:var(--ink,#172033);border-bottom:1px solid var(--line,rgba(128,128,128,.2));box-shadow:0 3px 14px rgba(15,23,42,.07);}
+.site-topbar-inner{max-width:1160px;min-height:64px;margin:0 auto;padding:10px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+.site-topbar-brand{font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase;color:var(--ink,#172033);line-height:1.35;}
+.site-topbar .site-icon-btn,#themeToggle.site-icon-btn{background:var(--surface2,#f4f6fb)!important;border:1px solid var(--line,#e5e9f1)!important;color:var(--ink,#172033)!important;backdrop-filter:none!important;}
+.site-topbar .site-icon-btn:hover{background:var(--blue-soft,#edf1ff)!important;border-color:var(--blue,#3157d5)!important;}
+@media(max-width:560px){.site-topbar-inner{min-height:58px;padding:8px 15px;}.site-topbar-brand{font-size:10px;letter-spacing:.09em;}}
 </style><style>
 /* Shared header controls and slide-in navigation */
 .site-controls{display:flex;align-items:center;gap:9px;flex:0 0 auto}
@@ -96,7 +103,7 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 body.site-menu-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){.site-menu-backdrop,.site-menu-panel,.site-menu-link{transition:none}}
 </style></head><body>
-<header><div class="wrap"><div class="top"><div class="eyebrow">Universitas Internasional Batam · Class of 2026</div><div class="site-controls"><button class="theme site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div><h1>Academic Dashboard</h1><div class="sub" id="greeting">Your academic command centre. Everything important, in one place.</div></div></header>
+<header><div class="wrap"><div class="site-topbar"><div class="site-topbar-inner"><div class="site-topbar-brand">Universitas Internasional Batam</div><div class="site-controls"><button class="theme site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div></div><h1>Academic Dashboard</h1><div class="sub" id="greeting">Your academic command centre. Everything important, in one place.</div></div></header>
 <main>
 <div class="section-title"><h2>At a glance</h2><p id="todayLabel"></p></div>
 <section class="metrics">
