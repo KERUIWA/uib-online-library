@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-12T08:02:17Z",
+  "updatedAt": "2026-11-12T13:52:43Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-12T08:02:17Z",
-      "lastSuccess": "2026-11-12T08:02:17Z",
+      "checkedAt": "2026-11-12T13:52:43Z",
+      "lastSuccess": "2026-11-12T13:52:43Z",
       "error": null,
       "data": [
         {
@@ -1323,7 +1323,7 @@
           "title": "All Aboard the Summer Express! | Clock In to Win Stellar Jade Rewards",
           "description": "The Summer Express bound for Astropolis is setting off! Bring Robin • Summeretto & Aventurine • Waveflair along to capture your vacation life! Event Period 2026/08/30 12:00 (UTC+8) — 2026/09/27 23:59 (UTC+8) How to Participate",
           "created_at": 1788062707,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/08/27/83c795c31b586c9e72e6973322b0a6c0_6492803804058090789.png",
+          "banner": null,
           "url": "https://www.hoyolab.com/article/46508058",
           "type": "event"
         },
