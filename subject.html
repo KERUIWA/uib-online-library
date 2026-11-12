@@ -52,9 +52,9 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 #themeToggle:hover{background:#2548bd!important;border-color:#2548bd!important;transform:translateY(-1px)!important;}
 #themeToggle:focus-visible{outline:3px solid #3157d559!important;outline-offset:3px!important;}
 
-/* Prevent the 16 week cards from running competing entrance animations. */
-@keyframes weekCardReveal{from{opacity:0}to{opacity:1}}
-.week-grid>.week{animation:weekCardReveal .38s ease both!important;animation-delay:calc(var(--i,0)*18ms)!important;}
+/* Give each week card a gentle bottom-to-top entrance without locking its hover transform. */
+@keyframes weekCardReveal{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.week-grid>.week{animation:weekCardReveal .48s cubic-bezier(.2,.75,.25,1) backwards!important;animation-delay:calc(var(--i,0)*18ms)!important;}
 </style>
 </head>
 <body>
