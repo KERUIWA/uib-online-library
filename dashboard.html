@@ -123,5 +123,5 @@ shimmer(t,.95,.18);tone(880,t+.28,1.45,"sine",.12,1320);tone(1320,t+.78,1.65,"si
 }catch(e){}} 
 function revealAha(){if(ahaShown)return;ahaShown=true;ahaOverlay.classList.add("pre-show");ahaOverlay.setAttribute("aria-hidden","false");playAhaSound();setTimeout(()=>{ahaOverlay.classList.remove("pre-show");ahaOverlay.classList.add("open");$("ahaDismiss").focus()},3400)}
 ahaFooter.addEventListener("click",()=>{if(ahaShown)return;ahaClicks++;if(ahaClicks===7){prepareAhaAudio();ahaTimer=setTimeout(revealAha,3000)}});$("ahaDismiss").addEventListener("click",()=>{ahaOverlay.classList.remove("open");ahaOverlay.setAttribute("aria-hidden","true")});ahaOverlay.addEventListener("click",e=>{if(e.target===ahaOverlay){ahaOverlay.classList.remove("open");ahaOverlay.setAttribute("aria-hidden","true")}});
-</script><script src="deadline-warning.js?v=20261112-2" defer></script>
+</script><script src="deadline-warning.js?v=20261112-3" defer></script>
 </body></html>
