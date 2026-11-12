@@ -1418,7 +1418,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   ]}
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
- let seen={},queue=[],showing=false,typing=false,typingRun=0,typeTimer=null,tipTimer=null,tipHideTimer=null,voiceMuted=false,voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
+ let seen={},queue=[],showing=false,typing=false,typingRun=0,typeTimer=null,tipTimer=null,tipHideTimer=null,tipShown=false,voiceMuted=false,voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
  function hideCyreneTip(){
   if(!tip)return;
   clearTimeout(tipTimer);tipTimer=null;
@@ -1523,7 +1523,8 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   panel.hidden=false;panel.setAttribute("aria-hidden","false");showing=true;
   requestAnimationFrame(()=>{
    panel.classList.add("open");
-   if(tip){
+   if(tip&&!tipShown){
+    tipShown=true;
     positionCyreneTip();
     clearTimeout(tipHideTimer);tipHideTimer=null;
     tip.classList.remove("closing","open");
