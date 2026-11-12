@@ -70,5 +70,5 @@ $("sortCourses").addEventListener("click",()=>{records[active].sort((a,b)=>Strin
 $("addCourse").addEventListener("click",()=>{records[active].push({name:"",sks:"",score:""});save();renderRows();renderSummary();const a=$("courseRows").querySelectorAll(".course-name");a[a.length-1]?.focus();});
 $("themeToggle").addEventListener("click",()=>{const d=document.documentElement.dataset.theme!=="dark";document.documentElement.dataset.theme=d?"dark":"light";try{localStorage.setItem("uib-library-theme",d?"dark":"light");}catch(e){}$("themeToggle").textContent=d?"☀ Light mode":"☾ Dark mode";});
 $("themeToggle").textContent=document.documentElement.dataset.theme==="dark"?"☀ Light mode":"☾ Dark mode";seedKnownLibraryCourses();render();loadCourses();
-</script><script src="deadline-warning.js?v=20261112-6" defer></script>
+</script><script src="deadline-warning.js?v=20261112-7" defer></script>
 </body></html>
