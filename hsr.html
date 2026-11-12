@@ -1410,7 +1410,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   ]}
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
- let seen={},queue=[],showing=false,typeTimer=null,voiceMuted=false,voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
+ let seen={},queue=[],showing=false,typeTimer=null,tipTimer=null,voiceMuted=false,voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
  const cyreneVoice=new Audio();
  cyreneVoice.preload="auto";
  cyreneVoice.muted=voiceMuted;
@@ -1497,14 +1497,14 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
     tip.classList.remove("open");
     const timer=tip.querySelector(".cyrene-tip-timer");
     if(timer){timer.style.animation="none";void timer.offsetWidth;timer.style.animation="";}
-    requestAnimationFrame(()=>tip.classList.add("open"));
+    requestAnimationFrame(()=>{\n     tip.classList.add("open");\n     clearTimeout(tipTimer);\n     tipTimer=setTimeout(()=>{tip.classList.remove("open");tipTimer=null},12000);\n    });
    }
   });
   typeText(conversations[id].line,()=>renderChoices(id),{en:conversations[id].audio,ja:conversations[id].audioJa||null});
  }
  function dismiss(){
   if(!showing)return;
-  clearTimeout(typeTimer);typeTimer=null;stopVoice();choicesHost.hidden=true;choicesHost.replaceChildren();
+  clearTimeout(typeTimer);typeTimer=null;clearTimeout(tipTimer);tipTimer=null;stopVoice();choicesHost.hidden=true;choicesHost.replaceChildren();
   panel.classList.remove("open");if(tip)tip.classList.remove("open");panel.setAttribute("aria-hidden","true");showing=false;
   setTimeout(()=>{if(!showing)panel.hidden=true;showNext()},420);
  }
