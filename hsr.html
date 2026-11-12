@@ -1705,7 +1705,8 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  dismissButton.addEventListener("click",dismiss);
  let clicks=0;
  title.addEventListener("click",()=>{clicks++;if(clicks>=5){clicks=0;activate("curious")}});
- setTimeout(()=>activate("visitor"),47000);
+ const visitorDelay=40000+Math.floor(Math.random()*50001); // Random delay: 40–90 seconds
+ setTimeout(()=>activate("visitor"),visitorDelay);
  function checkMidnight(){const hour=new Date().getHours();if(hour>=0&&hour<4)activate("midnight")}
  checkMidnight();setInterval(checkMidnight,60000);
 })();
