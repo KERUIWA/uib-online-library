@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-12T03:13:53Z",
+  "updatedAt": "2026-11-12T04:25:57Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-12T03:13:53Z",
-      "lastSuccess": "2026-11-12T03:13:53Z",
+      "checkedAt": "2026-11-12T04:25:57Z",
+      "lastSuccess": "2026-11-12T04:25:57Z",
       "error": null,
       "data": [
         {
@@ -1265,6 +1265,15 @@
           "type": "notice"
         },
         {
+          "id": "47413545",
+          "title": "Planarcadia Nine-Grid Recollection: Connect Grids to Form A Line, Relive Memories to Win Stellar Jades",
+          "description": "The Express bound for Planarcadia is reaching its final destination. Did this journey leave you with any unforgettable moments? Now, use a \"Story Recollection Nine-Squared Grid\" to fit your Planarcadia story into the squares! Select at least 3 squares, paste in-game screenshots of the corresponding themes, and connect the filled squares to form a line (horizontal, vertical, or diagonal). Then, post a screenshot of your completed nine-squared grid in the comments section for a chance to win Stellar Jade rewards! Event Period",
+          "created_at": 1794456607,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/11/adf2eac066979da0d5be59cd6e068f73_1247349091332822533.png",
+          "url": "https://www.hoyolab.com/article/47413545",
+          "type": "event"
+        },
+        {
           "id": "47395082",
           "title": "[Stellar Jade Rewards] Take Part in the Discussions for Aeon ★ Aha's Debut and Win Stellar Jades",
           "description": "Greetings, Trailblazers! Stepping back onto the stage of the Path, I tear off the god's mask. Who is Aha? The Trailblazer has also come to witness... an improv tour where humans and gods dance as one! Participate in the event to get a guaranteed Personal Homepage Background and Avatar Frame, and have a chance to win Stellar Jade Rewards!",
@@ -1355,13 +1364,13 @@
           "type": "event"
         },
         {
-          "id": "45852900",
-          "title": "[Stellar Jade Reward] Take Part in the Discussions for Himeko • Nova's Debut and Win Stellar Jades",
-          "description": "Greetings, Trailblazers! Some fight by your side, while others watch over you, the Trailblaze is never a solitary voyage. Himeko is your family, always looking out at the same horizon as you! Participate in the event to get a guaranteed Personal Homepage Background and Avatar Frame, and have a chance to win Stellar Jade Rewards!",
-          "created_at": 1784080807,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/07/14/47e15b6cc78ec157770b0e6be0eb3049_252961669583462378.png",
-          "url": "https://www.hoyolab.com/article/45852900",
-          "type": "event"
+          "id": "47413467",
+          "title": "Honkai: Star Rail EP: Ex Nihilo",
+          "description": "Upon the first echo of \"Aha,\" the Elation shall be born anew. Let's dance on the edge of illusion and reality! Tonight, a miracle will be created by all! \"Ex Nihilo\" Lyricist: 温菁 Jing.W (HOYO-MiX)/Ruby Qu Composer: 温菁 Jing.W (HOYO-MiX) Arranger: 温菁 Jing.W (HOYO-MiX)/张迦南 Duke.Killers (HOYO-MiX) Producer: 宫奇Gon (HOYO-MiX)/温菁 Jing.W (HOYO-MiX) Vocal Artist: MIREI Music Copyist: 刘乃齐 Ruri (HOYO-MiX)/吴泽熙 Jersey Wu (HOYO-MiX) Backing Vocal: MIREI Electric Guitar: 李力, 葛金桥 Electric Bass: 努而德科 Drum Set: 李佩莹 Strings Quartet: 刘星弦乐团 Violin: 刘星, 刘沁妤 Viola: 王璐 Cello: 王俊凯 Trumpet: 胡丹峰 Saxophone: 李世海 Trombone: 曹侃 Vocal Recording Studio: prime sound studio form Drum Set Recording Studio: Cashmere Studios Strings Recording Studio: Yihe Studio Winds Recording Studio: Soundhub Studios Vocal Recording Engineer: Kohei Hatakeyama (prime sound studio form) Drum Set Recording Engineer: 沈锦天 @Cashmere Studios Strings Recording Engineer: 木木Lnnter @Yihe Studio Winds Recording Engineer: 吴身宝 @Soundhub Studios/唐一展 @Soundhub Studios Mixing Engineer：宫奇Gon (HOYO-MiX) Mastering Engineer：宫奇Gon (HOYO-MiX) Produced by：HOYO-MiX",
+          "created_at": 1794456004,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/12/3289730c7eebc25852d516f1970a6a6f_552201882796181795.jpg",
+          "url": "https://www.hoyolab.com/article/47413467",
+          "type": "info"
         },
         {
           "id": "47413033",
@@ -1487,15 +1496,6 @@
           "created_at": 1794132005,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/aac2780aefe94e87927bd289528c955c_2791365905643116677.jpg",
           "url": "https://www.hoyolab.com/article/47366686",
-          "type": "info"
-        },
-        {
-          "id": "47363694",
-          "title": "Aeon ★ Aha Character Trailer: \"Let the Die Fly\" | Honkai: Star Rail",
-          "description": "\"What's the name of this brilliant plan of yours?\" \"To beat a boss, use a boss. I call this operation B2B: Boss-to-Boss.\" English Voice: Aeon ★ Aha — Amber Lee Connors Male Trailblazer — Shaun Mendum Lygus — Blythe Melin Silver Wolf — Melissa Fahn Acheron — Allegra Clark",
-          "created_at": 1794110408,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/07/0/5e9a2705c47e9e34ebcf152852f1db81_1502609315161875703.png",
-          "url": "https://www.hoyolab.com/article/47363694",
           "type": "info"
         }
       ]
