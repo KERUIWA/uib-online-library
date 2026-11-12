@@ -102,6 +102,12 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 .site-menu-link span:first-child{width:27px;text-align:center;font-size:19px}
 body.site-menu-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){.site-menu-backdrop,.site-menu-panel,.site-menu-link{transition:none}}
+
+/* Prevent the first upcoming-deadline row from being clipped by the scroll viewport. */
+#upcoming .task:hover,
+#upcoming .task:focus-visible{
+  transform:none!important;
+}
 </style></head><body>
 <div class="site-topbar"><div class="site-topbar-inner"><div class="site-topbar-brand">Universitas Internasional Batam</div><div class="site-controls"><button class="theme site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div></div>
 <header><div class="wrap"><h1>Academic Dashboard</h1><div class="sub" id="greeting">Your academic command centre. Everything important, in one place.</div></div></header>
