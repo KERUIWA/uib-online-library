@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-11T10:37:26Z",
+  "updatedAt": "2026-11-12T01:26:27Z",
   "feeds": {
     "calendar": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us",
-      "checkedAt": "2026-11-11T02:48:59Z",
-      "lastSuccess": "2026-11-11T02:48:59Z",
+      "checkedAt": "2026-11-12T01:26:25Z",
+      "lastSuccess": "2026-11-12T01:26:25Z",
       "error": null,
       "data": {
         "events": [
@@ -14,7 +14,7 @@
             "id": 293,
             "name": "Aha Reckons You Need This",
             "description": "",
-            "image_url": null,
+            "image_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/92/Event_Aha_Reckons_You_Need_This.png/revision/latest?cb=20261111055513",
             "type_name": "ActivityTypeSign",
             "start_time": 1794351600,
             "end_time": 1797976740,
@@ -39,7 +39,7 @@
             "id": 292,
             "name": "Magic Invitation",
             "description": "",
-            "image_url": null,
+            "image_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/7/74/Event_Magic_Invitation.png/revision/latest?cb=20261111055532",
             "type_name": "ActivityTypeOther",
             "start_time": 1794351600,
             "end_time": 1797976740,
@@ -72,7 +72,7 @@
             "id": 291,
             "name": "Affinitive Starveil",
             "description": "",
-            "image_url": null,
+            "image_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/6/68/Event_Affinitive_Starveil.png/revision/latest?cb=20261111054450",
             "type_name": "ActivityTypeOther",
             "start_time": 1794351600,
             "end_time": 1797976740,
