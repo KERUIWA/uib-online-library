@@ -1425,18 +1425,27 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
 (()=>{
  const panel=document.getElementById("cyreneEncounter");
  const tip=document.getElementById("cyreneTip");
- function positionCyreneTip(){
-  if(!tip||!showing||panel.hidden)return;
+ function alignCyreneTip(edge){
+  if(!tip||panel.hidden)return;
   const rect=panel.getBoundingClientRect();
-  tip.style.right=Math.max(14,window.innerWidth-rect.right)+"px";
-  tip.style.bottom=Math.max(14,window.innerHeight-rect.top+9)+"px";
+  tip.style.left=rect.left+"px";
+  tip.style.right="auto";
+  tip.style.width=rect.width+"px";
+  tip.style.top=(edge==="bottom"?rect.bottom-tip.offsetHeight:rect.top-tip.offsetHeight-9)+"px";
+  tip.style.bottom="auto";
+ }
+ function positionCyreneTip(){
+  if(!showing||!tip||!tip.classList.contains("open")||panel.hidden)return;
+  alignCyreneTip("top");
  }
  function pinCyreneTipToDialogBottom(){
   if(!tip||!tip.classList.contains("open")||panel.hidden)return;
-  const rect=panel.getBoundingClientRect();
-  tip.style.right=Math.max(14,window.innerWidth-rect.right)+"px";
-  tip.style.bottom=Math.max(14,window.innerHeight-rect.bottom)+"px";
+  alignCyreneTip("bottom");
  }
+ panel.addEventListener("transitionend",event=>{
+  if(event.propertyName==="transform"&&showing)positionCyreneTip();
+ });
+ window.addEventListener("resize",positionCyreneTip,{passive:true});
  if("ResizeObserver"in window){
   const tipObserver=new ResizeObserver(()=>positionCyreneTip());
   tipObserver.observe(panel);
@@ -1582,6 +1591,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
     if(timer){timer.style.animation="none";void timer.offsetWidth;timer.style.animation="";}
     requestAnimationFrame(()=>{
      tip.classList.add("open");
+     requestAnimationFrame(positionCyreneTip);
      clearTimeout(tipTimer);
      tipTimer=setTimeout(hideCyreneTip,12000);
     });
