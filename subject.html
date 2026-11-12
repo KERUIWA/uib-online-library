@@ -54,7 +54,7 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 
 /* Give each week card a gentle bottom-to-top entrance without locking its hover transform. */
 @keyframes weekCardReveal{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.week-grid>.week{animation:weekCardReveal .48s cubic-bezier(.2,.75,.25,1) backwards!important;animation-delay:calc(var(--i,0)*18ms)!important;}
+.week-grid.animate-weeks>.week{animation:weekCardReveal .48s cubic-bezier(.2,.75,.25,1) both!important;animation-delay:calc(var(--i,0)*18ms)!important;}
 </style>
 </head>
 <body>
@@ -83,6 +83,7 @@ function fileLink(f){const url=f.previewUrl||("https://drive.google.com/file/d/"
 function setTheme(theme){document.documentElement.dataset.theme=theme;try{localStorage.setItem("uib-library-theme",theme);}catch(e){}$("themeToggle").textContent=theme==="dark"?"☀ Light mode":"☾ Dark mode";}
 function initTheme(){setTheme(document.documentElement.dataset.theme==="dark"?"dark":"light");}
 $("themeToggle").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));initTheme();
+let hasRenderedWeeks=false;
 function render(data){
  const course=(data.folders||[]).find(x=>x.id===folderId);
  if(!course){$("subjectTitle").textContent="Subject not found";$("status").hidden=false;$("status").textContent="This subject could not be found. Return to the library and choose a subject again.";$("weekCount").textContent="";return;}
@@ -92,6 +93,7 @@ function render(data){
  const total=[...weekMap.values()].reduce((n,files)=>n+files.length,0);
  $("weekCount").textContent="16-week schedule · "+total+" files";$("status").hidden=true;
  const emptyMessages=["The files are playing hide-and-seek. Nobody has found them yet. 🙈","A little academic tumbleweed rolled through here. Nothing uploaded yet. 🌵","This week is currently powered by hopes, dreams, and absolutely zero files. ✨","The lecturer has entered stealth mode. Materials not spotted yet. 🥷","Your future notes are still in the making. Check back soon! 🛠️","So empty, even the echo is echoing. 📢"];
+ const animateWeeks=!hasRenderedWeeks;hasRenderedWeeks=true;$("weeks").classList.toggle("animate-weeks",animateWeeks);
  $("weeks").innerHTML=Array.from({length:16},(_,i)=>{
   const n=i+1,isCurrent=n===getCurrentAcademicWeek(),files=(weekMap.get(n)||[]).slice().sort((a,b)=>a.name.localeCompare(b.name));
   const kind=n===8?"uts":n===16?"uas":"",label=n===8?"UTS · Ujian Tengah Semester":n===16?"UAS · Ujian Akhir Semester":"";
