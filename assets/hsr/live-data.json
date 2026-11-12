@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-12T04:25:57Z",
+  "updatedAt": "2026-11-12T06:25:30Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-12T04:25:57Z",
-      "lastSuccess": "2026-11-12T04:25:57Z",
+      "checkedAt": "2026-11-12T06:25:30Z",
+      "lastSuccess": "2026-11-12T06:25:30Z",
       "error": null,
       "data": [
         {
@@ -1364,6 +1364,15 @@
           "type": "event"
         },
         {
+          "id": "47414506",
+          "title": "Planarcadia Brand-New OST \"Let There Be Laughter (Part 3)\" Now Online",
+          "description": "Hello, Trailblazers! The Honkai: Star Rail Planarcadia OST, \"Let There Be Laughter (Part 3),\" is now officially online. The album includes 48 original tracks created by the HOYO-MiX music team for Honkai: Star Rail, including \"Ex Nihilo,\" the combat background music for the battle against the Divine Skull of Indulgence.",
+          "created_at": 1794463203,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/12/a8ce1ae3bb1165e3ec564bfedaad0477_6329317609923181587.jpg",
+          "url": "https://www.hoyolab.com/article/47414506",
+          "type": "info"
+        },
+        {
           "id": "47413467",
           "title": "Honkai: Star Rail EP: Ex Nihilo",
           "description": "Upon the first echo of \"Aha,\" the Elation shall be born anew. Let's dance on the edge of illusion and reality! Tonight, a miracle will be created by all! \"Ex Nihilo\" Lyricist: 温菁 Jing.W (HOYO-MiX)/Ruby Qu Composer: 温菁 Jing.W (HOYO-MiX) Arranger: 温菁 Jing.W (HOYO-MiX)/张迦南 Duke.Killers (HOYO-MiX) Producer: 宫奇Gon (HOYO-MiX)/温菁 Jing.W (HOYO-MiX) Vocal Artist: MIREI Music Copyist: 刘乃齐 Ruri (HOYO-MiX)/吴泽熙 Jersey Wu (HOYO-MiX) Backing Vocal: MIREI Electric Guitar: 李力, 葛金桥 Electric Bass: 努而德科 Drum Set: 李佩莹 Strings Quartet: 刘星弦乐团 Violin: 刘星, 刘沁妤 Viola: 王璐 Cello: 王俊凯 Trumpet: 胡丹峰 Saxophone: 李世海 Trombone: 曹侃 Vocal Recording Studio: prime sound studio form Drum Set Recording Studio: Cashmere Studios Strings Recording Studio: Yihe Studio Winds Recording Studio: Soundhub Studios Vocal Recording Engineer: Kohei Hatakeyama (prime sound studio form) Drum Set Recording Engineer: 沈锦天 @Cashmere Studios Strings Recording Engineer: 木木Lnnter @Yihe Studio Winds Recording Engineer: 吴身宝 @Soundhub Studios/唐一展 @Soundhub Studios Mixing Engineer：宫奇Gon (HOYO-MiX) Mastering Engineer：宫奇Gon (HOYO-MiX) Produced by：HOYO-MiX",
@@ -1487,15 +1496,6 @@
           "created_at": 1794218407,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/09/acf4157f85937e1d167bee223ec4d59c_5187104214813693497.jpg",
           "url": "https://www.hoyolab.com/article/47377831",
-          "type": "info"
-        },
-        {
-          "id": "47366686",
-          "title": "Aha All-Stars | \"My Broke Bestie Is Actually the Richest Person in the Universe\"",
-          "description": "The moment she smiles, this game has only just begun... Our first encounter! I sought only to give you the best. Lies! The inevitable trial of friendship has arrived. The latest episode of \"My Broke Bestie Is Actually the Richest Person in the Universe\" is now airing. Honkai: Star Rail updates on 11/11! Under the watchful eye of Blurry_QR_Colt, their story may just hit a major turning point!!! ★ This content is purely fictional and for entertainment purposes only ★",
-          "created_at": 1794132005,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/aac2780aefe94e87927bd289528c955c_2791365905643116677.jpg",
-          "url": "https://www.hoyolab.com/article/47366686",
           "type": "info"
         }
       ]
