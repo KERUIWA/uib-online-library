@@ -130,7 +130,7 @@ function render(data){
  $("subjects").innerHTML=courses.map(course=>{
   const weeks=(course.folders||[]).filter(x=>/^week\s*\d+/i.test(x.name));const total=weeks.reduce((n,w)=>n+(w.files||[]).length,0);
   const allNames=[course.name,...weeks.flatMap(w=>(w.files||[]).map(f=>f.name)),...(course.files||[]).map(f=>f.name)].join(" ").toLowerCase();
-  const teacher=lecturer(course.name);return '<article class="card" data-search="'+esc(allNames+' '+teacher)+'"><div><h2>'+esc(course.name)+'</h2><div class="meta">'+weeks.length+' weekly sections · '+total+' files</div>'+(teacher?'<div class="teacher">Lecturer · '+esc(teacher)+'</div>':'')+'</div><div class="card-bottom"><a class="open-link" href="subject.html?folder='+encodeURIComponent(course.id)+'">Open subject <span class="arrow">→</span></a></div></article>';
+  const teacher=lecturer(course.name);return '<article class="card" data-search="'+esc(allNames+' '+teacher)+'"><div><h2>'+esc(course.name)+'</h2><div class="meta">'+weeks.length+' weekly sections · '+total+' files</div>'+(teacher?'<div class="teacher">Lecturer · '+esc(teacher)+'</div>':'')+'</div><div class="card-bottom"><a class="open-link" href="subject.html?v=20261112-1&folder='+encodeURIComponent(course.id)+'">Open subject <span class="arrow">→</span></a></div></article>';
  }).join("");
  const general=(data.files||[]).filter(f=>!/^00\s*-\s*PUSAT MATERI UIB\.html$/i.test(f.name));
  if(general.length){$("general").hidden=false;$("generalFiles").innerHTML=general.map(fileLink).join("");}
