@@ -1270,33 +1270,40 @@ function eventImageMarkup(x){
  if(!primary)return eventPoster(x);
  return '<img loading="eager" decoding="async" data-event-image="1" data-event-name="'+esc(x.name)+'" data-event-kind="'+esc(x.kind||"In-game activity")+'" data-fallback="'+esc(fallback&&primary!==fallback?fallback:"")+'" src="'+esc(primary)+'" alt="'+esc(x.name)+' poster">';
 }
+function replaceFailedEventImage(img){
+ if(!(img instanceof HTMLImageElement)||img.dataset.eventImage!=="1")return;
+ const fallback=img.dataset.fallback;
+ if(fallback&&img.dataset.fallbackTried!=="1"){
+  img.dataset.fallbackTried="1";
+  img.src=fallback;
+  return;
+ }
+ const poster=document.createElement("div");
+ poster.className="event-poster";
+ const eyebrow=document.createElement("span");
+ eyebrow.className="poster-top";
+ eyebrow.textContent="✦ Honkai: Star Rail · Event";
+ const title=document.createElement("strong");
+ title.textContent=img.dataset.eventName||"In-game event";
+ const kind=document.createElement("small");
+ kind.textContent=img.dataset.eventKind||"In-game activity";
+ poster.append(eyebrow,title,kind);
+ img.replaceWith(poster);
+}
 function bindEventImageFallbacks(){
  const host=$("eventCards");
- if(!host||host.dataset.imageFallbackBound==="1")return;
- host.dataset.imageFallbackBound="1";
- host.addEventListener("error",e=>{
-  const img=e.target;
-  if(!(img instanceof HTMLImageElement)||img.dataset.eventImage!=="1")return;
-  const fallback=img.dataset.fallback;
-  if(fallback&&img.dataset.fallbackTried!=="1"){
-   img.dataset.fallbackTried="1";
-   img.src=fallback;
-   return;
-  }
-  const poster=document.createElement("div");
-  poster.className="event-poster";
-  const eyebrow=document.createElement("span");
-  eyebrow.className="poster-top";
-  eyebrow.textContent="✦ Honkai: Star Rail · Event";
-  const title=document.createElement("strong");
-  title.textContent=img.dataset.eventName||"In-game event";
-  const kind=document.createElement("small");
-  kind.textContent=img.dataset.eventKind||"In-game activity";
-  poster.append(eyebrow,title,kind);
-  img.replaceWith(poster);
- },true);
+ if(!host)return;
+ host.querySelectorAll("img[data-event-image]").forEach(img=>{
+  if(img.dataset.fallbackBound==="1")return;
+  img.dataset.fallbackBound="1";
+  img.addEventListener("error",()=>replaceFailedEventImage(img));
+  if(img.complete&&img.naturalWidth===0)replaceFailedEventImage(img);
+  setTimeout(()=>{
+   if(img.isConnected&&!img.complete)replaceFailedEventImage(img);
+  },10000);
+ });
 }
-function renderEvents(list){bindEventImageFallbacks();events=list.slice().sort((a,b)=>(a.start?.getTime()||0)-(b.start?.getTime()||0));try{renderCurrentBanner()}catch(err){console.warn("Current banner failed independently:",err);const host=$("currentBanner");if(host)host.innerHTML='<div class="current-banner-empty">Banner display temporarily unavailable. Events are unaffected.</div>';}const visible=events.filter(x=>!x.isWarp&&!/(?:banner announcement|character event warp|light cone event warp|warp banner)/i.test([x.name,x.kind,x.description].filter(Boolean).join(" "))&&(!x.end||x.end>Date.now()));$("eventCount").textContent=visible.length+" active / upcoming";$("eventCards").innerHTML=visible.length?visible.map(x=>{const starts=x.start&&x.start>Date.now(),ends=x.end&&x.end-Date.now()<86400000,tag=ends?"Ending soon":starts?"Upcoming":"Live";return '<article class="card">'+eventImageMarkup(x)+'<div class="card-body"><span class="tag '+(ends?"ending":"")+'">'+tag+' · '+esc(x.kind)+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||"Check the official event notice for details.")+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown" data-countdown="'+esc(x.id)+'">'+countdownText(x)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View details ↗</a>':'')+'</div></article>'}).join(""):'<div class="empty">No active or upcoming activities were returned. Check the official announcement feed for the latest details.</div>';checkEventReminders();}
+function renderEvents(list){bindEventImageFallbacks();events=list.slice().sort((a,b)=>(a.start?.getTime()||0)-(b.start?.getTime()||0));try{renderCurrentBanner()}catch(err){console.warn("Current banner failed independently:",err);const host=$("currentBanner");if(host)host.innerHTML='<div class="current-banner-empty">Banner display temporarily unavailable. Events are unaffected.</div>';}const visible=events.filter(x=>!x.isWarp&&!/(?:banner announcement|character event warp|light cone event warp|warp banner)/i.test([x.name,x.kind,x.description].filter(Boolean).join(" "))&&(!x.end||x.end>Date.now()));$("eventCount").textContent=visible.length+" active / upcoming";$("eventCards").innerHTML=visible.length?visible.map(x=>{const starts=x.start&&x.start>Date.now(),ends=x.end&&x.end-Date.now()<86400000,tag=ends?"Ending soon":starts?"Upcoming":"Live";return '<article class="card">'+eventImageMarkup(x)+'<div class="card-body"><span class="tag '+(ends?"ending":"")+'">'+tag+' · '+esc(x.kind)+'</span><h3>'+esc(x.name)+'</h3><p>'+esc(x.description||"Check the official event notice for details.")+'</p><div class="dates">Starts: '+fmt(x.start)+'<br>Ends: '+fmt(x.end)+'</div><div class="banner-countdown" data-countdown="'+esc(x.id)+'">'+countdownText(x)+'</div>'+(x.url?'<a class="card-link" href="'+esc(x.url)+'" target="_blank" rel="noopener">View details ↗</a>':'')+'</div></article>'}).join(""):'<div class="empty">No active or upcoming activities were returned. Check the official announcement feed for the latest details.</div>';bindEventImageFallbacks();checkEventReminders();}
 function countdownText(x){const target=x.start&&x.start>Date.now()?x.start:x.end;if(!target)return "Schedule not announced";const ms=target.getTime()-Date.now();if(ms<=0)return x.end&&x.end<=Date.now()?"Ended":"Live";const d=Math.floor(ms/86400000),h=Math.floor(ms%86400000/3600000),m=Math.floor(ms%3600000/60000),s=Math.floor(ms%60000/1000);return (x.start&&x.start>Date.now()?"Starts in ":"Ends in ")+(d?d+"d ":"")+h+"h "+m+"m "+s+"s"}
 function updateBannerCountdowns(){document.querySelectorAll("[data-countdown]").forEach(el=>{const x=events.find(item=>item.id===el.dataset.countdown);if(x)el.textContent=countdownText(x)})}
 function renderNews(items){news=items.slice().sort((a,b)=>(b.created_at||0)-(a.created_at||0));$("newsList").innerHTML=news.length?news.slice(0,12).map(x=>'<article class="news-item"><div class="news-date">'+fmt(x.created_at).split(",")[0]+'</div><div class="news-copy"><h3>'+esc(x.title||"Honkai: Star Rail announcement")+'</h3><p>'+esc(x.description||"Open the announcement to read the full details.")+'</p>'+(x.url?'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">Read announcement ↗</a>':'')+'</div></article>').join(""):'<div class="empty">The announcement feed could not be loaded. Use the official HoYoLAB link above.</div>';notifyNewNews();}
