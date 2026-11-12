@@ -1521,13 +1521,22 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
    ["I couldn't fall asleep.","Then let the quiet keep you company for a while. You don't have to rush back to the world just yet.","Then-let-the-quiet-keep-you-company-for-a-while..mp3.mp3","Cyrene-2026-11-11-20-28-それなら、しばらく静寂に身を委ねてみて。今すぐ日常に戻らなくてもいいのよ.mp3"],
    ["I like the stars at this hour.","So do I. They seem a little closer when everything else has gone quiet, don't they?","So-do-I.-They-seem-a-little-closer-when-everythi.mp3.mpeg.mp3","Cyrene-2026-11-11-20-29-私も好きよ。ほかのすべてが静まり返ると、星々が少しだけ近くに感じられるでしょう？.mp3"]
   ]},
+  starlight:{line:"The stars look especially lovely tonight. I wonder if they're trying to tell us something, or if they're simply happy to be seen.",choices:[]},
+  humming:{line:"♪ Hmm-hmm... hmm~ ♪\n\nA soft little melody escapes Cyrene as she gazes at the stars.",choices:[]},
+  passingThought:{line:"You know, some of my favorite moments are the quiet ones. Nothing extraordinary happens, and yet... somehow, they stay with you.",choices:[]},
+  littleQuestion:{line:"May I ask you something? When you look up at the night sky, do you ever feel that someone, somewhere, is looking at the same stars?",choices:[
+   ["Sometimes, yes.","Then perhaps the distance between us isn't quite as wide as it seems."],
+   ["I never thought about it.","Perhaps tonight is a good night to start. The stars are patient listeners."]
+  ]},
+  keepsake:{line:"I found a little thought I wanted to share with you: even brief meetings can leave the warmest memories. Thank you for this one.",choices:[]},
+  playful:{line:"Were you hoping I'd appear again? ...I won't tease you. I was rather hoping to see you too.",choices:[]},
   reunion:{line:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence. Maybe some meetings are meant to happen more than once.",audio:"Ah...-weve-met-three-times-now,-havent-we-Perh.mp3.mpeg.mp3",audioJa:"Cyrene-2026-11-11-20-32-あら……これで三度目の出会いになるのね。もしかしたら、これは単なる偶然ではなかったのかもしれない.mp3",choices:[
    ["Will we meet again?","I believe we will. Until then, keep a little room in your heart for the unexpected.","I-believe-we-will.-Until-then,-keep-a-little-roo.mp3.mpeg.mp3","Cyrene-2026-11-11-20-34-ええ、きっと。また会えると信じているわ。それまでは、あなたの心に少しだけ、予期せぬ出来事のための.mp3"],
    ["I think I'll remember you.","Then this moment has already become something precious. I'll remember it too.","Then-this-moment-has-already-become-something-pr.mp3.mp3","Cyrene-2026-11-11-20-42-それなら、この瞬間はもう、大切な思い出になったのね。私も、あなたのことを覚えているわ.mp3"]
   ]}
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
- let seen={},queue=[],showing=false,typing=false,typingRun=0,typeTimer=null,tipTimer=null,tipHideTimer=null,tipShown=false,voiceMuted=false,cyreneDisabled=(()=>{try{return localStorage.getItem("uib-hsr-cyrene-disabled")==="1"}catch(e){return false}})(),voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
+ let seen={},queue=[],encounterCount=0,reunionQueued=false,showing=false,typing=false,typingRun=0,typeTimer=null,tipTimer=null,tipHideTimer=null,tipShown=false,voiceMuted=false,cyreneDisabled=(()=>{try{return localStorage.getItem("uib-hsr-cyrene-disabled")==="1"}catch(e){return false}})(),voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
  function hideCyreneTip(){
   if(!tip)return;
   clearTimeout(tipTimer);tipTimer=null;
@@ -1614,6 +1623,11 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  }
  function renderChoices(id){
   choicesHost.replaceChildren();
+  if(!conversations[id].choices.length){
+   choicesHost.hidden=true;
+   dismissButton.hidden=false;
+   return;
+  }
   conversations[id].choices.forEach(([label,reply],index)=>{
    const button=document.createElement("button");
    button.type="button";button.className="cyrene-choice";button.textContent=label;
@@ -1677,9 +1691,14 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   });
  }
  function activate(id){
-  if(cyreneDisabled||seen[id])return;
-  seen[id]=true;queue.push(id);
-  if(seen.visitor&&seen.curious&&seen.midnight&&!seen.reunion){seen.reunion=true;queue.push("reunion")}
+  if(cyreneDisabled||seen[id]||id==="reunion")return;
+  seen[id]=true;
+  queue.push(id);
+  encounterCount++;
+  if(encounterCount>=3&&!reunionQueued){
+   reunionQueued=true;
+   queue.push("reunion");
+  }
   showNext();
  }
  replayButton.addEventListener("click",replayVoice);
@@ -1705,8 +1724,12 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  dismissButton.addEventListener("click",dismiss);
  let clicks=0;
  title.addEventListener("click",()=>{clicks++;if(clicks>=5){clicks=0;activate("curious")}});
+ const randomEncounters=["visitor","starlight","humming","passingThought","littleQuestion","keepsake","playful"];
  const visitorDelay=40000+Math.floor(Math.random()*50001); // Random delay: 40–90 seconds
- setTimeout(()=>activate("visitor"),visitorDelay);
+ setTimeout(()=>{
+  const selected=randomEncounters[Math.floor(Math.random()*randomEncounters.length)];
+  activate(selected);
+ },visitorDelay);
  function checkMidnight(){const hour=new Date().getHours();if(hour>=0&&hour<4)activate("midnight")}
  checkMidnight();setInterval(checkMidnight,60000);
 })();
