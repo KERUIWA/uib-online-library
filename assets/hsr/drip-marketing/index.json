@@ -1,5 +1,615 @@
 {
   "source": "https://honkai-star-rail.fandom.com/wiki/Category:Drip_Marketing",
-  "updatedAt": null,
-  "characters": []
+  "updatedAt": "2026-11-12T04:02:54Z",
+  "characters": [
+    {
+      "name": "Acheron",
+      "file": "character-acheron-introduction.png",
+      "sourceFile": "File:Character Acheron Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/e/e2/Character_Acheron_Introduction.png/revision/latest?cb=20240207211418",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Aeon ★ Aha",
+      "file": "character-aeon-aha-introduction.png",
+      "sourceFile": "File:Character Aeon ★ Aha Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/2/25/Character_Aeon_%E2%98%85_Aha_Introduction.png/revision/latest?cb=20260915040050",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Aglaea",
+      "file": "character-aglaea-introduction.png",
+      "sourceFile": "File:Character Aglaea Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/0/0a/Character_Aglaea_Introduction.png/revision/latest?cb=20241120040640",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Anaxa",
+      "file": "character-anaxa-introduction.png",
+      "sourceFile": "File:Character Anaxa Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a8/Character_Anaxa_Introduction.png/revision/latest?cb=20250212040126",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Archer",
+      "file": "character-archer-introduction.png",
+      "sourceFile": "File:Character Archer Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/aa/Character_Archer_Introduction.png/revision/latest?cb=20250503134128",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Argenti",
+      "file": "character-argenti-introduction.png",
+      "sourceFile": "File:Character Argenti Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/4/42/Character_Argenti_Introduction.png/revision/latest?cb=20230927040854",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Arlan",
+      "file": "character-arlan-introduction.png",
+      "sourceFile": "File:Character Arlan Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/91/Character_Arlan_Introduction.png/revision/latest?cb=20220501075533",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Ashveil",
+      "file": "character-ashveil-introduction.png",
+      "sourceFile": "File:Character Ashveil Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/7/70/Character_Ashveil_Introduction.png/revision/latest?cb=20260207050213",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Asta",
+      "file": "character-asta-introduction.png",
+      "sourceFile": "File:Character Asta Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/0/0c/Character_Asta_Introduction.png/revision/latest?cb=20260110090023",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Astra Yao",
+      "file": "character-astra-yao-introduction.png",
+      "sourceFile": "File:Character Astra Yao Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/b/b3/Character_Astra_Yao_Introduction.png/revision/latest?cb=20261028040131",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Aventurine",
+      "file": "character-aventurine-introduction.png",
+      "sourceFile": "File:Character Aventurine Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/1/1b/Character_Aventurine_Introduction.png/revision/latest?cb=20240124044516",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Aventurine • Waveflair",
+      "file": "character-aventurine-waveflair-introduction.png",
+      "sourceFile": "File:Character Aventurine • Waveflair Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/1/18/Character_Aventurine_%E2%80%A2_Waveflair_Introduction.png/revision/latest?cb=20260630050024",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Bailu",
+      "file": "character-bailu-introduction.png",
+      "sourceFile": "File:Character Bailu Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/6/6b/Character_Bailu_Introduction.png/revision/latest?cb=20230125043725",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Black Swan",
+      "file": "character-black-swan-introduction.png",
+      "sourceFile": "File:Character Black Swan Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/5/5e/Character_Black_Swan_Introduction.png/revision/latest?cb=20231212041201",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Blade",
+      "file": "character-blade-introduction.png",
+      "sourceFile": "File:Character Blade Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/8/8b/Character_Blade_Introduction.png/revision/latest?cb=20260109140658",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Boothill",
+      "file": "character-boothill-introduction.png",
+      "sourceFile": "File:Character Boothill Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/c/cd/Character_Boothill_Introduction.png/revision/latest?cb=20240313040643",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Castorice",
+      "file": "character-castorice-introduction.png",
+      "sourceFile": "File:Character Castorice Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/0/0c/Character_Castorice_Introduction.png/revision/latest?cb=20250211040332",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Cerydra",
+      "file": "character-cerydra-introduction.png",
+      "sourceFile": "File:Character Cerydra Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/3/3e/Character_Cerydra_Introduction.png/revision/latest?cb=20250618040033",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Cipher",
+      "file": "character-cipher-introduction.png",
+      "sourceFile": "File:Character Cipher Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/4/4e/Character_Cipher_Introduction.png/revision/latest?cb=20250326040052",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Clara",
+      "file": "character-clara-introduction.png",
+      "sourceFile": "File:Character Clara Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/8/87/Character_Clara_Introduction.png/revision/latest?cb=20211025040823",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Cyrene",
+      "file": "character-cyrene-introduction.png",
+      "sourceFile": "File:Character Cyrene Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/e/ed/Character_Cyrene_Introduction.png/revision/latest?cb=20250909040027",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Dan Heng",
+      "file": "character-dan-heng-introduction.png",
+      "sourceFile": "File:Character Dan Heng Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/99/Character_Dan_Heng_Introduction.png/revision/latest?cb=20211015041126",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Dan Heng • Imbibitor Lunae",
+      "file": "character-dan-heng-imbibitor-lunae-introduction.png",
+      "sourceFile": "File:Character Dan Heng • Imbibitor Lunae Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/b/b3/Character_Dan_Heng_%E2%80%A2_Imbibitor_Lunae_Introduction.png/revision/latest?cb=20230704042508",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Dan Heng • Permansor Terrae",
+      "file": "character-dan-heng-permansor-terrae-introduction.png",
+      "sourceFile": "File:Character Dan Heng • Permansor Terrae Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/f/fc/Character_Dan_Heng_%E2%80%A2_Permansor_Terrae_Introduction.png/revision/latest?cb=20250804040154",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Dr. Ratio",
+      "file": "character-dr-ratio-introduction.png",
+      "sourceFile": "File:Character Dr. Ratio Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/8/84/Character_Dr._Ratio_Introduction.png/revision/latest?cb=20231031041746",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Ellen",
+      "file": "character-ellen-introduction.png",
+      "sourceFile": "File:Character Ellen Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/8/83/Character_Ellen_Introduction.png/revision/latest?cb=20261027041541",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Evanescia",
+      "file": "character-evanescia-introduction.png",
+      "sourceFile": "File:Character Evanescia Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/7/79/Character_Evanescia_Introduction.png/revision/latest?cb=20260311040023",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Evernight",
+      "file": "character-evernight-introduction.png",
+      "sourceFile": "File:Character Evernight Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/8/8b/Character_Evernight_Introduction.png/revision/latest?cb=20250803040024",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Feixiao",
+      "file": "character-feixiao-introduction.png",
+      "sourceFile": "File:Character Feixiao Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/1/16/Character_Feixiao_Introduction.png/revision/latest?cb=20240716040245",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Firefly",
+      "file": "character-firefly-introduction.png",
+      "sourceFile": "File:Character Firefly Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/e/e4/Character_Firefly_Introduction.png/revision/latest?cb=20240423040158",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Fu Xuan",
+      "file": "character-fu-xuan-introduction.png",
+      "sourceFile": "File:Character Fu Xuan Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/1/14/Character_Fu_Xuan_Introduction.png/revision/latest?cb=20230130060829",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Fugue",
+      "file": "character-fugue-introduction.png",
+      "sourceFile": "File:Character Fugue Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/96/Character_Fugue_Introduction.png/revision/latest?cb=20241011040101",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Gallagher",
+      "file": "character-gallagher-introduction.png",
+      "sourceFile": "File:Character Gallagher Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/3/34/Character_Gallagher_Introduction.png/revision/latest?cb=20240125040134",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Gilgamesh",
+      "file": "character-gilgamesh-introduction.png",
+      "sourceFile": "File:Character Gilgamesh Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/f/fc/Character_Gilgamesh_Introduction.png/revision/latest?cb=20260522123230",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Guinaifen",
+      "file": "character-guinaifen-introduction.png",
+      "sourceFile": "File:Character Guinaifen Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/9e/Character_Guinaifen_Introduction.png/revision/latest?cb=20230817043605",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Hanya",
+      "file": "character-hanya-introduction.png",
+      "sourceFile": "File:Character Hanya Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/3/3b/Character_Hanya_Introduction.png/revision/latest?cb=20230928045928",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Herta",
+      "file": "character-herta-introduction.png",
+      "sourceFile": "File:Character Herta Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/99/Character_Herta_Introduction.png/revision/latest?cb=20260109144721",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Himeko",
+      "file": "character-himeko-introduction.png",
+      "sourceFile": "File:Character Himeko Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a1/Character_Himeko_Introduction.png/revision/latest?cb=20211009090019",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Himeko • Nova",
+      "file": "character-himeko-nova-introduction.png",
+      "sourceFile": "File:Character Himeko • Nova Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/8/84/Character_Himeko_%E2%80%A2_Nova_Introduction.png/revision/latest?cb=20260519040101",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Hook",
+      "file": "character-hook-introduction.jpg",
+      "sourceFile": "File:Character Hook Introduction.jpg",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/9d/Character_Hook_Introduction.jpg/revision/latest?cb=20211019053236",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Huohuo",
+      "file": "character-huohuo-introduction.png",
+      "sourceFile": "File:Character Huohuo Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/1/12/Character_Huohuo_Introduction.png/revision/latest?cb=20230926043717",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Hyacine",
+      "file": "character-hyacine-introduction.png",
+      "sourceFile": "File:Character Hyacine Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/90/Character_Hyacine_Introduction.png/revision/latest?cb=20250325040102",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Hysilens",
+      "file": "character-hysilens-introduction.png",
+      "sourceFile": "File:Character Hysilens Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/ae/Character_Hysilens_Introduction.png/revision/latest?cb=20250617040124",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Jade",
+      "file": "character-jade-introduction.png",
+      "sourceFile": "File:Character Jade Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/6/6e/Character_Jade_Introduction.png/revision/latest?cb=20240424040103",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Jiaoqiu",
+      "file": "character-jiaoqiu-introduction.png",
+      "sourceFile": "File:Character Jiaoqiu Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/4/4a/Character_Jiaoqiu_Introduction.png/revision/latest?cb=20240606101047",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Jing Yuan",
+      "file": "character-jing-yuan-introduction.png",
+      "sourceFile": "File:Character Jing Yuan Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/1/16/Character_Jing_Yuan_Introduction.png/revision/latest?cb=20230513114418",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Jingliu",
+      "file": "character-jingliu-introduction.png",
+      "sourceFile": "File:Character Jingliu Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/f/f4/Character_Jingliu_Introduction.png/revision/latest?cb=20231011224251",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Kafka",
+      "file": "character-kafka-introduction.png",
+      "sourceFile": "File:Character Kafka Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/6/69/Character_Kafka_Introduction.png/revision/latest?cb=20220505041120",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Lingsha",
+      "file": "character-lingsha-introduction.png",
+      "sourceFile": "File:Character Lingsha Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/8/8c/Character_Lingsha_Introduction.png/revision/latest?cb=20240717040055",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Luka",
+      "file": "character-luka-introduction.png",
+      "sourceFile": "File:Character Luka Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/2/29/Character_Luka_Introduction.png/revision/latest?cb=20230525100725",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Luocha",
+      "file": "character-luocha-introduction.png",
+      "sourceFile": "File:Character Luocha Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/2/23/Character_Luocha_Introduction.png/revision/latest?cb=20220507041002",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Lynx",
+      "file": "character-lynx-introduction.png",
+      "sourceFile": "File:Character Lynx Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/98/Character_Lynx_Introduction.png/revision/latest?cb=20260109171817",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "March 7th (Preservation)",
+      "file": "character-march-7th-preservation-introduction.png",
+      "sourceFile": "File:Character March 7th (Preservation) Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/b/bb/Character_March_7th_%28Preservation%29_Introduction.png/revision/latest?cb=20211011041457",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "March 7th (The Hunt)",
+      "file": "character-march-7th-the-hunt-introduction.png",
+      "sourceFile": "File:Character March 7th (The Hunt) Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/7/75/Character_March_7th_%28The_Hunt%29_Introduction.png/revision/latest?cb=20240608043938",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Misha",
+      "file": "character-misha-introduction.png",
+      "sourceFile": "File:Character Misha Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/5/5f/Character_Misha_Introduction.png/revision/latest?cb=20231214052558",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Mortenax Blade",
+      "file": "character-mortenax-blade-introduction.png",
+      "sourceFile": "File:Character Mortenax Blade Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a6/Character_Mortenax_Blade_Introduction.png/revision/latest?cb=20260407040117",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Moze",
+      "file": "character-moze-introduction.png",
+      "sourceFile": "File:Character Moze Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/5/5f/Character_Moze_Introduction.png/revision/latest?cb=20240718040404",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Mydei",
+      "file": "character-mydei-introduction.png",
+      "sourceFile": "File:Character Mydei Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/1/1b/Character_Mydei_Introduction.png/revision/latest?cb=20241229040243",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Pearl",
+      "file": "character-pearl-introduction.png",
+      "sourceFile": "File:Character Pearl Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/0/0e/Character_Pearl_Introduction.png/revision/latest?cb=20260811040058",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Phainon",
+      "file": "character-phainon-introduction.png",
+      "sourceFile": "File:Character Phainon Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/c/cf/Character_Phainon_Introduction.png/revision/latest?cb=20250506040110",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Qingque",
+      "file": "character-qingque-introduction.png",
+      "sourceFile": "File:Character Qingque Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/8/85/Character_Qingque_Introduction.png/revision/latest?cb=20230127040835",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Rappa",
+      "file": "character-rappa-introduction.png",
+      "sourceFile": "File:Character Rappa Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a7/Character_Rappa_Introduction.png/revision/latest?cb=20240827040548",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Rin Tohsaka",
+      "file": "character-rin-tohsaka-introduction.png",
+      "sourceFile": "File:Character Rin Tohsaka Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/4/4c/Character_Rin_Tohsaka_Introduction.png/revision/latest?cb=20260522123708",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Robin",
+      "file": "character-robin-introduction.png",
+      "sourceFile": "File:Character Robin Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/b/ba/Character_Robin_Introduction.png/revision/latest?cb=20240312040444",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Robin • Summeretto",
+      "file": "character-robin-summeretto-introduction.png",
+      "sourceFile": "File:Character Robin • Summeretto Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/d/df/Character_Robin_%E2%80%A2_Summeretto_Introduction.png/revision/latest?cb=20260630040026",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Ruan Mei",
+      "file": "character-ruan-mei-introduction.png",
+      "sourceFile": "File:Character Ruan Mei Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/90/Character_Ruan_Mei_Introduction.png/revision/latest?cb=20231031083309",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Saber",
+      "file": "character-saber-introduction.png",
+      "sourceFile": "File:Character Saber Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/d/d7/Character_Saber_Introduction.png/revision/latest?cb=20250503133849",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Silver Wolf",
+      "file": "character-silver-wolf-introduction.png",
+      "sourceFile": "File:Character Silver Wolf Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a4/Character_Silver_Wolf_Introduction.png/revision/latest?cb=20220430094634",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Silver Wolf LV.999",
+      "file": "character-silver-wolf-lv-999-introduction.png",
+      "sourceFile": "File:Character Silver Wolf LV.999 Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/0/08/Character_Silver_Wolf_LV.999_Introduction.png/revision/latest?cb=20260310040146",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Sparkle",
+      "file": "character-sparkle-introduction.png",
+      "sourceFile": "File:Character Sparkle Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/3/32/Character_Sparkle_Introduction.png/revision/latest?cb=20231214040434",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Sparxie",
+      "file": "character-sparxie-introduction.png",
+      "sourceFile": "File:Character Sparxie Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/f/fb/Character_Sparxie_Introduction.png/revision/latest?cb=20260102040020",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Sunday",
+      "file": "character-sunday-introduction.png",
+      "sourceFile": "File:Character Sunday Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/99/Character_Sunday_Introduction.png/revision/latest?cb=20241008040045",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Sushang",
+      "file": "character-sushang-introduction.png",
+      "sourceFile": "File:Character Sushang Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/8/8a/Character_Sushang_Introduction.png/revision/latest?cb=20220508051953",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "The Dahlia",
+      "file": "character-the-dahlia-introduction.png",
+      "sourceFile": "File:Character The Dahlia Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/a/a1/Character_The_Dahlia_Introduction.png/revision/latest?cb=20251021040106",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "The Herta",
+      "file": "character-the-herta-introduction.png",
+      "sourceFile": "File:Character The Herta Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/0/07/Character_The_Herta_Introduction.png/revision/latest?cb=20241119040118",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Tingyun",
+      "file": "character-tingyun-introduction.jpg",
+      "sourceFile": "File:Character Tingyun Introduction.jpg",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/f/f9/Character_Tingyun_Introduction.jpg/revision/latest?cb=20230210232148",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Topaz & Numby",
+      "file": "character-topaz-numby-introduction.png",
+      "sourceFile": "File:Character Topaz & Numby Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/97/Character_Topaz_%26_Numby_Introduction.png/revision/latest?cb=20230816071526",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Trailblazer (F) (Elation)",
+      "file": "character-trailblazer-f-elation-introduction.png",
+      "sourceFile": "File:Character Trailblazer (F) (Elation) Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/1/14/Character_Trailblazer_%28F%29_%28Elation%29_Introduction.png/revision/latest?cb=20260312040113",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Trailblazer (F) (Remembrance)",
+      "file": "character-trailblazer-f-remembrance-introduction.png",
+      "sourceFile": "File:Character Trailblazer (F) (Remembrance) Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/2/26/Character_Trailblazer_%28F%29_%28Remembrance%29_Introduction.png/revision/latest?cb=20241121040242",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Trailblazer (M) (Elation)",
+      "file": "character-trailblazer-m-elation-introduction.png",
+      "sourceFile": "File:Character Trailblazer (M) (Elation) Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/f/f4/Character_Trailblazer_%28M%29_%28Elation%29_Introduction.png/revision/latest?cb=20260312040137",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Trailblazer (M) (Remembrance)",
+      "file": "character-trailblazer-m-remembrance-introduction.png",
+      "sourceFile": "File:Character Trailblazer (M) (Remembrance) Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/2/2a/Character_Trailblazer_%28M%29_%28Remembrance%29_Introduction.png/revision/latest?cb=20241121040400",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Tribbie",
+      "file": "character-tribbie-introduction.png",
+      "sourceFile": "File:Character Tribbie Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/8/8d/Character_Tribbie_Introduction.png/revision/latest?cb=20241228041930",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Xueyi",
+      "file": "character-xueyi-introduction.png",
+      "sourceFile": "File:Character Xueyi Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/4/4b/Character_Xueyi_Introduction.png/revision/latest?cb=20231031091649",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Yanqing",
+      "file": "character-yanqing-introduction.jpg",
+      "sourceFile": "File:Character Yanqing Introduction.jpg",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/8/88/Character_Yanqing_Introduction.jpg/revision/latest?cb=20230210221942",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Yao Guang",
+      "file": "character-yao-guang-introduction.png",
+      "sourceFile": "File:Character Yao Guang Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/4/4a/Character_Yao_Guang_Introduction.png/revision/latest?cb=20260101040026",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Yukong",
+      "file": "character-yukong-introduction.png",
+      "sourceFile": "File:Character Yukong Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/3/3c/Character_Yukong_Introduction.png/revision/latest?cb=20230625050159",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    },
+    {
+      "name": "Yunli",
+      "file": "character-yunli-introduction.png",
+      "sourceFile": "File:Character Yunli Introduction.png",
+      "sourceUrl": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/95/Character_Yunli_Introduction.png/revision/latest?cb=20240605044427",
+      "licenseNote": "Check the source file licensing; original character artwork belongs to HoYoverse."
+    }
+  ]
 }
