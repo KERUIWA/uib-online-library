@@ -916,12 +916,13 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 .site-menu-link.site-menu-hsr>span:first-child{width:auto!important;text-align:left!important;font-size:inherit!important}
 body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-width,0px)}
 @media(prefers-reduced-motion:reduce){.site-menu-backdrop,.site-menu-panel,.site-menu-link{transition:none}}
-#cyreneToggle{position:fixed;right:18px;bottom:18px;z-index:2147483002;width:76px;height:76px;padding:0;border:2px solid #f2c6e7;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 35% 25%,#fff4ff,#e8a8d6 65%,#9e6bb5);box-shadow:0 5px 20px #24102b66;cursor:pointer;display:grid;place-items:center;transition:transform .2s ease,box-shadow .2s ease}
-#cyreneToggle:hover{transform:translateY(-4px) rotate(-5deg);box-shadow:0 9px 26px #24102b88}
+#cyreneToggle{display:inline-flex;align-items:center;gap:10px;margin:14px auto 0;padding:8px 14px;border:1px solid #e8a8d6;border-radius:999px;background:#f5d8ef18;color:var(--text);box-shadow:0 4px 16px #24102b44;cursor:pointer;transition:transform .2s ease,background .2s ease}
+#cyreneToggle:hover{transform:translateY(-2px);background:#f5d8ef30}
 #cyreneToggle:focus-visible{outline:3px solid #e8c58c;outline-offset:4px}
-#cyreneToggle img{width:100%;height:100%;object-fit:cover;object-position:center 24%;display:block}
+#cyreneToggle img{width:46px;height:46px;object-fit:contain;display:block}
+#cyreneToggle .cyrene-toggle-fallback{display:none;font-size:30px;line-height:1}
 #cyreneToggle[aria-pressed="true"]{filter:grayscale(.65);opacity:.72}
-@media(max-width:560px){#cyreneToggle{right:12px;bottom:12px;width:62px;height:62px}}
+#cyreneToggle .cyrene-toggle-label{font-size:12px;font-weight:700;letter-spacing:.04em}
 </style><style id="cyrene-tip-styles">
 #cyreneTip{position:absolute;left:0;right:0;top:auto;bottom:calc(100% + 9px);z-index:2147483001;display:none;box-sizing:border-box;width:100%;padding:10px 13px 12px;border:1px solid #b99a70;border-radius:12px;background:linear-gradient(120deg,#211b30f5,#49314ef5);color:#f8efff;font:600 11px/1.4 Inter,Segoe UI,Arial,sans-serif;letter-spacing:.025em;box-shadow:0 10px 28px #08061188;pointer-events:none}
 #cyreneTip.open{display:block;animation:cyreneTipIn .28s ease both}
@@ -1023,7 +1024,11 @@ body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-widt
 <section class="section" id="newsSection"><div class="section-head"><div><span class="section-eyebrow">04 / INTELLIGENCE NETWORK</span><h2>Latest announcements</h2><p>Notices, event announcements, and game info</p></div><a class="btn" href="https://www.hoyolab.com/accountcenter/postList?id=172534910" target="_blank" rel="noopener">Official HoYoLAB ↗</a></div><div class="news-list" id="newsList"><div class="empty">Loading announcements…</div></div></section>
 <section class="section"><div class="section-head"><div><h2>Trailblazer reminders</h2><p>Browser alerts for event starts and closing dates</p></div></div><div class="reminder-panel"><div><h3>🔔 Don't let a limited event slip away</h3><p>Enable notifications to receive an alert when an event is due to start or end within 24 hours. The page must remain open for these browser reminders to run.</p><p class="note" id="notificationStatus">Notifications are currently off. You can still see event dates here.</p></div><button class="btn primary" id="enableNotifications">Enable reminders</button></div></section>
 <p class="note">Live event dates are supplied by StarRailAssistant and announcement summaries by a community API that relays HoYoLAB posts. They are not official HoYoverse services. Always open the linked official announcement to confirm eligibility, server-time differences, and final details. Data refreshes every 15 minutes while this page is open. If a data source is unavailable, the official HoYoLAB link remains available.</p>
-</main><footer>UIB E-Library · Honkai: Star Rail Hub · Not affiliated with HoYoverse</footer>
+</main><footer>UIB E-Library · Honkai: Star Rail Hub · Not affiliated with HoYoverse
+<button id="cyreneToggle" type="button" aria-label="Disable Cyrene dialog" aria-pressed="false" title="Disable Cyrene dialog">
+<img src="https://starrail.honeyhunterworld.com/img/item/mem-cuter-version-item_icon_100.webp" alt="Mem from Honkai: Star Rail" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+<span class="cyrene-toggle-fallback" aria-hidden="true">💗</span><span class="cyrene-toggle-label">MEM · DISABLE CYRENE</span>
+</button></footer>
 <aside id="cyreneEncounter" aria-live="polite" aria-hidden="true" hidden>
 <div id="cyreneTip" role="status">Tip: You can deactivate the Cyrene dialog at the very bottom of the page.<span class="cyrene-tip-track" aria-hidden="true"><span class="cyrene-tip-timer"></span></span></div>
 <img class="cyrene-art" src="https://static.icy-veins.com/images/honkai-star-rail/characters/full/cyrene.webp" alt="Cyrene from Honkai: Star Rail">
@@ -1040,9 +1045,6 @@ body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-widt
  <button class="cyrene-control cyrene-language" id="cyreneLanguage" type="button" aria-label="Switch voice language to Japanese" aria-pressed="false" title="Switch to Japanese audio">EN</button>
 </div>
 </aside>
-<button id="cyreneToggle" type="button" aria-label="Disable Cyrene dialog" aria-pressed="false" title="Disable Cyrene dialog">
-<img src="https://static.wikia.nocookie.net/houkai-star-rail/images/9/9f/NPC_Mem.png/revision/latest?cb=20250825100738" alt="Mem from Honkai: Star Rail">
-</button>
 <script>
 const ACTIVITY_API="https://starrailassistant.top/api/v1/activity/sr-en-US.json";
 const NEWS_API="https://api.ennead.cc/mihoyo/starrail/news/";
