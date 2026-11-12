@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-12T02:16:56Z",
+  "updatedAt": "2026-11-12T03:13:53Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-12T02:16:56Z",
-      "lastSuccess": "2026-11-12T02:16:56Z",
+      "checkedAt": "2026-11-12T03:13:53Z",
+      "lastSuccess": "2026-11-12T03:13:53Z",
       "error": null,
       "data": [
         {
@@ -1364,6 +1364,15 @@
           "type": "event"
         },
         {
+          "id": "47413033",
+          "title": "Version 5.5 | Who Else Remains Beyond the Story",
+          "description": "Amphoreus, continuing the Trailblaze... Then, people walk from yesterday towards tomorrow.",
+          "created_at": 1794453124,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/10/4e037077d672a368bd0f35675ce8485c_4946691285270170982.png",
+          "url": "https://www.hoyolab.com/article/47413033",
+          "type": "info"
+        },
+        {
           "id": "47412533",
           "title": "Razer | Honkai: Star Rail Collaboration Collection Is Officially Live",
           "description": "Ctrl + Alt + Win. Control, alter, and win the battle! Inspired by Silver Wolf Lv.999's meta-breaking spirit, the Razer | Honkai: Star Rail collaboration collection is now for sale. The gaming chair, keyboard, mouse, and headset are now available to help Trailblazers level up their combat gear and break the established rules.",
@@ -1487,15 +1496,6 @@
           "created_at": 1794110408,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/07/0/5e9a2705c47e9e34ebcf152852f1db81_1502609315161875703.png",
           "url": "https://www.hoyolab.com/article/47363694",
-          "type": "info"
-        },
-        {
-          "id": "47354878",
-          "title": "Aha All-Stars | \"Veteran's Got Talent\"",
-          "description": "Piano Prince ✧Sunday✧ Elegant fingers upon piano keys and gentle feathers by his ears. On stage, he is a quiet storyteller. Wolf's Temptation ✧Ashveil✧ Secrets of the hook, revealed on the spot! Clues of the flow, untangled from the knot! What kind of unexpected sparks will fly in their showdown? On 11/11, let's ignite the Honkai: Star Rail stage together. ★ This content is purely fictional and for entertainment purposes only ★",
-          "created_at": 1794045604,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/06/a41c480d2d78c6e711be693d1f32dbe3_8367397384526031617.jpg",
-          "url": "https://www.hoyolab.com/article/47354878",
           "type": "info"
         }
       ]
