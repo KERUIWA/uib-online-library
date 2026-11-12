@@ -1381,6 +1381,12 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   tip.style.right=Math.max(14,window.innerWidth-rect.right)+"px";
   tip.style.bottom=Math.max(14,window.innerHeight-rect.top+9)+"px";
  }
+ function pinCyreneTipToDialogBottom(){
+  if(!tip||!tip.classList.contains("open")||panel.hidden)return;
+  const rect=panel.getBoundingClientRect();
+  tip.style.right=Math.max(14,window.innerWidth-rect.right)+"px";
+  tip.style.bottom=Math.max(14,window.innerHeight-rect.bottom)+"px";
+ }
  if("ResizeObserver"in window){
   const tipObserver=new ResizeObserver(()=>positionCyreneTip());
   tipObserver.observe(panel);
@@ -1412,7 +1418,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   ]}
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
- let seen={},queue=[],showing=false,typeTimer=null,tipTimer=null,tipHideTimer=null,voiceMuted=false,voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
+ let seen={},queue=[],showing=false,typing=false,typingRun=0,typeTimer=null,tipTimer=null,tipHideTimer=null,voiceMuted=false,voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
  function hideCyreneTip(){
   if(!tip)return;
   clearTimeout(tipTimer);tipTimer=null;
@@ -1450,20 +1456,35 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  }
  function typeText(text,onComplete,audioFiles){
   clearTimeout(typeTimer);
+  const run=++typingRun;
+  typing=true;
   currentAudioFiles=audioFiles||{en:null,ja:null};
   currentDialogueText=text;
   currentDialogueComplete=onComplete||null;
   function step(index){
-   if(!showing)return;
+   if(!showing||!typing||run!==typingRun)return;
    dialogue.textContent=text.slice(0,index);
    positionCyreneTip();
    if(index<text.length)typeTimer=setTimeout(()=>step(index+1),28);
-   else{typeTimer=null;if(onComplete)onComplete()}
+   else{typeTimer=null;typing=false;activeTypingComplete=null;if(onComplete)onComplete()}
   }
-  playVoice(currentAudioFiles[voiceLanguage],()=>{if(showing)step(1)});
+  activeTypingComplete=onComplete||null;
+  playVoice(currentAudioFiles[voiceLanguage],()=>{if(showing&&typing&&run===typingRun)step(1)});
   replayButton.disabled=voiceMuted||!currentAudioFile;
   replayButton.title=currentAudioFile?"Replay voice":"No audio added for this language yet";
  }
+ let activeTypingComplete=null;
+ function finishTyping(){
+  if(!typing)return;
+  clearTimeout(typeTimer);typeTimer=null;
+  typing=false;typingRun++;
+  dialogue.textContent=currentDialogueText;
+  positionCyreneTip();
+  const complete=activeTypingComplete;
+  activeTypingComplete=null;
+  if(complete)complete();
+ }
+ dialogue.addEventListener("click",finishTyping);
  function replayVoice(){
   if(!currentAudioFile||voiceMuted)return;
   cyreneVoice.pause();
@@ -1519,8 +1540,9 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  }
  function dismiss(){
   if(!showing)return;
-  clearTimeout(typeTimer);typeTimer=null;clearTimeout(tipTimer);tipTimer=null;stopVoice();choicesHost.hidden=true;choicesHost.replaceChildren();
-  panel.classList.remove("open");hideCyreneTip();panel.setAttribute("aria-hidden","true");showing=false;
+  clearTimeout(typeTimer);typeTimer=null;typing=false;typingRun++;activeTypingComplete=null;stopVoice();choicesHost.hidden=true;choicesHost.replaceChildren();
+  pinCyreneTipToDialogBottom();
+  panel.classList.remove("open");panel.setAttribute("aria-hidden","true");showing=false;
   setTimeout(()=>{if(!showing)panel.hidden=true;showNext()},420);
  }
  function activate(id){
