@@ -1260,13 +1260,13 @@ async function renderCurrentBanner(){
 function eventPoster(x){return '<div class="event-poster"><span class="poster-top">✦ Honkai: Star Rail · Event</span><strong>'+esc(x.name)+'</strong><small>'+esc(x.kind||"In-game activity")+'</small></div>'}
 function eventArtwork(x){
  const name=String(x.name||"").toLowerCase();
- if(name.includes("relic recon"))return "https://www.theclick.gg/wp-content/uploads/2026/11/honkai-star-rail-relic-recon-version-47-official-press.jpg";
+ if(name.includes("relic recon"))return "https://www.theclick.gg/wp-content/uploads/2026/11/honkai-star-rail-relic-recon-official-event.png";
  if(name.includes("stellar companion"))return "https://admin.esports.gg/wp-content/uploads/2025/03/Free-5star-HSR-0-1024x576.jpeg";
  if(name.includes("planar fissure"))return "https://upload-static.hoyoverse.com/hoyolab-wiki/2023/08/02/167256510/6d1a3fe47833306bec2d5cd7a61806f4_2695222049010494603.png?x-oss-process=image%2Fformat%2Cwebp";
  return "";
 }
 function eventImageMarkup(x){
- const fallback=eventArtwork(x),primary=x.image||fallback;
+ const fallback=eventArtwork(x),primary=fallback||x.image;
  if(!primary)return eventPoster(x);
  const proxied="https://images.weserv.nl/?url="+encodeURIComponent(primary);
  return '<img loading="eager" decoding="async" data-event-image="1" data-event-name="'+esc(x.name)+'" data-event-kind="'+esc(x.kind||"In-game activity")+'" data-fallback="'+esc(fallback&&primary!==fallback?fallback:"")+'" src="'+proxied+'" alt="'+esc(x.name)+' poster">';
