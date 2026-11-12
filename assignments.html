@@ -110,11 +110,12 @@ function assignmentSignature(list){
 function mergeAssignments(local,remote){
   const merged=new Map();
   const diagnosticIds=new Set(["diagnostic-test-001","post-test-001","browser-post-test"]);
-  (Array.isArray(remote)?remote:[]).forEach(x=>{
-    if(x&&x.id&&!diagnosticIds.has(String(x.id)))merged.set(String(x.id),normalizeAssignment(x));
-  });
+  // Keep PC-only assignments, but let the shared copy win when an ID exists on both.
   (Array.isArray(local)?local:[]).forEach(x=>{
     if(x&&typeof x==="object"&&x.id&&!diagnosticIds.has(String(x.id)))merged.set(String(x.id),normalizeAssignment(x));
+  });
+  (Array.isArray(remote)?remote:[]).forEach(x=>{
+    if(x&&x.id&&!diagnosticIds.has(String(x.id)))merged.set(String(x.id),normalizeAssignment(x));
   });
   return Array.from(merged.values());
 }
