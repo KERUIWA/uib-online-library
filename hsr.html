@@ -1522,29 +1522,39 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  const choicesHost=document.getElementById("cyreneChoices");
  const title=document.querySelector(".hero h1");
  if(!panel||!dialogue||!dismissButton||!choicesHost||!title)return;
+ const CYRENE_AWKWARD_DURATION=24*60*60*1000;
+ function cyreneAwkwardActive(){
+  try{
+   const started=Number(localStorage.getItem("uib-hsr-cyrene-awkward-start")||0);
+   if(!started)return false;
+   if(Date.now()-started>=CYRENE_AWKWARD_DURATION){localStorage.removeItem("uib-hsr-cyrene-awkward-start");return false}
+   return true;
+  }catch(e){return false}
+ }
+ function startCyreneAwkwardPhase(){try{localStorage.setItem("uib-hsr-cyrene-awkward-start",String(Date.now()))}catch(e){}}
  const conversations={
-  visitor:{line:"Oh? You've been here for quite some time. Were you waiting for someone? I wonder if the stars brought you here, or if you simply lost track of time.",audio:"CY-VIS-01.en.mp3",audioJa:"CY-VIS-01.jp.mp3",choices:[
+  visitor:{awkwardLine:"Oh... you came back. I was just looking at the stars. Not waiting for you or anything.",awkwardLineJa:"……あ、あなた。星を見ていただけよ。別に、あなたを待ってたわけじゃないから。",line:"Oh? You've been here for quite some time. Were you waiting for someone? I wonder if the stars brought you here, or if you simply lost track of time.",audio:"CY-VIS-01.en.mp3",audioJa:"CY-VIS-01.jp.mp3",choices:[
    ["I was just exploring.","Then I'm glad your wandering brought you here. Sometimes the loveliest discoveries are the unplanned ones.","CY-VIS-R01.en.mp3","CY-VIS-R01.jp.mp3"],
    ["Maybe I was waiting for you.","For me? How sweet... Though I must admit, you have made this little visit rather special.","CY-VIS-R02.en.mp3","CY-VIS-R02.jp.mp3"]
   ]},
-  curious:{line:"Five times? Were you hoping something would happen? ...How interesting. Perhaps I should leave you another little surprise.",audio:"CY-CUR-01.en.mp3",audioJa:"CY-CUR-01.jp.mp3",choices:[
+  curious:{awkwardLine:"You're back already? I mean... it's nice. I just wasn't expecting you so soon.",awkwardLineJa:"もう戻ってきたの？えっと……嬉しいけど。こんなに早く来るとは思わなくて。",line:"Five times? Were you hoping something would happen? ...How interesting. Perhaps I should leave you another little surprise.",audio:"CY-CUR-01.en.mp3",audioJa:"CY-CUR-01.jp.mp3",choices:[
    ["I wanted to see if you'd appear.","And here I am. You really are quite persistent, aren't you? I think I rather like that.","CY-CUR-R01.en.mp3","CY-CUR-R01.jp.mp3"],
    ["It was an accident. Probably.","Probably? That sounds suspiciously like a little wish disguised as an accident.","CY-CUR-R02.en.mp3","CY-CUR-R02.jp.mp3"]
   ]},
-  midnight:{line:"It's rather late, isn't it? Even the stars are resting. Why are you still awake? Stay a little longer, if the quiet feels kind.",audio:"CY-MID-01.en.mp3",audioJa:"CY-MID-01.jp.mp3",choices:[
+  midnight:{awkwardLine:"Still awake...? I was going to ask you to stay a little longer, but... only if you want to.",awkwardLineJa:"まだ起きてるの……？もう少し一緒にいてって言おうと思ったけど……あなたがよければ、ね。",line:"It's rather late, isn't it? Even the stars are resting. Why are you still awake? Stay a little longer, if the quiet feels kind.",audio:"CY-MID-01.en.mp3",audioJa:"CY-MID-01.jp.mp3",choices:[
    ["I couldn't fall asleep.","Then let the quiet keep you company for a while. You don't have to rush back to the world just yet.","CY-MID-R01.en.mp3","CY-MID-R01.jp.mp3"],
    ["I like the stars at this hour.","So do I. They seem a little closer when everything else has gone quiet, don't they?","CY-MID-R02.en.mp3","CY-MID-R02.jp.mp3"]
   ]},
-  starlight:{line:"The stars look especially lovely tonight. I wonder if they're trying to tell us something, or if they're simply happy to be seen.",choices:[]},
-  humming:{line:"♪ Hmm-hmm... hmm~ ♪\n\nA soft little melody escapes Cyrene as she gazes at the stars.",italicNarration:true,choices:[]},
-  passingThought:{line:"You know, some of my favorite moments are the quiet ones. Nothing extraordinary happens, and yet... somehow, they stay with you.",choices:[]},
-  littleQuestion:{line:"May I ask you something? When you look up at the night sky, do you ever feel that someone, somewhere, is looking at the same stars?",choices:[
+  starlight:{awkwardLine:"The stars are lovely tonight. I thought about telling you that earlier... but I wasn't sure if it would be strange.",awkwardLineJa:"今夜の星は綺麗ね。さっきあなたに伝えようと思ったんだけど……変に思われないか、少し迷っちゃって。",line:"The stars look especially lovely tonight. I wonder if they're trying to tell us something, or if they're simply happy to be seen.",choices:[]},
+  humming:{awkwardLine:"♪ Hmm-hmm... hmm~ ♪\\n\\nCyrene stops humming when she notices you. “I-I wasn't humming for you...”",awkwardLineJa:"♪ ふんふん……ふふっ……♪\\n\\nあなたに気づいたサイレーンは、慌てて口を閉じた。「あ、あなたのために歌ってたわけじゃ……」",line:"♪ Hmm-hmm... hmm~ ♪\n\nA soft little melody escapes Cyrene as she gazes at the stars.",italicNarration:true,choices:[]},
+  passingThought:{awkwardLine:"I had a thought I wanted to share... but now that you're here, I've forgotten how to say it. That's embarrassing.",awkwardLineJa:"伝えたいことがあったのに……あなたが来たら、どう言えばいいか忘れちゃった。もう、恥ずかしいな。",line:"You know, some of my favorite moments are the quiet ones. Nothing extraordinary happens, and yet... somehow, they stay with you.",choices:[]},
+  littleQuestion:{awkwardLine:"Can I ask you something...? Never mind, that's a silly question. ...No, wait. I still want to ask.",awkwardLineJa:"ひとつ聞いてもいい……？ううん、やっぱり変な質問かな。……待って、やっぱり聞きたい。",line:"May I ask you something? When you look up at the night sky, do you ever feel that someone, somewhere, is looking at the same stars?",choices:[
    ["Sometimes, yes.","Then perhaps the distance between us isn't quite as wide as it seems."],
    ["I never thought about it.","Perhaps tonight is a good night to start. The stars are patient listeners."]
   ]},
-  keepsake:{line:"I found a little thought I wanted to share with you: even brief meetings can leave the warmest memories. Thank you for this one.",choices:[]},
-  playful:{line:"Were you hoping I'd appear again? ...I won't tease you. I was rather hoping to see you too.",choices:[]},
-  reunion:{line:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence. Maybe some meetings are meant to happen more than once.",audio:"CY-REU-01.en.mp3",audioJa:"CY-REU-01.jp.mp3",choices:[
+  keepsake:{awkwardLine:"I remembered our little moment. I wasn't trying to... well, I suppose I wanted to see you again.",awkwardLineJa:"あのときのこと、思い出してたの。別に……えっと、またあなたに会いたかったのかも。",line:"I found a little thought I wanted to share with you: even brief meetings can leave the warmest memories. Thank you for this one.",choices:[]},
+  playful:{awkwardLine:"Were you hoping I'd appear? ...I was hoping too. There, I said it. Don't make me repeat it.",awkwardLineJa:"私が現れるのを期待してた？……私も、そうだったの。言ったんだから、もう聞き返さないでよね。",line:"Were you hoping I'd appear again? ...I won't tease you. I was rather hoping to see you too.",choices:[]},
+  reunion:{awkwardLine:"Three meetings already...? I suppose we keep finding our way back to each other. I'm... glad. A little embarrassed, but glad.",awkwardLineJa:"もう三度も会ったのね……私たち、何度も巡り会うみたい。嬉しいわ……ちょっと照れくさいけど、本当に。",line:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence. Maybe some meetings are meant to happen more than once.",audio:"CY-REU-01.en.mp3",audioJa:"CY-REU-01.jp.mp3",choices:[
    ["Will we meet again?","I believe we will. Until then, keep a little room in your heart for the unexpected.","CY-REU-R01.en.mp3","CY-REU-R01.jp.mp3"],
    ["I think I'll remember you.","Then this moment has already become something precious. I'll remember it too.","CY-REU-R02.en.mp3","CY-REU-R02.jp.mp3"]
   ]},
@@ -1705,7 +1715,11 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
     });
    }
   });
-  typeText(conversations[id].line,()=>renderChoices(id),{en:conversations[id].audio||null,ja:conversations[id].audioJa||null},conversations[id].italicNarration,conversations[id].lineJa);
+  const awkwardActive=cyreneAwkwardActive()&&Boolean(conversations[id].awkwardLine);
+  const dialogueLine=awkwardActive?conversations[id].awkwardLine:conversations[id].line;
+  const dialogueLineJa=awkwardActive?conversations[id].awkwardLineJa:conversations[id].lineJa;
+  const dialogueAudio=awkwardActive?{en:null,ja:null}:{en:conversations[id].audio||null,ja:conversations[id].audioJa||null};
+  typeText(dialogueLine,()=>renderChoices(id),dialogueAudio,conversations[id].italicNarration,dialogueLineJa);
  }
  function dismiss(){
   if(!showing)return;
@@ -1733,6 +1747,8 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
     if(clicks>=5){
      cyreneAngryLocked=false;
      try{localStorage.removeItem("uib-hsr-cyrene-angry-lock");localStorage.removeItem("uib-hsr-cyrene-makeup-clicks")}catch(e){}
+     startCyreneAwkwardPhase();
+     deactivationTeaseShown=false;acceptedStay=false;
      syncCyreneToggle();queue.push("deactivationReconciled");showNext();
     }else syncCyreneToggle();
     return;
