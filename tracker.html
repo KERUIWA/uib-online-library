@@ -1,4 +1,18 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>IPS & IPK Tracker · UIB E-Library</title><script>try{if(localStorage.getItem("uib-library-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<script>
+(function(){
+ const key="uib-hsr-cyrene-awkward-start",duration=86400000,root=document.documentElement;
+ function sync(){
+  let started=0;try{started=Number(localStorage.getItem(key)||0)}catch(e){}
+  const active=started>0&&Date.now()-started<duration;
+  if(active)root.dataset.cyreneMood="awkward";else delete root.dataset.cyreneMood;
+  if(active&&started)window.setTimeout(sync,Math.max(50,started+duration-Date.now()+100));
+ }
+ sync();
+ window.addEventListener("storage",e=>{if(e.key===key)sync()});
+ window.addEventListener("uib:cyrene-mood-change",sync);
+})();
+</script><title>IPS & IPK Tracker · UIB E-Library</title><script>try{if(localStorage.getItem("uib-library-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script><style>
 :root{color-scheme:light;--bg:#f4f6fb;--surface:#fff;--surface2:#f8f9fd;--ink:#172033;--muted:#687386;--line:#e5e9f1;--blue:#3157d5;--blue-soft:#edf1ff;--red:#c64a55;--shadow:0 8px 28px #1720330b}:root[data-theme="dark"]{color-scheme:dark;--bg:#101522;--surface:#192131;--surface2:#202b3e;--ink:#edf2fc;--muted:#a2aec2;--line:#303c50;--blue:#9aafff;--blue-soft:#263454;--red:#ff8993;--shadow:0 8px 28px #0003}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,Segoe UI,Arial,sans-serif}header{background:var(--surface);border-bottom:1px solid var(--line);padding:22px}.wrap{max-width:1050px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);font-weight:800}h1{font-size:clamp(27px,4vw,38px);letter-spacing:-.04em;line-height:1.15;margin:12px 0 5px}.sub,.hint,.note{color:var(--muted)}main{max-width:1050px;margin:28px auto;padding:0 20px 60px}.back,.theme{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:var(--surface2);color:var(--ink);font:700 13px inherit;text-decoration:none;cursor:pointer}.back{color:var(--blue)}.summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:22px 0}.metric,.panel{background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow)}.metric span{display:block;color:var(--muted);font-size:12px;font-weight:700}.metric strong{display:block;font-size:clamp(25px,4vw,34px);letter-spacing:-.04em;margin-top:5px;font-variant-numeric:tabular-nums}.metric small{color:var(--muted);font-size:11px}.semester-nav{display:flex;gap:8px;overflow:auto;padding:4px 1px 14px}.semester{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);padding:9px 14px;font-size:13px;font-weight:750;cursor:pointer}.semester.active{background:var(--blue);border-color:var(--blue);color:white}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}.panel h2{font-size:19px;margin:0}.hint{font-size:12px}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:560px}th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.07em;padding:10px 8px;border-bottom:1px solid var(--line)}td{padding:9px 8px;border-bottom:1px solid var(--line)}td input,td select{width:100%;min-width:70px;border:1px solid var(--line);border-radius:9px;background:var(--surface2);color:var(--ink);padding:10px;font:inherit}td .course-name{min-width:190px}.remove{border:0;background:transparent;color:var(--red);font-size:20px;cursor:pointer;padding:5px 9px}.btn{border:0;border-radius:11px;padding:10px 15px;background:var(--blue);color:white;font:700 13px inherit;cursor:pointer}.semester-result{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-top:18px;padding:15px;border-radius:13px;background:var(--surface2)}.semester-result strong{font-size:22px;font-variant-numeric:tabular-nums}.history{margin-top:20px}.history h2{font-size:18px;margin:0 0 12px}.history-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}.history-card{background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:13px}.history-card span{display:block;color:var(--muted);font-size:11px}.history-card strong{font-size:21px;font-variant-numeric:tabular-nums}.bar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:var(--blue);border-radius:99px}.note{margin:18px 0 0;font-size:12px}footer{text-align:center;color:var(--muted);font-size:12px;padding:24px}[hidden]{display:none!important}@media(max-width:600px){main{padding:0 13px 40px}.summary{grid-template-columns:1fr 1fr}.metric:last-child{grid-column:1/-1}.panel{padding:14px}}
 /* Consistent interaction motion */
 body{transition:background .22s,color .22s}.metric,.panel,.history-card{animation:trackerEnter .4s ease both;transition:transform .2s,box-shadow .2s,border-color .2s}.metric:nth-child(2){animation-delay:.06s}.metric:nth-child(3){animation-delay:.12s}.metric:hover,.history-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
@@ -80,6 +94,60 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 4px color-mix(in srgb,v
 .site-menu-link.site-menu-hsr>span:first-child{width:auto!important;text-align:left!important;font-size:inherit!important}
 body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-width,0px)}
 @media(prefers-reduced-motion:reduce){.site-menu-backdrop,.site-menu-panel,.site-menu-link{transition:none}}
+
+/* Cyrene's 24-hour awkward phase: a shared, reversible site-wide atmosphere. */
+:root[data-cyrene-mood="awkward"]{
+ color-scheme:dark!important;
+ --bg:#101116!important;--surface:#191b24!important;--surface2:#22242e!important;
+ --ink:#d5d5df!important;--muted:#9294a2!important;--line:#343541!important;
+ --blue:#a0a8bd!important;--blue-soft:#292d3b!important;
+ --shadow:0 10px 34px #0008!important;
+ --uts:#302b29!important;--uts-line:#554b47!important;--uas:#30252b!important;--uas-line:#59404b!important;
+ --red:#c9828d!important;--red-bg:#39272e!important;--orange:#c39a7c!important;--orange-bg:#382e2a!important;
+ --yellow:#c5b58a!important;--yellow-bg:#373328!important;--green:#8eaa9a!important;--green-bg:#26332e!important;
+}
+html[data-cyrene-mood="awkward"] body{
+ background:radial-gradient(ellipse at 50% -15%,#33313d 0%,transparent 58%),var(--bg)!important;
+ color:var(--ink)!important;transition:background 1.2s ease,color 1.2s ease;
+}
+html[data-cyrene-mood="awkward"] header{
+ filter:saturate(.48) brightness(.78);transition:filter 1.2s ease;
+}
+html[data-cyrene-mood="awkward"] main,
+html[data-cyrene-mood="awkward"] .wrap{color:var(--ink)}
+html[data-cyrene-mood="awkward"] .card,
+html[data-cyrene-mood="awkward"] .panel,
+html[data-cyrene-mood="awkward"] .metric,
+html[data-cyrene-mood="awkward"] .tile,
+html[data-cyrene-mood="awkward"] .subject-card,
+html[data-cyrene-mood="awkward"] .assignment-card,
+html[data-cyrene-mood="awkward"] .tracker-card{
+ background-color:var(--surface)!important;border-color:var(--line)!important;
+ box-shadow:0 8px 26px #0003!important;transition:background-color 1.2s,border-color 1.2s,box-shadow 1.2s;
+}
+html[data-cyrene-mood="awkward"] button,
+html[data-cyrene-mood="awkward"] .btn,
+html[data-cyrene-mood="awkward"] .theme-toggle,
+html[data-cyrene-mood="awkward"] .theme{
+ filter:saturate(.58);transition:filter 1s,background-color 1s,color 1s;
+}
+html[data-cyrene-mood="awkward"] a{color:#aeb6cf}
+html[data-cyrene-mood="awkward"] img:not(.keep-color){
+ filter:saturate(.72) brightness(.88);transition:filter 1.2s;
+}
+html[data-cyrene-mood="awkward"] .top-poster>img,
+html[data-cyrene-mood="awkward"] header img{filter:grayscale(.48) brightness(.72) saturate(.58)}
+html[data-cyrene-mood="awkward"]::before{
+ content:"";position:fixed;inset:0;z-index:99990;pointer-events:none;opacity:.12;
+ background:repeating-linear-gradient(0deg,#fff0 0 3px,#aeb3c008 4px),radial-gradient(ellipse at center,transparent 48%,#05060bb0 100%);
+}
+html[data-cyrene-mood="awkward"]::after{
+ content:"";position:fixed;inset:0;z-index:99989;pointer-events:none;
+ background:linear-gradient(180deg,#0a0b1212,transparent 24%,transparent 76%,#08091030);
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-cyrene-mood="awkward"] *,html[data-cyrene-mood="awkward"] *::before,html[data-cyrene-mood="awkward"] *::after{transition:none!important;animation:none!important}
+}
 </style></head><body>
 <div class="site-topbar"><div class="site-topbar-inner"><a class="site-topbar-brand" href="dashboard.html" aria-label="Go to UIB E-Library dashboard">Universitas Internasional Batam</a><div class="site-controls"><button class="theme site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div></div>
 <header><div class="wrap"><h1>IPS & IPK Tracker</h1><div class="sub">Track your semester grades and cumulative academic progress.</div></div></header>
