@@ -153,6 +153,70 @@ html[data-cyrene-mood="awkward"] .subject-card:nth-child(3n){
  html[data-cyrene-mood="awkward"] .cyrene-haunt-message{animation:none!important;opacity:.8}
 }
 
+
+/* Physical decay: cracked glaze, grime, mildew blooms and torn edges. */
+html[data-cyrene-mood="awkward"] .card,
+html[data-cyrene-mood="awkward"] .panel,
+html[data-cyrene-mood="awkward"] .metric,
+html[data-cyrene-mood="awkward"] .tile,
+html[data-cyrene-mood="awkward"] .subject-card,
+html[data-cyrene-mood="awkward"] .assignment-card,
+html[data-cyrene-mood="awkward"] .tracker-card,
+html[data-cyrene-mood="awkward"] article{
+ position:relative!important;isolation:isolate;overflow:hidden!important;
+ border:1px solid #76606a!important;
+ background-color:#24242b!important;
+ background-image:
+  radial-gradient(ellipse at 12% 18%,#64705a48 0%,transparent 24%),
+  radial-gradient(ellipse at 88% 82%,#53634a3d 0%,transparent 21%),
+  radial-gradient(ellipse at 73% 12%,#7c684b30 0%,transparent 19%),
+  repeating-linear-gradient(164deg,transparent 0 29px,#09090d32 30px,#09090d32 32px,transparent 33px 61px),
+  linear-gradient(145deg,#343039f5 0%,#20242bf5 55%,#29232af5 100%)!important;
+ box-shadow:inset 0 0 28px #08090d99,0 13px 30px #05050a99,3px 4px 0 #09090d88!important;
+}
+html[data-cyrene-mood="awkward"] .card::before,
+html[data-cyrene-mood="awkward"] .panel::before,
+html[data-cyrene-mood="awkward"] .metric::before,
+html[data-cyrene-mood="awkward"] .tile::before,
+html[data-cyrene-mood="awkward"] .subject-card::before,
+html[data-cyrene-mood="awkward"] .assignment-card::before,
+html[data-cyrene-mood="awkward"] .tracker-card::before,
+html[data-cyrene-mood="awkward"] article::before{
+ content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.82;
+ background:
+  linear-gradient(28deg,transparent 0 47.8%,#0a0a0e 48%,#a7a0a0 48.25%,#111116 48.7%,transparent 49%) 17% 12%/54% 66% no-repeat,
+  linear-gradient(116deg,transparent 0 48%,#08090c 48.2%,#b4aa9f 48.45%,#111116 48.9%,transparent 49.2%) 16% 12%/58% 75% no-repeat,
+  linear-gradient(72deg,transparent 0 48%,#090a0d 48.2%,#a49b9a 48.45%,#111116 48.9%,transparent 49.2%) 100% 0/48% 60% no-repeat,
+  radial-gradient(ellipse at 8% 88%,#71805b80 0%,#52604455 12%,transparent 28%),
+  radial-gradient(ellipse at 91% 16%,#68704e72 0%,#4c563f4d 10%,transparent 25%),
+  repeating-linear-gradient(7deg,transparent 0 41px,#b4a9a018 42px,#09090d35 43px,transparent 45px 68px);
+ mix-blend-mode:screen;
+}
+html[data-cyrene-mood="awkward"] .card::after,
+html[data-cyrene-mood="awkward"] .panel::after,
+html[data-cyrene-mood="awkward"] .metric::after,
+html[data-cyrene-mood="awkward"] .tile::after,
+html[data-cyrene-mood="awkward"] .subject-card::after,
+html[data-cyrene-mood="awkward"] .assignment-card::after,
+html[data-cyrene-mood="awkward"] .tracker-card::after,
+html[data-cyrene-mood="awkward"] article::after{
+ content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.55;
+ background:
+  radial-gradient(ellipse at 18% 74%,#65704a66 0%,#5d69464a 8%,transparent 24%),
+  radial-gradient(ellipse at 82% 24%,#67734e55 0%,#46553d42 11%,transparent 27%),
+  radial-gradient(ellipse at 56% 104%,#08090d88 0%,transparent 34%),
+  repeating-linear-gradient(95deg,transparent 0 17px,#d1c2a00b 18px,transparent 20px 37px);
+ filter:blur(1.5px);
+}
+html[data-cyrene-mood="awkward"] .card>*,
+html[data-cyrene-mood="awkward"] .panel>*,
+html[data-cyrene-mood="awkward"] .metric>*,
+html[data-cyrene-mood="awkward"] .tile>*,
+html[data-cyrene-mood="awkward"] .subject-card>*,
+html[data-cyrene-mood="awkward"] .assignment-card>*,
+html[data-cyrene-mood="awkward"] .tracker-card>*,
+html[data-cyrene-mood="awkward"] article>*{position:relative;z-index:3}
+
 </style>
 <style>
 /* Shared header controls and slide-in navigation */
