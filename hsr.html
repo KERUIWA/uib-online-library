@@ -3,15 +3,16 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
 <script>
 (function(){
- const key="uib-hsr-cyrene-awkward-start",duration=86400000,root=document.documentElement;
+ const key="uib-hsr-cyrene-awkward-start",modeKey="uib-hsr-cyrene-mode-override",duration=86400000,root=document.documentElement;
  function sync(){
-  let started=0;try{started=Number(localStorage.getItem(key)||0)}catch(e){}
-  const active=started>0&&Date.now()-started<duration;
+  let started=0,override="";
+  try{started=Number(localStorage.getItem(key)||0);override=localStorage.getItem(modeKey)||""}catch(e){}
+  const active=override==="normal"?false:(started>0&&Date.now()-started<duration);
   if(active)root.dataset.cyreneMood="awkward";else delete root.dataset.cyreneMood;
   if(active&&started)window.setTimeout(sync,Math.max(50,started+duration-Date.now()+100));
  }
  sync();
- window.addEventListener("storage",e=>{if(e.key===key)sync()});
+ window.addEventListener("storage",e=>{if(e.key===key||e.key===modeKey)sync()});
  window.addEventListener("uib:cyrene-mood-change",sync);
 })();
 </script>
@@ -1848,7 +1849,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  function startCyreneAwkwardPhase(){try{localStorage.setItem("uib-hsr-cyrene-awkward-start",String(Date.now()));window.dispatchEvent(new Event("uib:cyrene-mood-change"))}catch(e){}}
  // Temporary, page-session override for testing dialogue and voice assets.
  let cyreneModeOverride=null;
- function isAwkwardMode(){return cyreneModeOverride===null?cyreneAwkwardActive():cyreneModeOverride}
+ function isAwkwardMode(){try{if(localStorage.getItem("uib-hsr-cyrene-mode-override")==="normal")return false}catch(e){}return cyreneModeOverride===null?cyreneAwkwardActive():cyreneModeOverride}
  function syncCyreneModeButton(){
   if(!modeButton)return;
   const awkward=isAwkwardMode();
@@ -1858,7 +1859,14 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   modeButton.title=awkward?"Awkward mode active. Switch to normal dialogue and audio.":"Normal mode active. Switch to awkward dialogue.";
  }
  if(modeButton)modeButton.addEventListener("click",()=>{
-  cyreneModeOverride=!isAwkwardMode();
+  if(isAwkwardMode()){
+   cyreneModeOverride=false;
+   try{localStorage.setItem("uib-hsr-cyrene-mode-override","normal")}catch(e){}
+  }else{
+   cyreneModeOverride=null;
+   try{localStorage.removeItem("uib-hsr-cyrene-mode-override")}catch(e){}
+  }
+  window.dispatchEvent(new Event("uib:cyrene-mood-change"));
   applyCyreneMode();
  });
  syncCyreneModeButton();
