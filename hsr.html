@@ -916,7 +916,11 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 .site-menu-link.site-menu-hsr>span:first-child{width:auto!important;text-align:left!important;font-size:inherit!important}
 body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-width,0px)}
 @media(prefers-reduced-motion:reduce){.site-menu-backdrop,.site-menu-panel,.site-menu-link{transition:none}}
-#cyreneToggle{display:flex;align-items:center;justify-content:center;margin:14px auto 0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;cursor:pointer;transition:transform .2s ease}
+.cyrene-footer-controls{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px auto 0}
+.cyrene-mode-toggle{min-width:76px;padding:9px 13px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font:700 11px/1 Inter,Segoe UI,Arial,sans-serif;letter-spacing:.06em;cursor:pointer;box-shadow:0 3px 12px #17203312;transition:transform .2s,background .2s,border-color .2s}
+.cyrene-mode-toggle:hover{transform:translateY(-2px);border-color:var(--blue)}
+.cyrene-mode-toggle[aria-pressed="true"]{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}
+#cyreneToggle{display:flex;align-items:center;justify-content:center;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;cursor:pointer;transition:transform .2s ease}
 #cyreneToggle:hover{transform:translateY(-2px)}
 #cyreneToggle:focus-visible{outline:3px solid #e8c58c;outline-offset:4px;border-radius:50%}
 #cyreneToggle img{width:64px;height:64px;object-fit:contain;display:block}
@@ -1037,9 +1041,12 @@ body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-widt
 <section class="section"><div class="section-head"><div><h2>Trailblazer reminders</h2><p>Browser alerts for event starts and closing dates</p></div></div><div class="reminder-panel"><div><h3>🔔 Don't let a limited event slip away</h3><p>Enable notifications to receive an alert when an event is due to start or end within 24 hours. The page must remain open for these browser reminders to run.</p><p class="note" id="notificationStatus">Notifications are currently off. You can still see event dates here.</p></div><button class="btn primary" id="enableNotifications">Enable reminders</button></div></section>
 <p class="note">Live event dates are supplied by StarRailAssistant and announcement summaries by a community API that relays HoYoLAB posts. They are not official HoYoverse services. Always open the linked official announcement to confirm eligibility, server-time differences, and final details. Data refreshes every 15 minutes while this page is open. If a data source is unavailable, the official HoYoLAB link remains available.</p>
 </main><footer style="display:flex;flex-direction:column;align-items:center;text-align:center">UIB E-Library · Honkai: Star Rail Hub · Not affiliated with HoYoverse
+<div class="cyrene-footer-controls">
+<button class="cyrene-mode-toggle" id="cyreneMode" type="button" aria-label="Switch to normal dialogue mode" aria-pressed="false" title="Temporary test switch between awkward and normal dialogue">AWK</button>
 <button id="cyreneToggle" type="button" aria-label="Disable Cyrene dialog" aria-pressed="false" title="Disable Cyrene dialog">
 <img src="assets/mem.png" alt="Mem, the pink flying fairy from Honkai: Star Rail">
-</button></footer>
+</button>
+</div></footer>
 <aside id="cyreneEncounter" aria-live="polite" aria-hidden="true" hidden>
 <div id="cyreneTip" role="status">Tip: You can deactivate the Cyrene dialog at the very bottom of the page.<span class="cyrene-tip-track" aria-hidden="true"><span class="cyrene-tip-timer"></span></span></div>
 <img class="cyrene-art" src="https://static.icy-veins.com/images/honkai-star-rail/characters/full/cyrene.webp" alt="Cyrene from Honkai: Star Rail">
@@ -1054,8 +1061,7 @@ body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-widt
  <button class="cyrene-control" id="cyreneMute" type="button" aria-label="Mute Cyrene voice" aria-pressed="false" title="Mute voice">🔊</button>
  <button class="cyrene-control" id="cyreneReplay" type="button" aria-label="Replay current voice line" title="Replay voice">↻</button>
  <button class="cyrene-control cyrene-language" id="cyreneLanguage" type="button" aria-label="Switch voice language to Japanese" aria-pressed="false" title="Switch to Japanese audio">EN</button>
- <button class="cyrene-control" id="cyreneMode" type="button" aria-label="Switch to normal dialogue mode" aria-pressed="false" title="Temporary test mode: switch between awkward and normal dialogue">AWK</button>
-</div>
+ </div>
 </aside>
 <script>
 const ACTIVITY_API="https://starrailassistant.top/api/v1/activity/sr-en-US.json";
@@ -1547,7 +1553,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  }
  if(modeButton)modeButton.addEventListener("click",()=>{
   cyreneModeOverride=!isAwkwardMode();
-  syncCyreneModeButton();
+  applyCyreneMode();
  });
  syncCyreneModeButton();
  const conversations={
@@ -1556,16 +1562,16 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
    ["Maybe I was waiting for you.","For me? How sweet... Though I must admit, you have made this little visit rather special.","CY-VIS-R02.en.mp3","CY-VIS-R02.jp.mp3"]
   ]},
   curious:{awkwardLine:"I was going to surprise you with a question, but you've managed to surprise me first. How do you keep doing that? ...Not that I'm complaining.",awkwardLineJa:"質問であなたを驚かせようと思っていたのに、先に驚かされちゃった。どうしていつもそうなの？……別に、嫌じゃないけど。",line:"Five times? Were you hoping something would happen? ...How interesting. Perhaps I should leave you another little surprise.",audio:"CY-CUR-01.en.mp3",audioJa:"CY-CUR-01.jp.mp3",choices:[
-   ["I wanted to see if you'd appear.","And here I am. You really are quite persistent, aren't you? I think I rather like that.","CY-CUR-R01.en.mp3","CY-CUR-R01.jp.mp3"],
-   ["It was an accident. Probably.","Probably? That sounds suspiciously like a little wish disguised as an accident.","CY-CUR-R02.en.mp3","CY-CUR-R02.jp.mp3"]
+   ["I wanted to see if you'd appear.","And here I am. You really are quite persistent, aren't you? I think I rather like that.","CY-CUR-R01-en.mp3","CY-CUR-R01.jp.mp3"],
+   ["It was an accident. Probably.","Probably? That sounds suspiciously like a little wish disguised as an accident.","CY-CUR-R02-en.mp3","CY-CUR-R02.jp.mp3"]
   ]},
   midnight:{awkwardLine:"I kept telling myself it was time to go rest. Then I thought you might still be awake, and... well, here I am. Don't look so pleased.",awkwardLineJa:"もう休む時間だって自分に言い聞かせていたの。でも、あなたはまだ起きているかもしれないって思って……それで、ここにいるの。そんなに嬉しそうな顔をしないで。",line:"It's rather late, isn't it? Even the stars are resting. Why are you still awake? Stay a little longer, if the quiet feels kind.",audio:"CY-MID-01.en.mp3",audioJa:"CY-MID-01.jp.mp3",choices:[
    ["I couldn't fall asleep.","Then let the quiet keep you company for a while. You don't have to rush back to the world just yet.","CY-MID-R01.en.mp3","CY-MID-R01.jp.mp3"],
    ["I like the stars at this hour.","So do I. They seem a little closer when everything else has gone quiet, don't they?","CY-MID-R02.en.mp3","CY-MID-R02.jp.mp3"]
   ]},
-  starlight:{awkwardLine:"I tried counting the stars to distract myself. Somehow I kept losing count and thinking about our last conversation instead. The stars are terribly unhelpful tonight.",awkwardLineJa:"気を紛らわせようと星を数えていたの。でも、何度も数を忘れて、前にあなたと話したことを思い出しちゃって。今夜の星は、ちっとも役に立たないわね。",line:"The stars look especially lovely tonight. I wonder if they're trying to tell us something, or if they're simply happy to be seen.",choices:[]},
-  humming:{awkwardLine:"♪ Hmm-hmm... hmm~ ♪\n\nCyrene notices you listening and lets the melody fade. “I was trying to remember a tune. It sounds nicer when someone is here, though...”",awkwardLineJa:"♪ ふんふん……ふふっ……♪\n\n聞かれていることに気づいたサイレーンは、そっと歌うのをやめた。「曲を思い出そうとしていただけよ。でも……誰かがいてくれると、少し素敵に聞こえるわね……」",line:"♪ Hmm-hmm... hmm~ ♪\n\nA soft little melody escapes Cyrene as she gazes at the stars.",italicNarration:true,choices:[]},
-  passingThought:{awkwardLine:"There's something I wanted to tell you: I don't think every moment needs to become a memory. Some can simply be nice while they're happening. Like this one, perhaps.",awkwardLineJa:"あなたに伝えたいことがあるの。すべての瞬間を思い出にしなくてもいいと思うの。ただ、その時間を楽しめばいい。……今みたいに、ね。",line:"You know, some of my favorite moments are the quiet ones. Nothing extraordinary happens, and yet... somehow, they stay with you.",choices:[]},
+  starlight:{audio:"CY-STL-01.en.mp3",awkwardLine:"I tried counting the stars to distract myself. Somehow I kept losing count and thinking about our last conversation instead. The stars are terribly unhelpful tonight.",awkwardLineJa:"気を紛らわせようと星を数えていたの。でも、何度も数を忘れて、前にあなたと話したことを思い出しちゃって。今夜の星は、ちっとも役に立たないわね。",line:"The stars look especially lovely tonight. I wonder if they're trying to tell us something, or if they're simply happy to be seen.",choices:[]},
+  humming:{audio:"CY-HUM-01.en.mp3",awkwardLine:"♪ Hmm-hmm... hmm~ ♪\n\nCyrene notices you listening and lets the melody fade. “I was trying to remember a tune. It sounds nicer when someone is here, though...”",awkwardLineJa:"♪ ふんふん……ふふっ……♪\n\n聞かれていることに気づいたサイレーンは、そっと歌うのをやめた。「曲を思い出そうとしていただけよ。でも……誰かがいてくれると、少し素敵に聞こえるわね……」",line:"♪ Hmm-hmm... hmm~ ♪\n\nA soft little melody escapes Cyrene as she gazes at the stars.",italicNarration:true,choices:[]},
+  passingThought:{audio:"CY-PTH-01.en.mp3",awkwardLine:"There's something I wanted to tell you: I don't think every moment needs to become a memory. Some can simply be nice while they're happening. Like this one, perhaps.",awkwardLineJa:"あなたに伝えたいことがあるの。すべての瞬間を思い出にしなくてもいいと思うの。ただ、その時間を楽しめばいい。……今みたいに、ね。",line:"You know, some of my favorite moments are the quiet ones. Nothing extraordinary happens, and yet... somehow, they stay with you.",choices:[]},
   littleQuestion:{awkwardLine:"One question. If we hadn't met before, do you think we'd still have found something to talk about? ...I hope so. I'd have wanted to try.",awkwardLineJa:"ひとつだけ質問してもいい？もし私たちがまだ出会っていなかったとしても、何か話すことを見つけられたと思う？……そうだといいな。私は、あなたと話してみたかったと思うから。",line:"May I ask you something? When you look up at the night sky, do you ever feel that someone, somewhere, is looking at the same stars?",choices:[
    ["Sometimes, yes.","Then perhaps the distance between us isn't quite as wide as it seems."],
    ["I never thought about it.","Perhaps tonight is a good night to start. The stars are patient listeners."]
@@ -1738,6 +1744,19 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   const dialogueLineJa=awkwardActive?conversations[id].awkwardLineJa:conversations[id].lineJa;
   const dialogueAudio=awkwardActive?{en:null,ja:null}:{en:conversations[id].audio||null,ja:conversations[id].audioJa||null};
   typeText(dialogueLine,()=>renderChoices(id),dialogueAudio,conversations[id].italicNarration,dialogueLineJa);
+ }
+ function applyCyreneMode(){
+  syncCyreneModeButton();
+  if(!showing||!currentEncounterId)return;
+  const id=currentEncounterId,entry=conversations[id];
+  if(!entry||!entry.awkwardLine)return;
+  clearTimeout(typeTimer);typeTimer=null;typing=false;typingRun++;stopVoice();
+  dialogue.textContent="";choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
+  const awkwardActive=isAwkwardMode();
+  const dialogueLine=awkwardActive?entry.awkwardLine:entry.line;
+  const dialogueLineJa=awkwardActive?entry.awkwardLineJa:entry.lineJa;
+  const dialogueAudio=awkwardActive?{en:null,ja:null}:{en:entry.audio||null,ja:entry.audioJa||null};
+  typeText(dialogueLine,()=>renderChoices(id),dialogueAudio,entry.italicNarration,dialogueLineJa);
  }
  function dismiss(){
   if(!showing)return;
