@@ -978,6 +978,20 @@ body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-widt
     font-size:10px!important
   }
 }
+
+/* Mobile large-banner mode: give each full-size banner its own breathing room */
+@media(max-width:650px){
+ #currentBanner[data-banner-view="large"] .current-banner-row{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  gap:18px!important;
+ }
+ #currentBanner[data-banner-view="large"] .current-banner-row>.current-banner-grid{
+  width:100%!important;
+  flex:0 0 auto!important;
+ }
+}
 </style>
 </head><body>
 <div class="site-topbar"><div class="site-topbar-inner"><a class="site-topbar-brand" href="dashboard.html" aria-label="Go to UIB E-Library dashboard">Universitas Internasional Batam</a><div class="site-controls"><button class="site-icon-btn site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div></div>
