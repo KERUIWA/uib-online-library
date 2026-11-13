@@ -1564,7 +1564,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   ]}
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
- let seen={},queue=[],encounterCount=0,reunionQueued=false,showing=false,currentEncounterId=null,deactivationTeaseShown=false,acceptedStay=false,typing=false,typingRun=0,typeTimer=null,tipTimer=null,tipHideTimer=null,tipShown=false,voiceMuted=false,cyreneDisabled=(()=>{try{return localStorage.getItem("uib-hsr-cyrene-disabled")==="1"}catch(e){return false}})(),voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueTextEn="",currentDialogueTextJa="",currentDialogueComplete=null;
+ let seen={},queue=[],encounterCount=0,reunionQueued=false,showing=false,currentEncounterId=null,deactivationTeaseShown=false,acceptedStay=false,cyreneAngryLocked=(()=>{try{return localStorage.getItem("uib-hsr-cyrene-angry-lock")==="1"}catch(e){return false}})(),typing=false,typingRun=0,typeTimer=null,tipTimer=null,tipHideTimer=null,tipShown=false,voiceMuted=false,cyreneDisabled=(()=>{try{return localStorage.getItem("uib-hsr-cyrene-disabled")==="1"}catch(e){return false}})(),voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueTextEn="",currentDialogueTextJa="",currentDialogueComplete=null;
  function hideCyreneTip(){
   if(!tip)return;
   clearTimeout(tipTimer);tipTimer=null;
@@ -1717,12 +1717,13 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  function syncCyreneToggle(){
   if(!cyreneToggle)return;
   cyreneToggle.setAttribute("aria-pressed",String(cyreneDisabled));
-  cyreneToggle.setAttribute("aria-label",cyreneDisabled?"Enable Cyrene dialog":"Disable Cyrene dialog");
-  cyreneToggle.title=cyreneDisabled?"Enable Cyrene dialog":"Disable Cyrene dialog";
+  cyreneToggle.setAttribute("aria-label",cyreneAngryLocked?"Cyrene is upset and will not appear until you make up":cyreneDisabled?"Enable Cyrene dialog":"Disable Cyrene dialog");
+  cyreneToggle.title=cyreneAngryLocked?"Cyrene is upset with you":cyreneDisabled?"Enable Cyrene dialog":"Disable Cyrene dialog";
  }
  if(cyreneToggle){
   syncCyreneToggle();
   cyreneToggle.addEventListener("click",()=>{
+   if(cyreneAngryLocked)return;
    if(!cyreneDisabled){
     if(!deactivationTeaseShown){
      deactivationTeaseShown=true;
@@ -1733,6 +1734,9 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
     if(currentEncounterId==="deactivationTease"||queue.includes("deactivationTease")||currentEncounterId==="deactivationAngry"||queue.includes("deactivationAngry"))return;
     if(acceptedStay){
      acceptedStay=false;
+     cyreneAngryLocked=true;
+     try{localStorage.setItem("uib-hsr-cyrene-angry-lock","1")}catch(e){}
+     syncCyreneToggle();
      queue.push("deactivationAngry");
      showNext();
      return;
@@ -1749,7 +1753,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   });
  }
  function activate(id){
-  if(cyreneDisabled||seen[id]||id==="reunion")return;
+  if(cyreneDisabled||cyreneAngryLocked||seen[id]||id==="reunion")return;
   seen[id]=true;
   queue.push(id);
   encounterCount++;
