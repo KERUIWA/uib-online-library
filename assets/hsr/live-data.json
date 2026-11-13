@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-12T15:34:03Z",
+  "updatedAt": "2026-11-13T02:32:16Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-12T15:34:03Z",
-      "lastSuccess": "2026-11-12T15:34:03Z",
+      "checkedAt": "2026-11-13T02:32:16Z",
+      "lastSuccess": "2026-11-13T02:32:16Z",
       "error": null,
       "data": [
         {
@@ -1364,6 +1364,15 @@
           "type": "event"
         },
         {
+          "id": "47424274",
+          "title": "New Honkai: Star Rail Merchandise Available on Amazon!",
+          "description": "The Gift+ Series \"Firefly 1/8 Figure Spring Missive Ver.\" makes its grand debut! The Firefly figure carries a spring theme, capturing her lively demeanor and a dreamy atmosphere~ Also making its debut is the \"Girls' Dorm Series\" merchandise, featuring Firefly, Kafka, Robin, and Silver Wolf. This release spans a variety of items across the character portrait series and chibi series. Come experience their cozy daily dorm life together~ The \"Character-Themed Impression Series\" silk scarves for Aventurine • Waveflair and Sparxie have also hit the shelves, available in both square and long styles. So, come explore diverse and intricate outfit inspirations! 〓Promotion Period〓 2026/11/13 00:00:00 – 2026/11/23 23:59:59 (PST)",
+          "created_at": 1794535201,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/10/32007491898cf11e353355c00aebb65f_6371389341308109125.png",
+          "url": "https://www.hoyolab.com/article/47424274",
+          "type": "info"
+        },
+        {
           "id": "47415456",
           "title": "[Event with Rewards] Aeon ★ Aha Spotlight — Reddit Event!",
           "description": "To play, to trick, to hunt... Please bear witness to an improv tour where humans and gods dance as one! It's time to shine a spotlight on Aeon ★ Aha! Create original art, memes, or discussions focused on Aeon ★ Aha and post them on our subreddit for a chance to win gift cards worth up to $50! Join Now:",
@@ -1487,15 +1496,6 @@
           "created_at": 1794290407,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/07/a2ad413112fbbc0c5302f3a3f793bfb3_5318431053071134921.jpg",
           "url": "https://www.hoyolab.com/article/47386304",
-          "type": "info"
-        },
-        {
-          "id": "47385591",
-          "title": "Keeping Up With Star Rail — \"Currency Wars: Voyage Into the Canvas\" Special Program | Honkai: Star Rail",
-          "description": "Breaking news! \"Fluffy Across the Blue\" is about to launch a major collaboration with \"Currency Wars\"! The Fluffy crew joins the fray in \"Currency Wars\"! Paired with the brand-new \"Plot Armor\" and newly adjusted characters, equipment, and Bonds, this season brings a completely fresh gameplay experience! For more details, please tune in to this special episode of \"Keeping Up With Star Rail\"! ※ The stats and mechanics displayed are for reference only. Please regard the launch version as final.",
-          "created_at": 1794283207,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/10/0/a0302fec3c4e5227c5eb766ac8333fe8_4837567322925059125.png",
-          "url": "https://www.hoyolab.com/article/47385591",
           "type": "info"
         }
       ]
