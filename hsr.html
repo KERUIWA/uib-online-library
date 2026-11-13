@@ -1054,6 +1054,7 @@ body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-widt
  <button class="cyrene-control" id="cyreneMute" type="button" aria-label="Mute Cyrene voice" aria-pressed="false" title="Mute voice">🔊</button>
  <button class="cyrene-control" id="cyreneReplay" type="button" aria-label="Replay current voice line" title="Replay voice">↻</button>
  <button class="cyrene-control cyrene-language" id="cyreneLanguage" type="button" aria-label="Switch voice language to Japanese" aria-pressed="false" title="Switch to Japanese audio">EN</button>
+ <button class="cyrene-control" id="cyreneMode" type="button" aria-label="Switch to normal dialogue mode" aria-pressed="false" title="Temporary test mode: switch between awkward and normal dialogue">AWK</button>
 </div>
 </aside>
 <script>
@@ -1519,6 +1520,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  const muteButton=document.getElementById("cyreneMute");
  const replayButton=document.getElementById("cyreneReplay");
  const languageButton=document.getElementById("cyreneLanguage");
+ const modeButton=document.getElementById("cyreneMode");
  const choicesHost=document.getElementById("cyreneChoices");
  const title=document.querySelector(".hero h1");
  if(!panel||!dialogue||!dismissButton||!choicesHost||!title)return;
@@ -1532,6 +1534,22 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   }catch(e){return false}
  }
  function startCyreneAwkwardPhase(){try{localStorage.setItem("uib-hsr-cyrene-awkward-start",String(Date.now()))}catch(e){}}
+ // Temporary, page-session override for testing dialogue and voice assets.
+ let cyreneModeOverride=null;
+ function isAwkwardMode(){return cyreneModeOverride===null?cyreneAwkwardActive():cyreneModeOverride}
+ function syncCyreneModeButton(){
+  if(!modeButton)return;
+  const awkward=isAwkwardMode();
+  modeButton.textContent=awkward?"AWK":"NORMAL";
+  modeButton.setAttribute("aria-pressed",String(awkward));
+  modeButton.setAttribute("aria-label",awkward?"Switch to normal dialogue mode":"Switch to awkward dialogue mode");
+  modeButton.title=awkward?"Awkward mode active. Switch to normal dialogue and audio.":"Normal mode active. Switch to awkward dialogue.";
+ }
+ if(modeButton)modeButton.addEventListener("click",()=>{
+  cyreneModeOverride=!isAwkwardMode();
+  syncCyreneModeButton();
+ });
+ syncCyreneModeButton();
  const conversations={
   visitor:{awkwardLine:"Oh... I wondered whether you'd show up again. I even thought of something clever to say, but now it's completely gone. So... hello. That's all I have.",awkwardLineJa:"……あら、また来てくれたのね。今度会えたら何か気の利いたことを言おうって考えていたのに、すっかり忘れちゃった。だから……こんにちは。それだけよ。",line:"Oh? You've been here for quite some time. Were you waiting for someone? I wonder if the stars brought you here, or if you simply lost track of time.",audio:"CY-VIS-01.en.mp3",audioJa:"CY-VIS-01.jp.mp3",choices:[
    ["I was just exploring.","Then I'm glad your wandering brought you here. Sometimes the loveliest discoveries are the unplanned ones.","CY-VIS-R01.en.mp3","CY-VIS-R01.jp.mp3"],
@@ -1715,7 +1733,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
     });
    }
   });
-  const awkwardActive=cyreneAwkwardActive()&&Boolean(conversations[id].awkwardLine);
+  const awkwardActive=isAwkwardMode()&&Boolean(conversations[id].awkwardLine);
   const dialogueLine=awkwardActive?conversations[id].awkwardLine:conversations[id].line;
   const dialogueLineJa=awkwardActive?conversations[id].awkwardLineJa:conversations[id].lineJa;
   const dialogueAudio=awkwardActive?{en:null,ja:null}:{en:conversations[id].audio||null,ja:conversations[id].audioJa||null};
