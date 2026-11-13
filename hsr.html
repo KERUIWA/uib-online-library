@@ -1612,22 +1612,6 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  const cyreneVoice=new Audio();
  cyreneVoice.preload="auto";
  cyreneVoice.muted=voiceMuted;
- let cyreneAudioContext=null,cyreneVoiceGain=null;
- function setupCyreneAmplification(){
-  if(cyreneAudioContext||!(window.AudioContext||window.webkitAudioContext))return;
-  try{
-   const AudioContextClass=window.AudioContext||window.webkitAudioContext;
-   cyreneAudioContext=new AudioContextClass();
-   const source=cyreneAudioContext.createMediaElementSource(cyreneVoice);
-   cyreneVoiceGain=cyreneAudioContext.createGain();
-   cyreneVoiceGain.gain.value=voiceLanguage==="en"?1.6:1;
-   source.connect(cyreneVoiceGain);
-   cyreneVoiceGain.connect(cyreneAudioContext.destination);
-   if(cyreneAudioContext.state==="suspended")cyreneAudioContext.resume().catch(()=>{});
-  }catch(e){cyreneAudioContext=null;cyreneVoiceGain=null}
- }
- document.addEventListener("pointerdown",setupCyreneAmplification,{once:true,capture:true});
- document.addEventListener("keydown",setupCyreneAmplification,{once:true,capture:true});
  function playVoice(file,onStarted){
   currentAudioFile=file||null;
   if(!file){onStarted();return}
@@ -1703,7 +1687,6 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  }
  function updateVoiceLanguage(){
   currentAudioFile=currentAudioFiles[voiceLanguage]||null;
-  if(cyreneVoiceGain)cyreneVoiceGain.gain.setTargetAtTime(voiceLanguage==="en"?1.6:1,cyreneAudioContext.currentTime,0.04);
   cyreneVoice.pause();
   cyreneVoice.currentTime=0;
   languageButton.textContent=voiceLanguage==="ja"?"JP":"EN";
