@@ -1536,7 +1536,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
    ["I like the stars at this hour.","So do I. They seem a little closer when everything else has gone quiet, don't they?","CY-MID-R02.en.mp3","CY-MID-R02.jp.mp3"]
   ]},
   starlight:{line:"The stars look especially lovely tonight. I wonder if they're trying to tell us something, or if they're simply happy to be seen.",choices:[]},
-  humming:{line:"♪ Hmm-hmm... hmm~ ♪\n\nA soft little melody escapes Cyrene as she gazes at the stars.",choices:[]},
+  humming:{line:"♪ Hmm-hmm... hmm~ ♪\n\nA soft little melody escapes Cyrene as she gazes at the stars.",italicNarration:true,choices:[]},
   passingThought:{line:"You know, some of my favorite moments are the quiet ones. Nothing extraordinary happens, and yet... somehow, they stay with you.",choices:[]},
   littleQuestion:{line:"May I ask you something? When you look up at the night sky, do you ever feel that someone, somewhere, is looking at the same stars?",choices:[
    ["Sometimes, yes.","Then perhaps the distance between us isn't quite as wide as it seems."],
@@ -1586,7 +1586,13 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   cyreneVoice.pause();
   cyreneVoice.currentTime=0;
  }
- function typeText(text,onComplete,audioFiles){
+ function renderDialogueContent(text,italicNarration){
+  if(!italicNarration){dialogue.textContent=text;return}
+  const parts=text.split("\\n\\n");
+  dialogue.replaceChildren(document.createTextNode(parts.shift()||""));
+  if(parts.length){dialogue.appendChild(document.createElement("br"));dialogue.appendChild(document.createElement("br"));const narration=document.createElement("em");narration.textContent=parts.join("\\n\\n");dialogue.appendChild(narration)}
+ }
+ function typeText(text,onComplete,audioFiles,italicNarration){
   clearTimeout(typeTimer);
   const run=++typingRun;
   typing=true;
@@ -1605,7 +1611,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   replayButton.disabled=voiceMuted||!currentAudioFile;
   replayButton.title=currentAudioFile?"Replay voice":"No audio added for this language yet";
  }
- let activeTypingComplete=null;
+ let activeTypingComplete=null;\n let currentDialogueItalicNarration=false;
  function finishTyping(){
   if(!typing)return;
   clearTimeout(typeTimer);typeTimer=null;
@@ -1675,7 +1681,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
     });
    }
   });
-  typeText(conversations[id].line,()=>renderChoices(id),{en:conversations[id].audio,ja:conversations[id].audioJa||null});
+  typeText(conversations[id].line,()=>renderChoices(id),{en:conversations[id].audio,ja:conversations[id].audioJa||null},conversations[id].italicNarration);
  }
  function dismiss(){
   if(!showing)return;
