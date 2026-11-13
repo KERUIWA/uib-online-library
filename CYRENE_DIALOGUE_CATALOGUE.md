@@ -497,5 +497,5 @@ These are **entirely new lines**, not shortened or lightly reworded copies of th
 1. Keep all visible dialogue and choice labels in English. The language toggle changes audio only.
 2. Japanese text in this catalogue is for translation/reference and Japanese voice recording.
 3. Do not rename an audio file without updating the matching reference in `hsr.html` and this catalogue.
-4. New encounters are intentionally unvoiced for now. Their filenames above are reserved suggestions, not existing files.
+4. Little Question, Keepsake, and Playful remain unvoiced. The awkward-phase alternate lines are also intentionally text-only to avoid playing recordings that do not match their wording.
 5. The current five-Mem-click reconciliation is implemented. The more elaborate reconciliation quest and the 72-hour post-redemption dialogue phase remain future ideas.
