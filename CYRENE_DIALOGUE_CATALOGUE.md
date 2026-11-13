@@ -33,7 +33,7 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 「あら？ずいぶん長い間ここにいるのね。誰かを待っていたの？星に導かれてここへ来たのか、それとも、ただ時間を忘れてしまったのかしら。」
 
 **Audio**
-- EN: `CY-VIS-01.en.mp3` · Recorded
+- EN: `CY-VIS-01.en.mp3` · Removed; awaiting replacement
 - JP: `CY-VIS-01.jp.mp3` · Recorded
 
 ### Choice 1
@@ -47,7 +47,7 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 「それなら、あなたの気ままな散策がここへ導いてくれて嬉しいわ。思いがけない発見こそ、時にはいちばん素敵なものになるのよ。」
 
 **Audio**
-- EN: `CY-VIS-R01.en.mp3` · Recorded
+- EN: `CY-VIS-R01.en.mp3` · Removed; awaiting replacement
 - JP: `CY-VIS-R01.jp.mp3` · Recorded
 
 ### Choice 2
@@ -61,7 +61,7 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 「私を？ふふ、嬉しいことを言ってくれるのね……でも、この小さな訪問を特別なものにしてくれたのは、あなたよ。」
 
 **Audio**
-- EN: `CY-VIS-R02.en.mp3` · Recorded
+- EN: `CY-VIS-R02.en.mp3` · Removed; awaiting replacement
 - JP: `CY-VIS-R02.jp.mp3` · Recorded
 
 ---
@@ -80,7 +80,7 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 「五回も？何か起こるのを期待していたの？……面白いわね。今度は、もうひとつ小さなサプライズを用意してあげようかしら。」
 
 **Audio**
-- EN: `CY-CUR-01.en.mp3` · Recorded
+- EN: `CY-CUR-01.en.mp3` · Removed; awaiting replacement
 - JP: `CY-CUR-01.jp.mp3` · Recorded
 
 ### Choice 1
@@ -94,7 +94,7 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 「ほら、ちゃんと現れたでしょう？あなたって本当に粘り強いのね。そういうところ、けっこう好きよ。」
 
 **Audio**
-- EN: `CY-CUR-R01.en.mp3` · Recorded
+- EN: `CY-CUR-R01.en.mp3` · Removed; awaiting replacement
 - JP: `CY-CUR-R01.jp.mp3` · Recorded
 
 ### Choice 2
@@ -108,7 +108,7 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 「たぶん？それって、願いごとを偶然のふりで隠しているように聞こえるわね。」
 
 **Audio**
-- EN: `CY-CUR-R02.en.mp3` · Recorded
+- EN: `CY-CUR-R02.en.mp3` · Removed; awaiting replacement
 - JP: `CY-CUR-R02.jp.mp3` · Recorded
 
 ---
@@ -127,7 +127,7 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 「もうずいぶん遅い時間ね。星たちでさえ休んでいるわ。どうしてまだ起きているの？この静けさが心地いいなら、もう少し一緒にいましょう。」
 
 **Audio**
-- EN: `CY-MID-01.en.mp3` · Recorded
+- EN: `CY-MID-01.en.mp3` · Removed; awaiting replacement
 - JP: `CY-MID-01.jp.mp3` · Recorded
 
 ### Choice 1
@@ -141,7 +141,7 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 「それなら、しばらくこの静けさに寄り添ってもらいましょう。まだ急いでいつもの世界に戻らなくてもいいのよ。」
 
 **Audio**
-- EN: `CY-MID-R01.en.mp3` · Recorded
+- EN: `CY-MID-R01.en.mp3` · Removed; awaiting replacement
 - JP: `CY-MID-R01.jp.mp3` · Recorded
 
 ### Choice 2
@@ -155,7 +155,7 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 「私もよ。ほかのすべてが静まり返ると、星たちが少し近くに感じられるでしょう？」
 
 **Audio**
-- EN: `CY-MID-R02.en.mp3` · Recorded
+- EN: `CY-MID-R02.en.mp3` · Removed; awaiting replacement
 - JP: `CY-MID-R02.jp.mp3` · Recorded
 
 ---
@@ -322,7 +322,7 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 「あら……これで三度目の再会ね。もしかしたら、偶然なんかじゃなかったのかもしれないわ。何度も巡り合う運命の出会いだって、あるのかもしれないわね。」
 
 **Audio**
-- EN: `CY-REU-01.en.mp3` · Recorded
+- EN: `CY-REU-01.en.mp3` · Removed; awaiting replacement
 - JP: `CY-REU-01.jp.mp3` · Recorded
 
 ### Choice 1
@@ -336,7 +336,7 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 「きっと会えるわ。それまで、心の片隅に思いがけない出来事のための場所を残しておいてね。」
 
 **Audio**
-- EN: `CY-REU-R01.en.mp3` · Recorded
+- EN: `CY-REU-R01.en.mp3` · Removed; awaiting replacement
 - JP: `CY-REU-R01.jp.mp3` · Recorded
 
 ### Choice 2
@@ -350,7 +350,7 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 「それなら、この瞬間はもう大切な思い出になったのね。私も、きっと忘れないわ。」
 
 **Audio**
-- EN: `CY-REU-R02.en.mp3` · Recorded
+- EN: `CY-REU-R02.en.mp3` · Removed; awaiting replacement
 - JP: `CY-REU-R02.jp.mp3` · Recorded
 
 ---
@@ -491,6 +491,8 @@ These are **entirely new lines**, not shortened or lightly reworded copies of th
 | Reunion | "We've crossed paths so many times now. I used to think each meeting was a separate little accident. Lately, I've started looking forward to the next one." | 「こうして何度も顔を合わせるようになったわね。以前は、一度一度の出会いは小さな偶然だと思っていたの。でも最近は……次に会える日を楽しみにしている自分がいるの。」 |
 
 ## Recording / implementation notes
+
+- All 12 previously existing English voice files were removed from `assets/audio/` on 13 November 2026 at the user's request. Their filenames remain reserved in the code and catalogue for replacement recordings. Japanese recordings were not changed.
 
 1. Keep all visible dialogue and choice labels in English. The language toggle changes audio only.
 2. Japanese text in this catalogue is for translation/reference and Japanese voice recording.
