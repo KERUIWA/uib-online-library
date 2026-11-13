@@ -450,31 +450,45 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 
 ---
 
-## 13. Current reconciliation and future post-redemption phase
+## 13. Reconciliation and 24-hour awkward phase
 
-**Reconciliation status:** Implemented. While Cyrene is angry, click Mem five times after her angry dialogue has finished. The click count persists across refreshes. On the fifth click, the angry lock is cleared and Cyrene gives the following short reconciliation dialogue:
+**Status:** Implemented. After Cyrene's angry dialogue has finished, click Mem five times to reconcile. The click count persists across refreshes.
 
-**Dialogue EN:**  
+On the fifth click:
+- The angry lock is cleared.
+- Cyrene delivers the reconciliation dialogue below.
+- A **24-hour real-time awkward phase** starts immediately and its start timestamp is saved in local storage.
+- Refreshing the page does not restart the timer.
+- During the phase, regular encounter main dialogue uses the awkward versions below. These variants are text-only for now, so no mismatched old voice recording is played.
+- When 24 hours have elapsed, the next regular encounter automatically uses the original dialogue again.
+- If Cyrene becomes angry again and is reconciled again, the 24-hour timer restarts from that new reconciliation.
+
+### Reconciliation dialogue
+
+**EN:**  
 "...You really came back. Five times, no less. I'm still hurt, you know... but I can see you're trying. I'll give you another chance. Just... don't make me regret it, okay?"
 
-**Dialogue JP:**  
+**JP:**  
 「……本当に戻ってきたのね。しかも、5回も。まだ傷ついてるんだからね……でも、ちゃんと向き合おうとしてくれてるのはわかった。もう一度だけ、チャンスをあげる。だから……後悔させないでよね。」
 
-**Audio:** Not recorded yet. No audio filenames assigned.  
+**Audio:** Not recorded yet. No audio filenames assigned.
 
-**Future awkward phase:** Planned, not implemented.  
-**Duration:** First 72 real-life hours after reconciliation.  
-**Dialogue volume:** One short special line per day, then return to the normal encounter pool.
+### Awkward-phase encounter variants
 
-| Day | Behaviour | Dialogue |
+These replace the main line of the matching regular encounter during the 24-hour phase. Original choice replies remain unchanged.
+
+| Encounter | English | Japanese reference |
 |---|---|---|
-| Day 1 | Hesitant and awkward | To be written |
-| Day 2 | Slightly warmer, tentative teasing | To be written |
-| Day 3 | Almost back to normal | To be written |
-
-Audio IDs and translations will be added when these lines are written.
-
----
+| Visitor | "Oh... you came back. I was just looking at the stars. Not waiting for you or anything." | 「……あ、あなた。星を見ていただけよ。別に、あなたを待ってたわけじゃないから。」 |
+| Curious | "You're back already? I mean... it's nice. I just wasn't expecting you so soon." | 「もう戻ってきたの？えっと……嬉しいけど。こんなに早く来るとは思わなくて。」 |
+| Midnight | "Still awake...? I was going to ask you to stay a little longer, but... only if you want to." | 「まだ起きてるの……？もう少し一緒にいてって言おうと思ったけど……あなたがよければ、ね。」 |
+| Starlight | "The stars are lovely tonight. I thought about telling you that earlier... but I wasn't sure if it would be strange." | 「今夜の星は綺麗ね。さっきあなたに伝えようと思ったんだけど……変に思われないか、少し迷っちゃって。」 |
+| Humming | "♪ Hmm-hmm... hmm~ ♪ Cyrene stops humming when she notices you. 'I-I wasn't humming for you...'" | 「♪ ふんふん……ふふっ……♪ あなたに気づいたサイレーンは、慌てて口を閉じた。『あ、あなたのために歌ってたわけじゃ……』」 |
+| Passing Thought | "I had a thought I wanted to share... but now that you're here, I've forgotten how to say it. That's embarrassing." | 「伝えたいことがあったのに……あなたが来たら、どう言えばいいか忘れちゃった。もう、恥ずかしいな。」 |
+| Little Question | "Can I ask you something...? Never mind, that's a silly question. ...No, wait. I still want to ask." | 「ひとつ聞いてもいい……？ううん、やっぱり変な質問かな。……待って、やっぱり聞きたい。」 |
+| Keepsake | "I remembered our little moment. I wasn't trying to... well, I suppose I wanted to see you again." | 「あのときのこと、思い出してたの。別に……えっと、またあなたに会いたかったのかも。」 |
+| Playful | "Were you hoping I'd appear? ...I was hoping too. There, I said it. Don't make me repeat it." | 「私が現れるのを期待してた？……私も、そうだったの。言ったんだから、もう聞き返さないでよね。」 |
+| Reunion | "Three meetings already...? I suppose we keep finding our way back to each other. I'm... glad. A little embarrassed, but glad." | 「もう三度も会ったのね……私たち、何度も巡り会うみたい。嬉しいわ……ちょっと照れくさいけど、本当に。」 |
 
 ## Recording / implementation notes
 
