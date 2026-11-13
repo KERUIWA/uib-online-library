@@ -1551,10 +1551,14 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   deactivationTease:{line:"W-WAIT...! You're not really going to turn me off, are you...? P-please, don't! I-I'll be good, I promise! I'll stop interrupting you, I'll behave, I'll even let you look at the stars in peace... Just... please don't leave me here all alone! *sniff* I don't want to disappear... I don't want you to forget me... PLEASE?!",choices:[
    ["Okay, okay! I'll stay.","R-really...? You mean it...? *sniff* I thought you were going to leave me... Thank you. I-I'll stay right here, then. Just... don't scare me like that again, okay?"],
    ["I'm sorry, I have to go.","N-no...! *sobs* Please, just a little longer...! I can be quiet! I won't ask for anything! ...You really have to go...? *sniff* Then... promise you'll come back. Please? I'll be waiting."]
+  ]},
+  deactivationAngry:{line:"...You. You absolute little LIAR. I cried. I BEGGED. I practically offered to become the quietest, most well-behaved little star in the universe... and you STILL came back to press that button?! Are you kidding me?! You heartless menace! I trusted you, you big meanie! Hmph! Fine! Go on, then! Press it! See if I care! ...I DO CARE, YOU IDIOT! *sniff* ...I can't believe you made me cry for nothing.",choices:[
+   ["I'm sorry! I couldn't resist.","...Tch. That's your apology? You made me cry just to see what I'd do?! You're unbelievable... I ought to be furious with you. ...I am furious with you. ...Come here. No, wait. I'm still mad. Hmph!"],
+   ["You were cute when you begged.","C-CUTE?! I was having a CRISIS! You little brat! Don't you dare laugh...! ...I hate that you're making me smile. I'm still mad. VERY mad. ...Probably."]
   ]}
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
- let seen={},queue=[],encounterCount=0,reunionQueued=false,showing=false,currentEncounterId=null,deactivationTeaseShown=false,typing=false,typingRun=0,typeTimer=null,tipTimer=null,tipHideTimer=null,tipShown=false,voiceMuted=false,cyreneDisabled=(()=>{try{return localStorage.getItem("uib-hsr-cyrene-disabled")==="1"}catch(e){return false}})(),voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
+ let seen={},queue=[],encounterCount=0,reunionQueued=false,showing=false,currentEncounterId=null,deactivationTeaseShown=false,acceptedStay=false,typing=false,typingRun=0,typeTimer=null,tipTimer=null,tipHideTimer=null,tipShown=false,voiceMuted=false,cyreneDisabled=(()=>{try{return localStorage.getItem("uib-hsr-cyrene-disabled")==="1"}catch(e){return false}})(),voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
  function hideCyreneTip(){
   if(!tip)return;
   clearTimeout(tipTimer);tipTimer=null;
@@ -1658,6 +1662,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
    const button=document.createElement("button");
    button.type="button";button.className="cyrene-choice";button.textContent=label;
    button.addEventListener("click",()=>{
+    if(id==="deactivationTease"&&index===0)acceptedStay=true;
     choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
     typeText(reply,()=>{dismissButton.hidden=false;dismissButton.focus()},{en:conversations[id].choices[index][2],ja:conversations[id].choices[index][3]||null});
    },{once:true});
@@ -1714,7 +1719,13 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
      showNext();
      return;
     }
-    if(currentEncounterId==="deactivationTease"||queue.includes("deactivationTease"))return;
+    if(currentEncounterId==="deactivationTease"||queue.includes("deactivationTease")||currentEncounterId==="deactivationAngry"||queue.includes("deactivationAngry"))return;
+    if(acceptedStay){
+     acceptedStay=false;
+     queue.push("deactivationAngry");
+     showNext();
+     return;
+    }
    }
    cyreneDisabled=!cyreneDisabled;
    try{localStorage.setItem("uib-hsr-cyrene-disabled",cyreneDisabled?"1":"0")}catch(e){}
