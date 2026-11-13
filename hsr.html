@@ -1613,7 +1613,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   currentAudioFiles=audioFiles||{en:null,ja:null};
   currentDialogueTextEn=text;
   currentDialogueTextJa=localizedText||text;
-  currentDialogueText=voiceLanguage==="ja"?currentDialogueTextJa:currentDialogueTextEn;
+  currentDialogueText=currentDialogueTextEn;
   const displayText=currentDialogueText;
   currentDialogueItalicNarration=Boolean(italicNarration);
   currentDialogueComplete=onComplete||null;
@@ -1670,13 +1670,12 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   conversations[id].choices.forEach(([label,reply],index)=>{
    const button=document.createElement("button");
    button.type="button";button.className="cyrene-choice";
-   button.textContent=voiceLanguage==="ja"&&conversations[id].choicesJa?.[index]?.[0]||label;
+   button.textContent=label;
    button.addEventListener("click",()=>{
     if(id==="deactivationTease"&&index===0)acceptedStay=true;
     choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
     const choice=conversations[id].choices[index];
-    const replyJa=conversations[id].choicesJa?.[index]?.[1]||reply;
-    typeText(reply,()=>{dismissButton.hidden=false;dismissButton.focus()},{en:choice[2]||null,ja:choice[3]||null},false,replyJa);
+    typeText(reply,()=>{dismissButton.hidden=false;dismissButton.focus()},{en:choice[2]||null,ja:choice[3]||null});
    },{once:true});
    choicesHost.appendChild(button);
   });
