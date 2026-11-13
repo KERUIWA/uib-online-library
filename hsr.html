@@ -65,7 +65,7 @@ body:has(#spotlightModal.open)>main{z-index:6000!important}
 @keyframes sheen{0%{background-position:180% 0}100%{background-position:-180% 0}}
 @keyframes starBlink{0%,100%{opacity:.2}50%{opacity:.9}}
 @keyframes heroDrift{0%,100%{background-position:center 38%}50%{background-position:center 48%}}
-.card,.metric,.panel,.quick,.leader,.week,.semester-button,.history-card,.news-item,.info-box,.version,.reminder-panel,.task,.search-result,.deadline-home-item{transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
+.card,.metric,.panel,.quick,.leader,.week,.semester-button,.history-card,.news-item,.info-box,.version,.reminder-panel,.task,.search-result,.deadline-home-item{transition:transform .55s ease,box-shadow .8s ease,border-color .8s ease,filter .8s ease,border-radius .8s ease,background-color .8s ease}
 .card:hover,.metric:hover,.quick:hover,.leader:hover,.week:hover,.semester-button:hover,.history-card:hover,.news-item:hover,.info-box:hover,.task:hover,.search-result:hover{transform:translateY(-4px);box-shadow:0 16px 34px #17203318}
 .btn,.theme,.theme-toggle,.nav a,.nav button,.back,.open-link{transition:transform .2s ease,filter .2s ease,background .2s ease}
 .btn:hover,.theme:hover,.theme-toggle:hover,.nav a:hover,.nav button:hover,.back:hover,.open-link:hover{transform:translateY(-2px);filter:brightness(1.08)}
@@ -895,6 +895,19 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 .site-topbar .site-icon-btn:hover{background:var(--blue-soft,#edf1ff)!important;border-color:var(--blue,#3157d5)!important;}
 @media(max-width:560px){.site-topbar-inner{min-height:58px;padding:8px 15px;}.site-topbar-brand{font-size:10px;letter-spacing:.09em;}}
 
+/* A slow blackout as Cyrene's awkward idle world returns. */
+html[data-cyrene-mood="awkward"]:not([data-cyrene-talking="true"])::after{
+ content:"";position:fixed;inset:0;z-index:99970;pointer-events:none;
+ background:
+  radial-gradient(ellipse at 50% 42%,#17131b22 0%,#09090dcc 100%),
+  linear-gradient(180deg,#17121b44,#08090de0);
+ opacity:0;animation:cyrene-dark-arrival 2.1s cubic-bezier(.18,.72,.2,1) forwards;
+}
+@keyframes cyrene-dark-arrival{
+ 0%{opacity:0;backdrop-filter:brightness(1) grayscale(0)}
+ 38%{opacity:.28;backdrop-filter:brightness(.72) grayscale(.22)}
+ 100%{opacity:.58;backdrop-filter:brightness(.48) grayscale(.42)}
+}
 /* Cyrene's heartbreak: thicker fog, damaged surfaces, and intrusive red fragments. */
 html[data-cyrene-mood="awkward"]:not([data-cyrene-talking="true"]) .cyrene-fog-bank{
  position:fixed;inset:-18%;z-index:99979;overflow:hidden;pointer-events:none;
