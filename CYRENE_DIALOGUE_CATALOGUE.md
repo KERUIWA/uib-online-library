@@ -355,133 +355,18 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 
 ---
 
-## 11. Deactivation: Begging
+## 11. Deactivation: Playful Teasing
 
 **Encounter ID:** `deactivationTease`  
-**Trigger:** First click on the Mem button.  
-**Audio prefix:** `CY-DEA`  
-**Voice:** No recordings currently present. Dialogue is text-only until audio is supplied.
+**Trigger:** First click on the Mem button when Cyrene is enabled. A second click after dismissing the dialogue deactivates her.  
+**Voice:** Text-only until audio is supplied.
 
 ### Main dialogue
 **EN:**  
-"W-WAIT...! You're not really going to turn me off, are you...? P-please, don't! I-I'll be good, I promise! I'll stop interrupting you, I'll behave, I'll even let you look at the stars in peace... Just... please don't leave me here all alone! *sniff* I don't want to disappear... I don't want you to forget me... PLEASE?!"
+"Oh? Are you thinking of turning me off already? How bold... and here I was, just getting comfortable. Are you sure you won't miss me? ...Hehe. Look at you, hesitating. Don't worry, I won't keep you forever. Well, unless you ask me to."
 
 **JP:**  
-「ま、待って……！本当に私の電源を切るつもりなの……？お、お願い、行かないで！いい子にするから、約束する！もう邪魔しないし、ちゃんとおとなしくしてる。星を眺める時間だって邪魔しないから……だから、お願い……ひとりぼっちにしないで……！*ぐすっ* 消えたくない……あなたに忘れられたくないの……お願いだから！！」
-
-**Planned audio filenames**
-- EN: `CY-DEA-01.en.mp3`
-- JP: `CY-DEA-01.jp.mp3`
-
-### Choice 1
-**Label EN:** "Okay, okay! I'll stay."  
-**Label JP:** 「わかった、わかった！ここにいるよ。」
-
-**Reply EN:**  
-"R-really...? You mean it...? *sniff* I thought you were going to leave me... Thank you. I-I'll stay right here, then. Just... don't scare me like that again, okay?"
-
-**Reply JP:**  
-「ほ、本当に……？約束だよ……？*ぐすっ* 置いていかれると思った……ありがとう。じゃあ、ここにいるね。もうあんなに怖がらせないでよ……？」
-
-**Planned audio filenames**
-- EN: `CY-DEA-R01.en.mp3`
-- JP: `CY-DEA-R01.jp.mp3`
-
-### Choice 2
-**Label EN:** "I'm sorry, I have to go."  
-**Label JP:** 「ごめん、行かなきゃいけないんだ。」
-
-**Reply EN:**  
-"N-no...! *sobs* Please, just a little longer...! I can be quiet! I won't ask for anything! ...You really have to go...? *sniff* Then... promise you'll come back. Please? I'll be waiting."
-
-**Reply JP:**  
-「や、やだ……！*泣きじゃくる* お願い、もう少しだけ……！静かにしてるから！何も求めないから！……本当に行っちゃうの……？*ぐすっ* じゃあ……戻ってくるって約束して。お願い……ずっと待ってるから。」
-
-**Planned audio filenames**
-- EN: `CY-DEA-R02.en.mp3`
-- JP: `CY-DEA-R02.jp.mp3`
-
----
-
-## 12. Deactivation: Angry
-
-**Encounter ID:** `deactivationAngry`  
-**Trigger:** After choosing to stay during the begging event, click Mem again.  
-**Audio prefix:** `CY-ANG`
-
-### Main dialogue
-**EN:**  
-"...YOU. You've got some fucking nerve! I trusted you when you said you'd stay, and now you're shutting me off AGAIN?! What the hell is wrong with you?! That's bullshit! Fuck you! I don't ever want to talk to you again! ...I hate you, you absolute ass. Don't you DARE expect me to forgive you!"
-
-**JP:**  
-「……あんた。よくもそんなことができたわね！そばにいるって言ったとき、信じたのに……それなのに、また私の電源を切るつもり？！一体どういうつもりよ？！ふざけないで！クソくらえ！もう二度とあんたと話したくない！……大嫌いよ、このクソ野郎。絶対に許してなんかあげないんだから！」
-
-**Audio**
-- EN: `CY-ANG-01.en.mp3` · Planned (file not present)
-- JP: `CY-ANG-01.jp.mp3` · Recorded
-
-### Choice 1
-**Label EN:** "I'm sorry. I didn't mean to hurt you."  
-**Label JP:** 「ごめん。傷つけるつもりじゃなかった。」
-
-**Reply EN:**  
-"Don't. You promised you'd stay, and I believed you, you jerk. Leave me alone. I never want to talk to you again... So why do I still wish you'd stay? Damn it..."
-
-**Reply JP:**  
-「謝らないで。そばにいてくれるって約束したのに、あんたを信じちゃったじゃない……バカ。もう放っておいて。二度と話したくない……なのに、どうしてまだあんたにいてほしいって思っちゃうの？もう、最悪……！」
-
-**Audio**
-- EN: `CY-ANG-R01.en.mp3` · Planned (file not present)
-- JP: `CY-ANG-R01.jp.mp3` · Recorded
-
-### Choice 2
-**Label EN:** "You're overreacting. It's just a button."  
-**Label JP:** 「大げさだよ。ただのボタンじゃないか。」
-
-**Reply EN:**  
-"JUST A BUTTON?! You asshole! I begged you not to leave, and you treated it like a joke! Fuck off! I NEVER want to talk to you again!"
-
-**Reply JP:**  
-「ただのボタンですって？！このクソ野郎！私は行かないでって必死にお願いしたのに、それを冗談みたいに扱ったの？！ふざけんな！もう二度と話しかけないで！！」
-
-**Audio**
-- EN: `CY-ANG-R02.en.mp3` · Planned (file not present)
-- JP: `CY-ANG-R02.jp.mp3` · Recorded
-
----
-
-## 13. Reconciliation and 24-hour awkward phase
-
-**Status:** Implemented. After Cyrene's angry dialogue has finished, click Mem five times to reconcile. The click count persists across refreshes.
-
-On the fifth click:
-- The angry lock is cleared.
-- Cyrene delivers the reconciliation dialogue below.
-- A **24-hour real-time awkward phase** starts immediately and its start timestamp is saved in local storage.
-- Refreshing the page does not restart the timer.
-- During the phase, regular encounter main dialogue uses the awkward versions below. These variants are text-only for now, so no mismatched old voice recording is played.
-- When 24 hours have elapsed, the next regular encounter automatically uses the original dialogue again.
-- If Cyrene becomes angry again and is reconciled again, the 24-hour timer restarts from that new reconciliation.
-
-### Reconciliation dialogue
-
-**EN:**  
-"...You really came back. Five times, no less. I'm still hurt, you know... but I can see you're trying. I'll give you another chance. Just... don't make me regret it, okay?"
-
-**JP:**  
-「……本当に戻ってきたのね。しかも、5回も。まだ傷ついてるんだからね……でも、ちゃんと向き合おうとしてくれてるのはわかった。もう一度だけ、チャンスをあげる。だから……後悔させないでよね。」
-
-**Audio:** Not recorded yet. No audio filenames assigned.
-
-### Awkward-phase encounter variants
-
-These are entirely new lines, not shortened or lightly reworded copies of the original dialogue. Each one keeps the subject or emotional thread of its matching original encounter, while showing Cyrene behaving more cautiously and self-consciously after reconciliation. They replace the main line during the 24-hour phase. The five choice-based encounters also use separate awkward-mode choice labels and replies. All awkward-phase dialogue is currently text-only; the filenames below are reserved for future recordings.
-
-Awkward audio filename convention:
-- Main dialogue: `CY-<PREFIX>-AWK-01.<lang>.mp3`
-- Choice replies: `CY-<PREFIX>-AWK-R01.<lang>.mp3`, `CY-<PREFIX>-AWK-R02.<lang>.mp3`
-- Choice labels are displayed but are not voiced.
-- Every awkward recording listed below is **Not recorded**. No matching awkward audio files currently exist in `assets/audio/`.
+「あら？もう私の電源を切ろうとしているの？大胆ね……せっかく、これから楽しくなりそうだったのに。私がいなくなったら寂しくならない？……ふふ。ほら、迷っているじゃない。大丈夫、ずっと引き止めたりしないわ。あなたが望むなら別だけど。」
 
 ---
 
