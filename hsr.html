@@ -1043,6 +1043,7 @@ body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-widt
 </main><footer style="display:flex;flex-direction:column;align-items:center;text-align:center">UIB E-Library · Honkai: Star Rail Hub · Not affiliated with HoYoverse
 <div class="cyrene-footer-controls">
 <button class="cyrene-mode-toggle" id="cyreneMode" type="button" aria-label="Switch to normal dialogue mode" aria-pressed="false" title="Temporary test switch between awkward and normal dialogue">AWK</button>
+<button class="cyrene-mode-toggle" id="cyreneTrigger" type="button" title="Trigger a random encounter, including the waiting visitor">VISIT</button>
 <button id="cyreneToggle" type="button" aria-label="Disable Cyrene dialog" aria-pressed="false" title="Disable Cyrene dialog">
 <img src="assets/mem.png" alt="Mem, the pink flying fairy from Honkai: Star Rail">
 </button>
@@ -1558,29 +1559,29 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  syncCyreneModeButton();
  const conversations={
   visitor:{awkwardLine:"Oh... I wondered whether you'd show up again. I even thought of something clever to say, but now it's completely gone. So... hello. That's all I have.",awkwardLineJa:"……あら、また来てくれたのね。今度会えたら何か気の利いたことを言おうって考えていたのに、すっかり忘れちゃった。だから……こんにちは。それだけよ。",line:"Oh? You've been here for quite some time. Were you waiting for someone? I wonder if the stars brought you here, or if you simply lost track of time.",audio:"CY-VIS-01.en.mp3",audioJa:"CY-VIS-01.jp.mp3",choices:[
-   ["I was just exploring.","Then I'm glad your wandering brought you here. Sometimes the loveliest discoveries are the unplanned ones.","CY-VIS-R01.en.mp3","CY-VIS-R01.jp.mp3"],
-   ["Maybe I was waiting for you.","For me? How sweet... Though I must admit, you have made this little visit rather special.","CY-VIS-R02.en.mp3","CY-VIS-R02.jp.mp3"]
+   ["I was just exploring.","Then I'm glad your wandering brought you here. Sometimes the loveliest discoveries are the unplanned ones.","CY-VIS-R01.en.mp3","CY-VIS-R01.jp.mp3","I was only looking around...","I see. I was hoping you might say you came to see me. ...Never mind. I shouldn't put you on the spot.","そう、ただ見て回っていたのね……。あなたが私に会いに来たって言ってくれるかも、なんて期待していたの。……何でもないわ。困らせるつもりはなかったの。"],
+   ["Maybe I was waiting for you.","For me? How sweet... Though I must admit, you have made this little visit rather special.","CY-VIS-R02.en.mp3","CY-VIS-R02.jp.mp3","Maybe I was hoping you'd be here.","You can't just say things like that so casually... Give me a moment to recover, will you?","そんなこと、そんなにさらっと言わないでよ……。ちょっと心の準備をさせてくれる？"]
   ]},
   curious:{awkwardLine:"I was going to surprise you with a question, but you've managed to surprise me first. How do you keep doing that? ...Not that I'm complaining.",awkwardLineJa:"質問であなたを驚かせようと思っていたのに、先に驚かされちゃった。どうしていつもそうなの？……別に、嫌じゃないけど。",line:"Five times? Were you hoping something would happen? ...How interesting. Perhaps I should leave you another little surprise.",audio:"CY-CUR-01.en.mp3",audioJa:"CY-CUR-01.jp.mp3",choices:[
-   ["I wanted to see if you'd appear.","And here I am. You really are quite persistent, aren't you? I think I rather like that.","CY-CUR-R01-en.mp3","CY-CUR-R01.jp.mp3"],
-   ["It was an accident. Probably.","Probably? That sounds suspiciously like a little wish disguised as an accident.","CY-CUR-R02-en.mp3","CY-CUR-R02.jp.mp3"]
+   ["I wanted to see if you'd appear.","And here I am. You really are quite persistent, aren't you? I think I rather like that.","CY-CUR-R01-en.mp3","CY-CUR-R01.jp.mp3","I was curious whether you'd come back.","You were wondering about me? ...I may have checked to see whether you were here, too. Just once. Or twice.","私が戻ってくるか気になっていたの？……私も、あなたがいるか確かめたことがあるわ。一度だけ……ううん、二度くらい。"],
+   ["It was an accident. Probably.","Probably? That sounds suspiciously like a little wish disguised as an accident.","CY-CUR-R02-en.mp3","CY-CUR-R02.jp.mp3","It was probably an accident.","Then I suppose we're both very lucky accidents keep bringing us together. ...I hope they don't stop.","じゃあ、偶然に感謝しなくちゃね。こうして何度も会えるなんて……。この偶然が終わらないといいな。"]
   ]},
   midnight:{awkwardLine:"I kept telling myself it was time to go rest. Then I thought you might still be awake, and... well, here I am. Don't look so pleased.",awkwardLineJa:"もう休む時間だって自分に言い聞かせていたの。でも、あなたはまだ起きているかもしれないって思って……それで、ここにいるの。そんなに嬉しそうな顔をしないで。",line:"It's rather late, isn't it? Even the stars are resting. Why are you still awake? Stay a little longer, if the quiet feels kind.",audio:"CY-MID-01.en.mp3",audioJa:"CY-MID-01.jp.mp3",choices:[
-   ["I couldn't fall asleep.","Then let the quiet keep you company for a while. You don't have to rush back to the world just yet.","CY-MID-R01.en.mp3","CY-MID-R01.jp.mp3"],
-   ["I like the stars at this hour.","So do I. They seem a little closer when everything else has gone quiet, don't they?","CY-MID-R02.en.mp3","CY-MID-R02.jp.mp3"]
+   ["I couldn't fall asleep.","Then let the quiet keep you company for a while. You don't have to rush back to the world just yet.","CY-MID-R01.en.mp3","CY-MID-R01.jp.mp3","I couldn't sleep... and I wondered if you were awake.","You did? ...I was hoping you'd say that. It makes this late hour feel a little less lonely.","そうだったの？……そう言ってくれるのを、少し期待していたの。おかげで、この夜更けも少し寂しくなくなったわ。"],
+   ["I like the stars at this hour.","So do I. They seem a little closer when everything else has gone quiet, don't they?","CY-MID-R02.en.mp3","CY-MID-R02.jp.mp3","I wanted a quiet moment with you.","Then... stay a little longer? I was just getting used to having you here. I mean, the stars are nice company too.","じゃあ……もう少しだけ一緒にいてくれる？あなたがいてくれることに、ちょうど慣れてきたところなの。星も、もちろん素敵な話し相手だけど。"]
   ]},
   starlight:{audio:"CY-STL-01.en.mp3",awkwardLine:"I tried counting the stars to distract myself. Somehow I kept losing count and thinking about our last conversation instead. The stars are terribly unhelpful tonight.",awkwardLineJa:"気を紛らわせようと星を数えていたの。でも、何度も数を忘れて、前にあなたと話したことを思い出しちゃって。今夜の星は、ちっとも役に立たないわね。",line:"The stars look especially lovely tonight. I wonder if they're trying to tell us something, or if they're simply happy to be seen.",choices:[]},
   humming:{audio:"CY-HUM-01.en.mp3",awkwardLine:"♪ Hmm-hmm... hmm~ ♪\n\nCyrene notices you listening and lets the melody fade. “I was trying to remember a tune. It sounds nicer when someone is here, though...”",awkwardLineJa:"♪ ふんふん……ふふっ……♪\n\n聞かれていることに気づいたサイレーンは、そっと歌うのをやめた。「曲を思い出そうとしていただけよ。でも……誰かがいてくれると、少し素敵に聞こえるわね……」",line:"♪ Hmm-hmm... hmm~ ♪\n\nA soft little melody escapes Cyrene as she gazes at the stars.",italicNarration:true,choices:[]},
   passingThought:{audio:"CY-PTH-01.en.mp3",awkwardLine:"There's something I wanted to tell you: I don't think every moment needs to become a memory. Some can simply be nice while they're happening. Like this one, perhaps.",awkwardLineJa:"あなたに伝えたいことがあるの。すべての瞬間を思い出にしなくてもいいと思うの。ただ、その時間を楽しめばいい。……今みたいに、ね。",line:"You know, some of my favorite moments are the quiet ones. Nothing extraordinary happens, and yet... somehow, they stay with you.",choices:[]},
   littleQuestion:{awkwardLine:"One question. If we hadn't met before, do you think we'd still have found something to talk about? ...I hope so. I'd have wanted to try.",awkwardLineJa:"ひとつだけ質問してもいい？もし私たちがまだ出会っていなかったとしても、何か話すことを見つけられたと思う？……そうだといいな。私は、あなたと話してみたかったと思うから。",line:"May I ask you something? When you look up at the night sky, do you ever feel that someone, somewhere, is looking at the same stars?",choices:[
-   ["Sometimes, yes.","Then perhaps the distance between us isn't quite as wide as it seems."],
-   ["I never thought about it.","Perhaps tonight is a good night to start. The stars are patient listeners."]
+   ["Sometimes, yes.","Then perhaps the distance between us isn't quite as wide as it seems.",null,null,"I like thinking someone might be looking up with me.","That thought makes the sky feel smaller, somehow. Maybe that's why I keep hoping you're looking at it too.","そう考えると、空が少し近く感じるわね。だから私も、あなたが同じ空を見ているといいなって思うのかもしれない。"],
+   ["I never thought about it.","Perhaps tonight is a good night to start. The stars are patient listeners.",null,null,"I think I'll look for someone next time.","Then I hope you'll remember me when you do. ...That's a rather selfish thing to ask, isn't it?","じゃあ次に空を見上げるとき、私のことも思い出してくれたら嬉しいわ。……ちょっと自分勝手なお願いかしら？"]
   ]},
   keepsake:{awkwardLine:"I came across something that reminded me of you. It wasn't anything special, just a little detail... but it made me smile. I thought you should know.",awkwardLineJa:"あなたを思い出すものを見つけたの。特別なものじゃなくて、ほんの小さなことよ……でも、思わず笑顔になったの。あなたにも伝えておきたくて。",line:"I found a little thought I wanted to share with you: even brief meetings can leave the warmest memories. Thank you for this one.",choices:[]},
   playful:{awkwardLine:"You're getting rather good at appearing when I'm thinking about you. Should I call that coincidence, or are you becoming predictable? ...I'm only teasing. A little.",awkwardLineJa:"私があなたのことを考えているときに現れるの、ずいぶん上手になったわね。偶然って呼ぶべきかしら、それとも分かりやすくなったのかしら？……冗談よ。少しだけね。",line:"Were you hoping I'd appear again? ...I won't tease you. I was rather hoping to see you too.",choices:[]},
   reunion:{awkwardLine:"We've crossed paths so many times now. I used to think each meeting was a separate little accident. Lately, I've started looking forward to the next one.",awkwardLineJa:"こうして何度も顔を合わせるようになったわね。以前は、一度一度の出会いは小さな偶然だと思っていたの。でも最近は……次に会える日を楽しみにしている自分がいるの。",line:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence. Maybe some meetings are meant to happen more than once.",audio:"CY-REU-01.en.mp3",audioJa:"CY-REU-01.jp.mp3",choices:[
-   ["Will we meet again?","I believe we will. Until then, keep a little room in your heart for the unexpected.","CY-REU-R01.en.mp3","CY-REU-R01.jp.mp3"],
-   ["I think I'll remember you.","Then this moment has already become something precious. I'll remember it too.","CY-REU-R02.en.mp3","CY-REU-R02.jp.mp3"]
+   ["Will we meet again?","I believe we will. Until then, keep a little room in your heart for the unexpected.","CY-REU-R01.en.mp3","CY-REU-R01.jp.mp3","Will you look forward to seeing me?","I already do. ...There, I said it. Don't make me repeat myself, or I'll lose my nerve.","もう楽しみにしているわ。……言っちゃった。もう一度言わせないでね。恥ずかしくなってしまうから。"],
+   ["I think I'll remember you.","Then this moment has already become something precious. I'll remember it too.","CY-REU-R02.en.mp3","CY-REU-R02.jp.mp3","I don't think I could forget you now.","...You make it very difficult to act as though this is just another meeting. I suppose I don't want it to be.","……もう、ただの再会みたいな顔をするのは難しいわね。……本当は、そうしたくないのかもしれない。"]
   ]},
   deactivationTease:{line:"W-WAIT...! You're not really going to turn me off, are you...? P-please, don't! I-I'll be good, I promise! I'll stop interrupting you, I'll behave, I'll even let you look at the stars in peace... Just... please don't leave me here all alone! *sniff* I don't want to disappear... I don't want you to forget me... PLEASE?!",lineJa:"ま、待って……！本当に私の電源を切るつもりなの……？お、お願い、行かないで！いい子にするから、約束する！もう邪魔しないし、ちゃんとおとなしくしてる。星を眺める時間だって邪魔しないから……だから、お願い……ひとりぼっちにしないで……！*ぐすっ* 消えたくない……あなたに忘れられたくないの……お願いだから！！",choices:[
    ["Okay, okay! I'll stay.","R-really...? You mean it...? *sniff* I thought you were going to leave me... Thank you. I-I'll stay right here, then. Just... don't scare me like that again, okay?"],
@@ -1705,12 +1706,14 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   conversations[id].choices.forEach(([label,reply],index)=>{
    const button=document.createElement("button");
    button.type="button";button.className="cyrene-choice";
-   button.textContent=label;
+   const awkwardChoice=isAwkwardMode()&&Boolean(conversations[id].awkwardLine)&&choice[5];
+    button.textContent=awkwardChoice?(choice[4]||label):label;
    button.addEventListener("click",()=>{
     if(id==="deactivationTease"&&index===0)acceptedStay=true;
     choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
     const choice=conversations[id].choices[index];
-    typeText(reply,()=>{dismissButton.hidden=false;dismissButton.focus()},{en:choice[2]||null,ja:choice[3]||null});
+    const awkwardChoice=isAwkwardMode()&&Boolean(conversations[id].awkwardLine)&&choice[5];
+    typeText(awkwardChoice?choice[5]:reply,()=>{dismissButton.hidden=false;dismissButton.focus()},{en:awkwardChoice?null:(choice[2]||null),ja:awkwardChoice?null:(choice[3]||null)},false,awkwardChoice?(choice[6]||choice[5]):null);
    },{once:true});
    choicesHost.appendChild(button);
   });
@@ -1859,7 +1862,15 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   const selected=randomEncounters[Math.floor(Math.random()*randomEncounters.length)];
   activate(selected);
  },visitorDelay);
- function checkMidnight(){const hour=new Date().getHours();if(hour>=0&&hour<4)activate("midnight")}
+ const triggerButton=document.getElementById("cyreneTrigger");
+  if(triggerButton)triggerButton.addEventListener("click",()=>{
+   if(cyreneDisabled||cyreneAngryLocked)return;
+   let available=randomEncounters.filter(id=>!seen[id]);
+   if(!available.length){randomEncounters.forEach(id=>delete seen[id]);available=randomEncounters.slice()}
+   const selected=available[Math.floor(Math.random()*available.length)];
+   seen[selected]=true;queue.push(selected);showNext();
+  });
+  function checkMidnight(){const hour=new Date().getHours();if(hour>=0&&hour<4)activate("midnight")}
  checkMidnight();setInterval(checkMidnight,60000);
 })();
 
