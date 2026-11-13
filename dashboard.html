@@ -2,15 +2,16 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
 <script>
 (function(){
- const key="uib-hsr-cyrene-awkward-start",duration=86400000,root=document.documentElement;
+ const key="uib-hsr-cyrene-awkward-start",modeKey="uib-hsr-cyrene-mode-override",duration=86400000,root=document.documentElement;
  function sync(){
-  let started=0;try{started=Number(localStorage.getItem(key)||0)}catch(e){}
-  const active=started>0&&Date.now()-started<duration;
+  let started=0,override="";
+  try{started=Number(localStorage.getItem(key)||0);override=localStorage.getItem(modeKey)||""}catch(e){}
+  const active=override==="normal"?false:(started>0&&Date.now()-started<duration);
   if(active)root.dataset.cyreneMood="awkward";else delete root.dataset.cyreneMood;
   if(active&&started)window.setTimeout(sync,Math.max(50,started+duration-Date.now()+100));
  }
  sync();
- window.addEventListener("storage",e=>{if(e.key===key)sync()});
+ window.addEventListener("storage",e=>{if(e.key===key||e.key===modeKey)sync()});
  window.addEventListener("uib:cyrene-mood-change",sync);
 })();
 </script><title>Academic Dashboard · UIB E-Library</title>
