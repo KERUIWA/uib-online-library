@@ -1,6 +1,20 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<script>
+(function(){
+ const key="uib-hsr-cyrene-awkward-start",duration=86400000,root=document.documentElement;
+ function sync(){
+  let started=0;try{started=Number(localStorage.getItem(key)||0)}catch(e){}
+  const active=started>0&&Date.now()-started<duration;
+  if(active)root.dataset.cyreneMood="awkward";else delete root.dataset.cyreneMood;
+  if(active&&started)window.setTimeout(sync,Math.max(50,started+duration-Date.now()+100));
+ }
+ sync();
+ window.addEventListener("storage",e=>{if(e.key===key)sync()});
+ window.addEventListener("uib:cyrene-mood-change",sync);
+})();
+</script>
 <title>Honkai: Star Rail Hub · UIB E-Library</title>
 <script>try{if(localStorage.getItem("uib-library-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <style>
@@ -996,6 +1010,60 @@ body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-widt
   flex:0 0 auto!important;
  }
 }
+
+/* Cyrene's 24-hour awkward phase: a shared, reversible site-wide atmosphere. */
+:root[data-cyrene-mood="awkward"]{
+ color-scheme:dark!important;
+ --bg:#101116!important;--surface:#191b24!important;--surface2:#22242e!important;
+ --ink:#d5d5df!important;--muted:#9294a2!important;--line:#343541!important;
+ --blue:#a0a8bd!important;--blue-soft:#292d3b!important;
+ --shadow:0 10px 34px #0008!important;
+ --uts:#302b29!important;--uts-line:#554b47!important;--uas:#30252b!important;--uas-line:#59404b!important;
+ --red:#c9828d!important;--red-bg:#39272e!important;--orange:#c39a7c!important;--orange-bg:#382e2a!important;
+ --yellow:#c5b58a!important;--yellow-bg:#373328!important;--green:#8eaa9a!important;--green-bg:#26332e!important;
+}
+html[data-cyrene-mood="awkward"] body{
+ background:radial-gradient(ellipse at 50% -15%,#33313d 0%,transparent 58%),var(--bg)!important;
+ color:var(--ink)!important;transition:background 1.2s ease,color 1.2s ease;
+}
+html[data-cyrene-mood="awkward"] header{
+ filter:saturate(.48) brightness(.78);transition:filter 1.2s ease;
+}
+html[data-cyrene-mood="awkward"] main,
+html[data-cyrene-mood="awkward"] .wrap{color:var(--ink)}
+html[data-cyrene-mood="awkward"] .card,
+html[data-cyrene-mood="awkward"] .panel,
+html[data-cyrene-mood="awkward"] .metric,
+html[data-cyrene-mood="awkward"] .tile,
+html[data-cyrene-mood="awkward"] .subject-card,
+html[data-cyrene-mood="awkward"] .assignment-card,
+html[data-cyrene-mood="awkward"] .tracker-card{
+ background-color:var(--surface)!important;border-color:var(--line)!important;
+ box-shadow:0 8px 26px #0003!important;transition:background-color 1.2s,border-color 1.2s,box-shadow 1.2s;
+}
+html[data-cyrene-mood="awkward"] button,
+html[data-cyrene-mood="awkward"] .btn,
+html[data-cyrene-mood="awkward"] .theme-toggle,
+html[data-cyrene-mood="awkward"] .theme{
+ filter:saturate(.58);transition:filter 1s,background-color 1s,color 1s;
+}
+html[data-cyrene-mood="awkward"] a{color:#aeb6cf}
+html[data-cyrene-mood="awkward"] img:not(.keep-color){
+ filter:saturate(.72) brightness(.88);transition:filter 1.2s;
+}
+html[data-cyrene-mood="awkward"] .top-poster>img,
+html[data-cyrene-mood="awkward"] header img{filter:grayscale(.48) brightness(.72) saturate(.58)}
+html[data-cyrene-mood="awkward"]::before{
+ content:"";position:fixed;inset:0;z-index:99990;pointer-events:none;opacity:.12;
+ background:repeating-linear-gradient(0deg,#fff0 0 3px,#aeb3c008 4px),radial-gradient(ellipse at center,transparent 48%,#05060bb0 100%);
+}
+html[data-cyrene-mood="awkward"]::after{
+ content:"";position:fixed;inset:0;z-index:99989;pointer-events:none;
+ background:linear-gradient(180deg,#0a0b1212,transparent 24%,transparent 76%,#08091030);
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-cyrene-mood="awkward"] *,html[data-cyrene-mood="awkward"] *::before,html[data-cyrene-mood="awkward"] *::after{transition:none!important;animation:none!important}
+}
 </style>
 </head><body>
 <div class="site-topbar"><div class="site-topbar-inner"><a class="site-topbar-brand" href="dashboard.html" aria-label="Go to UIB E-Library dashboard">Universitas Internasional Batam</a><div class="site-controls"><button class="site-icon-btn site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div></div>
@@ -1540,7 +1608,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
    return true;
   }catch(e){return false}
  }
- function startCyreneAwkwardPhase(){try{localStorage.setItem("uib-hsr-cyrene-awkward-start",String(Date.now()))}catch(e){}}
+ function startCyreneAwkwardPhase(){try{localStorage.setItem("uib-hsr-cyrene-awkward-start",String(Date.now()));window.dispatchEvent(new Event("uib:cyrene-mood-change"))}catch(e){}}
  // Temporary, page-session override for testing dialogue and voice assets.
  let cyreneModeOverride=null;
  function isAwkwardMode(){return cyreneModeOverride===null?cyreneAwkwardActive():cyreneModeOverride}
