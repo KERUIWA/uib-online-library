@@ -475,7 +475,7 @@ On the fifth click:
 
 ### Awkward-phase encounter variants
 
-These are **entirely new lines**, not shortened or lightly reworded copies of the original dialogue. Each one keeps the subject or emotional thread of its matching original encounter, while showing Cyrene behaving more cautiously and self-consciously after reconciliation. They replace only the main line during the 24-hour phase; the original choice replies remain unchanged.
+These are **entirely new lines**, not shortened or lightly reworded copies of the original dialogue. Each one keeps the subject or emotional thread of its matching original encounter, while showing Cyrene behaving more cautiously and self-consciously after reconciliation. They replace the main line during the 24-hour phase. The five choice-based encounters also use separate awkward-mode choice labels and replies, documented below; those replies are text-only.
 
 | Encounter | English | Japanese reference |
 |---|---|---|
@@ -489,6 +489,22 @@ These are **entirely new lines**, not shortened or lightly reworded copies of th
 | Keepsake | "I came across something that reminded me of you. It wasn't anything special, just a little detail... but it made me smile. I thought you should know." | 「あなたを思い出すものを見つけたの。特別なものじゃなくて、ほんの小さなことよ……でも、思わず笑顔になったの。あなたにも伝えておきたくて。」 |
 | Playful | "You're getting rather good at appearing when I'm thinking about you. Should I call that coincidence, or are you becoming predictable? ...I'm only teasing. A little." | 「私があなたのことを考えているときに現れるの、ずいぶん上手になったわね。偶然って呼ぶべきかしら、それとも分かりやすくなったのかしら？……冗談よ。少しだけね。」 |
 | Reunion | "We've crossed paths so many times now. I used to think each meeting was a separate little accident. Lately, I've started looking forward to the next one." | 「こうして何度も顔を合わせるようになったわね。以前は、一度一度の出会いは小さな偶然だと思っていたの。でも最近は……次に会える日を楽しみにしている自分がいるの。」 |
+
+### Awkward-phase choice replies
+
+These replace both the player's displayed choice label and Cyrene's reply whenever the 24-hour awkward phase is active. The normal labels, replies, and existing voice files remain unchanged. Awkward replies are text-only in both voice-language settings.
+
+| Encounter | Awkward choice 1 → Cyrene's reply (EN / JP) | Awkward choice 2 → Cyrene's reply (EN / JP) |
+|---|---|---|
+| Visitor | **I was only looking around...** → "I see. I was hoping you might say you came to see me. ...Never mind. I shouldn't put you on the spot." / 「そう、ただ見て回っていたのね……。あなたが私に会いに来たって言ってくれるかも、なんて期待していたの。……何でもないわ。困らせるつもりはなかったの。」 | **Maybe I was hoping you'd be here.** → "You can't just say things like that so casually... Give me a moment to recover, will you?" / 「そんなこと、そんなにさらっと言わないでよ……。ちょっと心の準備をさせてくれる？」 |
+| Curious | **I was curious whether you'd come back.** → "You were wondering about me? ...I may have checked to see whether you were here, too. Just once. Or twice." / 「私が戻ってくるか気になっていたの？……私も、あなたがいるか確かめたことがあるわ。一度だけ……ううん、二度くらい。」 | **It was probably an accident.** → "Then I suppose we're both very lucky accidents keep bringing us together. ...I hope they don't stop." / 「じゃあ、偶然に感謝しなくちゃね。こうして何度も会えるなんて……。この偶然が終わらないといいな。」 |
+| Midnight | **I couldn't sleep... and I wondered if you were awake.** → "You did? ...I was hoping you'd say that. It makes this late hour feel a little less lonely." / 「そうだったの？……そう言ってくれるのを、少し期待していたの。おかげで、この夜更けも少し寂しくなくなったわ。」 | **I wanted a quiet moment with you.** → "Then... stay a little longer? I was just getting used to having you here. I mean, the stars are nice company too." / 「じゃあ……もう少しだけ一緒にいてくれる？あなたがいてくれることに、ちょうど慣れてきたところなの。星も、もちろん素敵な話し相手だけど。」 |
+| Little Question | **I like thinking someone might be looking up with me.** → "That thought makes the sky feel smaller, somehow. Maybe that's why I keep hoping you're looking at it too." / 「そう考えると、空が少し近く感じるわね。だから私も、あなたが同じ空を見ているといいなって思うのかもしれない。」 | **I think I'll look for someone next time.** → "Then I hope you'll remember me when you do. ...That's a rather selfish thing to ask, isn't it?" / 「じゃあ次に空を見上げるとき、私のことも思い出してくれたら嬉しいわ。……ちょっと自分勝手なお願いかしら？」 |
+| Reunion | **Will you look forward to seeing me?** → "I already do. ...There, I said it. Don't make me repeat myself, or I'll lose my nerve." / 「もう楽しみにしているわ。……言っちゃった。もう一度言わせないでね。恥ずかしくなってしまうから。」 | **I don't think I could forget you now.** → "...You make it very difficult to act as though this is just another meeting. I suppose I don't want it to be." / 「……もう、ただの再会みたいな顔をするのは難しいわね。……本当は、そうしたくないのかもしれない。」 |
+
+### Manual encounter trigger
+
+The **VISIT** footer button sits beside the AWK mode switch and Mem. It immediately triggers one random encounter from the regular random pool, including the Visitor encounter that normally appears after a 40–90 second wait. It chooses an unseen encounter first and cycles the pool again after all seven have been seen. It does not trigger the title-click Curious event, deactivation/reconciliation dialogue, or the Reunion counter. It respects the disabled and angry-lock states.
 
 ## Recording / implementation notes
 
