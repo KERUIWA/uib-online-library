@@ -1598,10 +1598,11 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   typing=true;
   currentAudioFiles=audioFiles||{en:null,ja:null};
   currentDialogueText=text;
+  currentDialogueItalicNarration=Boolean(italicNarration);
   currentDialogueComplete=onComplete||null;
   function step(index){
    if(!showing||!typing||run!==typingRun)return;
-   dialogue.textContent=text.slice(0,index);
+   if(index<text.length)dialogue.textContent=text.slice(0,index);else renderDialogueContent(text,currentDialogueItalicNarration);
    positionCyreneTip();
    if(index<text.length)typeTimer=setTimeout(()=>step(index+1),28);
    else{typeTimer=null;typing=false;activeTypingComplete=null;if(onComplete)onComplete()}
@@ -1611,12 +1612,13 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   replayButton.disabled=voiceMuted||!currentAudioFile;
   replayButton.title=currentAudioFile?"Replay voice":"No audio added for this language yet";
  }
- let activeTypingComplete=null;\n let currentDialogueItalicNarration=false;
+ let activeTypingComplete=null;
+ let currentDialogueItalicNarration=false;
  function finishTyping(){
   if(!typing)return;
   clearTimeout(typeTimer);typeTimer=null;
   typing=false;typingRun++;
-  dialogue.textContent=currentDialogueText;
+  renderDialogueContent(currentDialogueText,currentDialogueItalicNarration);
   positionCyreneTip();
   const complete=activeTypingComplete;
   activeTypingComplete=null;
