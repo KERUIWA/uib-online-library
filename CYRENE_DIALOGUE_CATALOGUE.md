@@ -450,9 +450,19 @@ This is the human-readable source catalogue for Cyrene's dialogue. English is th
 
 ---
 
-## 13. Future: Post-redemption awkward phase
+## 13. Current reconciliation and future post-redemption phase
 
-**Status:** Planned only. Not implemented in the website yet.  
+**Reconciliation status:** Implemented. While Cyrene is angry, click Mem five times after her angry dialogue has finished. The click count persists across refreshes. On the fifth click, the angry lock is cleared and Cyrene gives the following short reconciliation dialogue:
+
+**Dialogue EN:**  
+"...You really came back. Five times, no less. I'm still hurt, you know... but I can see you're trying. I'll give you another chance. Just... don't make me regret it, okay?"
+
+**Dialogue JP:**  
+「……本当に戻ってきたのね。しかも、5回も。まだ傷ついてるんだからね……でも、ちゃんと向き合おうとしてくれてるのはわかった。もう一度だけ、チャンスをあげる。だから……後悔させないでよね。」
+
+**Audio:** Not recorded yet. No audio filenames assigned.  
+
+**Future awkward phase:** Planned, not implemented.  
 **Duration:** First 72 real-life hours after reconciliation.  
 **Dialogue volume:** One short special line per day, then return to the normal encounter pool.
 
@@ -472,4 +482,4 @@ Audio IDs and translations will be added when these lines are written.
 2. Japanese text in this catalogue is for translation/reference and Japanese voice recording.
 3. Do not rename an audio file without updating the matching reference in `hsr.html` and this catalogue.
 4. New encounters are intentionally unvoiced for now. Their filenames above are reserved suggestions, not existing files.
-5. The angry-state lock and reconciliation quest are separate from this catalogue. The post-redemption phase is a planned feature, not yet implemented.
+5. The current five-Mem-click reconciliation is implemented. The more elaborate reconciliation quest and the 72-hour post-redemption dialogue phase remain future ideas.
