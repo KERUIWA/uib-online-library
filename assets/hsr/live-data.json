@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-13T03:29:31Z",
+  "updatedAt": "2026-11-13T04:26:06Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-13T03:29:31Z",
-      "lastSuccess": "2026-11-13T03:29:31Z",
+      "checkedAt": "2026-11-13T04:26:06Z",
+      "lastSuccess": "2026-11-13T04:26:06Z",
       "error": null,
       "data": [
         {
@@ -1364,6 +1364,15 @@
           "type": "event"
         },
         {
+          "id": "47424980",
+          "title": "Destiny's Magic",
+          "description": "A deck of magic cards that foretell destiny. You're welcome to think of them as a friend's blessing: a wish that joy will always accompany you on the long journey ahead.",
+          "created_at": 1794542409,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/12/b7cfae5b9186630858f7ce9c59b642f0_1643620569699003821.jpg",
+          "url": "https://www.hoyolab.com/article/47424980",
+          "type": "info"
+        },
+        {
           "id": "47424584",
           "title": "Powerful Enemy Dossifur | Divine Skull of Indulgence",
           "description": "You're asking where the Paraprince went? Huh? You sent Paraprince to fight the Voracity? For real!? Hehe, for this issue, let's have the former president of Furbobo Weekly, the Aeon of Elation (aka me), take the stage!",
@@ -1487,15 +1496,6 @@
           "created_at": 1794304805,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/09/93b1e93440b82516d03ad0b66091160e_6864426294440169056.jpg",
           "url": "https://www.hoyolab.com/article/47387949",
-          "type": "info"
-        },
-        {
-          "id": "47386628",
-          "title": "\"Interastral Peace Gala: Road to Fame\" Event Introduction",
-          "description": "Want to become the star of the show? Step onto the stage, take down your rivals, and win cheers and applause with your brilliance! ※ For more information, please refer to the in-game notice.",
-          "created_at": 1794294004,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/07/cc8e81cea50afa8cad4767fdb7016ee9_9219320819695219261.jpg",
-          "url": "https://www.hoyolab.com/article/47386628",
           "type": "info"
         }
       ]
