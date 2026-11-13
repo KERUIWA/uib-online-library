@@ -152,7 +152,13 @@ html[data-cyrene-mood="awkward"] .tracker-card::before,
 html[data-cyrene-mood="awkward"] article::before{
  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.82;
  background:
-  linear-gradient(28deg,transparent 0 47.8%,#0a0a0e 48%,#a7a0a0 48.25%,#111116 48.7%,transparent 49%) 17% 12%/54% 66% no-repeat,
+  /* Pitted-out holes: dark broken centres with chipped, dusty rims. */
+  radial-gradient(ellipse 7% 11% at 23% 28%,#08090d 0 44%,#050609 48%,#b8aaa0 53%,#55504f 58%,transparent 68%),
+  radial-gradient(ellipse 5% 8% at 77% 69%,#07080b 0 42%,#030407 48%,#a69b91 55%,#4b4947 61%,transparent 72%),
+  radial-gradient(ellipse 3.8% 6% at 58% 16%,#050609 0 43%,#b5a89b 51%,#514b48 59%,transparent 72%),
+  radial-gradient(ellipse 4.5% 7% at 89% 39%,#06070a 0 45%,#b4a69a 53%,#4e4946 61%,transparent 73%),
+  radial-gradient(ellipse 2.8% 4.5% at 11% 76%,#050609 0 42%,#a99b91 53%,#4c4845 62%,transparent 75%),
+  linear-gradient(28deg,transparent 0 47.8%,#0a0a0e 48%,#d0c2b8 48.25%,#111116 48.7%,transparent 49%) 17% 12%/54% 66% no-repeat,
   linear-gradient(116deg,transparent 0 48%,#08090c 48.2%,#b4aa9f 48.45%,#111116 48.9%,transparent 49.2%) 16% 12%/58% 75% no-repeat,
   linear-gradient(72deg,transparent 0 48%,#090a0d 48.2%,#a49b9a 48.45%,#111116 48.9%,transparent 49.2%) 100% 0/48% 60% no-repeat,
   radial-gradient(ellipse at 8% 88%,#71805b80 0%,#52604455 12%,transparent 28%),
