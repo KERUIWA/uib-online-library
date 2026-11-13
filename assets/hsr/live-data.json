@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-13T02:32:16Z",
+  "updatedAt": "2026-11-13T03:29:31Z",
   "feeds": {
     "calendar": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us",
-      "checkedAt": "2026-11-12T01:26:25Z",
-      "lastSuccess": "2026-11-12T01:26:25Z",
+      "checkedAt": "2026-11-13T03:29:27Z",
+      "lastSuccess": "2026-11-13T03:29:27Z",
       "error": null,
       "data": {
         "events": [
@@ -606,6 +606,71 @@
         ],
         "challenges": [
           {
+            "id": 3021,
+            "name": "Dominance of Oblivion",
+            "type_name": "ChallengeTypeBoss",
+            "start_time": 1791169200,
+            "end_time": 1794798000,
+            "rewards": [
+              {
+                "id": 1,
+                "name": "Stellar Jade",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+                "rarity": "5",
+                "amount": 900
+              },
+              {
+                "id": 262,
+                "name": "Jade Feather",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3f9ef99c9e0c6d2abb591333538d9b36.png",
+                "rarity": "5",
+                "amount": 600
+              },
+              {
+                "id": 213,
+                "name": "Traveler's Guide",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/835c8fbcd39880ab0892aa28950c3ae8.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 223,
+                "name": "Refined Aether",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3e97329f9bc6b7c2b984c74eeaa6262f.png",
+                "rarity": "4",
+                "amount": 12
+              },
+              {
+                "id": 233,
+                "name": "Lost Crystal",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/cc36442783e0e78095a4abe469ba6270.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 261,
+                "name": "Lucent Afterglow",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/e9e9336e8def2317ac7e029a60ef3710.png",
+                "rarity": "4",
+                "amount": 96
+              },
+              {
+                "id": 2,
+                "name": "Credit",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/11c9d7270b777d04f6242629f0d42000.png",
+                "rarity": "3",
+                "amount": 360000
+              }
+            ],
+            "special_reward": {
+              "id": 1,
+              "name": "Stellar Jade",
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+              "rarity": "5",
+              "amount": 900
+            }
+          },
+          {
             "id": 11,
             "name": "Hidden Stage",
             "type_name": "ChallengeTypePeak",
@@ -707,71 +772,6 @@
             "type_name": "ChallengeTypeStory",
             "start_time": 1792378800,
             "end_time": 1796007600,
-            "rewards": [
-              {
-                "id": 1,
-                "name": "Stellar Jade",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
-                "rarity": "5",
-                "amount": 900
-              },
-              {
-                "id": 262,
-                "name": "Jade Feather",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3f9ef99c9e0c6d2abb591333538d9b36.png",
-                "rarity": "5",
-                "amount": 600
-              },
-              {
-                "id": 213,
-                "name": "Traveler's Guide",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/835c8fbcd39880ab0892aa28950c3ae8.png",
-                "rarity": "4",
-                "amount": 24
-              },
-              {
-                "id": 223,
-                "name": "Refined Aether",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3e97329f9bc6b7c2b984c74eeaa6262f.png",
-                "rarity": "4",
-                "amount": 12
-              },
-              {
-                "id": 233,
-                "name": "Lost Crystal",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/cc36442783e0e78095a4abe469ba6270.png",
-                "rarity": "4",
-                "amount": 24
-              },
-              {
-                "id": 261,
-                "name": "Lucent Afterglow",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/e9e9336e8def2317ac7e029a60ef3710.png",
-                "rarity": "4",
-                "amount": 96
-              },
-              {
-                "id": 2,
-                "name": "Credit",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/11c9d7270b777d04f6242629f0d42000.png",
-                "rarity": "3",
-                "amount": 360000
-              }
-            ],
-            "special_reward": {
-              "id": 1,
-              "name": "Stellar Jade",
-              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
-              "rarity": "5",
-              "amount": 900
-            }
-          },
-          {
-            "id": 3021,
-            "name": "Dominance of Oblivion",
-            "type_name": "ChallengeTypeBoss",
-            "start_time": 1791169200,
-            "end_time": 1794798000,
             "rewards": [
               {
                 "id": 1,
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-13T02:32:16Z",
-      "lastSuccess": "2026-11-13T02:32:16Z",
+      "checkedAt": "2026-11-13T03:29:31Z",
+      "lastSuccess": "2026-11-13T03:29:31Z",
       "error": null,
       "data": [
         {
@@ -1364,6 +1364,15 @@
           "type": "event"
         },
         {
+          "id": "47424584",
+          "title": "Powerful Enemy Dossifur | Divine Skull of Indulgence",
+          "description": "You're asking where the Paraprince went? Huh? You sent Paraprince to fight the Voracity? For real!? Hehe, for this issue, let's have the former president of Furbobo Weekly, the Aeon of Elation (aka me), take the stage!",
+          "created_at": 1794538808,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/12/e25f1ff58801a3c6a5233652741eaa20_4297805326964139928.jpg",
+          "url": "https://www.hoyolab.com/article/47424584",
+          "type": "info"
+        },
+        {
           "id": "47424274",
           "title": "New Honkai: Star Rail Merchandise Available on Amazon!",
           "description": "The Gift+ Series \"Firefly 1/8 Figure Spring Missive Ver.\" makes its grand debut! The Firefly figure carries a spring theme, capturing her lively demeanor and a dreamy atmosphere~ Also making its debut is the \"Girls' Dorm Series\" merchandise, featuring Firefly, Kafka, Robin, and Silver Wolf. This release spans a variety of items across the character portrait series and chibi series. Come experience their cozy daily dorm life together~ The \"Character-Themed Impression Series\" silk scarves for Aventurine • Waveflair and Sparxie have also hit the shelves, available in both square and long styles. So, come explore diverse and intricate outfit inspirations! 〓Promotion Period〓 2026/11/13 00:00:00 – 2026/11/23 23:59:59 (PST)",
@@ -1487,15 +1496,6 @@
           "created_at": 1794294004,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/07/cc8e81cea50afa8cad4767fdb7016ee9_9219320819695219261.jpg",
           "url": "https://www.hoyolab.com/article/47386628",
-          "type": "info"
-        },
-        {
-          "id": "47386304",
-          "title": "You have an inheritance from \"Blurry_QR_Colt\" to claim (Note: Real estate)",
-          "description": "Leave Fluffy Across the Blue unfinished? Sorry, but the greatest and most responsible comic artist, Blurry_QR_Colt, could never do such a thing. In fact, she's even going to draw a gourmet story version! She has left behind an inheritance waiting to be claimed. To get your hands on it, you'll have to first finish this masterpiece. However, \"drawing\" comics isn't as simple as you think... ※ For more information, please refer to the in-game notice.",
-          "created_at": 1794290407,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/07/a2ad413112fbbc0c5302f3a3f793bfb3_5318431053071134921.jpg",
-          "url": "https://www.hoyolab.com/article/47386304",
           "type": "info"
         }
       ]
