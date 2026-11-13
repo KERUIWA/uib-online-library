@@ -114,6 +114,7 @@ body.site-menu-open{overflow:hidden;padding-right:var(--site-menu-scrollbar-widt
 @media(prefers-reduced-motion:reduce){.site-menu-backdrop,.site-menu-panel,.site-menu-link{transition:none}}
 
 /* Full-screen melancholy atmosphere: rain, fog, slow motion and visual wear. */
+.cyrene-mood-caption{display:none!important;}
 html[data-cyrene-mood="awkward"]{
  --bg:#10121d!important;--surface:#1b1b2a!important;--surface2:#242335!important;
  --ink:#e1dce8!important;--muted:#a79cad!important;--line:#51465d!important;
@@ -141,7 +142,7 @@ html[data-cyrene-mood="awkward"] body::before{
 }
 html[data-cyrene-mood="awkward"] body::after{
  content:"";position:fixed;inset:-15%;z-index:99981;pointer-events:none;
- opacity:.72;
+ opacity:.38;
  background:
   radial-gradient(ellipse at 12% 72%,#7b526b22 0%,transparent 32%),
   radial-gradient(ellipse at 84% 25%,#50748720 0%,transparent 36%),
@@ -233,7 +234,7 @@ html[data-cyrene-mood="awkward"] .site-menu-backdrop{
  background-color:#1c1928!important;border-color:#66516c!important;
 }
 html[data-cyrene-mood="awkward"] .cyrene-mood-caption{
- position:fixed;right:clamp(12px,3vw,34px);bottom:18px;z-index:99982;
+ display:block!important;position:fixed;right:clamp(12px,3vw,34px);bottom:18px;z-index:99982;
  pointer-events:none;color:#c3a9c9a8;font:italic 11px/1.4 Georgia,serif;
  letter-spacing:.2em;text-transform:uppercase;
  text-shadow:0 1px 12px #080611;opacity:.8;
