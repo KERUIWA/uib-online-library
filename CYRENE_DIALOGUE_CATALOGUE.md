@@ -475,20 +475,20 @@ On the fifth click:
 
 ### Awkward-phase encounter variants
 
-These replace the main line of the matching regular encounter during the 24-hour phase. Original choice replies remain unchanged.
+These are **entirely new lines**, not shortened or lightly reworded copies of the original dialogue. Each one keeps the subject or emotional thread of its matching original encounter, while showing Cyrene behaving more cautiously and self-consciously after reconciliation. They replace only the main line during the 24-hour phase; the original choice replies remain unchanged.
 
 | Encounter | English | Japanese reference |
 |---|---|---|
-| Visitor | "Oh... you came back. I was just looking at the stars. Not waiting for you or anything." | 「……あ、あなた。星を見ていただけよ。別に、あなたを待ってたわけじゃないから。」 |
-| Curious | "You're back already? I mean... it's nice. I just wasn't expecting you so soon." | 「もう戻ってきたの？えっと……嬉しいけど。こんなに早く来るとは思わなくて。」 |
-| Midnight | "Still awake...? I was going to ask you to stay a little longer, but... only if you want to." | 「まだ起きてるの……？もう少し一緒にいてって言おうと思ったけど……あなたがよければ、ね。」 |
-| Starlight | "The stars are lovely tonight. I thought about telling you that earlier... but I wasn't sure if it would be strange." | 「今夜の星は綺麗ね。さっきあなたに伝えようと思ったんだけど……変に思われないか、少し迷っちゃって。」 |
-| Humming | "♪ Hmm-hmm... hmm~ ♪ Cyrene stops humming when she notices you. 'I-I wasn't humming for you...'" | 「♪ ふんふん……ふふっ……♪ あなたに気づいたサイレーンは、慌てて口を閉じた。『あ、あなたのために歌ってたわけじゃ……』」 |
-| Passing Thought | "I had a thought I wanted to share... but now that you're here, I've forgotten how to say it. That's embarrassing." | 「伝えたいことがあったのに……あなたが来たら、どう言えばいいか忘れちゃった。もう、恥ずかしいな。」 |
-| Little Question | "Can I ask you something...? Never mind, that's a silly question. ...No, wait. I still want to ask." | 「ひとつ聞いてもいい……？ううん、やっぱり変な質問かな。……待って、やっぱり聞きたい。」 |
-| Keepsake | "I remembered our little moment. I wasn't trying to... well, I suppose I wanted to see you again." | 「あのときのこと、思い出してたの。別に……えっと、またあなたに会いたかったのかも。」 |
-| Playful | "Were you hoping I'd appear? ...I was hoping too. There, I said it. Don't make me repeat it." | 「私が現れるのを期待してた？……私も、そうだったの。言ったんだから、もう聞き返さないでよね。」 |
-| Reunion | "Three meetings already...? I suppose we keep finding our way back to each other. I'm... glad. A little embarrassed, but glad." | 「もう三度も会ったのね……私たち、何度も巡り会うみたい。嬉しいわ……ちょっと照れくさいけど、本当に。」 |
+| Visitor | "Oh... I wondered whether you'd show up again. I even thought of something clever to say, but now it's completely gone. So... hello. That's all I have." | 「……あら、また来てくれたのね。今度会えたら何か気の利いたことを言おうって考えていたのに、すっかり忘れちゃった。だから……こんにちは。それだけよ。」 |
+| Curious | "I was going to surprise you with a question, but you've managed to surprise me first. How do you keep doing that? ...Not that I'm complaining." | 「質問であなたを驚かせようと思っていたのに、先に驚かされちゃった。どうしていつもそうなの？……別に、嫌じゃないけど。」 |
+| Midnight | "I kept telling myself it was time to go rest. Then I thought you might still be awake, and... well, here I am. Don't look so pleased." | 「もう休む時間だって自分に言い聞かせていたの。でも、あなたはまだ起きているかもしれないって思って……それで、ここにいるの。そんなに嬉しそうな顔をしないで。」 |
+| Starlight | "I tried counting the stars to distract myself. Somehow I kept losing count and thinking about our last conversation instead. The stars are terribly unhelpful tonight." | 「気を紛らわせようと星を数えていたの。でも、何度も数を忘れて、前にあなたと話したことを思い出しちゃって。今夜の星は、ちっとも役に立たないわね。」 |
+| Humming | "♪ Hmm-hmm... hmm~ ♪ Cyrene notices you listening and lets the melody fade. 'I was trying to remember a tune. It sounds nicer when someone is here, though...'" | 「♪ ふんふん……ふふっ……♪ 聞かれていることに気づいたサイレーンは、そっと歌うのをやめた。『曲を思い出そうとしていただけよ。でも……誰かがいてくれると、少し素敵に聞こえるわね……』」 |
+| Passing Thought | "There's something I wanted to tell you: I don't think every moment needs to become a memory. Some can simply be nice while they're happening. Like this one, perhaps." | 「あなたに伝えたいことがあるの。すべての瞬間を思い出にしなくてもいいと思うの。ただ、その時間を楽しめばいい。……今みたいに、ね。」 |
+| Little Question | "One question. If we hadn't met before, do you think we'd still have found something to talk about? ...I hope so. I'd have wanted to try." | 「ひとつだけ質問してもいい？もし私たちがまだ出会っていなかったとしても、何か話すことを見つけられたと思う？……そうだといいな。私は、あなたと話してみたかったと思うから。」 |
+| Keepsake | "I came across something that reminded me of you. It wasn't anything special, just a little detail... but it made me smile. I thought you should know." | 「あなたを思い出すものを見つけたの。特別なものじゃなくて、ほんの小さなことよ……でも、思わず笑顔になったの。あなたにも伝えておきたくて。」 |
+| Playful | "You're getting rather good at appearing when I'm thinking about you. Should I call that coincidence, or are you becoming predictable? ...I'm only teasing. A little." | 「私があなたのことを考えているときに現れるの、ずいぶん上手になったわね。偶然って呼ぶべきかしら、それとも分かりやすくなったのかしら？……冗談よ。少しだけね。」 |
+| Reunion | "We've crossed paths so many times now. I used to think each meeting was a separate little accident. Lately, I've started looking forward to the next one." | 「こうして何度も顔を合わせるようになったわね。以前は、一度一度の出会いは小さな偶然だと思っていたの。でも最近は……次に会える日を楽しみにしている自分がいるの。」 |
 
 ## Recording / implementation notes
 
