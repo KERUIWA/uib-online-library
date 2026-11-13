@@ -1736,6 +1736,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
     if(currentEncounterId==="deactivationTease"||queue.includes("deactivationTease"))return;
    }
    cyreneDisabled=!cyreneDisabled;
+   if(!cyreneDisabled)deactivationTeaseShown=false;
    try{localStorage.setItem("uib-hsr-cyrene-disabled",cyreneDisabled?"1":"0")}catch(e){}
    if(cyreneDisabled){queue=[];hideCyreneTip();if(showing)dismiss()}
    syncCyreneToggle();
