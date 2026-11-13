@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-13T04:26:06Z",
+  "updatedAt": "2026-11-13T05:24:50Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-13T04:26:06Z",
-      "lastSuccess": "2026-11-13T04:26:06Z",
+      "checkedAt": "2026-11-13T05:24:50Z",
+      "lastSuccess": "2026-11-13T05:24:50Z",
       "error": null,
       "data": [
         {
@@ -1364,6 +1364,15 @@
           "type": "event"
         },
         {
+          "id": "47425538",
+          "title": "\"Reward Event\" Aeon ★ Aha Strategy Discussion Event",
+          "description": "To play, to trick, to hunt... Please bear witness to an improv tour where humans and gods dance as one! Aeon ★ Aha has arrived! We are inviting all Trailblazers to join in a character strategy discussion to share build suggestions, combat combinations, and team setups to help her achieve maximum potential! Join the conversation for a chance to win a $25 gift card! Join Now:",
+          "created_at": 1794546004,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/12/68edff10c1ad68d26dcd9d86482600f0_8462664871200745470.jpg",
+          "url": "https://www.hoyolab.com/article/47425538",
+          "type": "info"
+        },
+        {
           "id": "47424980",
           "title": "Destiny's Magic",
           "description": "A deck of magic cards that foretell destiny. You're welcome to think of them as a friend's blessing: a wish that joy will always accompany you on the long journey ahead.",
@@ -1487,15 +1496,6 @@
           "created_at": 1794369603,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/11/0/8ef30e5a7d2074fb0abb63bd8b42d8dc_7929374346152601504.jpeg",
           "url": "https://www.hoyolab.com/article/47396371",
-          "type": "info"
-        },
-        {
-          "id": "47387949",
-          "title": "Aha All-Stars | \"World's End Beauty Salon\"",
-          "description": "Lord Ravager Asat Pramad yearns for a reroll? The show might be facing the biggest challenge in makeover history! ✧ Starring Ace Beautician \"Aeon ★ Aha\" ✧ After a decade of honing their skills, the Supplicant team faces the ultimate test... \"After years of looking in the mirror, he finally decides he no longer wants to destroy the world.\" An exclusive Honkai: Star Rail online release on 11/11! ★ This content is purely fictional and for entertainment purposes only ★",
-          "created_at": 1794304805,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/09/93b1e93440b82516d03ad0b66091160e_6864426294440169056.jpg",
-          "url": "https://www.hoyolab.com/article/47387949",
           "type": "info"
         }
       ]
