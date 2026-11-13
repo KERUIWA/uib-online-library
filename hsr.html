@@ -1547,10 +1547,14 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   reunion:{line:"Ah... we've met three times now, haven't we? Perhaps this wasn't quite a coincidence. Maybe some meetings are meant to happen more than once.",audio:"CY-REU-01.en.mp3",audioJa:"CY-REU-01.jp.mp3",choices:[
    ["Will we meet again?","I believe we will. Until then, keep a little room in your heart for the unexpected.","CY-REU-R01.en.mp3","CY-REU-R01.jp.mp3"],
    ["I think I'll remember you.","Then this moment has already become something precious. I'll remember it too.","CY-REU-R02.en.mp3","CY-REU-R02.jp.mp3"]
+  ]},
+  deactivationTease:{line:"Leaving already? ...And here I thought you might have grown fond of having me around. Is that little pink friend really going to send me away? How cruel. I suppose I can't stop you... but you could at least pretend you'll miss me.",choices:[
+   ["I wouldn't leave you.","Oh? Then perhaps you should put Mem away before I start believing you. I would hate to discover you were only teasing me."],
+   ["Just for a little while.","Just a little while, you say? I'll hold you to that. Don't keep me waiting too long, alright?"]
   ]}
  };
  /* Encounter history is page-local, so refreshing lets every Easter egg trigger again. */
- let seen={},queue=[],encounterCount=0,reunionQueued=false,showing=false,typing=false,typingRun=0,typeTimer=null,tipTimer=null,tipHideTimer=null,tipShown=false,voiceMuted=false,cyreneDisabled=(()=>{try{return localStorage.getItem("uib-hsr-cyrene-disabled")==="1"}catch(e){return false}})(),voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
+ let seen={},queue=[],encounterCount=0,reunionQueued=false,showing=false,currentEncounterId=null,deactivationTeaseShown=false,typing=false,typingRun=0,typeTimer=null,tipTimer=null,tipHideTimer=null,tipShown=false,voiceMuted=false,cyreneDisabled=(()=>{try{return localStorage.getItem("uib-hsr-cyrene-disabled")==="1"}catch(e){return false}})(),voiceLanguage=(()=>{try{return localStorage.getItem("cyrene-voice-language")==="ja"?"ja":"en"}catch(e){return"en"}})(),currentAudioFiles={en:null,ja:null},currentAudioFile=null,currentDialogueText="",currentDialogueComplete=null;
  function hideCyreneTip(){
   if(!tip)return;
   clearTimeout(tipTimer);tipTimer=null;
@@ -1664,6 +1668,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  function showNext(){
   if(showing||!queue.length)return;
   const id=queue.shift();
+  currentEncounterId=id;
   dialogue.textContent="";choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
   panel.hidden=false;panel.setAttribute("aria-hidden","false");showing=true;
   requestAnimationFrame(()=>{
@@ -1689,7 +1694,7 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
   if(!showing)return;
   clearTimeout(typeTimer);typeTimer=null;typing=false;typingRun++;activeTypingComplete=null;stopVoice();choicesHost.hidden=true;choicesHost.replaceChildren();
   pinCyreneTipToDialogBottom();
-  panel.classList.remove("open");panel.setAttribute("aria-hidden","true");showing=false;
+  panel.classList.remove("open");panel.setAttribute("aria-hidden","true");showing=false;currentEncounterId=null;
   setTimeout(()=>{if(!showing)panel.hidden=true;showNext()},420);
  }
  const cyreneToggle=document.getElementById("cyreneToggle");
@@ -1702,6 +1707,15 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
  if(cyreneToggle){
   syncCyreneToggle();
   cyreneToggle.addEventListener("click",()=>{
+   if(!cyreneDisabled){
+    if(!deactivationTeaseShown){
+     deactivationTeaseShown=true;
+     queue.push("deactivationTease");
+     showNext();
+     return;
+    }
+    if(currentEncounterId==="deactivationTease"||queue.includes("deactivationTease"))return;
+   }
    cyreneDisabled=!cyreneDisabled;
    try{localStorage.setItem("uib-hsr-cyrene-disabled",cyreneDisabled?"1":"0")}catch(e){}
    if(cyreneDisabled){
