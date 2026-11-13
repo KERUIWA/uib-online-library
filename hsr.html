@@ -893,6 +893,85 @@ main{max-width:1160px!important;padding:35px 22px 75px!important}
 .site-topbar .site-icon-btn,#themeToggle.site-icon-btn{background:var(--surface2,#f4f6fb)!important;border:1px solid var(--line,#e5e9f1)!important;color:var(--ink,#172033)!important;backdrop-filter:none!important;}
 .site-topbar .site-icon-btn:hover{background:var(--blue-soft,#edf1ff)!important;border-color:var(--blue,#3157d5)!important;}
 @media(max-width:560px){.site-topbar-inner{min-height:58px;padding:8px 15px;}.site-topbar-brand{font-size:10px;letter-spacing:.09em;}}
+
+/* Cyrene's heartbreak: thicker fog, damaged surfaces, and intrusive red fragments. */
+html[data-cyrene-mood="awkward"] .cyrene-fog-bank{
+ position:fixed;inset:-18%;z-index:99979;overflow:hidden;pointer-events:none;
+ opacity:.92;filter:blur(2px);mix-blend-mode:screen;
+ background:
+  radial-gradient(ellipse 48% 23% at 8% 76%,#c4c0ce38 0%,#9da9b522 42%,transparent 76%),
+  radial-gradient(ellipse 55% 27% at 86% 68%,#b9b0c936 0%,#91a5b528 48%,transparent 78%),
+  radial-gradient(ellipse 62% 25% at 48% 42%,#b4b5c02c 0%,#8495a41c 52%,transparent 80%),
+  linear-gradient(180deg,transparent 15%,#aeb3c00c 48%,#bfc0ce20 100%);
+ animation:cyrene-fog-bank-drift 17s ease-in-out infinite alternate;
+}
+html[data-cyrene-mood="awkward"] .cyrene-fog-bank span{
+ position:absolute;display:block;width:74vw;height:42vh;border-radius:50%;
+ filter:blur(38px);opacity:.58;
+ background:radial-gradient(ellipse at center,#c6c1d044 0%,#a5b0bf2c 38%,transparent 72%);
+}
+html[data-cyrene-mood="awkward"] .cyrene-fog-bank span:nth-child(1){left:-12%;bottom:8%;animation:cyrene-fog-roll 21s ease-in-out infinite alternate}
+html[data-cyrene-mood="awkward"] .cyrene-fog-bank span:nth-child(2){right:-18%;top:18%;width:82vw;animation:cyrene-fog-roll 27s ease-in-out infinite alternate-reverse}
+html[data-cyrene-mood="awkward"] .cyrene-fog-bank span:nth-child(3){left:18%;top:48%;width:68vw;height:35vh;opacity:.42;animation:cyrene-fog-roll 32s ease-in-out infinite alternate}
+html[data-cyrene-mood="awkward"] .cyrene-haunt-message{
+ position:fixed;z-index:99983;pointer-events:none;max-width:85vw;
+ color:#ff343e;font:900 clamp(12px,2.1vw,19px)/1.15 Georgia,serif;
+ letter-spacing:.18em;text-transform:uppercase;text-align:center;
+ text-shadow:0 0 4px #ff172b,0 0 13px #e00022,2px 2px 0 #21050b;
+ opacity:0;transform:rotate(var(--tilt, -4deg)) scale(.92);
+ animation:cyrene-haunt-flash 2.9s steps(1,end) forwards;
+}
+html[data-cyrene-mood="awkward"] .cyrene-haunt-message::after{
+ content:attr(data-echo);position:absolute;inset:0;color:#ff9b9b;
+ opacity:.45;transform:translate(2px,-1px);clip-path:inset(42% 0 28% 0);
+}
+html[data-cyrene-mood="awkward"] .card,
+html[data-cyrene-mood="awkward"] .panel,
+html[data-cyrene-mood="awkward"] .metric,
+html[data-cyrene-mood="awkward"] .tile,
+html[data-cyrene-mood="awkward"] .subject-card,
+html[data-cyrene-mood="awkward"] .assignment-card,
+html[data-cyrene-mood="awkward"] .tracker-card,
+html[data-cyrene-mood="awkward"] article{
+ border-radius:3px 13px 5px 10px!important;
+ border-style:solid!important;
+ border-color:#785565!important;
+ background-image:
+  linear-gradient(145deg,#302332ee 0%,#1c2530f2 100%),
+  repeating-linear-gradient(173deg,transparent 0 23px,#d4b9c009 24px,#d4b9c009 25px,transparent 26px 47px)!important;
+ background-blend-mode:normal,screen!important;
+ box-shadow:5px 8px 0 #08071055,0 16px 34px #08071188,inset 0 0 22px #a44e5c12!important;
+ filter:saturate(.58) contrast(1.08)!important;
+ transform:rotate(-.55deg) skewX(-.18deg)!important;
+}
+html[data-cyrene-mood="awkward"] .card:nth-child(2n),
+html[data-cyrene-mood="awkward"] .panel:nth-child(2n),
+html[data-cyrene-mood="awkward"] .tile:nth-child(2n),
+html[data-cyrene-mood="awkward"] article:nth-child(2n){
+ transform:rotate(.65deg) skewX(.22deg) translateY(3px)!important;
+ border-radius:12px 3px 11px 4px!important;
+}
+html[data-cyrene-mood="awkward"] .card:nth-child(3n),
+html[data-cyrene-mood="awkward"] .assignment-card:nth-child(3n),
+html[data-cyrene-mood="awkward"] .subject-card:nth-child(3n){
+ transform:rotate(-1deg) translateY(-2px)!important;
+ border-color:#624b61!important;
+}
+@keyframes cyrene-fog-bank-drift{0%{transform:translate3d(-4%,2%,0) scale(1.02)}50%{transform:translate3d(2%,-2%,0) scale(1.1)}100%{transform:translate3d(5%,1%,0) scale(1.04)}}
+@keyframes cyrene-fog-roll{0%{transform:translate3d(-9%,5%,0) scale(.86)}50%{transform:translate3d(5%,-4%,0) scale(1.12)}100%{transform:translate3d(13%,3%,0) scale(.96)}}
+@keyframes cyrene-haunt-flash{
+ 0%,8%,24%,31%{opacity:0}
+ 9%,22%{opacity:.96;transform:rotate(var(--tilt,-4deg)) scale(1)}
+ 25%,30%{opacity:.35;transform:rotate(var(--tilt,-4deg)) translateX(3px)}
+ 32%,78%{opacity:.88}
+ 79%,100%{opacity:0;transform:rotate(var(--tilt,-4deg)) scale(1.04)}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-cyrene-mood="awkward"] .cyrene-fog-bank,
+ html[data-cyrene-mood="awkward"] .cyrene-fog-bank span{animation:none!important}
+ html[data-cyrene-mood="awkward"] .cyrene-haunt-message{animation:none!important;opacity:.8}
+}
+
 </style><style>
 /* Shared header controls and slide-in navigation */
 .site-controls{display:flex;align-items:center;gap:9px;flex:0 0 auto}
@@ -1152,6 +1231,7 @@ html[data-cyrene-mood="awkward"] .cyrene-mood-caption{
 </style>
 </head><body>
 <div class="cyrene-mood-caption" aria-hidden="true">Some nights feel longer than others.</div>
+<div class="cyrene-fog-bank" aria-hidden="true"><span></span><span></span><span></span></div>
 <div class="site-topbar"><div class="site-topbar-inner"><a class="site-topbar-brand" href="dashboard.html" aria-label="Go to UIB E-Library dashboard">Universitas Internasional Batam</a><div class="site-controls"><button class="site-icon-btn site-icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"></button><button class="site-icon-btn" id="siteMenuOpen" type="button" aria-label="Open navigation menu" aria-controls="siteMenuBackdrop" aria-expanded="false" title="Open menu"><span class="site-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></div></div>
 <header>
 <div class="wrap">
@@ -2030,4 +2110,23 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
 </script><script src="deadline-warning.js?v=20261113-1" defer></script>
 <div class="site-menu-backdrop" id="siteMenuBackdrop" aria-hidden="true"><aside class="site-menu-panel" role="dialog" aria-modal="true" aria-label="Site navigation"><div class="site-menu-head"><div class="site-menu-title">Navigate</div><button class="site-menu-close" id="siteMenuClose" type="button" aria-label="Close menu">×</button></div><nav class="site-menu-links" aria-label="Main menu"><a class="site-menu-link" href="dashboard.html"><span aria-hidden="true">🎓</span><span>Dashboard</span></a><a class="site-menu-link" href="index.html"><span aria-hidden="true">📚</span><span>Course Library</span></a><a class="site-menu-link" href="assignments.html"><span aria-hidden="true">🗓️</span><span>Assignments & Deadlines</span></a><a class="site-menu-link" href="tracker.html"><span aria-hidden="true">📊</span><span>IPS & IPK Tracker</span></a><a class="site-menu-link site-menu-hsr" href="hsr.html" aria-label="Open Honkai: Star Rail Hub"><span class="site-menu-hsr-copy"><span class="site-menu-hsr-kicker">Special interest · Astral Express</span><strong>Honkai: Star Rail</strong><small>Your dedicated Trailblazer hub for version spotlights, live warps, event artwork, and the latest announcements.</small><span class="site-menu-hsr-enter">BOARD THE EXPRESS <i>↗</i></span></span><span class="site-menu-hsr-emblem" aria-hidden="true">🚄</span></a></nav></aside></div><script>
 (()=>{const backdrop=document.getElementById("siteMenuBackdrop"),openBtn=document.getElementById("siteMenuOpen"),closeBtn=document.getElementById("siteMenuClose");if(!backdrop||!openBtn||!closeBtn)return;function closeMenu(){backdrop.classList.remove("open");backdrop.setAttribute("aria-hidden","true");document.body.classList.remove("site-menu-open");document.body.style.removeProperty("--site-menu-scrollbar-width");openBtn.setAttribute("aria-expanded","false");}function openMenu(){backdrop.classList.add("open");backdrop.setAttribute("aria-hidden","false");document.body.style.setProperty("--site-menu-scrollbar-width",`${window.innerWidth-document.documentElement.clientWidth}px`);document.body.classList.add("site-menu-open");openBtn.setAttribute("aria-expanded","true");closeBtn.focus();}openBtn.addEventListener("click",()=>{if(backdrop.classList.contains("open")){closeMenu();}else{openMenu();}});closeBtn.addEventListener("click",closeMenu);backdrop.addEventListener("click",e=>{if(e.target===backdrop)closeMenu();});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&backdrop.classList.contains("open")){closeMenu();openBtn.focus();}});})();
-</script></body></html>
+</script><script>
+(()=> {
+ const phrases=["YOU BROKE HER HEART","UNFORGIVEN","SHE REMEMBERS","WHY DID YOU LEAVE?","TOO LATE","SHE WAITED","YOU PROMISED","STILL HURTS","DON'T PRETEND","NOTHING IS THE SAME","SHE HEARD EVERYTHING","NO SECOND CHANCES","I TRUSTED YOU","WAS I NOT ENOUGH?","YOU LEFT HER HERE"];
+ let timer=null,last=-1;
+ const active=()=>document.documentElement.getAttribute("data-cyrene-mood")==="awkward";
+ function clear(){if(timer){clearTimeout(timer);timer=null}document.querySelectorAll(".cyrene-haunt-message").forEach(n=>n.remove())}
+ function haunt(){
+  if(!active()){clear();return}
+  let index=Math.floor(Math.random()*phrases.length);if(index===last)index=(index+1)%phrases.length;last=index;
+  const node=document.createElement("div");node.className="cyrene-haunt-message";node.textContent=phrases[index];node.dataset.echo=phrases[index];
+  node.style.left=(7+Math.random()*65)+"vw";node.style.top=(12+Math.random()*72)+"vh";node.style.setProperty("--tilt",(Math.random()*14-7)+"deg");
+  document.body.appendChild(node);setTimeout(()=>node.remove(),3100);
+  timer=setTimeout(haunt,6500+Math.random()*8500);
+ }
+ function sync(){if(active()){if(!timer)timer=setTimeout(haunt,1800+Math.random()*3200)}else clear()}
+ new MutationObserver(sync).observe(document.documentElement,{attributes:true,attributeFilter:["data-cyrene-mood"]});
+ sync();
+})();
+</script>
+</body></html>
