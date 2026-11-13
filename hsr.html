@@ -1721,15 +1721,14 @@ refreshAll().then(()=>{restorePageScroll();setTimeout(()=>{if(scrollRestoreUntil
    return;
   }
   conversations[id].choices.forEach(([label,reply],index)=>{
+   const choice=conversations[id].choices[index];
+   const awkwardChoice=isAwkwardMode()&&Boolean(conversations[id].awkwardLine)&&Boolean(choice[5]);
    const button=document.createElement("button");
    button.type="button";button.className="cyrene-choice";
-   const awkwardChoice=isAwkwardMode()&&Boolean(conversations[id].awkwardLine)&&choice[5];
-    button.textContent=awkwardChoice?(choice[4]||label):label;
+   button.textContent=awkwardChoice?(choice[4]||label):label;
    button.addEventListener("click",()=>{
     if(id==="deactivationTease"&&index===0)acceptedStay=true;
     choicesHost.hidden=true;choicesHost.replaceChildren();dismissButton.hidden=true;
-    const choice=conversations[id].choices[index];
-    const awkwardChoice=isAwkwardMode()&&Boolean(conversations[id].awkwardLine)&&choice[5];
     typeText(awkwardChoice?choice[5]:reply,()=>{dismissButton.hidden=false;dismissButton.focus()},{en:awkwardChoice?null:(choice[2]||null),ja:awkwardChoice?null:(choice[3]||null)},false,awkwardChoice?(choice[6]||choice[5]):null);
    },{once:true});
    choicesHost.appendChild(button);
