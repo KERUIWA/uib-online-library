@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-13T05:24:50Z",
+  "updatedAt": "2026-11-14T04:16:24Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-13T05:24:50Z",
-      "lastSuccess": "2026-11-13T05:24:50Z",
+      "checkedAt": "2026-11-14T04:16:24Z",
+      "lastSuccess": "2026-11-14T04:16:24Z",
       "error": null,
       "data": [
         {
@@ -1364,6 +1364,15 @@
           "type": "event"
         },
         {
+          "id": "47436372",
+          "title": "Welcome to Arcadia | Invitation from the Starfroster",
+          "description": "President! The wicked president sent an invitation, saying all the furbos at the agency are invited to visit the Starfroster~ The furbos are squeaky clean and smelling sweet, just waiting for you to say the word, President! ✧ All rights reserved by Furbobo Weekly ✧ ✧ Any Similarities? Blame Aha ✧",
+          "created_at": 1794628807,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/13/0f08fa62a217dea6ccc5f73674f400ef_2260129078735765371.jpg",
+          "url": "https://www.hoyolab.com/article/47436372",
+          "type": "info"
+        },
+        {
           "id": "47425538",
           "title": "\"Reward Event\" Aeon ★ Aha Strategy Discussion Event",
           "description": "To play, to trick, to hunt... Please bear witness to an improv tour where humans and gods dance as one! Aeon ★ Aha has arrived! We are inviting all Trailblazers to join in a character strategy discussion to share build suggestions, combat combinations, and team setups to help her achieve maximum potential! Join the conversation for a chance to win a $25 gift card! Join Now:",
@@ -1487,15 +1496,6 @@
           "created_at": 1794369603,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/10/addec2d24a1f50df8d94fec2c70705f1_359826799021973590.png",
           "url": "https://www.hoyolab.com/article/47396370",
-          "type": "info"
-        },
-        {
-          "id": "47396371",
-          "title": "Animated Short: \"A Joyful Funeral Beneath the Moon\" | Honkai: Star Rail",
-          "description": "Dearest travelers from afar, \"Why not try starting a game once more? Savor the pain it brings once more, tremble at its cruelty once more, and wander through the hell within yourself once more. Do this over and over, and eventually, you'll get better at this game. Eventually, you'll learn to laugh.\" Yours truly, the unwelcoming Aha ※ We recommend viewing this video after experiencing Version 4.7 Trailblaze Mission.",
-          "created_at": 1794369603,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/11/0/8ef30e5a7d2074fb0abb63bd8b42d8dc_7929374346152601504.jpeg",
-          "url": "https://www.hoyolab.com/article/47396371",
           "type": "info"
         }
       ]
