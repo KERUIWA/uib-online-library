@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-14T04:16:24Z",
+  "updatedAt": "2026-11-15T19:48:21Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1125,8 +1125,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-14T04:16:24Z",
-      "lastSuccess": "2026-11-14T04:16:24Z",
+      "checkedAt": "2026-11-15T19:48:21Z",
+      "lastSuccess": "2026-11-15T19:48:21Z",
       "error": null,
       "data": [
         {
@@ -1161,7 +1161,7 @@
           "title": "Relic Recon: Participate to get 5-star +15 Relics!",
           "description": "A mysterious collection vault in the Herta Space Station has opened its doors to you, filled with countless chests containing wondrous items. If you could get your hands on a special access card... ▌Event Period",
           "created_at": 1794202208,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/07/f8eec42433db0059907e90e373c59cd7_930801714997872062.png",
+          "banner": null,
           "url": "https://www.hoyolab.com/article/47375703",
           "type": "notice"
         },
