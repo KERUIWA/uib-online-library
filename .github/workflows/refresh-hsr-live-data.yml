@@ -5,6 +5,11 @@ on:
   push:
     paths:
       - "hsr.html"
+      - "assets/hsr/cyrene-letters.js"
+      - "assets/hsr/cyrene-letters-config.js"
+      - "cloudflare/cyrene-worker/**"
+      - ".github/scripts/send_cyrene_letter.py"
+      - ".github/workflows/cyrene-daily-letter.yml"
       - "assets/hsr/live-data.json"
       - ".github/scripts/refresh_hsr_live_data.py"
       - ".github/workflows/refresh-hsr-live-data.yml"
@@ -55,6 +60,8 @@ jobs:
           Path("/tmp/hsr-inline.js").write_text(scripts[-1], encoding="utf-8")
           PY
           node --check /tmp/hsr-inline.js
+          node --check assets/hsr/cyrene-letters.js
+          node --check --input-type=module < cloudflare/cyrene-worker/src/index.js
 
       - name: Fetch feeds and email newly published announcements
         env:
