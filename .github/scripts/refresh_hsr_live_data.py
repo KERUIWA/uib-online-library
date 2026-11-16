@@ -137,7 +137,33 @@ def send_new_announcement_email(items):
     print(f"Sent email notification for {len(items)} new announcement(s) to {recipient}.")
 
 
+
+def send_test_email():
+    """Send an explicit one-off delivery test when requested by workflow_dispatch."""
+    password = os.environ.get("GMAIL_APP_PASSWORD", "").strip().replace(" ", "")
+    recipient = os.environ.get("ANNOUNCEMENT_EMAIL_TO", "").strip()
+    if not password:
+        raise RuntimeError("Cannot send test email: GMAIL_APP_PASSWORD is not configured")
+    if not recipient:
+        raise RuntimeError("Cannot send test email: ANNOUNCEMENT_EMAIL_TO is missing")
+    message = EmailMessage()
+    message["From"] = recipient
+    message["To"] = recipient
+    message["Subject"] = "UIB HSR monitor: email delivery test"
+    message.set_content(
+        "This is a test email from the UIB Online Library HSR announcement monitor.\\n\\n"
+        "If you received this message, Gmail SMTP authentication and delivery are working."
+    )
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context, timeout=30) as server:
+        server.login(recipient, password)
+        server.send_message(message)
+    print(f"Test email successfully sent to {recipient}.")
+
+
 def main():
+    if os.environ.get("SEND_TEST_EMAIL", "").lower() == "true":
+        send_test_email()
     previous = load_previous()
     feeds = {}
     for name, (url, _) in SOURCES.items():
