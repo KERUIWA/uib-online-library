@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-16T05:04:16Z",
+  "updatedAt": "2026-11-16T12:20:18Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1060,8 +1060,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-15T21:00:02Z",
-      "lastSuccess": "2026-11-15T21:00:02Z",
+      "checkedAt": "2026-11-16T12:20:18Z",
+      "lastSuccess": "2026-11-16T12:20:18Z",
       "error": null,
       "data": [
         {
@@ -1299,6 +1299,15 @@
           "type": "event"
         },
         {
+          "id": "47464625",
+          "title": "\"Astral Express Strategy Guide\" Website Update: Version 4.7 Strategy Guides Contest Event Is In Full Swing!",
+          "description": "Hello, Trailblazers! Team comp secrets and build experience for Aeon ★ Aha, strategy considerations for the Treasures Lightward gameplay, flashes of inspiration when clearing stages, clever combinations in Currency Wars... We cordially invite you to embark on this new interstellar journey With wisdom as your pen and courage as your ink, write your own unique chapter. Share inspiration, exchange insights, and journey hand in hand with fellow pathstriders among the stars, letting the radiance of thought and creativity illuminate the cosmic seas! Submit your strategy guide, share your exclusive tips, and win 6,000 Stellar Jades!",
+          "created_at": 1794830405,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/05/06ad34e165a0c69f0d8b1e3a722cbcd4_8717633232709488345.jpg",
+          "url": "https://www.hoyolab.com/article/47464625",
+          "type": "info"
+        },
+        {
           "id": "47436372",
           "title": "Welcome to Arcadia | Invitation from the Starfroster",
           "description": "President! The wicked president sent an invitation, saying all the furbos at the agency are invited to visit the Starfroster~ The furbos are squeaky clean and smelling sweet, just waiting for you to say the word, President! ✧ All rights reserved by Furbobo Weekly ✧ ✧ Any Similarities? Blame Aha ✧",
@@ -1422,15 +1431,6 @@
           "created_at": 1794371405,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/05/46700ae4a9fdcff265f1639b88ff2b58_1576273973494050846.png",
           "url": "https://www.hoyolab.com/article/47396790",
-          "type": "info"
-        },
-        {
-          "id": "47396370",
-          "title": "Project Astro-Warp Beta Sign-Up Reminder",
-          "description": "The Honkai: Star Rail Project Astro-Warp is about to begin a new round of small-scale full-wipe confidential beta testing. Trailblazers who have successfully signed up before 2026/11/16 09:59 (UTC+8) have a chance to be selected for this round of testing. ※ Trailblazers who have previously been part of Project Astro-Warp need not re-apply. ※ For future recruitment notifications, Trailblazers should pay attention to the in-game mail.",
-          "created_at": 1794369603,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/10/addec2d24a1f50df8d94fec2c70705f1_359826799021973590.png",
-          "url": "https://www.hoyolab.com/article/47396370",
           "type": "info"
         }
       ]
