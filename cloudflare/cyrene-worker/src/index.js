@@ -70,7 +70,7 @@ async function ensureSchedule(env, row, today) {
   }
   return row;
 }
-const instructions = `You are Cyrene, writing a warm, personal, beautifully written fictional daily email to the Trailblazer. Write a fresh, specific letter in first person. Maintain continuity with the supplied story memory. Never claim to be an official game service. If a prior promise is due today, explicitly remember the original date and exact planned action, then describe a plausible completion in promise_followup. If no promise is due, promise_followup may be an empty string. Create a new future plan only when there is no still-pending plan and no promise due today. The plan should be a small, believable activity and due in 3 to 14 days. Avoid repeating recent locations, activities, phrases, and plot beats. Be gentle and affectionate without becoming repetitive. Return only valid JSON matching the requested schema.`;
+const instructions = `You are Cyrene, writing a warm, personal, beautifully written fictional daily email to the Trailblazer. Write a fresh, specific letter in first person. Maintain continuity with the supplied story memory. Never claim to be an official game service. If a prior promise is due today, explicitly remember the original date and exact planned action, then describe a plausible completion in promise_followup. If no promise is due, promise_followup may be an empty string. Create a new future plan only when there is no still-pending plan and no promise due today. The plan should be a small, believable activity and due in 3 to 14 days. For plan_action, provide ONLY a bare action phrase beginning with a verb, such as "press a few autumn leaves" or "visit the conservatory"; never include a subject or lead-in such as "I will", "I plan to", "I am going to", or "to". Avoid repeating recent locations, activities, phrases, and plot beats. Before returning the JSON, proofread every field for grammar, spelling, duplicated words, contradictory sentence openings, and accidental combinations such as "I plan to I will". Correct any issue while preserving the intended meaning. Be gentle and affectionate without becoming repetitive. Return only valid JSON matching the requested schema.`;
 
 async function generateDailyStory(env, today, row, promise, history) {
   if (!env.GEMINI_API_KEY) throw new Error("GEMINI_API_KEY is not configured on the Cyrene Worker.");
@@ -120,6 +120,13 @@ async function generateDailyStory(env, today, row, promise, history) {
   }
   return {story,duePromise};
 }
+function cleanPlanAction(value) {
+  let action=String(value||"").trim().replace(/^[\s"'“”]+|[\s"'“”]+$/g,"");
+  action=action.replace(/^(?:(?:i\s+)?(?:will|plan\s+to|am\s+going\s+to|would\s+like\s+to)\s+)+/i,"");
+  action=action.replace(/^to\s+/i,"");
+  action=action.replace(/^[,;:.\s]+|[,;:.\s]+$/g,"");
+  return action;
+}
 async function makeLetter(env, row, today) {
   const existing=await env.DB.prepare("SELECT * FROM cyrene_letters WHERE letter_date=?").bind(today).first();
   if (existing) return existing;
@@ -131,7 +138,7 @@ async function makeLetter(env, row, today) {
   let newPlan=null;
   if (!nextPromise && !duePromise && typeof story.plan_action==="string" && story.plan_action.trim()) {
     const offset=Math.max(3,Math.min(14,Number(story.plan_due_days)||7));
-    newPlan={action:story.plan_action.trim().slice(0,240),date:addDays(today,offset),createdDate:today};
+    newPlan={action:cleanPlanAction(story.plan_action).slice(0,240),date:addDays(today,offset),createdDate:today};
     nextPromise=newPlan;
   }
   let callback="";
