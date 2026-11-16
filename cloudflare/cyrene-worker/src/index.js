@@ -80,8 +80,9 @@ async function makeLetter(env, row, today) {
     try { promise=JSON.parse(row.active_plan_json); } catch {}
   }
   let callback="";
-  if (promise && promise.date===today) {
-    callback=`Do you remember what I told you on ${longDate(promise.createdDate)}? I said I would ${promise.action} today. I did, and I am rather glad I kept that little promise. ${promise.done}`;
+  if (promise && promise.date<=today) {
+    const timing=promise.date===today ? "today" : `on ${longDate(promise.date)}`;
+    callback=`Do you remember what I told you on ${longDate(promise.createdDate)}? I said I would ${promise.action} ${timing}. I did, and I am rather glad I kept that little promise. ${promise.done}`;
     promise=null;
   }
   let newPlan=null;
