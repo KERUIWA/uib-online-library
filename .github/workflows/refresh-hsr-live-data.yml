@@ -11,6 +11,12 @@ on:
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
+    inputs:
+      test_email:
+        description: 'Send a one-off test email to the configured recipient'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -54,6 +60,7 @@ jobs:
         env:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           ANNOUNCEMENT_EMAIL_TO: theomgvirus@gmail.com
+          SEND_TEST_EMAIL: ${{ inputs.test_email }}
         run: python .github/scripts/refresh_hsr_live_data.py
 
       - name: Publish updated snapshot
