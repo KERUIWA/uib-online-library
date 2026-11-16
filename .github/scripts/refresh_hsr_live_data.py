@@ -94,49 +94,189 @@ def article_key(item):
     return str(item.get("id") or item.get("url") or item.get("title") or "")
 
 
-def send_new_announcement_email(items):
-    """Email only newly listed article IDs. Missing credentials safely disable email."""
+def html_escape(value):
+    import html
+    return html.escape(str(value or ""))
+
+
+def item_label(item):
+    if not isinstance(item, dict):
+        return str(item)
+    return str(item.get("title") or item.get("name") or item.get("name_en") or item.get("id") or item.get("url") or "Untitled item")
+
+
+def item_key(item, index):
+    if isinstance(item, dict):
+        return str(item.get("id") or item.get("url") or item.get("key") or item.get("title") or item.get("name") or index)
+    return str(index)
+
+
+def summarize_item(item):
+    if not isinstance(item, dict):
+        return str(item)[:350]
+    parts = []
+    for key in ("title", "name", "name_en", "description", "desc", "start_time", "end_time", "startTime", "endTime", "url"):
+        value = item.get(key)
+        if value not in (None, ""):
+            parts.append(f"{key.replace('_', ' ').title()}: {str(value)[:450]}")
+    return " | ".join(parts)[:900] or json.dumps(item, ensure_ascii=False)[:900]
+
+
+def collection_changes(old_items, new_items):
+    old_map = {item_key(item, i): item for i, item in enumerate(old_items or [])}
+    new_map = {item_key(item, i): item for i, item in enumerate(new_items or [])}
+    added = [new_map[k] for k in new_map.keys() - old_map.keys()]
+    removed = [old_map[k] for k in old_map.keys() - new_map.keys()]
+    updated = [(old_map[k], new_map[k]) for k in old_map.keys() & new_map.keys() if old_map[k] != new_map[k]]
+    return added, removed, updated
+
+
+def feed_sections(name, data):
+    if name == "calendar" and isinstance(data, dict):
+        return [(key, data.get(key)) for key in ("banners", "events") if isinstance(data.get(key), list)]
+    if name == "activity" and isinstance(data, dict):
+        sections = []
+        if isinstance(data.get("activities"), list):
+            sections.append(("Activities", data["activities"]))
+        return sections
+    if name == "news" and isinstance(data, list):
+        return [("News and announcements", data)]
+    if isinstance(data, list):
+        return [(name.title(), data)]
+    if isinstance(data, dict):
+        return [(key.replace("_", " ").title(), value) for key, value in data.items() if isinstance(value, list)]
+    return []
+
+
+def build_change_report(previous_feeds, current_feeds):
+    report = []
+    unavailable = []
+    for feed_name in sorted(set(previous_feeds) | set(current_feeds)):
+        old_feed = previous_feeds.get(feed_name, {})
+        new_feed = current_feeds.get(feed_name, {})
+        if new_feed.get("status") != "ok":
+            unavailable.append((feed_name, new_feed.get("error") or "Feed could not be verified"))
+            continue
+        new_data = new_feed.get("data")
+        old_data = old_feed.get("data") if old_feed.get("status") == "ok" else None
+        if old_data is None:
+            report.append({"feed": feed_name, "section": "Initial data", "added": [], "removed": [], "updated": [], "baseline": True})
+            continue
+        old_sections = dict(feed_sections(feed_name, old_data))
+        new_sections = dict(feed_sections(feed_name, new_data))
+        section_names = set(old_sections) | set(new_sections)
+        for section in sorted(section_names):
+            before = old_sections.get(section, [])
+            after = new_sections.get(section, [])
+            if isinstance(before, list) and isinstance(after, list):
+                added, removed, updated = collection_changes(before, after)
+                if added or removed or updated:
+                    report.append({"feed": feed_name, "section": section, "added": added, "removed": removed, "updated": updated})
+        if isinstance(old_data, dict) and isinstance(new_data, dict):
+            ignored = {"banners", "events", "activities"}
+            for key in sorted((set(old_data) | set(new_data)) - ignored):
+                if old_data.get(key) != new_data.get(key):
+                    report.append({"feed": feed_name, "section": key.replace("_", " ").title(), "added": [], "removed": [], "updated": [], "metadata": f"{old_data.get(key)} → {new_data.get(key)}"})
+        elif old_data != new_data and not old_sections and not new_sections:
+            report.append({"feed": feed_name, "section": "Feed data", "added": [], "removed": [], "updated": [], "metadata": "Feed content changed"})
+    return report, unavailable
+
+
+def send_status_email(report, unavailable, checked_at):
     password = os.environ.get("GMAIL_APP_PASSWORD", "").strip().replace(" ", "")
     recipient = os.environ.get("ANNOUNCEMENT_EMAIL_TO", "").strip()
     if not password:
-        print("GMAIL_APP_PASSWORD is not configured; email notifications are pending setup.")
-        return
+        raise RuntimeError("GMAIL_APP_PASSWORD is not configured; cannot send the hourly status email")
     if not recipient:
-        raise RuntimeError("ANNOUNCEMENT_EMAIL_TO is missing while Gmail credentials are configured")
+        raise RuntimeError("ANNOUNCEMENT_EMAIL_TO is missing")
 
+    changed = bool(report)
+    status = "CHANGES DETECTED" if changed else "NO CHANGES"
+    subject = f"HSR Monitor | {len(report)} update section(s)" if changed else "HSR Monitor | No changes"
+    plain = [
+        "UIB ONLINE LIBRARY · HONKAI: STAR RAIL MONITOR",
+        status,
+        f"Checked: {checked_at}",
+        "",
+    ]
+    cards = []
+    for entry in report:
+        feed = entry["feed"].replace("_", " ").title()
+        section = entry["section"]
+        counts = []
+        for key, label in (("added", "New"), ("updated", "Updated"), ("removed", "Removed")):
+            if entry.get(key):
+                counts.append(f"{label}: {len(entry[key])}")
+        if entry.get("baseline"):
+            counts.append("Initial snapshot")
+        if entry.get("metadata"):
+            counts.append(entry["metadata"])
+        details = []
+        for item in entry.get("added", []):
+            details.append(("＋", "New", summarize_item(item)))
+        for old_item, new_item in entry.get("updated", []):
+            details.append(("↻", "Updated", summarize_item(new_item)))
+        for item in entry.get("removed", []):
+            details.append(("−", "Removed", summarize_item(item)))
+        if not details and entry.get("baseline"):
+            details.append(("•", "Baseline", "First successful snapshot recorded for this feed."))
+        if not details and entry.get("metadata"):
+            details.append(("↻", "Metadata", entry["metadata"]))
+        detail_html = "".join(
+            f'<li style="margin:7px 0;color:#334155;"><b>{html_escape(kind)}</b> · {html_escape(detail)}</li>'
+            for _, kind, detail in details[:30]
+        )
+        detail_text = "\n".join(f"{kind}: {detail}" for _, kind, detail in details[:30])
+        plain.extend([f"{feed} / {section}: {', '.join(counts)}", detail_text, ""])
+        cards.append(
+            '<div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin:12px 0;">'
+            f'<div style="font-size:11px;letter-spacing:1.2px;color:#64748b;text-transform:uppercase;">{html_escape(feed)}</div>'
+            f'<div style="font-size:17px;font-weight:700;color:#0f172a;margin:4px 0 8px;">{html_escape(section)}</div>'
+            f'<div style="font-size:12px;color:#64748b;margin-bottom:8px;">{html_escape(" · ".join(counts))}</div>'
+            f'<ul style="padding-left:18px;margin:0;">{detail_html}</ul></div>'
+        )
+    if not report:
+        plain.append("No changes were detected in the available feeds during this check.")
+        cards.append(
+            '<div style="background:#ecfdf5;border:1px solid #a7f3d0;border-radius:14px;padding:22px;margin:16px 0;text-align:center;">'
+            '<div style="font-size:28px;">✓</div><div style="font-size:20px;font-weight:700;color:#065f46;margin:6px 0;">No changes this hour</div>'
+            '<div style="color:#047857;">Banners, events, news and activity data match the previous successful check.</div></div>'
+        )
+    if unavailable:
+        plain.extend(["", "FEEDS THAT COULD NOT BE VERIFIED:"])
+        for name, error in unavailable:
+            plain.append(f"- {name}: {error}")
+        cards.append(
+            '<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:15px;margin:12px 0;">'
+            '<b style="color:#9a3412;">Some feeds could not be verified</b><ul style="margin-bottom:0;">'
+            + "".join(f'<li>{html_escape(name)}: {html_escape(error)}</li>' for name, error in unavailable)
+            + '</ul><div style="font-size:12px;color:#9a3412;margin-top:8px;">No-change status applies only to feeds checked successfully.</div></div>'
+        )
+    plain.extend(["", "This automated report is from the UIB Online Library HSR monitor."])
+    html_body = (
+        '<div style="margin:0;background:#f1f5f9;padding:24px 10px;font-family:Arial,Helvetica,sans-serif;color:#0f172a;">'
+        '<div style="max-width:680px;margin:0 auto;">'
+        '<div style="background:#111827;border-radius:18px 18px 0 0;padding:26px;color:#fff;">'
+        '<div style="font-size:11px;letter-spacing:2px;color:#a5b4fc;font-weight:700;">UIB ONLINE LIBRARY</div>'
+        '<div style="font-size:25px;font-weight:800;margin-top:8px;">Honkai: Star Rail Monitor</div>'
+        f'<div style="display:inline-block;margin-top:14px;padding:7px 11px;border-radius:20px;background:{"#064e3b" if not changed else "#7c2d12"};color:#fff;font-size:12px;font-weight:700;letter-spacing:.6px;">{status}</div>'
+        f'<div style="font-size:12px;color:#cbd5e1;margin-top:12px;">Checked {html_escape(checked_at)}</div></div>'
+        '<div style="background:#f8fafc;padding:18px 20px;border-radius:0 0 18px 18px;">'
+        + "".join(cards)
+        + '<div style="font-size:11px;color:#64748b;text-align:center;padding:12px;">Automated hourly report · UIB Online Library</div>'
+        '</div></div></div>'
+    )
     message = EmailMessage()
     message["From"] = recipient
     message["To"] = recipient
-    message["Subject"] = f"New Honkai: Star Rail announcement(s): {len(items)}"
-    lines = [
-        "A new Honkai: Star Rail announcement was detected by the UIB E-Library hourly monitor.",
-        "",
-    ]
-    for item in items:
-        title = item.get("title") or "Honkai: Star Rail announcement"
-        description = item.get("description") or ""
-        url = item.get("url") or ""
-        created = item.get("created_at")
-        try:
-            stamp = datetime.fromtimestamp(float(created), timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-        except (TypeError, ValueError, OverflowError):
-            stamp = "Publication time unavailable"
-        lines.extend([title, f"Published: {stamp}"])
-        if description:
-            lines.append(description)
-        if url:
-            lines.append(url)
-        lines.append("")
-    lines.append("The HSR hub's announcement list will update from the same feed.")
-    message.set_content("\n".join(lines))
-
+    message["Subject"] = subject
+    message.set_content("\n".join(plain))
+    message.add_alternative(html_body, subtype="html")
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context, timeout=30) as server:
         server.login(recipient, password)
         server.send_message(message)
-    print(f"Sent email notification for {len(items)} new announcement(s) to {recipient}.")
-
-
+    print(f"Hourly status email successfully sent to {recipient}: {status}; {len(report)} changed section(s), {len(unavailable)} unavailable feed(s).")
 
 def send_test_email():
     """Send an explicit one-off delivery test when requested by workflow_dispatch."""
@@ -171,7 +311,6 @@ def main():
 
     news_url = "https://api.ennead.cc/mihoyo/starrail/news/"
     old_news = previous.get("feeds", {}).get("news", {})
-    previous_news_data = old_news.get("data") if isinstance(old_news.get("data"), list) else None
     try:
         articles = []
         for category in NEWS_TYPES:
@@ -190,8 +329,8 @@ def main():
             feeds["news"] = old_news
         else:
             feeds["news"] = {
-            "status": "ok", "source": news_url, "checkedAt": now_iso(),
-            "lastSuccess": now_iso(), "error": None, "data": news_data,
+                "status": "ok", "source": news_url, "checkedAt": now_iso(),
+                "lastSuccess": now_iso(), "error": None, "data": news_data,
             }
     except Exception as exc:
         print(f"news: refresh failed: {exc}")
@@ -199,30 +338,18 @@ def main():
             feeds["news"] = old_news
         else:
             feeds["news"] = {
-            "status": "stale" if old_news.get("data") is not None else "error",
-            "source": old_news.get("source") or news_url, "checkedAt": now_iso(),
-            "lastSuccess": old_news.get("lastSuccess"), "error": str(exc),
-            "data": old_news.get("data"),
+                "status": "stale" if old_news.get("data") is not None else "error",
+                "source": old_news.get("source") or news_url, "checkedAt": now_iso(),
+                "lastSuccess": old_news.get("lastSuccess"), "error": str(exc),
+                "data": old_news.get("data"),
             }
 
-    # The first populated snapshot is a silent baseline. Thereafter, email only
-    # articles with IDs/URLs that were absent from the previous successful feed.
-    current_news = feeds.get("news", {}).get("data")
-    if previous_news_data is not None and isinstance(current_news, list):
-        previous_ids = {article_key(item) for item in previous_news_data if isinstance(item, dict)}
-        new_articles = [
-            item for item in current_news
-            if isinstance(item, dict) and article_key(item) and article_key(item) not in previous_ids
-        ]
-        if new_articles:
-            send_new_announcement_email(new_articles)
-        else:
-            print("No newly published announcements; no email sent.")
-    else:
-        print("No previous successful news snapshot; establishing a silent email baseline.")
+    report, unavailable = build_change_report(previous.get("feeds", {}), feeds)
+    checked_at = now_iso()
+    send_status_email(report, unavailable, checked_at)
 
     unchanged = feeds == previous.get("feeds", {})
-    snapshot = {"schemaVersion": 1, "updatedAt": previous.get("updatedAt") if unchanged else now_iso(), "feeds": feeds}
+    snapshot = {"schemaVersion": 1, "updatedAt": previous.get("updatedAt") if unchanged else checked_at, "feeds": feeds}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     for name, feed in feeds.items():
