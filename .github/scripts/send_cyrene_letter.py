@@ -27,7 +27,8 @@ def main():
     password = os.environ.get("GMAIL_APP_PASSWORD", "").strip().replace(" ", "")
     recipient = os.environ.get("ANNOUNCEMENT_EMAIL_TO", "theomgvirus@gmail.com").strip()
     if not base or not token:
-        raise RuntimeError("CYRENE_WORKER_URL and CYRENE_API_TOKEN must be configured.")
+        print("Cyrene letter service is not configured yet; skipping this scheduled check.")
+        return
     if not password:
         raise RuntimeError("GMAIL_APP_PASSWORD is not configured.")
     result = request_json(base + "/api/cyrene/due", token)
