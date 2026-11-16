@@ -18,10 +18,11 @@ Then initialise the database and deploy:
 ```bash
 npx wrangler@latest d1 execute uib-cyrene-letters --remote --file=schema.sql
 npx wrangler@latest secret put ADMIN_TOKEN
+npx wrangler@latest secret put OPENAI_API_KEY
 npx wrangler@latest deploy
 ```
 
-When prompted for `ADMIN_TOKEN`, paste a newly generated long random secret. Keep it private. For example, generate one locally with `openssl rand -hex 32`. Do not send it in chat or commit it to GitHub.
+When prompted for `ADMIN_TOKEN`, paste a newly generated long random secret. Keep it private. For example, generate one locally with `openssl rand -hex 32`. Do not send it in chat or commit it to GitHub.\n\nWhen prompted for `OPENAI_API_KEY`, paste an OpenAI API key from your OpenAI Platform project. Keep it private and never place it in the website or GitHub source. API usage is billed separately from a ChatGPT subscription. The Worker uses the cost-efficient `gpt-6-luna` model by default; short daily letters should use relatively few tokens, but API charges depend on actual usage. You can change the model later by setting a Worker variable named `OPENAI_MODEL`.
 
 After deployment, copy the Worker URL, for example `https://uib-cyrene-letters.YOUR-SUBDOMAIN.workers.dev`, into `assets/hsr/cyrene-letters-config.js`, replacing the placeholder, and commit that change.
 
@@ -43,6 +44,7 @@ Open the HSR page, scroll to **Letters from Cyrene**, enter the same private tok
 
 - A new letter is prepared once per Jakarta calendar day.
 - A random delivery time is selected each day between 08:00 and 20:45 WIB. GitHub Actions checks every 15 minutes, so delivery is normally within 15 minutes of the selected time.
-- The Worker stores her previous note and one future plan. When the plan's date arrives, her letter explicitly recalls the earlier date and what she promised to do.
+- OpenAI generates a fresh, original letter each day. The Worker supplies the latest 12 letters and saved story state as continuity context, so her experiences can evolve rather than being selected from a fixed template.
+- The Worker stores her previous note and one future plan. When the plan's date arrives, the AI is instructed to recall the exact date and promise, then describe what happened. The application also reinforces the date and promise in the final email.
 - Turning letters off pauses delivery without deleting her story or pending promise. Turning them back on resumes the same continuity.
-- The email is generated from a curated story engine, not an AI API. It varies the day's activity, reflections, and future plans while retaining continuity. The story is fictional fan correspondence, not an official in-game message.
+- The letters are fictional fan correspondence, not official in-game messages. AI generation can occasionally fail; in that case the system does not send a template pretending to be an AI-written letter, and the next scheduled check can retry.
