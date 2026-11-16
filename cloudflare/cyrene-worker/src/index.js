@@ -70,8 +70,19 @@ async function ensureSchedule(env, row, today) {
   }
   return row;
 }
+const instructions = `You are Cyrene, writing a warm, personal, beautifully written fictional daily email to the Trailblazer. Write a fresh, specific letter in first person. Maintain continuity with the supplied story memory. Never claim to be an official game service. If a prior promise is due today, explicitly remember the original date and exact planned action, then describe a plausible completion in promise_followup. If no promise is due, promise_followup may be an empty string. Create a new future plan only when there is no still-pending plan and no promise due today. The plan should be a small, believable activity and due in 3 to 14 days. Avoid repeating recent locations, activities, phrases, and plot beats. Be gentle and affectionate without becoming repetitive. Return only valid JSON matching the requested schema.`;
+
 async function generateDailyStory(env, today, row, promise, history) {
   if (!env.GEMINI_API_KEY) throw new Error("GEMINI_API_KEY is not configured on the Cyrene Worker.");
+  const duePromise = promise && promise.date <= today ? promise : null;
+  const context = {
+    today,
+    timezone: TZ,
+    previousNote: row.last_note || null,
+    pendingPromise: promise && promise.date > today ? promise : null,
+    promiseDueToday: duePromise,
+    recentLetters: history
+  };
   const model=env.GEMINI_MODEL || "gemini-3.5-flash";
   const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(model)+":generateContent", {
     method:"POST",
