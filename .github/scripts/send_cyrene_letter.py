@@ -17,8 +17,15 @@ def request_json(url, token, method="GET", payload=None):
         method=method,
         headers={"Authorization": f"Bearer {token}", "Accept": "application/json", "Content-Type": "application/json"},
     )
-    with urllib.request.urlopen(req, timeout=25) as response:
-        return json.loads(response.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req, timeout=25) as response:
+            return json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as error:
+        detail = error.read().decode("utf-8", errors="replace")[:1500]
+        raise RuntimeError(
+            f"Cyrene Worker returned HTTP {error.code} for {url.split('/')[-1]}. "
+            f"Response: {detail or '(empty response body)'}"
+        ) from None
 
 
 def main():
