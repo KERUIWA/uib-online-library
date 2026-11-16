@@ -5,4 +5,4 @@ compatibility_date = "2026-11-16"
 [[d1_databases]]
 binding = "DB"
 database_name = "uib-cyrene-letters"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "9117838d-6b59-46bf-85f6-fe21299b5844"
