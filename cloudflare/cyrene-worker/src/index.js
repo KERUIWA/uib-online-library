@@ -71,48 +71,28 @@ async function ensureSchedule(env, row, today) {
   return row;
 }
 async function generateDailyStory(env, today, row, promise, history) {
-  if (!env.OPENAI_API_KEY) throw new Error("OPENAI_API_KEY is not configured on the Cyrene Worker.");
-  const duePromise = promise && promise.date <= today ? promise : null;
-  const pendingPromise = promise && promise.date > today ? promise : null;
-  const context = {
-    date: longDate(today),
-    previousLetters: history.map(x => ({date:x.letter_date, text:(x.text_body||"").slice(0,1400)})),
-    lastNote: row.last_note || null,
-    pendingPromise,
-    promiseDueToday: duePromise ? {
-      createdOn: longDate(duePromise.createdDate),
-      dueOn: longDate(duePromise.date),
-      action: duePromise.action
-    } : null
-  };
-  const instructions = `Write today's original, immersive personal letter as Cyrene from Honkai: Star Rail, addressed warmly to "Dear Trailblazer". This is fictional fan correspondence, not an official game message.
-Character voice: gentle, perceptive, poetic but natural, quietly affectionate, curious, emotionally sincere, occasionally lightly playful. Never angry, cruel, or melodramatic. Avoid repetitive openings, stock phrases, and generic filler.
-Continuity is essential. Read the previous letters and maintain the same ongoing fictional life, locations, relationships, and timeline. Do not repeat an old day's event as if it happened today. You may refer to a past detail naturally, but do not force a callback every day.
-Today's date is ${context.date}. Create a distinct event that happens today. It can be a small everyday experience, a discovery, a conversation, a task, a celebration, a minor setback handled calmly, or a new place. Invent fresh details while keeping the world coherent.
-If promiseDueToday is present, the letter MUST clearly remember that on the specified createdOn date she promised to do the exact action, then describe what happened on the due date. Include a natural callback sentence that names the earlier date and the promised action. Do not silently drop or change the promise.
-If pendingPromise is present, do not create a second future promise. You may briefly show anticipation, but do not change its date or action.
-If there is no pending promise and no promise due today, create one specific, believable plan for 3 to 14 days from today. It must be something she can plausibly do in her fictional daily life. Make it concrete enough to revisit later.
-Return ONLY valid JSON with these fields:
-{
-  "subject": "short varied email subject, no date prefix",
-  "opening": "one or two natural sentences",
-  "paragraphs": ["2 to 4 substantial paragraphs describing today's unique experience and thoughts"],
-  "promise_followup": "if a promise is due, describe completing it; otherwise empty string",
-  "day_note": "one concise detail to remember for future continuity",
-  "plan_action": "new future plan action, or empty string if a promise is already pending or due today",
-  "plan_due_days": 3 to 14 integer if plan_action is nonempty, otherwise 0,
-  "closing": "one warm, varied closing sentence"
-}
-Do not include HTML or markdown. Do not invent user personal facts. Avoid claiming that Cyrene can see, monitor, or know the Trailblazer's real-world activities.`;
-  const response = await fetch("https://api.openai.com/v1/responses", {
+  if (!env.GEMINI_API_KEY) throw new Error("GEMINI_API_KEY is not configured on the Cyrene Worker.");
+  const model=env.GEMINI_MODEL || "gemini-3.5-flash";
+  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(model)+":generateContent", {
     method:"POST",
-    headers:{"authorization":"Bearer "+env.OPENAI_API_KEY,"content-type":"application/json"},
+    headers:{"x-goog-api-key":env.GEMINI_API_KEY,"content-type":"application/json"},
     body:JSON.stringify({
-      model:env.OPENAI_MODEL || "gpt-6-luna",
-      reasoning:{effort:"none"},
-      max_output_tokens:1100,
-      text:{format:{type:"json_object"}},
-      input:instructions+"\n\nSTORY MEMORY:\n"+JSON.stringify(context)
+      system_instruction:{parts:[{text:instructions}]},
+      contents:[{role:"user",parts:[{text:"STORY MEMORY:\n"+JSON.stringify(context)}]}],
+      generationConfig:{responseMimeType:"application/json",responseSchema:{
+        type:"OBJECT",
+        properties:{
+          subject:{type:"STRING"},
+          opening:{type:"STRING"},
+          paragraphs:{type:"ARRAY",items:{type:"STRING"}},
+          promise_followup:{type:"STRING"},
+          day_note:{type:"STRING"},
+          plan_action:{type:"STRING"},
+          plan_due_days:{type:"INTEGER"},
+          closing:{type:"STRING"}
+        },
+        required:["subject","opening","paragraphs","promise_followup","day_note","plan_action","plan_due_days","closing"]
+      }}
     })
   });
   if (!response.ok) {
@@ -120,7 +100,7 @@ Do not include HTML or markdown. Do not invent user personal facts. Avoid claimi
     throw new Error("OpenAI API request failed ("+response.status+"): "+detail);
   }
   const payload=await response.json();
-  const outputText=payload.output_text || (payload.output||[]).flatMap(x=>x.content||[]).filter(x=>x.type==="output_text").map(x=>x.text).join("");
+  const outputText=payload.candidates?.[0]?.content?.parts?.map(p=>p.text||"").join("") || "";
   if (!outputText) throw new Error("OpenAI returned no letter text.");
   let story;
   try { story=JSON.parse(outputText); } catch { throw new Error("OpenAI returned invalid JSON for the daily letter."); }
