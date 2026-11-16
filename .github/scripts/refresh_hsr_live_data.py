@@ -346,7 +346,10 @@ def main():
 
     report, unavailable = build_change_report(previous.get("feeds", {}), feeds)
     checked_at = now_iso()
-    send_status_email(report, unavailable, checked_at)
+    if os.environ.get("SEND_STATUS_EMAIL", "false").lower() == "true":
+        send_status_email(report, unavailable, checked_at)
+    else:
+        print("Status email skipped for automatic push-triggered refresh.")
 
     unchanged = feeds == previous.get("feeds", {})
     snapshot = {"schemaVersion": 1, "updatedAt": previous.get("updatedAt") if unchanged else checked_at, "feeds": feeds}
