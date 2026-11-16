@@ -61,6 +61,7 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           ANNOUNCEMENT_EMAIL_TO: theomgvirus@gmail.com
           SEND_TEST_EMAIL: ${{ inputs.test_email }}
+          SEND_STATUS_EMAIL: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
         run: python .github/scripts/refresh_hsr_live_data.py
 
       - name: Publish updated snapshot
