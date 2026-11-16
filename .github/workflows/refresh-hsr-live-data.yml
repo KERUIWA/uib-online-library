@@ -62,6 +62,7 @@ jobs:
           node --check /tmp/hsr-inline.js
           node --check assets/hsr/cyrene-letters.js
           node --check --input-type=module < cloudflare/cyrene-worker/src/index.js
+          python -m py_compile .github/scripts/send_cyrene_letter.py
 
       - name: Fetch feeds and email newly published announcements
         env:
