@@ -9,7 +9,7 @@ on:
       - ".github/scripts/refresh_hsr_live_data.py"
       - ".github/workflows/refresh-hsr-live-data.yml"
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -50,7 +50,10 @@ jobs:
           PY
           node --check /tmp/hsr-inline.js
 
-      - name: Fetch and validate independent HSR feeds
+      - name: Fetch feeds and email newly published announcements
+        env:
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          ANNOUNCEMENT_EMAIL_TO: theomgvirus@gmail.com
         run: python .github/scripts/refresh_hsr_live_data.py
 
       - name: Publish updated snapshot
