@@ -1,5 +1,5 @@
 (() => {
-  const endpoint = "https://YOUR-WORKER-SUBDOMAIN.workers.dev";
+  const endpoint = window.CYRENE_LETTER_API || "https://YOUR-WORKER-SUBDOMAIN.workers.dev";
   const panel = document.getElementById("cyreneLettersPanel");
   if (!panel) return;
   const toggle = document.getElementById("cyreneLettersToggle");
