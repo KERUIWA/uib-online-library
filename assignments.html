@@ -179,6 +179,10 @@ html[data-cyrene-mood="awkward"] .assignment-card>*,
 html[data-cyrene-mood="awkward"] .tracker-card>*,
 html[data-cyrene-mood="awkward"] article>*{position:relative;z-index:3}
 
+
+/* Keep Cyrene's atmospheric caption exclusive to dark mode. */
+:root:not([data-theme="dark"]) .cyrene-mood-caption{display:none!important}
+:root[data-theme="dark"] .cyrene-mood-caption{display:block!important}
 </style><style>
 /* Shared header controls and slide-in navigation */
 .site-controls{display:flex;align-items:center;gap:9px;flex:0 0 auto}
