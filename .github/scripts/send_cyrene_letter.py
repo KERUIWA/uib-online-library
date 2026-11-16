@@ -15,7 +15,12 @@ def request_json(url, token, method="GET", payload=None):
         url,
         data=data,
         method=method,
-        headers={"Authorization": f"Bearer {token}", "Accept": "application/json", "Content-Type": "application/json"},
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "User-Agent": "CyreneDailyLetter/1.0 (+https://github.com/KERUIWA/uib-online-library)",
+        },
     )
     try:
         with urllib.request.urlopen(req, timeout=25) as response:
