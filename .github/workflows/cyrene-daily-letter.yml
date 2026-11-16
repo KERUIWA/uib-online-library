@@ -1,0 +1,31 @@
+name: Send Cyrene's daily letter
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cyrene-daily-letter
+  cancel-in-progress: false
+
+jobs:
+  send-letter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Check for a due letter and send it
+        env:
+          CYRENE_WORKER_URL: ${{ vars.CYRENE_WORKER_URL }}
+          CYRENE_API_TOKEN: ${{ secrets.CYRENE_API_TOKEN }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          ANNOUNCEMENT_EMAIL_TO: theomgvirus@gmail.com
+        run: python .github/scripts/send_cyrene_letter.py
