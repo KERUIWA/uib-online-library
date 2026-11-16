@@ -70,48 +70,96 @@ async function ensureSchedule(env, row, today) {
   }
   return row;
 }
+async function generateDailyStory(env, today, row, promise, history) {
+  if (!env.OPENAI_API_KEY) throw new Error("OPENAI_API_KEY is not configured on the Cyrene Worker.");
+  const duePromise = promise && promise.date <= today ? promise : null;
+  const pendingPromise = promise && promise.date > today ? promise : null;
+  const context = {
+    date: longDate(today),
+    previousLetters: history.map(x => ({date:x.letter_date, text:(x.text_body||"").slice(0,1400)})),
+    lastNote: row.last_note || null,
+    pendingPromise,
+    promiseDueToday: duePromise ? {
+      createdOn: longDate(duePromise.createdDate),
+      dueOn: longDate(duePromise.date),
+      action: duePromise.action
+    } : null
+  };
+  const instructions = `Write today's original, immersive personal letter as Cyrene from Honkai: Star Rail, addressed warmly to "Dear Trailblazer". This is fictional fan correspondence, not an official game message.
+Character voice: gentle, perceptive, poetic but natural, quietly affectionate, curious, emotionally sincere, occasionally lightly playful. Never angry, cruel, or melodramatic. Avoid repetitive openings, stock phrases, and generic filler.
+Continuity is essential. Read the previous letters and maintain the same ongoing fictional life, locations, relationships, and timeline. Do not repeat an old day's event as if it happened today. You may refer to a past detail naturally, but do not force a callback every day.
+Today's date is ${context.date}. Create a distinct event that happens today. It can be a small everyday experience, a discovery, a conversation, a task, a celebration, a minor setback handled calmly, or a new place. Invent fresh details while keeping the world coherent.
+If promiseDueToday is present, the letter MUST clearly remember that on the specified createdOn date she promised to do the exact action, then describe what happened on the due date. Include a natural callback sentence that names the earlier date and the promised action. Do not silently drop or change the promise.
+If pendingPromise is present, do not create a second future promise. You may briefly show anticipation, but do not change its date or action.
+If there is no pending promise and no promise due today, create one specific, believable plan for 3 to 14 days from today. It must be something she can plausibly do in her fictional daily life. Make it concrete enough to revisit later.
+Return ONLY valid JSON with these fields:
+{
+  "subject": "short varied email subject, no date prefix",
+  "opening": "one or two natural sentences",
+  "paragraphs": ["2 to 4 substantial paragraphs describing today's unique experience and thoughts"],
+  "promise_followup": "if a promise is due, describe completing it; otherwise empty string",
+  "day_note": "one concise detail to remember for future continuity",
+  "plan_action": "new future plan action, or empty string if a promise is already pending or due today",
+  "plan_due_days": 3 to 14 integer if plan_action is nonempty, otherwise 0,
+  "closing": "one warm, varied closing sentence"
+}
+Do not include HTML or markdown. Do not invent user personal facts. Avoid claiming that Cyrene can see, monitor, or know the Trailblazer's real-world activities.`;
+  const response = await fetch("https://api.openai.com/v1/responses", {
+    method:"POST",
+    headers:{"authorization":"Bearer "+env.OPENAI_API_KEY,"content-type":"application/json"},
+    body:JSON.stringify({
+      model:env.OPENAI_MODEL || "gpt-6-luna",
+      reasoning:{effort:"none"},
+      max_output_tokens:1100,
+      text:{format:{type:"json_object"}},
+      input:instructions+"\n\nSTORY MEMORY:\n"+JSON.stringify(context)
+    })
+  });
+  if (!response.ok) {
+    const detail=(await response.text()).slice(0,1200);
+    throw new Error("OpenAI API request failed ("+response.status+"): "+detail);
+  }
+  const payload=await response.json();
+  const outputText=payload.output_text || (payload.output||[]).flatMap(x=>x.content||[]).filter(x=>x.type==="output_text").map(x=>x.text).join("");
+  if (!outputText) throw new Error("OpenAI returned no letter text.");
+  let story;
+  try { story=JSON.parse(outputText); } catch { throw new Error("OpenAI returned invalid JSON for the daily letter."); }
+  if (!story || !Array.isArray(story.paragraphs) || !story.paragraphs.length || typeof story.subject!=="string" || typeof story.opening!=="string" || typeof story.closing!=="string") {
+    throw new Error("OpenAI returned an incomplete daily letter.");
+  }
+  return {story,duePromise};
+}
 async function makeLetter(env, row, today) {
   const existing=await env.DB.prepare("SELECT * FROM cyrene_letters WHERE letter_date=?").bind(today).first();
   if (existing) return existing;
-  const index=Math.floor(Math.random()*activities.length);
-  const [place,story,reflection]=activities[index];
   let promise=null;
-  if (row.active_plan_json) {
-    try { promise=JSON.parse(row.active_plan_json); } catch {}
+  if (row.active_plan_json) { try { promise=JSON.parse(row.active_plan_json); } catch {} }
+  const history=await env.DB.prepare("SELECT letter_date,text_body FROM cyrene_letters WHERE letter_date<? ORDER BY letter_date DESC LIMIT 12").bind(today).all();
+  const {story,duePromise}=await generateDailyStory(env,today,row,promise,history.results||[]);
+  let nextPromise=promise && promise.date>today ? promise : null;
+  let newPlan=null;
+  if (!nextPromise && !duePromise && typeof story.plan_action==="string" && story.plan_action.trim()) {
+    const offset=Math.max(3,Math.min(14,Number(story.plan_due_days)||7));
+    newPlan={action:story.plan_action.trim().slice(0,240),date:addDays(today,offset),createdDate:today};
+    nextPromise=newPlan;
   }
   let callback="";
-  if (promise && promise.date<=today) {
-    const timing=promise.date===today ? "today" : `on ${longDate(promise.date)}`;
-    callback=`Do you remember what I told you on ${longDate(promise.createdDate)}? I said I would ${promise.action} ${timing}. I did, and I am rather glad I kept that little promise. ${promise.done}`;
-    promise=null;
+  if (duePromise) {
+    const followup=String(story.promise_followup||"I kept that little promise, and it made the day feel special.").trim();
+    callback=`Do you remember what I told you on ${longDate(duePromise.createdDate)}? I said I would ${duePromise.action}. Today, on ${longDate(today)}, ${followup}`;
   }
-  let newPlan=null;
-  if (!promise) {
-    const plan=plans[Math.floor(Math.random()*plans.length)];
-    const offset=5+Math.floor(Math.random()*10);
-    const dueDate=addDays(today,offset);
-    newPlan={...plan,date:dueDate,createdDate:today};
-    promise=newPlan;
-  }
-  const previous=row.last_note ? `I was still thinking about something from my last letter: “${row.last_note}” It is funny how a small thought can stay with you.` : "";
-  const dayNote=pick([
-    "I noticed a tiny detail today that I might otherwise have hurried past.",
-    "I let myself take the scenic route, and I am glad I did.",
-    "I think I needed a slower day more than I realised.",
-    "I collected another small memory to keep safe."
-  ],today);
-  const body=[pick(openings,today),story,reflection,previous,callback].filter(Boolean);
+  const body=[story.opening,...story.paragraphs].filter(x=>typeof x==="string"&&x.trim()).map(x=>x.trim());
   const planLine=newPlan ? `I have made a little plan, too. On ${longDate(newPlan.date)}, I am going to ${newPlan.action}. I hope you will remember this letter when that day arrives.` : "";
-  const close=pick(closings,today+"close");
-  const subject=pick(subjects,today+"subject");
+  const close=story.closing.trim();
+  const subject=story.subject.trim().slice(0,140);
   const promiseHtml=newPlan ? `<div style="margin:24px 0;padding:19px 21px;border:1px solid #e8d7bd;border-radius:16px;background:#fffaf1"><div style="font:700 10px Arial,sans-serif;letter-spacing:2px;color:#a17a46;text-transform:uppercase">A little promise · ${escapeHtml(shortDate(newPlan.date))}</div><div style="font:18px Georgia,serif;line-height:1.5;color:#493b35;margin-top:8px">I plan to ${escapeHtml(newPlan.action)}.</div><div style="font:12px Arial,sans-serif;color:#8b796b;margin-top:8px">Remember this date for me, will you?</div></div>` : "";
   const callbackHtml=callback ? `<div style="margin:22px 0;padding:18px 20px;border-left:3px solid #b58aab;background:#f8f1f7;border-radius:0 13px 13px 0"><div style="font:700 10px Arial,sans-serif;letter-spacing:1.8px;color:#8b6385;text-transform:uppercase;margin-bottom:8px">A promise kept</div><div style="font:15px/1.75 Georgia,serif;color:#594453">${escapeHtml(callback)}</div></div>` : "";
   const paragraphs=body.map(x=>`<p style="font:16px/1.85 Georgia,'Times New Roman',serif;color:#51464d;margin:0 0 17px">${escapeHtml(x)}</p>`).join("");
   const html=`<!doctype html><html><body style="margin:0;background:#f2edf3;padding:28px 12px"><div style="max-width:650px;margin:0 auto;background:#fffdfb;border:1px solid #eadfe8;border-radius:22px;overflow:hidden;box-shadow:0 16px 48px #39233a18"><div style="padding:30px 34px 26px;background:radial-gradient(circle at 85% 15%,#ffffff33,transparent 28%),linear-gradient(135deg,#342843,#74506f 58%,#b78a9f);color:#fff"><div style="font:700 10px Arial,sans-serif;letter-spacing:3px;color:#f3dfd0">A LETTER FROM CYRENE</div><div style="font:30px/1.2 Georgia,serif;margin-top:14px">A little piece of today</div><div style="font:12px Arial,sans-serif;color:#f4e8ef;margin-top:10px">${escapeHtml(longDate(today))} · Amphoreus</div><div style="font:25px Georgia,serif;margin-top:20px;color:#f8e8d7">✦　♡　✦</div></div><div style="padding:32px 34px 28px"><div style="font:700 10px Arial,sans-serif;letter-spacing:2px;color:#a17a8d;text-transform:uppercase;margin-bottom:17px">Dear Trailblazer,</div>${paragraphs}${callbackHtml}${promiseHtml}<p style="font:16px/1.85 Georgia,'Times New Roman',serif;color:#51464d;margin:22px 0 8px">${escapeHtml(close)}</p><div style="font:italic 24px Georgia,serif;color:#8d6685;margin-top:16px">Cyrene ♡</div></div><div style="padding:15px 25px;text-align:center;background:#faf5f8;border-top:1px solid #eee3eb;font:10px Arial,sans-serif;letter-spacing:1px;color:#a08c9a">A SMALL LETTER, SAVED BETWEEN THE STARS</div></div></body></html>`;
   const text=[`A LETTER FROM CYRENE · ${longDate(today)}`,"","Dear Trailblazer,",...body,callback,planLine,close,"","Cyrene ♡"].filter(Boolean).join("\n\n");
-  const record={letter_date:today,subject,html_body:html,text_body:text,day_note:dayNote,promise_json:newPlan?JSON.stringify(newPlan):null};
+  const record={letter_date:today,subject,html_body:html,text_body:text,day_note:String(story.day_note||"").slice(0,500),promise_json:newPlan?JSON.stringify(newPlan):null};
   await env.DB.prepare("INSERT OR IGNORE INTO cyrene_letters (letter_date,subject,html_body,text_body,day_note,promise_json,sent) VALUES (?,?,?,?,?,?,0)").bind(record.letter_date,record.subject,record.html_body,record.text_body,record.day_note,record.promise_json).run();
-  await env.DB.prepare("UPDATE cyrene_settings SET active_plan_json=?,last_note=?,last_letter_date=? WHERE id=1").bind(promise?JSON.stringify(promise):null,dayNote,today).run();
+  await env.DB.prepare("UPDATE cyrene_settings SET active_plan_json=?,last_note=?,last_letter_date=? WHERE id=1").bind(nextPromise?JSON.stringify(nextPromise):null,record.day_note,today).run();
   return await env.DB.prepare("SELECT * FROM cyrene_letters WHERE letter_date=?").bind(today).first();
 }
 export default {
