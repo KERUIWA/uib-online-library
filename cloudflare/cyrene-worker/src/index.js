@@ -97,15 +97,15 @@ async function generateDailyStory(env, today, row, promise, history) {
   });
   if (!response.ok) {
     const detail=(await response.text()).slice(0,1200);
-    throw new Error("OpenAI API request failed ("+response.status+"): "+detail);
+    throw new Error("Gemini API request failed ("+response.status+"): "+detail);
   }
   const payload=await response.json();
   const outputText=payload.candidates?.[0]?.content?.parts?.map(p=>p.text||"").join("") || "";
-  if (!outputText) throw new Error("OpenAI returned no letter text.");
+  if (!outputText) throw new Error("Gemini returned no letter text.");
   let story;
-  try { story=JSON.parse(outputText); } catch { throw new Error("OpenAI returned invalid JSON for the daily letter."); }
+  try { story=JSON.parse(outputText); } catch { throw new Error("Gemini returned invalid JSON for the daily letter."); }
   if (!story || !Array.isArray(story.paragraphs) || !story.paragraphs.length || typeof story.subject!=="string" || typeof story.opening!=="string" || typeof story.closing!=="string") {
-    throw new Error("OpenAI returned an incomplete daily letter.");
+    throw new Error("Gemini returned an incomplete daily letter.");
   }
   return {story,duePromise};
 }
