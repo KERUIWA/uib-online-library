@@ -5,10 +5,14 @@ Each feed is fetched and validated independently. A failed refresh keeps the
 last known-good payload and marks it stale instead of replacing it with [].
 """
 import json
+import os
+import smtplib
+import ssl
 import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
+from email.message import EmailMessage
 from pathlib import Path
 
 OUT = Path("assets/hsr/live-data.json")
@@ -86,6 +90,53 @@ def refresh_feed(previous, name, url, validator):
         }
 
 
+def article_key(item):
+    return str(item.get("id") or item.get("url") or item.get("title") or "")
+
+
+def send_new_announcement_email(items):
+    """Email only newly listed article IDs. Missing credentials safely disable email."""
+    password = os.environ.get("GMAIL_APP_PASSWORD", "").strip().replace(" ", "")
+    recipient = os.environ.get("ANNOUNCEMENT_EMAIL_TO", "").strip()
+    if not password:
+        print("GMAIL_APP_PASSWORD is not configured; email notifications are pending setup.")
+        return
+    if not recipient:
+        raise RuntimeError("ANNOUNCEMENT_EMAIL_TO is missing while Gmail credentials are configured")
+
+    message = EmailMessage()
+    message["From"] = recipient
+    message["To"] = recipient
+    message["Subject"] = f"New Honkai: Star Rail announcement(s): {len(items)}"
+    lines = [
+        "A new Honkai: Star Rail announcement was detected by the UIB E-Library hourly monitor.",
+        "",
+    ]
+    for item in items:
+        title = item.get("title") or "Honkai: Star Rail announcement"
+        description = item.get("description") or ""
+        url = item.get("url") or ""
+        created = item.get("created_at")
+        try:
+            stamp = datetime.fromtimestamp(float(created), timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+        except (TypeError, ValueError, OverflowError):
+            stamp = "Publication time unavailable"
+        lines.extend([title, f"Published: {stamp}"])
+        if description:
+            lines.append(description)
+        if url:
+            lines.append(url)
+        lines.append("")
+    lines.append("The HSR hub's announcement list will update from the same feed.")
+    message.set_content("\n".join(lines))
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context, timeout=30) as server:
+        server.login(recipient, password)
+        server.send_message(message)
+    print(f"Sent email notification for {len(items)} new announcement(s) to {recipient}.")
+
+
 def main():
     previous = load_previous()
     feeds = {}
@@ -94,6 +145,7 @@ def main():
 
     news_url = "https://api.ennead.cc/mihoyo/starrail/news/"
     old_news = previous.get("feeds", {}).get("news", {})
+    previous_news_data = old_news.get("data") if isinstance(old_news.get("data"), list) else None
     try:
         articles = []
         for category in NEWS_TYPES:
@@ -126,6 +178,22 @@ def main():
             "lastSuccess": old_news.get("lastSuccess"), "error": str(exc),
             "data": old_news.get("data"),
             }
+
+    # The first populated snapshot is a silent baseline. Thereafter, email only
+    # articles with IDs/URLs that were absent from the previous successful feed.
+    current_news = feeds.get("news", {}).get("data")
+    if previous_news_data is not None and isinstance(current_news, list):
+        previous_ids = {article_key(item) for item in previous_news_data if isinstance(item, dict)}
+        new_articles = [
+            item for item in current_news
+            if isinstance(item, dict) and article_key(item) and article_key(item) not in previous_ids
+        ]
+        if new_articles:
+            send_new_announcement_email(new_articles)
+        else:
+            print("No newly published announcements; no email sent.")
+    else:
+        print("No previous successful news snapshot; establishing a silent email baseline.")
 
     unchanged = feeds == previous.get("feeds", {})
     snapshot = {"schemaVersion": 1, "updatedAt": previous.get("updatedAt") if unchanged else now_iso(), "feeds": feeds}
