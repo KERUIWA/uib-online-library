@@ -81,7 +81,6 @@ def process():
     if not all((base, token, password, account)):
         raise RuntimeError("Cyrene reply service configuration is incomplete.")
 
-    context = ssl.create_default_context()
     mail = imaplib.IMAP4_SSL("imap.gmail.com", 993, ssl_context=context, timeout=30)
     try:
         mail.login(account, password)
@@ -89,7 +88,7 @@ def process():
         if status != "OK":
             raise RuntimeError("Could not open the Gmail inbox.")
         # A short lookback is enough; D1 deduplicates messages across workflow runs.
-        status, data = mail.search(None, "SINCE", email.utils.formatdate(time.time() - 14 * 86400, localtime=True, usegmt=False)[5:16])
+        status, data = mail.search(None, "SINCE", __import__("datetime").datetime.now().strftime("%d-%b-%Y"))
         if status != "OK":
             raise RuntimeError("Could not search the Gmail inbox.")
         ids = data[0].split()[-100:]
