@@ -11,6 +11,7 @@ import urllib.request
 from email.message import EmailMessage
 from email.policy import default
 from email.utils import make_msgid, parseaddr
+from datetime import datetime, timedelta
 
 
 def worker_request(base, token, endpoint, payload):
@@ -88,7 +89,7 @@ def process():
         if status != "OK":
             raise RuntimeError("Could not open the Gmail inbox.")
         # A short lookback is enough; D1 deduplicates messages across workflow runs.
-        status, data = mail.search(None, "SINCE", __import__("datetime").datetime.now().strftime("%d-%b-%Y"))
+        status, data = mail.search(None, "SINCE", (datetime.now() - timedelta(days=14)).strftime("%d-%b-%Y"))
         if status != "OK":
             raise RuntimeError("Could not search the Gmail inbox.")
         ids = data[0].split()[-100:]
