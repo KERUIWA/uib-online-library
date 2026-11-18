@@ -137,7 +137,7 @@ def process():
             draft["X-Cyrene-Inbound-ID"] = inbound_id
             draft.set_content(reply_text)
             raw = draft.as_bytes()
-            status = mail.append('"[Gmail]/Drafts"', "\Draft", imaplib.Time2Internaldate(time.time()), raw)[0]
+            status = mail.append('"[Gmail]/Drafts"', r"\Draft", imaplib.Time2Internaldate(time.time()), raw)[0]
             if status != "OK":
                 raise RuntimeError("Gmail did not accept the Cyrene draft.")
             worker_request(base, token, "/api/cyrene/reply-drafted", {"inboundMessageId": inbound_id})
