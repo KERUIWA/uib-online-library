@@ -36,7 +36,7 @@ def worker_request(base, token, endpoint, payload):
 
 def message_body(message):
     chunks = []
-    parts = message.walk() if message.is_multipart() else [message]
+    parts = list(message.walk()) if message.is_multipart() else [message]
     for part in parts:
         if part.get_content_maintype() == "multipart":
             continue
@@ -53,24 +53,24 @@ def message_body(message):
             if part.get_content_type() == "text/html":
                 try:
                     html = part.get_content()
-                    text = re.sub(r"(?is)<(script|style).*?>.*?</\\1>", " ", html)
-                    text = re.sub(r"(?i)<br\\s*/?>|</p>|</div>", "\\n", text)
+                    text = re.sub(r"(?is)<(script|style).*?>.*?</\1>", " ", html)
+                    text = re.sub(r"(?i)<br\s*/?>|</p>|</div>", "\n", text)
                     text = re.sub(r"<[^>]+>", " ", text)
                     text = re.sub(r"&nbsp;", " ", text)
                     text = re.sub(r"&amp;", "&", text)
-                    text = re.sub(r"\\s+", " ", text).strip()
+                    text = re.sub(r"\s+", " ", text).strip()
                     break
                 except Exception:
                     pass
     # Keep the user's own words and remove the most common quoted-reply tail.
     cleaned = []
     for line in text.splitlines():
-        if re.match(r"^\\s*>", line):
+        if re.match(r"^\s*>", line):
             break
-        if re.match(r"^On .{5,160}wrote:\\s*$", line.strip(), re.I):
+        if re.match(r"^On .{5,160}wrote:\s*$", line.strip(), re.I):
             break
         cleaned.append(line)
-    return "\\n".join(cleaned).strip()[:12000]
+    return "\n".join(cleaned).strip()[:12000]
 
 
 def process():
@@ -135,7 +135,7 @@ def process():
             draft["X-Cyrene-Inbound-ID"] = inbound_id
             draft.set_content(reply_text)
             raw = draft.as_bytes()
-            status = mail.append('"[Gmail]/Drafts"', "\\Draft", imaplib.Time2Internaldate(time.time()), raw)[0]
+            status = mail.append('"[Gmail]/Drafts"', "\Draft", imaplib.Time2Internaldate(time.time()), raw)[0]
             if status != "OK":
                 raise RuntimeError("Gmail did not accept the Cyrene draft.")
             worker_request(base, token, "/api/cyrene/reply-drafted", {"inboundMessageId": inbound_id})
