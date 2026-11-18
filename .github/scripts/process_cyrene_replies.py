@@ -8,10 +8,11 @@ import ssl
 import time
 import urllib.error
 import urllib.request
+from datetime import datetime, timedelta
 from email.message import EmailMessage
 from email.policy import default
 from email.utils import make_msgid, parseaddr
-from datetime import datetime, timedelta
+
 
 
 def worker_request(base, token, endpoint, payload):
@@ -82,6 +83,7 @@ def process():
     if not all((base, token, password, account)):
         raise RuntimeError("Cyrene reply service configuration is incomplete.")
 
+    context = ssl.create_default_context()
     mail = imaplib.IMAP4_SSL("imap.gmail.com", 993, ssl_context=context, timeout=30)
     try:
         mail.login(account, password)
