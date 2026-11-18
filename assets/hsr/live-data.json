@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-18T11:47:06Z",
+  "updatedAt": "2026-11-18T14:03:41Z",
   "feeds": {
     "calendar": {
-      "status": "stale",
+      "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us",
-      "checkedAt": "2026-11-18T11:47:05Z",
-      "lastSuccess": "2026-11-16T05:04:13Z",
-      "error": "HTTP Error 530: <none>",
+      "checkedAt": "2026-11-18T14:03:37Z",
+      "lastSuccess": "2026-11-18T14:03:37Z",
+      "error": null,
       "data": {
         "events": [
           {
@@ -1058,11 +1058,11 @@
       }
     },
     "news": {
-      "status": "stale",
+      "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-18T11:47:06Z",
-      "lastSuccess": "2026-11-17T16:50:17Z",
-      "error": "HTTP Error 530: <none>",
+      "checkedAt": "2026-11-18T14:03:41Z",
+      "lastSuccess": "2026-11-18T14:03:41Z",
+      "error": null,
       "data": [
         {
           "id": "47394097",
