@@ -7,6 +7,7 @@ import ssl
 import urllib.error
 import urllib.request
 from email.message import EmailMessage
+from email.utils import make_msgid
 
 
 def request_json(url, token, method="GET", payload=None):
@@ -51,13 +52,14 @@ def main():
     message["From"] = recipient
     message["To"] = recipient
     message["Subject"] = result["subject"]
+    message["Message-ID"] = make_msgid(domain="cyrene-daily-letters")
     message.set_content(result["text"])
     message.add_alternative(result["html"], subtype="html")
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context, timeout=30) as server:
         server.login(recipient, password)
         server.send_message(message)
-    request_json(base + "/api/cyrene/ack", token, "POST", {"date": result["date"]})
+    request_json(base + "/api/cyrene/ack", token, "POST", {"date": result["date"], "messageId": message["Message-ID"]})
     print(f"Cyrene's daily letter sent successfully for {result['date']} to {recipient}.")
 
 
