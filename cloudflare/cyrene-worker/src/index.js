@@ -49,6 +49,10 @@ function pick(list, seed) {
   let h=2166136261; for (const c of seed) h=Math.imul(h^c.charCodeAt(0),16777619);
   return list[(h>>>0)%list.length];
 }
+async function ensureReplyTables(env) {
+  await env.DB.prepare("CREATE TABLE IF NOT EXISTS cyrene_letter_message_ids (letter_date TEXT PRIMARY KEY, message_id TEXT NOT NULL UNIQUE)").run();
+  await env.DB.prepare("CREATE TABLE IF NOT EXISTS cyrene_replies (inbound_message_id TEXT PRIMARY KEY, parent_message_id TEXT NOT NULL, subject TEXT NOT NULL, inbound_text TEXT NOT NULL, reply_subject TEXT, reply_text TEXT, status TEXT NOT NULL DEFAULT 'generated', created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();
+}
 async function settings(env) {
   let row=await env.DB.prepare("SELECT * FROM cyrene_settings WHERE id=1").first();
   if (!row) {
@@ -193,7 +197,57 @@ export default {
       if(!data.date) return json({error:"date is required."},400);
       await env.DB.prepare("UPDATE cyrene_letters SET sent=1 WHERE letter_date=?").bind(data.date).run();
       await env.DB.prepare("UPDATE cyrene_settings SET last_sent_date=? WHERE id=1").bind(data.date).run();
+      if (typeof data.messageId==="string" && data.messageId.trim()) {
+        await ensureReplyTables(env);
+        await env.DB.prepare("INSERT OR REPLACE INTO cyrene_letter_message_ids (letter_date,message_id) VALUES (?,?)").bind(data.date,data.messageId.trim()).run();
+      }
       return json({ok:true,date:data.date});
+    }
+    if (url.pathname==="/api/cyrene/reply" && request.method==="POST") {
+      if (!authorized(request,env)) return json({error:"Unauthorized."},401);
+      let data; try { data=await request.json(); } catch { return json({error:"Invalid JSON."},400); }
+      const inboundId=String(data.inboundMessageId||"").trim();
+      const parentId=String(data.parentMessageId||"").trim();
+      const subject=String(data.subject||"Cyrene letter").trim().slice(0,180);
+      const body=String(data.body||"").trim().slice(0,12000);
+      if (!inboundId || !parentId || !body) return json({error:"inboundMessageId, parentMessageId, and body are required."},400);
+      await ensureReplyTables(env);
+      const existing=await env.DB.prepare("SELECT reply_subject,reply_text,status FROM cyrene_replies WHERE inbound_message_id=?").bind(inboundId).first();
+      if (existing) return json({ok:true,alreadyProcessed:true,subject:existing.reply_subject,text:existing.reply_text,status:existing.status});
+      const parent=await env.DB.prepare("SELECT letter_date FROM cyrene_letter_message_ids WHERE message_id=?").bind(parentId).first();
+      if (!parent) return json({error:"This message is not a reply to a tracked Cyrene letter."},403);
+      if (!env.GEMINI_API_KEY) return json({error:"GEMINI_API_KEY is not configured."},503);
+      const letters=await env.DB.prepare("SELECT letter_date,text_body FROM cyrene_letters WHERE letter_date<=? ORDER BY letter_date DESC LIMIT 8").bind(parent.letter_date).all();
+      const previousReplies=await env.DB.prepare("SELECT inbound_text,reply_text FROM cyrene_replies WHERE status='drafted' ORDER BY created_at DESC LIMIT 8").all();
+      const prompt={letterDate:parent.letter_date,originalSubject:subject,userMessage:body,recentLetters:letters.results||[],recentConversations:previousReplies.results||[]};
+      const model=env.GEMINI_MODEL || "gemini-3.5-flash-lite";
+      const generated=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(model)+":generateContent",{
+        method:"POST",
+        headers:{"x-goog-api-key":env.GEMINI_API_KEY,"content-type":"application/json"},
+        body:JSON.stringify({
+          system_instruction:{parts:[{text:"You are Cyrene, replying personally to the Trailblazer's email. Write in a warm, thoughtful, affectionate, natural voice consistent with her daily letters. Treat the supplied letters and previous exchanges as story continuity. Respond directly to what the user actually wrote; do not invent what they said, do not repeat their entire message, and do not claim to have performed real-world actions. Keep the reply around 2 to 4 short paragraphs unless the message calls for more. This is a fictional fan correspondence, not an official game service. Return only valid JSON with a concise email subject and plain-text reply body."}]},
+          contents:[{role:"user",parts:[{text:"CONVERSATION CONTEXT:\n"+JSON.stringify(prompt)}]}],
+          generationConfig:{responseMimeType:"application/json",responseSchema:{type:"OBJECT",properties:{subject:{type:"STRING"},body:{type:"STRING"}},required:["subject","body"]}}
+        })
+      });
+      if (!generated.ok) return json({error:"Gemini reply generation failed.",detail:(await generated.text()).slice(0,800)},502);
+      const payload=await generated.json();
+      const raw=payload.candidates?.[0]?.content?.parts?.map(p=>p.text||"").join("")||"";
+      let reply; try { reply=JSON.parse(raw); } catch { return json({error:"Gemini returned invalid reply JSON."},502); }
+      if (typeof reply.body!=="string" || !reply.body.trim()) return json({error:"Gemini returned an empty reply."},502);
+      const replySubject=String(reply.subject||("Re: "+subject)).trim().slice(0,180);
+      const replyText=reply.body.trim().slice(0,12000);
+      await env.DB.prepare("INSERT OR IGNORE INTO cyrene_replies (inbound_message_id,parent_message_id,subject,inbound_text,reply_subject,reply_text,status) VALUES (?,?,?,?,?,?,'generated')").bind(inboundId,parentId,subject,body,replySubject,replyText).run();
+      return json({ok:true,subject:replySubject,text:replyText,status:"generated"});
+    }
+    if (url.pathname==="/api/cyrene/reply-drafted" && request.method==="POST") {
+      if (!authorized(request,env)) return json({error:"Unauthorized."},401);
+      let data; try { data=await request.json(); } catch { return json({error:"Invalid JSON."},400); }
+      const id=String(data.inboundMessageId||"").trim();
+      if (!id) return json({error:"inboundMessageId is required."},400);
+      await ensureReplyTables(env);
+      await env.DB.prepare("UPDATE cyrene_replies SET status='drafted' WHERE inbound_message_id=?").bind(id).run();
+      return json({ok:true});
     }
     return json({error:"Not found."},404);
   }
