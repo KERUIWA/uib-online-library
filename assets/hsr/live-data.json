@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-19T11:43:54Z",
+  "updatedAt": "2026-11-20T11:45:39Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1060,8 +1060,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-19T11:43:54Z",
-      "lastSuccess": "2026-11-19T11:43:54Z",
+      "checkedAt": "2026-11-20T11:45:39Z",
+      "lastSuccess": "2026-11-20T11:45:39Z",
       "error": null,
       "data": [
         {
@@ -1299,6 +1299,15 @@
           "type": "event"
         },
         {
+          "id": "47507004",
+          "title": "Log in to claim a limited 5-star character",
+          "description": "Hello, Trailblazers~ From after the Version 4.8 update until the end of Version 5.0, log in to claim the limited 5-star character Astra Yao (Harmony: Quantum) ×1 and materials to build her to Lv. 60!",
+          "created_at": 1795173303,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/20/22db3247b2cb81d269efcfefa859fc79_6297321972937703389.jpg",
+          "url": "https://www.hoyolab.com/article/47507004",
+          "type": "info"
+        },
+        {
           "id": "47464625",
           "title": "\"Astral Express Strategy Guide\" Website Update: Version 4.7 Strategy Guides Contest Event Is In Full Swing!",
           "description": "Hello, Trailblazers! Team comp secrets and build experience for Aeon ★ Aha, strategy considerations for the Treasures Lightward gameplay, flashes of inspiration when clearing stages, clever combinations in Currency Wars... We cordially invite you to embark on this new interstellar journey With wisdom as your pen and courage as your ink, write your own unique chapter. Share inspiration, exchange insights, and journey hand in hand with fellow pathstriders among the stars, letting the radiance of thought and creativity illuminate the cosmic seas! Submit your strategy guide, share your exclusive tips, and win 6,000 Stellar Jades!",
@@ -1422,15 +1431,6 @@
           "created_at": 1794376804,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/09/4f3cc35e64a76923a443a02a84b785a3_5392164014926069146.png",
           "url": "https://www.hoyolab.com/article/47398071",
-          "type": "info"
-        },
-        {
-          "id": "47396790",
-          "title": "The player return web event \"Come With Me, Take the Journey\" is now available. Participate to obtain up to 480 Stellar Jades and more!",
-          "description": "Dear Trailblazer, your companions aboard the Express are waiting for you to take the journey by their side and re-embark on your cosmic adventure! Earn up to 480 Stellar Jades! ▌ Event Period After the Version 4.7 update — 2026/12/23 06:00 (UTC+8) Participate:",
-          "created_at": 1794371405,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/05/46700ae4a9fdcff265f1639b88ff2b58_1576273973494050846.png",
-          "url": "https://www.hoyolab.com/article/47396790",
           "type": "info"
         }
       ]
