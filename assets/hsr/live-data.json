@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-21T10:35:44Z",
+  "updatedAt": "2026-11-21T11:32:36Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1060,8 +1060,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-21T10:35:44Z",
-      "lastSuccess": "2026-11-21T10:35:44Z",
+      "checkedAt": "2026-11-21T11:32:36Z",
+      "lastSuccess": "2026-11-21T11:32:36Z",
       "error": null,
       "data": [
         {
@@ -1294,7 +1294,7 @@
           "title": "Depart Anew When the Phantasmoon is Full | Share Screenshots to Win Stellar Jades and Gift Cards",
           "description": "The villain character comes charging in, yelling stuff about sacrifice and destruction! Hehe, good thing Himeko fulfilled her promise with a certain \"someone\" under the full Phantasmoon, obtained the strength of the giant robot \"Starblazer,\" and came out on top with the Express Crew. Navigator Himeko will continue to lead the Express Crew forward. I bet the Trailblazer and Himeko have a ton of stories to tell too, right? Follow the instructions in this post to share your \"story\" with Himeko, and the Express Crew will randomly select 195 Trailblazers to receive Stellar Jades and gift card rewards. ※ Reviews or posts with screenshots are more likely to be picked by the Express Crew! ▌ Event Duration",
           "created_at": 1784106006,
-          "banner": null,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/07/13/458da72b7faeb48f720f9099aa6f9a5a_6878259505548510034.jpg",
           "url": "https://www.hoyolab.com/article/45858065",
           "type": "event"
         },
