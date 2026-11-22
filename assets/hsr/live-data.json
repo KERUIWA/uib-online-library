@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-21T11:32:36Z",
+  "updatedAt": "2026-11-22T04:44:42Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1060,10 +1060,19 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-21T11:32:36Z",
-      "lastSuccess": "2026-11-21T11:32:36Z",
+      "checkedAt": "2026-11-22T04:44:42Z",
+      "lastSuccess": "2026-11-22T04:44:42Z",
       "error": null,
       "data": [
+        {
+          "id": "47526861",
+          "title": "Planar Fissure Event: Planar Ornaments Drop Rate Doubled for a Limited Time",
+          "description": "▌Event Period 2026/11/23 04:00 - 2026/12/07 03:59 (server time) ▌Participation Requirement Unlock Planar Ornament ▌Event Details During the Planar Fissure event, receive double rewards when obtaining Immersion Rewards or performing Ornament Extraction in the Simulated Universe.",
+          "created_at": 1795320004,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/18/445eff9915166d9bcdbd60b279933ff8_486478364482363375.png",
+          "url": "https://www.hoyolab.com/article/47526861",
+          "type": "notice"
+        },
         {
           "id": "47394097",
           "title": "Version 4.7 \"Now, Lay Laughter to All Stars\" Update Details",
@@ -1188,15 +1197,6 @@
           "created_at": 1791687603,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/10/08/445eff9915166d9bcdbd60b279933ff8_739955734522521317.png",
           "url": "https://www.hoyolab.com/article/47043223",
-          "type": "notice"
-        },
-        {
-          "id": "46861607",
-          "title": "Version 4.6 \"Dance With the Beast Before Moonrise\" Update Details",
-          "description": "The beast stirring in the darkness opens THEIR maw once more, demanding a god as a sacrifice. Before the moon rises again, only the blood of the wise can sate THEIR hunger... Hello, Trailblazers! Welcome to Version 4.6 \"Dance With the Beast Before Moonrise\"! ▌Update and Compensation Details",
-          "created_at": 1790550006,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/09/24/694e777822e0964cdaa7458804c82fef_8989305327318684464.png",
-          "url": "https://www.hoyolab.com/article/46861607",
           "type": "notice"
         },
         {
