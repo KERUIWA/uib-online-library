@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-22T04:44:42Z",
+  "updatedAt": "2026-11-23T03:47:29Z",
   "feeds": {
     "calendar": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us",
-      "checkedAt": "2026-11-19T11:43:50Z",
-      "lastSuccess": "2026-11-19T11:43:50Z",
+      "checkedAt": "2026-11-23T03:47:26Z",
+      "lastSuccess": "2026-11-23T03:47:26Z",
       "error": null,
       "data": {
         "events": [
@@ -99,6 +99,17 @@
                 "amount": 0
               }
             ],
+            "special_reward": null
+          },
+          {
+            "id": 290,
+            "name": "Planar Fissure",
+            "description": "During the event, successfully challenge Simulated Universe or Divergent Universe to earn double Planar Ornaments rewards.",
+            "image_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/91/Event_Planar_Fissure.png/revision/latest?cb=20260726044453",
+            "type_name": "ActivityTypeDouble",
+            "start_time": 1795402800,
+            "end_time": 1796612399,
+            "rewards": [],
             "special_reward": null
           },
           {
@@ -277,17 +288,6 @@
                 "amount": 0
               }
             ],
-            "special_reward": null
-          },
-          {
-            "id": 290,
-            "name": "Planar Fissure",
-            "description": "During the event, successfully challenge Simulated Universe or Divergent Universe to earn double Planar Ornaments rewards.",
-            "image_url": "https://static.wikia.nocookie.net/houkai-star-rail/images/9/91/Event_Planar_Fissure.png/revision/latest?cb=20260726044453",
-            "type_name": "ActivityTypeDouble",
-            "start_time": 1795402800,
-            "end_time": 1796612399,
-            "rewards": [],
             "special_reward": null
           },
           {
