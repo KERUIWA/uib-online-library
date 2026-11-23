@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-23T03:47:29Z",
+  "updatedAt": "2026-11-23T04:59:00Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1060,8 +1060,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-22T04:44:42Z",
-      "lastSuccess": "2026-11-22T04:44:42Z",
+      "checkedAt": "2026-11-23T04:59:00Z",
+      "lastSuccess": "2026-11-23T04:59:00Z",
       "error": null,
       "data": [
         {
@@ -1231,7 +1231,7 @@
           "title": "[Stellar Jade Rewards] Take Part in the Discussions for Pearl's Debut and Win Stellar Jades",
           "description": "Greetings, Trailblazers! Color the stars, trace the myriad phenomena, and the lost pearls of civilization regain their luster. What kind of insights will the Trailblazer harvest after being baptized by art? Participate in the event to get a guaranteed Personal Homepage Background and Avatar Frame, and have a chance to win Stellar Jade Rewards!",
           "created_at": 1790560807,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/09/24/ede0d21450537f8c4065df35929595af_834730297494981128.png",
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/09/24/ede0d21450537f8c4065df35929595af_2121959796994151624.png",
           "url": "https://www.hoyolab.com/article/46862618",
           "type": "event"
         },
