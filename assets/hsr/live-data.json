@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-25T04:55:01Z",
+  "updatedAt": "2026-11-25T06:52:14Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1060,8 +1060,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-25T04:55:01Z",
-      "lastSuccess": "2026-11-25T04:55:01Z",
+      "checkedAt": "2026-11-25T06:52:14Z",
+      "lastSuccess": "2026-11-25T06:52:14Z",
       "error": null,
       "data": [
         {
@@ -1299,6 +1299,15 @@
           "type": "event"
         },
         {
+          "id": "47559323",
+          "title": "V4.7 Discord Quest Is Ending Soon!",
+          "description": "Trailblazers, the V4.7 Discord Quest will end on December 1! Remember to participate in the event and claim your rewards in time~ Join Now: https://hoyo.link/5nVmwECaT",
+          "created_at": 1795586408,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/18/4f3cc35e64a76923a443a02a84b785a3_8496514012114198431.png",
+          "url": "https://www.hoyolab.com/article/47559323",
+          "type": "info"
+        },
+        {
           "id": "47558482",
           "title": "Pom-Pom Gallery | Now, Lay Laughter to All Stars (I)",
           "description": "\"After today, the cosmos will know that standing behind the Astral Express are two gods, joining hands and setting out once more.\"",
@@ -1422,15 +1431,6 @@
           "created_at": 1794391206,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/11/0/ff7a734634c9446ddd60ff05031fff04_8513200727923580871.jpeg",
           "url": "https://www.hoyolab.com/article/47401368",
-          "type": "info"
-        },
-        {
-          "id": "47399652",
-          "title": "Discord \"Account Linking Check-In Event\" Reminder",
-          "description": "Dear Trailblazers, With the release of Version 4.7 \"Now, Lay Laughter to All Stars,\" the Discord \"Account Linking Check-In\" event has been updated with a brand-new batch of redemption codes! Link your Discord account and check in via the Astral Express bot on the official Discord server to claim 30 Stellar Jades!",
-          "created_at": 1794384008,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/10/bbcef537d92b416df6e414cc9cb8c1cd_4489582251811439297.png",
-          "url": "https://www.hoyolab.com/article/47399652",
           "type": "info"
         }
       ]
