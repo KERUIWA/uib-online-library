@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-25T16:53:16Z",
+  "updatedAt": "2026-11-27T02:11:59Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1060,8 +1060,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-25T16:53:16Z",
-      "lastSuccess": "2026-11-25T16:53:16Z",
+      "checkedAt": "2026-11-27T02:11:59Z",
+      "lastSuccess": "2026-11-27T02:11:59Z",
       "error": null,
       "data": [
         {
@@ -1299,6 +1299,15 @@
           "type": "event"
         },
         {
+          "id": "47576352",
+          "title": "New Honkai: Star Rail Merchandise Available on Amazon!",
+          "description": "This release, we're bringing major new drops, headlined by the Phainon Elite Gaming Controller With Haptic Feedback and the Cyrene Ripples of Past Reverie Mechanical Keyboard! The controller's right side is engraved with an image of Phainon and comes equipped with the Self-Developed Force-Adjustable Alloy Joystick 3.0 and multiple smart interactive modes to unlock! The keyboard features an exclusive Cyrene-themed color palette, complete with a uniquely stunning heart-shaped lighting design~ We are also rolling out the Gift+ Series Sunday Figure 1/8 Figure Star Rail LIVE Ver. and the Hyacine 1/8 Figure. Sunday is dressed in a black tailcoat, his halo gleaming with a metal luster as he strikes an incredibly elegant pose with raised hands. Hyacine looks lively and energetic with a bright smile, her skirt fluttering lightly with her stride. In addition, the all-new POTEPOTTE-R Series Sitting Epoxy Figures are now available. Their adorable tilted heads are guaranteed to soothe your heart! And there's more: a lineup of Cyrene-themed Impression Series accessories, including a ring set, a mechanical watch, a shoulder bag, and more~",
+          "created_at": 1795744805,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/25/5ab288af3b4921c395b9edfda24513b7_8812693894503570007.jpg",
+          "url": "https://www.hoyolab.com/article/47576352",
+          "type": "info"
+        },
+        {
           "id": "47559323",
           "title": "V4.7 Discord Quest Is Ending Soon!",
           "description": "Trailblazers, the V4.7 Discord Quest will end on December 1! Remember to participate in the event and claim your rewards in time~ Join Now: https://hoyo.link/5nVmwECaT",
@@ -1422,15 +1431,6 @@
           "created_at": 1794448804,
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/11/11/6faa50394eedf24ddd385d7533e54409_7697111409745255445.png",
           "url": "https://www.hoyolab.com/article/47412533",
-          "type": "info"
-        },
-        {
-          "id": "47401368",
-          "title": "A Moment Among the Stars — \"All's Well That Ends Well\" | Honkai: Star Rail",
-          "description": "All the universe is a stage, And everyone merely players. They have their exits and their entrances. And one in their time plays many parts. Until the show ends, and then An anticipated announcement is made: The Elation never takes a curtain call!",
-          "created_at": 1794391206,
-          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/11/0/ff7a734634c9446ddd60ff05031fff04_8513200727923580871.jpeg",
-          "url": "https://www.hoyolab.com/article/47401368",
           "type": "info"
         }
       ]
