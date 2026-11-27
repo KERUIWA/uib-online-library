@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-27T02:11:59Z",
+  "updatedAt": "2026-11-27T03:46:50Z",
   "feeds": {
     "calendar": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/calendar?lang=en-us",
-      "checkedAt": "2026-11-23T03:47:26Z",
-      "lastSuccess": "2026-11-23T03:47:26Z",
+      "checkedAt": "2026-11-27T03:46:46Z",
+      "lastSuccess": "2026-11-27T03:46:46Z",
       "error": null,
       "data": {
         "events": [
@@ -606,6 +606,71 @@
         ],
         "challenges": [
           {
+            "id": 2027,
+            "name": "Imagined Words",
+            "type_name": "ChallengeTypeStory",
+            "start_time": 1792378800,
+            "end_time": 1796007600,
+            "rewards": [
+              {
+                "id": 1,
+                "name": "Stellar Jade",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+                "rarity": "5",
+                "amount": 900
+              },
+              {
+                "id": 262,
+                "name": "Jade Feather",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3f9ef99c9e0c6d2abb591333538d9b36.png",
+                "rarity": "5",
+                "amount": 600
+              },
+              {
+                "id": 213,
+                "name": "Traveler's Guide",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/835c8fbcd39880ab0892aa28950c3ae8.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 223,
+                "name": "Refined Aether",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3e97329f9bc6b7c2b984c74eeaa6262f.png",
+                "rarity": "4",
+                "amount": 12
+              },
+              {
+                "id": 233,
+                "name": "Lost Crystal",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/cc36442783e0e78095a4abe469ba6270.png",
+                "rarity": "4",
+                "amount": 24
+              },
+              {
+                "id": 261,
+                "name": "Lucent Afterglow",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/e9e9336e8def2317ac7e029a60ef3710.png",
+                "rarity": "4",
+                "amount": 96
+              },
+              {
+                "id": 2,
+                "name": "Credit",
+                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/11c9d7270b777d04f6242629f0d42000.png",
+                "rarity": "3",
+                "amount": 360000
+              }
+            ],
+            "special_reward": {
+              "id": 1,
+              "name": "Stellar Jade",
+              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
+              "rarity": "5",
+              "amount": 900
+            }
+          },
+          {
             "id": 3022,
             "name": "Navigator's Netherveil",
             "type_name": "ChallengeTypeBoss",
@@ -707,71 +772,6 @@
             "type_name": "ChallengeTypeChasm",
             "start_time": 1793588400,
             "end_time": 1797217200,
-            "rewards": [
-              {
-                "id": 1,
-                "name": "Stellar Jade",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
-                "rarity": "5",
-                "amount": 900
-              },
-              {
-                "id": 262,
-                "name": "Jade Feather",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3f9ef99c9e0c6d2abb591333538d9b36.png",
-                "rarity": "5",
-                "amount": 600
-              },
-              {
-                "id": 213,
-                "name": "Traveler's Guide",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/835c8fbcd39880ab0892aa28950c3ae8.png",
-                "rarity": "4",
-                "amount": 24
-              },
-              {
-                "id": 223,
-                "name": "Refined Aether",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/3e97329f9bc6b7c2b984c74eeaa6262f.png",
-                "rarity": "4",
-                "amount": 12
-              },
-              {
-                "id": 233,
-                "name": "Lost Crystal",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/cc36442783e0e78095a4abe469ba6270.png",
-                "rarity": "4",
-                "amount": 24
-              },
-              {
-                "id": 261,
-                "name": "Lucent Afterglow",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/e9e9336e8def2317ac7e029a60ef3710.png",
-                "rarity": "4",
-                "amount": 96
-              },
-              {
-                "id": 2,
-                "name": "Credit",
-                "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/11c9d7270b777d04f6242629f0d42000.png",
-                "rarity": "3",
-                "amount": 360000
-              }
-            ],
-            "special_reward": {
-              "id": 1,
-              "name": "Stellar Jade",
-              "icon": "https://act-webstatic.hoyoverse.com/darkmatter/hkrpg/prod_gf_cn/item_icon_ubd4re/8f20e21a19e00be6cae368960d6e43f7.png",
-              "rarity": "5",
-              "amount": 900
-            }
-          },
-          {
-            "id": 2027,
-            "name": "Imagined Words",
-            "type_name": "ChallengeTypeStory",
-            "start_time": 1792378800,
-            "end_time": 1796007600,
             "rewards": [
               {
                 "id": 1,
