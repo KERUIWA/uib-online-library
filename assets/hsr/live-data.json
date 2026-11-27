@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-27T03:46:50Z",
+  "updatedAt": "2026-11-27T11:43:31Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -1060,8 +1060,8 @@
     "news": {
       "status": "ok",
       "source": "https://api.ennead.cc/mihoyo/starrail/news/",
-      "checkedAt": "2026-11-27T02:11:59Z",
-      "lastSuccess": "2026-11-27T02:11:59Z",
+      "checkedAt": "2026-11-27T11:43:31Z",
+      "lastSuccess": "2026-11-27T11:43:31Z",
       "error": null,
       "data": [
         {
@@ -1198,6 +1198,15 @@
           "banner": "https://upload-os-bbs.hoyolab.com/upload/community/2026/10/08/445eff9915166d9bcdbd60b279933ff8_739955734522521317.png",
           "url": "https://www.hoyolab.com/article/47043223",
           "type": "notice"
+        },
+        {
+          "id": "47580005",
+          "title": "Honkai: Star Rail HoYoFair 2026 Special Fan Art Program \"Red Velvet Friday\"",
+          "description": "Remember that indescribable feeling you get when the lights begin to dim? Somehow, you feel good in a place like this. Red Velvet Market, we see the goods in you. Program List The \"Red Velvet Friday\" HoYoFair Impression Trailer is currently available",
+          "created_at": 1795777206,
+          "banner": "https://upload-os-bbs.hoyolab.com/upload/2026/11/26/2a93a8e62f8500762fc8cb2d9e2cad21_1636632135812860013.jpeg",
+          "url": "https://www.hoyolab.com/article/47580005",
+          "type": "event"
         },
         {
           "id": "47413545",
