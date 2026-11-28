@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-27T11:43:31Z",
+  "updatedAt": "2026-11-28T02:07:03Z",
   "feeds": {
     "calendar": {
       "status": "ok",
@@ -967,8 +967,8 @@
     "activity": {
       "status": "ok",
       "source": "https://starrailassistant.top/api/v1/activity/sr-en-US.json",
-      "checkedAt": "2026-11-11T03:16:51Z",
-      "lastSuccess": "2026-11-11T03:16:51Z",
+      "checkedAt": "2026-11-28T02:07:02Z",
+      "lastSuccess": "2026-11-28T02:07:02Z",
       "error": null,
       "data": {
         "version": "4.7",
@@ -1032,6 +1032,13 @@
             "startTime": "2026-10-19T04:00:00",
             "endTime": "2026-11-30T03:59:59",
             "cover": "https://i0.hdslb.com/bfs/new_dyn/13e21e998566cef8e41f4ae287c17fc11340190821.jpg"
+          },
+          {
+            "name": "Planar Fissure",
+            "description": "During the Planar Fissure event, obtain double rewards when claiming Immersion Rewards in the Simulated Universe or performing Ornament Extraction.",
+            "startTime": "2026-11-23T04:00:00",
+            "endTime": "2026-12-07T03:59:59",
+            "cover": "https://i0.hdslb.com/bfs/new_dyn/234306c260be1c80654431efe81c6ce81340190821.png"
           },
           {
             "name": "Pure Fiction: Fiction Made Truth",
